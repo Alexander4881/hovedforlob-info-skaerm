@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 <?php
-$testing = "Hello WOrld";
-$pleaseWork = "!!!!";
+  $testing = "Hello WOrld";
+  $pleaseWork = "!!!!";
 ?>
 
 <head>
