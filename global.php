@@ -19,4 +19,7 @@ $_INDEXTITLE = "Test Title";
 $_FONTAWESOME_URL ="https://use.fontawesome.com/releases/v5.6.3/css/all.css";
 $_FONTAWESOME_INTEGRITY = "sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/";
 $_FORTAWESOME_CROSSORIGIN = "anonymous";
+
+// Redirects
+$_INDEX = "index.php";
 ?>

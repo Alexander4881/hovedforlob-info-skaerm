@@ -2,6 +2,7 @@
 <html>
 <?php
 include_once "global.php";
+include_once "./include/header.php";
 ?>
 <head>
     <meta charset="utf-8" />
