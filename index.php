@@ -1,9 +1,11 @@
-<?php 
-$testing = "Hello WOrld";
-?>
-
 <!DOCTYPE html>
 <html>
+
+<?php
+$testing = "Hello WOrld";
+$pleaseWork = "!!!!";
+?>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,8 +16,9 @@ $testing = "Hello WOrld";
 </head>
 <body>
     <p>
-    <?php 
-    echo $testing; 
+    <?php
+    echo $testing;
+    echo $pleaseWork;
     phpinfo();
     ?>
     </p>
