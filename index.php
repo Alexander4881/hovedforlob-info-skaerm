@@ -9,6 +9,7 @@ include_once "global.php";
     <title><?php $_INDEXTITLE ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="<?php $_SITECSS ?>" />
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php $_FONTICONS ?>" />
     <script src="<?php $_MAINJS ?>"></script>
 </head>
 <body>
