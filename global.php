@@ -22,4 +22,10 @@ $_FORTAWESOME_CROSSORIGIN = 'anonymous';
 
 // Redirects
 $_INDEX = './index.php';
+
+// MySQL Configuration
+$DBUser = "root";
+$DBPassword = "********";
+$DBHost = "localhost";
+$DBName = "maincourse";
 ?>
