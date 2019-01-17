@@ -40,6 +40,7 @@ include_once 'global.php';
   <h2><?php echo $_INDEXTITLE; ?></h2>
   <p>
     <?php
+    include './images/svg.php';
     // require './management/db/db.php';
     // $query="select * from tbl_session";
     // $sockets = db::getInstance()->get_result($query);
