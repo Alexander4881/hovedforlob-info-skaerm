@@ -2,7 +2,7 @@
 <html>
 <?php
 include_once 'global.php';
-require './db/db.php';
+require './management/db/db.php';
 ?>
 <head>
   <meta charset="utf-8" />
