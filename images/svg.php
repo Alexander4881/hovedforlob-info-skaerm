@@ -1,4 +1,4 @@
-<svg width="964.0000000000001" height="257" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox=" 4.5 1.5 965 257" xmlns="http://www.w3.org/2000/svg">
  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
  <g>
   <rect fill="none" id="canvas_background" height="259" width="966" y="-1" x="-1"/>
@@ -7,11 +7,11 @@
   </g>
  </g>
  <g id="svg">
-  <g id="Rum-B.16" stroke-width="10" stroke="#d6d6d6" fill="#ff7c7c">
+  <g id="Rum-B.16" class="active" stroke-width="10" stroke="#d6d6d6" fill="#ff7c7c">
    <rect id="svg_4" height="244.828488" width="303" y="6.263195" x="6.837376"  />
    <line stroke-linecap="null" stroke-linejoin="null" id="svg_15" y2="226.060687" x2="212.121278" y1="247.878877" x1="270.303086" stroke-width="5"/>
   </g>
-  <g id="Rum-B.014" stroke-width="10" stroke="#d6d6d6" fill="#ff7c7c">
+  <g id="Rum-B.014" class="active" stroke-width="10" stroke="#d6d6d6" fill="#ff7c7c">
    <rect id="svg_9" height="244.828488" width="303.449394" y="6.263195" x="318.907483" />
    <line stroke-linecap="null" stroke-linejoin="null" id="svg_18" y2="226.060687" x2="528.484871" y1="247.878877" x1="584.848509" stroke-width="5" />
    <line transform="rotate(-90 611.2122802734376,196.96966552734372) " stroke-linecap="null" stroke-linejoin="null" id="svg_19" y2="186.060573" x2="639.393927" y1="207.878763" x1="583.030368" stroke-width="5"/>

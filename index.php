@@ -23,8 +23,8 @@ include_once 'global.php';
 <body>
 
   <!-- Maintenance -->
-  <div class="alert alert-danger justify-content-center" role="alert">
-    <div class="justify-content-between align-items-center w-100">
+  <div class="alert alert-danger navbar justify-content-between align-items-center w-100" role="alert">
+    <div class="justify-content-center align-items-center">
       Website is in Alpha, be patient.
     </div>
     <div class="flex-row justify-content-end flex-nowrap">
@@ -38,15 +38,15 @@ include_once 'global.php';
   ?>
 
   <!-- Main Content -->
-  <h2><?php echo $_INDEXTITLE; ?></h2>
-  <p>
-    <?php
-    include './images/svg.php';
-    // require './management/db/db.php';
-    // $query="select * from tbl_session";
-    // $sockets = db::getInstance()->get_result($query);
-    ?>
-  </p>
+  <div class="container main-content">
+    <h2 class="display-3"><?php echo $_INDEXTITLE; ?></h2>
+      <?php
+      include './images/svg.php';
+      // require './management/db/db.php';
+      // $query="select * from tbl_session";
+      // $sockets = db::getInstance()->get_result($query);
+      ?>
+  </div>
 
   <!-- Footer -->
   <?php

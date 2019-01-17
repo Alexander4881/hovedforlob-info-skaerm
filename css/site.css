@@ -1,3 +1,8 @@
+.main-content{
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
 .alert-danger{
   margin-bottom: 0px;
   border: none;
@@ -5,11 +10,16 @@
   text-align: center;
 }
 
-#svg, g:hover{
-  stroke: green;
-  fill:lightgreen;
+
+#svg g:hover{
+  stroke: grey;
+  fill: darkgrey;
 }
 
+#svg .active:hover{
+  stroke: green;
+  fill: lightgreen;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
