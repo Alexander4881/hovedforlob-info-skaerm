@@ -4,3 +4,8 @@
   border-radius: 0;
   text-align: center;
 }
+
+#svg, g:hover{
+  stroke: green;
+  fill:lightgreen;
+}
