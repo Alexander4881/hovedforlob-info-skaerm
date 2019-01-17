@@ -26,8 +26,8 @@ include_once '../global.php';
           </li>
         </ul>
         <ul class="nav navbar-nav flex-row justify-content-center flex-nowrap">
-            <li class="nav-item"><a class="nav-link" href=""><i class="fab fa-facebook-f mr-1"></i></a> </li>
-            <li class="nav-item"><a class="nav-link" href=""><i class="fab fa-discord"></i></a> </li>
+            <li class="nav-item"><a class="nav-link" href=""><i class="fab fa-facebook-f mr-1"></i></a></li>
+            <li class="nav-item"><a class="nav-link" href=""><i class="fab fa-discord"></i></a></li>
         </ul>
     </div>
 </nav>

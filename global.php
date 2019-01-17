@@ -21,11 +21,11 @@ $_FONTAWESOME_INTEGRITY = 'sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA
 $_FORTAWESOME_CROSSORIGIN = 'anonymous';
 
 // Redirects
-$_INDEX = './index.php';
+$_INDEX = 'index.php';
 
 // MySQL Configuration
-$DBUser = "root";
+$DBUsername = "root";
 $DBPassword = "********";
-$DBHost = "localhost";
+$DBHostname = "localhost";
 $DBName = "maincourse";
 ?>
