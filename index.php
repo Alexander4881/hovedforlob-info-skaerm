@@ -46,6 +46,11 @@ include_once 'global.php';
     ?>
   </p>
 
+  <!-- Footer -->
+  <?php
+  include_once './include/footer.php';
+  ?>
+
   <!-- Scripts -->
   <script src="<?= $_BOOTSTRAP_JS ?>"></script>
   <script src="<?= $_BOOTSTRAP_JS_MIN ?>"></script>
