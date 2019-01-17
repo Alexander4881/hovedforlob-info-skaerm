@@ -13,7 +13,7 @@ $_BOOTSTRAP_JS_MIN = './js/bootstrap.min.js';
 // Type code here..
 
 // PAGE TITLES
-$_INDEXTITLE = 'Test Title';
+$_INDEXTITLE = 'Hovedforløb Infoskærme';
 
 // FONTAWESOME
 $_FONTAWESOME_URL ='https://use.fontawesome.com/releases/v5.6.3/css/all.css';
@@ -24,8 +24,8 @@ $_FORTAWESOME_CROSSORIGIN = 'anonymous';
 $_INDEX = 'index.php';
 
 // MySQL Configuration
-$DBUsername = "root";
-$DBPassword = "********";
-$DBHostname = "localhost";
-$DBName = "maincourse";
+$_DBUsername = "root";
+$_DBPassword = "********";
+$_DBHostname = "localhost";
+$_DBName = "maincourse";
 ?>

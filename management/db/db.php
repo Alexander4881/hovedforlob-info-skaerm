@@ -42,7 +42,7 @@ class DB extends mysqli
 
   private function _construct()
   {
-    parent::_construct($this->dbHost, $this->user, $this->pass, $this->dbName);
+    parent::_construct($this->$dbHost, $this->$user, $this->$pass, $this->$dbName);
     if (mysqli_connection_error())
     {
       exit('Connect Error (' . mysqli_connection_errno() . ') ' . mysqli_connection_error());

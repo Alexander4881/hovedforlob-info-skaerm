@@ -1,8 +1,8 @@
 <?php
 require '../global.php';
 
-define('DB_USER', '$DBUsername');
-define('DB_PASSWORD', '$DBPassword');
-define('DB_HOST', '$DBHostname');
-define('DB_NAME', '$DBName');
+define('DB_USER', '$_DBUsername');
+define('DB_PASSWORD', '$_DBPassword');
+define('DB_HOST', '$_DBHostname');
+define('DB_NAME', '$_DBName');
  ?>
