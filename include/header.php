@@ -13,10 +13,10 @@ include_once '../global.php';
     <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="navbarToggler">
         <ul class="navbar-nav mx-auto text-center">
           <li class="nav-item">
-            <a class="nav-link" href="#Link1">Link 1</a>
+            <a class="nav-link" href="../locations/lokale-B.14.php">Lokale B.14</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#Link2">Link 2</a>
+            <a class="nav-link" href="../locations/lokale-B.16.php">Lokale B.16</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#Link3">Link 3</a>
