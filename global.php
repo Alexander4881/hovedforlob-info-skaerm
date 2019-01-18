@@ -5,7 +5,7 @@ $_BOOTSTRAP_CSS = './css/bootstrap.css';
 $_BOOTSTRAP_CSS_MIN = './css/bootstrap.min.css';
 
 // JS Global
-$_MAINJS = './js/mainJS.js';
+$_MAINJS = "./js/mainJS.js";
 $_BOOTSTRAP_JS = './js/bootstrap.js';
 $_BOOTSTRAP_JS_MIN = './js/bootstrap.min.js';
 
@@ -14,6 +14,10 @@ $_BOOTSTRAP_JS_MIN = './js/bootstrap.min.js';
 
 // PAGE TITLES
 $_INDEXTITLE = 'Hovedforløb Infoskærme';
+
+// PAGE REF
+$_LOCATIONB16 = "../location/lokale-B.16.php";
+$_LOCATIONB14 = "../location/lokale-B.14.php";
 
 // FONTAWESOME
 $_FONTAWESOME_URL ='https://use.fontawesome.com/releases/v5.6.3/css/all.css';
