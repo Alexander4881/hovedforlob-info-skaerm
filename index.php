@@ -56,6 +56,6 @@ include_once 'global.php';
   <!-- Scripts -->
   <script src="<?= $_BOOTSTRAP_JS ?>"></script>
   <script src="<?= $_BOOTSTRAP_JS_MIN ?>"></script>
-  <script src="./js/mainJS.js"></script>
+  <script src="./js/MainJavaScript.js"></script>
 </body>
 </html>
