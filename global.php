@@ -5,7 +5,7 @@ $_BOOTSTRAP_CSS = './css/bootstrap.css';
 $_BOOTSTRAP_CSS_MIN = './css/bootstrap.min.css';
 
 // JS Global
-$_MAINJS = './js/main.js';
+$_MAINJS = './js/mainJS.js';
 $_BOOTSTRAP_JS = './js/bootstrap.js';
 $_BOOTSTRAP_JS_MIN = './js/bootstrap.min.js';
 
