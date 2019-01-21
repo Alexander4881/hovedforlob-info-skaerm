@@ -18,16 +18,9 @@ include_once '../global.php';
           <li class="nav-item">
             <a class="nav-link" href=" <?= $_LOCATIONB16 ?> ">Lokale B.16</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#Link3">Link 3</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#Link4">Link 4</a>
-          </li>
         </ul>
         <ul class="nav navbar-nav flex-row justify-content-center flex-nowrap">
-            <li class="nav-item"><a class="nav-link" href=""><i class="fab fa-facebook-f mr-1"></i></a></li>
-            <li class="nav-item"><a class="nav-link" href=""><i class="fab fa-discord"></i></a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= $_DISCORD ?>"><i class="fab fa-discord mr-1" alt="Feature Coming Soon"></i></a></li>
         </ul>
     </div>
 </nav>
