@@ -1,5 +1,6 @@
 <?php
 // CSS Global
+// CSS Test
 $_SITECSS = './css/site.css';
 
 // JS Global
