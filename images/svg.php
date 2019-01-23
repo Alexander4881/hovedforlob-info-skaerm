@@ -39,7 +39,7 @@
   <g fill="#ff7c7c" stroke-width="10" stroke="#d6d6d6" id="Rum-B.08">
    <rect x="836.150741" y="9.263198" width="94.827929" height="142.586306" id="svg_6"/>
   </g>
-  <a xlink:href="<?= $_LOCATIONB14ADMIN ?>">
+  <a xlink:href="<?= $_ADMINISTRATION ?>">
     <g id="add-b14" class="add" fill="#fff" stroke="#ff5656">
       <rect rx="10" id="svg_7" height="49" width="49" y="22.626255" x="559.859433" stroke-width="0" stroke="#000" />
       <g>
@@ -48,7 +48,7 @@
       </g>
     </g>
 </a>
-<a xlink:href="<?= $_LOCATIONB16ADMIN ?>">
+<a xlink:href="<?= $_ADMINISTRATION ?>">
   <g class="add" fill="#fff" stroke="#ff5656">
       <rect rx="10" id="svg_16" height="49" width="49" y="25.035894" x="245" stroke-width="0" stroke="#000" />
       <g>
