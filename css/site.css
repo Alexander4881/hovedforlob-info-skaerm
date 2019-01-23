@@ -10,18 +10,23 @@
   text-align: center;
 }
 
-
-#svg g:hover{
+/* svg hover css */
+svg > g:hover{
   stroke: grey;
   fill: darkgrey;
 }
 
-#svg .active:hover{
+svg > a > .active:hover{
   stroke: green;
   fill: lightgreen;
 }
-/* Sticky footer styles
--------------------------------------------------- */
+
+svg > a > .add:hover{
+  stroke:green;
+  fill: lightgreen;
+}
+
+/* Sticky footer styles*/
 html {
   position: relative;
   min-height: 100%;

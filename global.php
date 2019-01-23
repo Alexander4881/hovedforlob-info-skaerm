@@ -1,6 +1,5 @@
 <?php
 // CSS Global
-// CSS Test
 $_SITECSS = './css/site.css';
 
 // JS Global
@@ -28,6 +27,10 @@ $_INDEXTITLE = 'Hovedforløb Infoskærme';
 // PAGE REF
 $_LOCATIONB16 = "../location/lokale-B.16.php";
 $_LOCATIONB14 = "../location/lokale-B.14.php";
+
+// PAGE ADMIN REF
+$_LOCATIONB14ADMIN = "./location/lokale-B.14-admin.php";
+$_LOCATIONB16ADMIN = "./location/lokale-B.16-admin.php";
 
 // FONTAWESOME
 $_FONTAWESOME_URL ='https://use.fontawesome.com/releases/v5.6.3/css/all.css';

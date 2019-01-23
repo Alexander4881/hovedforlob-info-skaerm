@@ -12,7 +12,7 @@ class DB extends mysqli
   // DB Connection Vars
   private $user = DB_USER;
   private $pass = DB_PASSWORD;
-  private $dbCatalogue = DB_Catalogue;
+  private $dbName = DB_NAME;
   private $dbHost = DB_HOST;
 
   // This method must be static.
@@ -42,7 +42,7 @@ class DB extends mysqli
 
   private function _construct()
   {
-    parent::_construct($this->$dbHost, $this->$user, $this->$pass, $this->$dbCatalogue);
+    parent::_construct($this->$dbHost, $this->$user, $this->$pass, $this->$dbName);
     if (mysqli_connection_error())
     {
       exit('Connect Error (' . mysqli_connection_errno() . ') ' . mysqli_connection_error());

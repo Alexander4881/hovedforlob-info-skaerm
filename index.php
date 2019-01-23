@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php
-include_once 'global.php';
+include './global.php';
 ?>
 <head>
   <meta charset="utf-8" />
@@ -34,7 +34,7 @@ include_once 'global.php';
 
   <!-- Header -->
   <?php
-  include_once './include/header.php';
+  include './include/header.php';
   ?>
 
   <!-- Main Content -->
@@ -42,12 +42,15 @@ include_once 'global.php';
     <h2 class="display-3"><?php echo $_INDEXTITLE; ?></h2>
       <?php
       include './images/svg.php';
+      // require './management/db/db.php';
+      // $query="select * from tbl_session";
+      // $sockets = db::getInstance()->get_result($query);
       ?>
   </div>
 
   <!-- Footer -->
   <?php
-  include_once './include/footer.php';
+  include './include/footer.php';
   ?>
 
   <!-- Scripts -->
