@@ -8,3 +8,91 @@ require 'db.php';
 # USE 2
 $query="insert into `tbl_chats` (coloum_name) values('".$val."')";
 $wisherID = db::getInstance()->dbquery($query);
+
+<script type="text/javascript" language="Javascript">
+   document.observe("dom:loaded", function() {
+      $$('.article-images a').each(function(a) {
+         Event.observe(a, 'click', function(e) {
+            Event.stop(e);
+            Overlay.lightbox(a.href, "Image is loading");
+         });
+      });
+
+      $$('a.article-2729').each(function(a) {
+         a.replace(a.innerHTML);
+      });
+   });
+</script>
+
+<?php
+if( $_GET['id'] ) {
+	$query = mysql_query( "SELECT * FROM `cms_news` WHERE id = '".filter($_GET['id'])."'");
+	$array = mysql_fetch_assoc( $query );
+}
+?>
+
+if(isset($_POST['opretter_nyhedsartikel'])) {
+   $title = secureStr($_POST['title']);
+   $shortstory = secureStr($_POST['shortstory']);
+   $longstory = secureStr($_POST['longstory']);
+   $topstory = secureStr(mysql_real_escape_string($_POST['topstory']));
+   
+   if(empty($title)){
+      echo '<div class = "alert">Venligst indtast en titel.</div><br>';
+   }
+   
+   else if(empty($shortstory)){
+      echo '<div class = "alert">Venligst indtast en beskrivelse.</div><br>';
+   }
+   
+   else if(empty($longstory)){
+      echo '<div class = "alert">Venligst indtast en nyhed.</div><br>';
+   }
+   
+   else{
+      $q = "INSERT INTO cms_news (title, shortstory, longstory, published, image, author) VALUES('{$title}','{$shortstory}','" . htmlspecialchars_decode($longstory) . "',default,'{$topstory}','". $_SESSION['user']['username'] ."')";
+      $q_nupdate = "INSERT INTO hk_logs (type, time, who_done) VALUES('Oprettet Nyhedsartikel(" . $_POST['title'] .")','". time() ."','{$_SESSION['user']['username']}')";
+
+      mysql_query($q) or die(mysql_error());
+      mysql_query ($q_nupdate);
+      echo "<div class = \"success\">Nyhedsartikel blev oprettet.</div><br>";
+   }
+}
+else if($_POST['topstory_view']){ ?>
+   <img style = "width:440px;height:200px;" src = "{url}/r63/c_images/Top_Story_Images/<?php echo $_POST['topstory']; ?>">
+<?php } ?>
+
+<form method="post" autocomplete="off">
+   <b>Titel: </b>
+      <input type="text" name="title" value="<?php echo $_POST['title']?>" maxlength="35" placeholder = "Indtast titel.."></br>
+   <b>Kort Beskrivelse: </b>
+      <input type="text" name="shortstory" value="<?php echo $_POST['shortstory']?>" maxlength="70" placeholder="Indtast beskrivelse.."></br>
+      <textarea id="editor1" type="text" class="tinymce" name="longstory" cols="68" rows="10">
+         <?php echo $_POST['longstory']?>
+      </textarea>
+      </br>
+   <b>Forfatter: </b>
+      <input type="text" value="<?php echo $_SESSION['user']['username']; ?>" disabled><br>
+   <select name="topstory" id="topstory" class="#topstory select">
+   <?php 
+      if ($handle = opendir('r63/c_images/Top_Story_Images/'))
+         {	
+         while (false !== ($file = readdir($handle)))
+            {
+               if ($file == '.' || $file == '..')
+               {
+                  continue;
+               }		
+               echo '<option value="' . $file . '"';
+               if (isset($_POST['topstory']) && $_POST['topstory'] == $file)
+                  {
+                     echo ' selected';
+                  }
+                  echo '>' . $file . '</option>';
+         }
+      }
+   ?>
+   </select>
+   <input type="submit" name="topstory_view" value="Vis Billede">
+   <input type="submit" name="opretter_nyhedsartikel" value="Opret Nyhed">
+</form>
