@@ -47,4 +47,7 @@ $_DBUsername = "root";
 $_DBPassword = "********";
 $_DBHostname = "localhost";
 $_DBCatalogue = "maincourse";
+
+// Copyright
+$_COPYNUMBER = '2011';
 ?>
