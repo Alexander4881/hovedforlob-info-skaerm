@@ -52,5 +52,5 @@ $_DBHostname = "localhost";
 $_DBCatalogue = "maincourse";
 
 // Copyright
-$_COPYNUMBER = '2011';
+$_COPYNUMBER = '2019';
 ?>
