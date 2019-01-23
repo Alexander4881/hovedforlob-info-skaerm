@@ -1,6 +1,5 @@
 <?php
 // CSS Global
-// CSS Test
 $_SITECSS = './css/site.css';
 
 // JS Global
@@ -29,6 +28,10 @@ $_INDEXTITLE = 'Hovedforløb Infoskærme';
 $_LOCATIONB16 = "../location/lokale-B.16.php";
 $_LOCATIONB14 = "../location/lokale-B.14.php";
 
+// PAGE ADMIN REF
+$_LOCATIONB14ADMIN = "./location/lokale-B.14-admin.php";
+$_LOCATIONB16ADMIN = "./location/lokale-B.16-admin.php";
+
 // FONTAWESOME
 $_FONTAWESOME_URL ='https://use.fontawesome.com/releases/v5.6.3/css/all.css';
 $_FONTAWESOME_INTEGRITY = 'sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/';
@@ -46,5 +49,5 @@ $_DISCORD = '#Feature-Coming-Soon';
 $_DBUsername = "root";
 $_DBPassword = "********";
 $_DBHostname = "localhost";
-$_DBCatalogue = "maincourse";
+$_DBName = "maincourse";
 ?>

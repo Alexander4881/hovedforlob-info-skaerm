@@ -1,7 +1,7 @@
 ### db.php ###
 
 # USE 1
-require './management/db/db.php';
+require 'db.php';
    $query="select * from tbl_session";
    $sockets = db::getInstance()->get_result($query);
 
