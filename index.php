@@ -42,9 +42,6 @@ include_once 'global.php';
     <h2 class="display-3"><?php echo $_INDEXTITLE; ?></h2>
       <?php
       include './images/svg.php';
-      // require './management/db/db.php';
-      // $query="select * from tbl_session";
-      // $sockets = db::getInstance()->get_result($query);
       ?>
   </div>
 

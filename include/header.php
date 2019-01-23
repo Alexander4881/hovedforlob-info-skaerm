@@ -1,7 +1,3 @@
-<?php
-include_once '../global.php';
-?>
-
 <nav class="navbar navbar-light navbar-expand-md bg-light justify-content-center sticky-top">
   <a class="navbar-brand" href="<?= $_INDEX; ?>">
     <img src="#" width="30" height="30" class="d-inline-block align-top" alt="" />

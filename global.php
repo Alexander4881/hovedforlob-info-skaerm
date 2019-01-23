@@ -46,5 +46,5 @@ $_DISCORD = '#Feature-Coming-Soon';
 $_DBUsername = "root";
 $_DBPassword = "********";
 $_DBHostname = "localhost";
-$_DBName = "maincourse";
+$_DBCatalogue = "maincourse";
 ?>
