@@ -39,7 +39,7 @@ $_FONTAWESOME_INTEGRITY = 'sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA
 $_CROSSORIGIN = 'anonymous';
 
 // Redirects
-$_INDEX = 'index.php';
+$_INDEX = '../../index.php';
 
 // Links
 $_DISCORD = '#Feature-Coming-Soon';
@@ -52,4 +52,7 @@ $_DBCatalogue = "maincourse";
 
 // Copyright
 $_COPYNUMBER = '2019';
+
+// Never notice
+$_TEST = "Alexander was here";
 ?>
