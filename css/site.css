@@ -9,9 +9,7 @@
   border-radius: 0;
   text-align: center;
 }
-.test{
-  height: 100%;
-}
+
 /* svg hover css */
 svg > g:hover{
   stroke: grey;
