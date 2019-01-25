@@ -11,6 +11,9 @@
 }
 
 /* svg hover css */
+svg{
+  margin-bottom: 60px;
+}
 svg > g:hover{
   stroke: grey;
   fill: darkgrey;
@@ -34,12 +37,35 @@ html {
 
 body {
   /* Margin bottom by footer height */
+  height: calc(100vh - 164px);
   margin-bottom: 60px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
   line-height: 60px;
+}
+
+
+
+/* Administration*/
+#element-select-box{
+  border-left: 0.3em double grey;
+}
+
+#element-select > .row > .col > i{
+  text-align: center;
+  padding: 3em 2em;
+  border: 0.1em solid black;
+  margin: 0 auto;
+}
+
+#element-select > .row > .element {
+  margin: 2em auto;
+  text-align: center;
+  padding: 1.5em 4em;
+  border: 0.2em double black;
 }
