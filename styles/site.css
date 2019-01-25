@@ -49,12 +49,10 @@ body {
   line-height: 60px;
 }
 
-
-
 /* Administration*/
 #element-select-box{
   border-left: 0.3em double grey;
-  overflow: scroll;
+  overflow-y: auto;
   position: relative;
 }
 
@@ -63,11 +61,13 @@ body {
   padding: 3em 2em;
   border: 0.1em solid black;
   margin: 0 auto;
+  font-size: 30px;
 }
 
 #element-select > .row > .element {
-  margin: 2em auto;
+  margin: 1em auto;
   text-align: center;
-  padding: 1.5em 4em;
-  border: 0.2em double black;
+  padding: 0.5em 2em;
+  font-size: 30px;
+  border: 0.15em double black;
 }

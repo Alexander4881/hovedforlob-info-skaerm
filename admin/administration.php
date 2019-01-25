@@ -15,27 +15,17 @@ include_once("../includes/header.php");
         </div>
         <div id="element-select-box" class="col-2 h-100 d-inline-block" style="background-color: rgba(0,100,255,.1)">
             <div id="element-select">
-
                 <div class="row">
-                    <div class="element"><i class="fas fa-font"></i></div>
+                    <a href="" class="element"><i class="fas fa-font"></i></a>
                 </div>
 
                 <div class="row">
-                    <div class="element"><i class="fas fa-font"></i></div>
+                    <a class="element"><i class="fas fa-image"></i></a>
                 </div>
 
                 <div class="row">
-                    <div class="element"><i class="fas fa-font"></i></div>
+                    <a class="element"><i class="fas fa-clock"></i></a>
                 </div>
-
-                <div class="row">
-                    <div class="element"><i class="fas fa-font"></i></div>
-                </div>
-
-                <div class="row">
-                    <div class="element"><i class="fas fa-font"></i></div>
-                </div>
-
             </div>
         </div>
     </div>
