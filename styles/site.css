@@ -54,6 +54,8 @@ body {
 /* Administration*/
 #element-select-box{
   border-left: 0.3em double grey;
+  overflow: scroll;
+  position: relative;
 }
 
 #element-select > .row > .col > i{

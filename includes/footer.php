@@ -1,5 +1,5 @@
     <!-- Footer -->
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-light bg-dark">
         <div class="container">
             <?php
             function auto_copyright ($year = 'auto')
@@ -30,6 +30,7 @@
             auto_copyright($_COPYNUMBER);
             $_RUDE;
              ?>
+
         </div>
     </footer>
 
