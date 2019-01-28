@@ -16,21 +16,22 @@ include_once("../includes/header.php");
         <div id="element-select-box" class="col-2 h-100 d-inline-block" style="background-color: rgba(0,100,255,.1)">
             <div id="element-select">
                 <div class="row">
-                    <a href="" class="element"><i class="fas fa-font"></i></a>
+                    <button class="element" type="submit"><i class="fas fa-font"></i></button>
                 </div>
 
                 <div class="row">
-                    <a class="element"><i class="fas fa-image"></i></a>
+                    <button class="element" type="submit"><i class="fas fa-font"></i></button>
                 </div>
 
                 <div class="row">
-                    <a class="element"><i class="fas fa-clock"></i></a>
+                    <button class="element" type="submit"><i class="fas fa-font"></i></button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js">
 <script src="../styles/assets/js/administrationJS.js"></script>
 
 <?php

@@ -1,14 +1,3 @@
-### db.php ###
-
-# USE 1
-require 'db.php';
-   $query="select * from tbl_session";
-   $sockets = db::getInstance()->get_result($query);
-
-# USE 2
-$query="insert into `tbl_chats` (coloum_name) values('".$val."')";
-$wisherID = db::getInstance()->dbquery($query);
-
 <script type="text/javascript" language="Javascript">
    document.observe("dom:loaded", function() {
       $$('.article-images a').each(function(a) {
