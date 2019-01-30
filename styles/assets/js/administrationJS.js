@@ -1,29 +1,27 @@
+var buttons = $("button");
 
-function clickme(){
-    alert("click virker!!");
-}
+console.log(buttons);
 
-$
+var button = document.getElementsByTagName("button");
 
-$("button").click(function(e) {
-    alert("test");
+console.log("button");
+
+$(".element").click(function(e) {
     e.preventDefault();
     $.ajax({
         type: "POST",
         url: "./administration-logic.php",
-        data: { 
-            id: $(this).val(),
-            val: "test"
+        data: {
+            val: $(this).val()
         },
         success: function(result) {
-            alert('ok');
+            console.log("ok");
         },
         error: function(result) {
-            alert('error');
+            console.log('error');
         }
     });
 });
-
 
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
@@ -33,3 +31,4 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", "../styles/assets/ajax/preview.php", true);
 xmlhttp.send();
+
