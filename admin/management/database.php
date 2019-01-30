@@ -1,6 +1,6 @@
 <?php
 
-$connection = db();
+$connection;
 
 function db(){    
     $DBUsername = 'mysql';
@@ -19,7 +19,7 @@ function db(){
 }
 
 function NewText(){
-    if($connection == null){
+    if(!isset($connection)){
         $connection = db();
     }
 
@@ -30,35 +30,48 @@ function NewText(){
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($connection);
     }
+    $connection->close();
 }
 
 function NewTime(){
+    if(!isset($connection)){
+        $connection = db();
+    }
+
     $sql = "INSERT INTO Time (startTime, endTime, website_id) VALUES ('2019-01-30','2008-02-14','1')";
 
     if (mysqli_query($connection, $sql)) {
         echo "New record created successfully";
     } else {
-        echo "Error: " . $sql;
+        echo "Error: " . $sql . "<br>" . mysqli_error($connection);
     }
 }
 
 function NewImage(){
+    if(!isset($connection)){
+        $connection = db();
+    }
+
     $sql = "INSERT INTO WebSite (text, website_id) VALUES ('text','1')";
 
     if (mysqli_query(db(), $sql)) {
         echo "New record created successfully";
     } else {
-        echo "Error: " . $sql;
+        echo "Error: " . $sql . "<br>" . mysqli_error($connection);
     }
 }
 
 function NewWebsite(){
+    if(!isset($connection)){
+        $connection = db();
+    }
+
     $sql = "INSERT INTO WebSite (text, website_id) VALUES ('text','1')";
 
     if (mysqli_query(db(), $sql)) {
         echo "New record created successfully";
     } else {
-        echo "Error: " . $sql;
+        echo "Error: " . $sql . "<br>" . mysqli_error($connection);
     }
 }
 ?>
