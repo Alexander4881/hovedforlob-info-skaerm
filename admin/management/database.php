@@ -52,7 +52,9 @@ function NewImage(){
         $connection = db();
     }
 
-    $sql = "INSERT INTO WebSite (text, website_id) VALUES ('text','1')";
+    $sql = "INSERT INTO Image (text, website_id) VALUES ('text','1')";
+    $sql = "INSERT INTO Image (text, website_id) VALUES ('text','1')";
+    $sql = "INSERT INTO Image (text, website_id) VALUES ('text','1')";
 
     if (mysqli_query(db(), $sql)) {
         echo "New record created successfully";
