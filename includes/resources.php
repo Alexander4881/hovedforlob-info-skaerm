@@ -7,3 +7,5 @@
   <script src="<?= $_SLIM_JS_MIN_URL; ?>" integrity="<?= $_SLIM_JS_MIN_INTEGRITY; ?>" crossorigin="<?= $_CROSSORIGIN; ?>"></script>
   <script src="<?= $_POPPER_JS_MIN_URL; ?>" integrity="<?= $_POPPER_JS_MIN_INTEGRITY; ?>" crossorigin="<?= $_CROSSORIGIN; ?>"></script>
   <script src="<?= $_BOOTSTRAP_JS_MIN_URL; ?>" integrity="<?= $_BOOTSTRAP_JS_INTEGRITY; ?>" crossorigin="<?= $_CROSSORIGIN; ?>"></script>
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=16mauh767pflqtvs7gx2rgofc0uvfstztryn1fxfnh5xf9kt"></script>
+
