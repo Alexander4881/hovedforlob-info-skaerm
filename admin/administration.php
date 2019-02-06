@@ -16,15 +16,15 @@ include_once("management/database.php");
             <div id="element-select">
 
                 <div class="row">
-                    <button class="element" type="submit" onclick="test()" value="newText"><i class="fas fa-font"></i></button>
+                    <button class="element" type="submit" onclick="test()" value="newText"><i class="fas fa-file-alt"></i></button>
                 </div>
 
                 <div class="row">
-                    <button class="element" type="submit" onclick="test()" value="newTime"><i class="fas fa-font"></i></button>
+                    <button class="element" type="submit" onclick="test()" value="newTime"><i class="far fa-clock"></i></i></button>
                 </div>
 
                 <div class="row">
-                    <button class="element" type="submit" onclick="test()" value="newImage"><i class="fas fa-font"></i></button>
+                    <button class="element" type="submit" onclick="test()" value="newImage"><i class="fas fa-image"></i></button>
                 </div>
 
             </div>

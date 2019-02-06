@@ -75,3 +75,18 @@ body {
 #preview{
   padding: 2em;
 }
+
+.frame{
+  border: 1px solid red;
+}
+
+.handel{
+  font-size: 3em;
+  color: lightskyblue;
+  cursor: grab;
+  position: absolute;
+}
+
+.resize{
+  transform: rotate(-45deg);
+}
