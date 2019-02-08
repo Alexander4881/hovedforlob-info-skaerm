@@ -46,47 +46,75 @@ function LoadPreview(){
     xmlhttp.send();
 }
 
-// add listeners to the page
-function PreviewOverlay(){
-    // get the preview elements on the page
-    var previewElements = document.getElementById("preview").getElementsByTagName("*");
+//Globale Variables
+var selectedElement;
 
-    // adds a on click listener to the elements
-    for(var i = 0; i < previewElements.length; i++){
-        previewElements[i].onclick = function(){
-            if(this.nodeName ==="P"){
-                console.log("text");
-            }else if(this.nodeName === "H1"){
-                console.log("H1");
-            }else if(this.nodeName === "IMG"){
-                console.log("IMG");
-            }else if (this.nodeName === "span"){
-                console.log("span");
-            }
-            resize(this);
-        };
+function PreviewOverlay(){    
+    document.getElementById("preview").addEventListener("click",function(event){
+        console.log(event.target);
+        SelectElement(event.target);
+        SetElementSettings();
+    });
+}
+
+function SelectElement(element){
+    console.log("selected element", element);
+    if(selectedElement !== element){
+        selectedElement = element;
     }
 }
 
-var iconResize = '<i class="fas fa-arrows-alt handel"></i>';
-var iconMove = '<i class="fas fa-arrows-alt-v handel resize"></i>';
+function SetElementSettings(){
+    switch(selectedElement.tagName){
+        case'P':
+        console.log("det er et P element");
+        console.log(selectedElement.style.fontSize);
+        fontSize.innerHTML=selectedElement.style.fontSize;
+        ShowTextEditor();
+        break;
 
-function resize(htmlElement){
-    // 
-    if(!htmlElement.classList.contains('frame')){
-        htmlElement.className = 'frame';
+        case'IMG':
+        console.log("det er et IMG element");
+        break;
 
-        htmlPosition = htmlElement.getBoundingClientRect();
-        console.log(htmlPosition.top, htmlPosition.right, htmlPosition.bottom, htmlPosition.left);
+        case'H1':
+        console.log("det er et H1 element");
+        break;
 
-        var doc = document.getElementById('preview');
-        doc.innerHTML += iconResize;
+        case'SPAN':
+        console.log("det er et SPAN element");
+        break;
     }
-
-    
 }
 
-var editFontSize = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-angle-down"></i></label><label class="btn btn-secondary disabled"><input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-font"></i></label><label class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-angle-up"></i></label></div>';
-var editTextAlignment = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-align-left"></i></label><label class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-align-center"></i></label><label class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-align-right"></i></label><label class="btn btn-secondary"><input type="radio" name="options" id="option3" autocomplete="off"> <i class="fas fa-trash-alt"></i></label></div>';
-var editLayerHeight = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-plus"></i></label><label class="btn btn-secondary disabled"><input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-layer-group"></i></label><label class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-minus"></i></label></div>';
-var editTextTypes = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off"><i class="fas fa-underline"></i></label><label class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-italic"></i></label><label class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-bold"></i></label><label class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-strikethrough"></i></label></div>';
+// new element box
+var newElementBox = document.getElementById("element-select");
+
+// element settings box
+var elementSettings = document.getElementById("element-editor");
+
+// editors
+
+
+// editor settings
+var fontSize = document.getElementById("fontSizeVal");
+var widthInput = document.getElementById("widthInput");
+var heigthInput = document.getElementById("heigthInput");
+
+function ShowTextEditor(){
+    if (newElementBox.style.display !== "none") {
+      newElementBox.style.display = "none";
+    }
+}
+function ShowImageEditor(){
+
+}
+
+function FontSizeEdit(input){
+    if(input === 1 && Number(fontSize.innerText) < 48){
+        fontSize.innerHTML = Number(fontSize.innerText)+1;
+    }else if(input == -1 && Number(fontSize.innerText) > 1){
+        fontSize.innerHTML = Number(fontSize.innerText)-1;
+    }
+    selectedElement.style.fontSize=Number(fontSize.innerHTML)+"px";
+}

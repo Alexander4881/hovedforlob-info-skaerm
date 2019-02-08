@@ -1,3 +1,9 @@
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 .main-content{
   margin-top: 60px;
   margin-bottom: 60px;
@@ -72,6 +78,10 @@ body {
   border: 0.15em double black;
 }
 
+#element-select > .row > .btn-group-toggle{
+  margin: 1em auto 0 auto;
+}
+
 #preview{
   padding: 2em;
 }
@@ -85,8 +95,21 @@ body {
   color: lightskyblue;
   cursor: grab;
   position: absolute;
+  z-index: 10;
 }
 
 .resize{
   transform: rotate(-45deg);
+}
+
+.btn-input{
+  padding: 3px 4px;
+}
+
+#widthInput{
+  width: 40px!important;
+}
+
+#heigthInput{
+  width: 40px!important;
 }
