@@ -66,10 +66,10 @@ function SelectElement(element){
 
 function SetElementSettings(){
     switch(selectedElement.tagName){
-        case'P':
+        case'P'|| 'H1':
         console.log("det er et P element");
-        console.log(selectedElement.style.fontSize);
-        fontSize.innerHTML=selectedElement.style.fontSize;
+        console.log(window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px',''));
+        fontSize.innerHTML = window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
         ShowTextEditor();
         break;
 
@@ -79,6 +79,9 @@ function SetElementSettings(){
 
         case'H1':
         console.log("det er et H1 element");
+        console.log(window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px',''));
+        fontSize.innerHTML = window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
+        ShowTextEditor();
         break;
 
         case'SPAN':
@@ -111,7 +114,7 @@ function ShowImageEditor(){
 }
 
 function FontSizeEdit(input){
-    if(input === 1 && Number(fontSize.innerText) < 48){
+    if(input === 1 && Number(fontSize.innerText) < 72){
         fontSize.innerHTML = Number(fontSize.innerText)+1;
     }else if(input == -1 && Number(fontSize.innerText) > 1){
         fontSize.innerHTML = Number(fontSize.innerText)-1;
