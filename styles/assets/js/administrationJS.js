@@ -69,26 +69,19 @@ function SetElementSettings(){
         case'P':
         console.log("det er et P element");
         // set font size
-        console.log(window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px',''));
         fontSize.innerHTML = window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
-        
         
         ShowTextEditor();
         break;
 
         case'IMG':
         console.log("det er et IMG element");
+        
+        ShowImageEditor();
         break;
 
         case'SPAN':
         console.log("det er et SPAN element");
-        break;
-
-        case'SMALL':
-        console.log("det er et SMALL element");
-        console.log(window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px',''));
-        fontSize.innerHTML = window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
-        ShowTextEditor();
         break;
     }
 }
@@ -100,7 +93,7 @@ var newElementBox = document.getElementById("element-select");
 var elementSettings = document.getElementById("element-editor");
 
 // editors
-
+var textEditor = document.getElementById("text-editor");
 
 // editor settings
 var fontSize = document.getElementById("fontSizeVal");
@@ -116,9 +109,15 @@ function ShowTextEditor(){
     if (newElementBox.style.display !== "none") {
       newElementBox.style.display = "none";
     }
+    if(textEditor.style.display === "none"){
+        textEditor.style.display = "inline";
+    }
 }
 function ShowImageEditor(){
-
+    if (newElementBox.style.display !== "none") {
+        newElementBox.style.display = "none";
+    }
+    textEditor.style.display = "none";
 }
 
 function FontSizeEdit(input){
@@ -136,10 +135,44 @@ function TextAlign(textAlign){
     // Right = 3
     if(textAlign == 1){
         console.log("left");
-        textAlignLeft.classList += "disabled";
+        if(!textAlignLeft.classList.contains("disabled")){
+            textAlignLeft.classList += " disabled";   
+        }
+        selectedElement.style.textAlign='left';
+
+        textAlignCenter.classList.remove('disabled');
+        textAlignRight.classList.remove('disabled');
+
     }else if(textAlign == 2){
         console.log("center");
+        if(!textAlignCenter.classList.contains("disabled")){
+            textAlignCenter.classList += " disabled";
+        }
+        selectedElement.style.textAlign='center';
+
+        textAlignLeft.classList.remove('disabled');
+        textAlignRight.classList.remove('disabled');
+
     }else if(textAlign === 3){
         console.log("right");
+        if(!textAlignRight.classList.contains("disabled")){
+            textAlignRight.classList += " disabled";
+        }
+        selectedElement.style.textAlign='right';
+
+        textAlignCenter.classList.remove('disabled');
+        textAlignLeft.classList.remove('disabled');
+    }
+}
+
+function LayerHeigth(addOrSubtract){
+    // addOrSubtract = 1 add to layer
+    // addOrSubtract = -1 subrtract from layer
+    if(addOrSubtract == 1){
+        console.log("add layer");
+        selectedElement.style.zIndex = Number(selectedElement.style.zIndex)+1;
+    }else if(addOrSubtract == -1){
+        console.log("subtract layer");
+        selectedElement.style.zIndex = Number(selectedElement.style.zIndex)-1;
     }
 }
