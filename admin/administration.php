@@ -55,17 +55,18 @@ include_once("management/database.php");
 
                 <div class="row">
                     <span class="badge badge-pill badge-primary m-2">Text Align:</span>
-
+                </div>
+                <div class="row">
                     <div class="btn-group btn-group-toggle m-2" data-toggle="buttons">
-                        <label class="btn btn-secondary">
+                        <label class="btn btn-secondary" onclick="TextAlign(1)" id="textAlignLeft">
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-align-left"></i>
                         </label>
-                        <label class="btn btn-secondary">
+                        <label class="btn btn-secondary" onclick="TextAlign(2)" id="textAlignCenter">
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-align-center"></i>
                         </label>
-                        <label class="btn btn-secondary">
+                        <label class="btn btn-secondary" onclick="TextAlign(3)" id="textAlignRight">
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-align-right"></i>
                         </label>

@@ -66,10 +66,13 @@ function SelectElement(element){
 
 function SetElementSettings(){
     switch(selectedElement.tagName){
-        case'P'|| 'H1':
+        case'P':
         console.log("det er et P element");
+        // set font size
         console.log(window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px',''));
         fontSize.innerHTML = window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
+        
+        
         ShowTextEditor();
         break;
 
@@ -77,15 +80,15 @@ function SetElementSettings(){
         console.log("det er et IMG element");
         break;
 
-        case'H1':
-        console.log("det er et H1 element");
+        case'SPAN':
+        console.log("det er et SPAN element");
+        break;
+
+        case'SMALL':
+        console.log("det er et SMALL element");
         console.log(window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px',''));
         fontSize.innerHTML = window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
         ShowTextEditor();
-        break;
-
-        case'SPAN':
-        console.log("det er et SPAN element");
         break;
     }
 }
@@ -104,6 +107,11 @@ var fontSize = document.getElementById("fontSizeVal");
 var widthInput = document.getElementById("widthInput");
 var heigthInput = document.getElementById("heigthInput");
 
+// set font align
+var textAlignLeft = document.getElementById("textAlignLeft");
+var textAlignCenter = document.getElementById("textAlignCenter");
+var textAlignRight = document.getElementById("textAlignRight");
+
 function ShowTextEditor(){
     if (newElementBox.style.display !== "none") {
       newElementBox.style.display = "none";
@@ -120,4 +128,18 @@ function FontSizeEdit(input){
         fontSize.innerHTML = Number(fontSize.innerText)-1;
     }
     selectedElement.style.fontSize=Number(fontSize.innerHTML)+"px";
+}
+
+function TextAlign(textAlign){
+    // Left = 1
+    // Center = 2
+    // Right = 3
+    if(textAlign == 1){
+        console.log("left");
+        textAlignLeft.classList += "disabled";
+    }else if(textAlign == 2){
+        console.log("center");
+    }else if(textAlign === 3){
+        console.log("right");
+    }
 }
