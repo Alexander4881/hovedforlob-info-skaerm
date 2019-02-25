@@ -10,9 +10,9 @@ include_once("management/database.php");
 <div class="container-fluid h-100">
     <div class="row h-100">
 
-        <div id="preview" class="col-10" style="background-color: rgba(0,0,255,.1)">
+        <div id="preview" class="col-9" style="background-color: rgba(0,0,255,.1)">
         </div>
-        <div id="element-select-box" class="col-2 h-100 d-inline-block" style="background-color: rgba(0,100,255,.1)">
+        <div id="element-select-box" class="col-3 d-inline-block" style="background-color: rgba(0,100,255,.1)">
             <div id="element-select">
 
                 <div class="row">
@@ -130,7 +130,7 @@ include_once("management/database.php");
                 </div>
                 <div class="row">
                     <div class="btn-group btn-group-toggle m-2" data-toggle="buttons">
-                        <label class="btn btn-secondary">
+                        <label class="btn btn-secondary" onclick="ContentWidth(1)">
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-plus"></i>
                         </label>
@@ -138,7 +138,7 @@ include_once("management/database.php");
                             <input type="number" min="0" max="1920" value="1920" name="options" id="widthInput"
                                 autocomplete="off">
                         </label>
-                        <label class="btn btn-secondary">
+                        <label class="btn btn-secondary" onclick="ContentWidth(-1)">
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-minus"></i>
                         </label>
@@ -150,7 +150,7 @@ include_once("management/database.php");
                 </div>
                 <div class="row">
                     <div class="btn-group btn-group-toggle m-2" data-toggle="buttons">
-                        <label class="btn btn-secondary">
+                        <label class="btn btn-secondary" onclick="ContentHeight(1)">
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-plus"></i>
                         </label>
@@ -158,7 +158,7 @@ include_once("management/database.php");
                             <input type="number" min="0" max="1080" value="1080" name="options" id="heigthInput"
                                 autocomplete="off">
                         </label>
-                        <label class="btn btn-secondary">
+                        <label class="btn btn-secondary" onclick="ContentHeight(-1)">
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-minus"></i>
                         </label>
@@ -173,7 +173,7 @@ include_once("management/database.php");
                 </div>
                 <div class="row">
                     <div class="btn-group btn-group-toggle m-2" data-toggle="buttons">
-                        <label class="btn btn-secondary">
+                        <label class="btn btn-secondary" onclick="PosisitionTop(1)">
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-plus"></i>
                         </label>
@@ -181,7 +181,7 @@ include_once("management/database.php");
                             <input type="number" min="0" max="1080" value="1080" name="options" id="heigthInput"
                                 autocomplete="off">
                         </label>
-                        <label class="btn btn-secondary">
+                        <label class="btn btn-secondary" onclick="PosisitionTop(-1)">
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-minus"></i>
                         </label>
@@ -216,5 +216,5 @@ include_once("management/database.php");
 <script src="../styles/assets/js/administrationJS.js"></script>
 
 <?php
-include_once("../includes/footer.php");
+//  include_once("../includes/footer.php");
 ?>

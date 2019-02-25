@@ -176,3 +176,50 @@ function LayerHeigth(addOrSubtract){
         selectedElement.style.zIndex = Number(selectedElement.style.zIndex)-1;
     }
 }
+
+function ContentWidth(addOrSubtract){
+    // addOrSubtract 1 = add width
+    // addOrSubtract -1 = remove width
+    if(addOrSubtract == 1){
+        // Take the current width and adds it by one
+        selectedElement.style.width = Number(selectedElement.clientWidth)+1 + "px";
+        
+    }else if(addOrSubtract == -1){
+        // Take the current width and adds it by one
+        selectedElement.style.width = Number(selectedElement.clientWidth)-1 + "px";
+
+    }
+}
+
+function ContentHeight(addOrSubtract){
+    // addOrSubtract 1 = add Height
+    // addOrSubtract -1 = remove Height
+    if(addOrSubtract == 1){
+        // Take the current Height and adds it by one
+        selectedElement.style.height = Number(selectedElement.clientHeight)+1 + "px";
+        console.log(Number(selectedElement.clientHeight)+1 + "px");
+        
+    }else if(addOrSubtract == -1){
+        // Take the current Height and adds it by one
+        selectedElement.style.height = Number(selectedElement.clientHeight)-1 + "px";
+
+    }
+}
+
+function PosisitionTop(addOrSubtract){
+    
+    
+    if(addOrSubtract == 1){
+        if(selectedElement.style.display == "absolute"){
+            
+            var boundingBox = selectedElement.getBoundingClientRect();
+
+            selectedElement.style.position = "absolute";
+
+            
+
+        }
+    }else if(addOrSubtract == -1){
+
+    }
+}
