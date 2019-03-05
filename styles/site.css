@@ -98,26 +98,40 @@ body {
   border: 1px solid red;
 }
 
-.handel{
+.colorInput{
+  width: 100px!important;
+  height: 72px!important;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+}
+
+.colorInput:focus{
+  outline: none;
+}
+
+#widthInput, #heigthInput, #leftInput, #topInput{
+  width: 40px!important;
+}
+
+#colorSvg{
+  height: 200px;
+  margin: 0.5 0;
   font-size: 3em;
-  color: lightskyblue;
-  cursor: grab;
-  position: absolute;
-  z-index: 10;
 }
 
-.resize{
-  transform: rotate(-45deg);
+.red{
+  color: red;
 }
 
-.btn-input{
-  padding: 3px 4px;
+.blue{
+  color: blue;
 }
 
-#widthInput{
-  width: 40px!important;
+.green{
+  color:green;
 }
 
-#heigthInput{
-  width: 40px!important;
+.hide{
+  display: none;
 }

@@ -21,19 +21,28 @@ include_once("management/database.php");
                 </div>
 
                 <div class="row">
-                    <button class="element" type="submit" onclick="test()" value="newTime"><i
-                            class="fas fa-font"></i></button>
+                    <button class="element" type="submit" onclick="test()" value="newTime">
+                        <i class="far fa-clock"></i>
+                    </button>
                 </div>
 
                 <div class="row">
-                    <button class="element" type="submit" onclick="test()" value="newImage"><i
-                            class="fas fa-font"></i></button>
+                    <button class="element" type="submit" onclick="test()" value="newImage">
+                        <i class="fas fa-image"></i>
+                    </button>
                 </div>
             </div>
 
-            <div id="element-editor">
+            <div id="element-editor" class="hide">
 
                 <div id="text-editor">
+
+                    <div class="row">
+                        <?php 
+                            include("../styles/images/colorPicker.php");
+                        ?>
+                    </div>
+
                     <div class="row">
                         <span class="badge badge-pill badge-primary m-2">Text:</span>
                     </div>
@@ -80,6 +89,8 @@ include_once("management/database.php");
 
                     <div class="row">
                         <span class="badge badge-pill badge-primary m-2">Layer Height:</span>
+                    </div>
+                    <div class="row">
 
                         <div class="btn-group btn-group-toggle m-2" data-toggle="buttons">
                             <label class="btn btn-secondary" onclick="LayerHeigth(1)">
@@ -98,8 +109,9 @@ include_once("management/database.php");
                     </div>
 
                     <div class="row">
-
                         <span class="badge badge-pill badge-primary m-2">Text Style:</span>
+                    </div>
+                    <div class="row">
 
                         <div class="btn-group btn-group-toggle m-2" data-toggle="buttons">
                             <label class="btn btn-secondary">
@@ -134,9 +146,9 @@ include_once("management/database.php");
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-plus"></i>
                         </label>
-                        <label class="btn btn-secondary disabled btn-input">
-                            <input type="number" min="0" max="1920" value="1920" name="options" id="widthInput"
-                                autocomplete="off">
+                        <label class="btn btn-secondary disabled btn-input" >
+                            <input type="number" min="0" max="1920" value="" name="options" id="widthInput"
+                                autocomplete="off" onchange="InputValueChanges(this)">
                         </label>
                         <label class="btn btn-secondary" onclick="ContentWidth(-1)">
                             <input type="radio" name="options" id="option2" autocomplete="off">
@@ -154,9 +166,9 @@ include_once("management/database.php");
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-plus"></i>
                         </label>
-                        <label class="btn btn-secondary disabled btn-input">
-                            <input type="number" min="0" max="1080" value="1080" name="options" id="heigthInput"
-                                autocomplete="off">
+                        <label class="btn btn-secondary disabled btn-input scroll-able">
+                            <input type="number" min="0" max="1080" value="" name="options" id="heigthInput"
+                                autocomplete="off" onchange="InputValueChanges(this)">
                         </label>
                         <label class="btn btn-secondary" onclick="ContentHeight(-1)">
                             <input type="radio" name="options" id="option2" autocomplete="off">
@@ -177,9 +189,9 @@ include_once("management/database.php");
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-plus"></i>
                         </label>
-                        <label class="btn btn-secondary disabled btn-input">
-                            <input type="number" min="0" max="1080" value="1080" name="options" id="heigthInput"
-                                autocomplete="off">
+                        <label class="btn btn-secondary disabled btn-input scroll-able">
+                            <input type="number" min="0" max="1080" value="" name="options" id="topInput"
+                                autocomplete="off" onchange="InputValueChanges(this)">
                         </label>
                         <label class="btn btn-secondary" onclick="PosisitionTop(-1)">
                             <input type="radio" name="options" id="option2" autocomplete="off">
@@ -192,15 +204,15 @@ include_once("management/database.php");
                 </div>
                 <div class="row">
                     <div class="btn-group btn-group-toggle m-2" data-toggle="buttons">
-                        <label class="btn btn-secondary">
+                        <label class="btn btn-secondary" onclick="PosisitionLeft(1)">
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-plus"></i>
                         </label>
-                        <label class="btn btn-secondary disabled btn-input">
-                            <input type="number" min="0" max="1080" value="1080" name="options" id="heigthInput"
-                                autocomplete="off">
+                        <label class="btn btn-secondary disabled btn-input scroll-able" >
+                            <input type="number" min="0" max="1080" value="0" name="options" id="leftInput"
+                                onchange="InputValueChanges(this)">
                         </label>
-                        <label class="btn btn-secondary">
+                        <label class="btn btn-secondary" onclick="PosisitionLeft(-1)">
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-minus"></i>
                         </label>

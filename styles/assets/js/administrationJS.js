@@ -1,3 +1,24 @@
+// new element box
+var newElementBox = document.getElementById("element-select");
+
+// element settings box
+var elementSettings = document.getElementById("element-editor");
+
+// editors
+var textEditor = document.getElementById("text-editor");
+
+// editor settings
+var fontSize = document.getElementById("fontSizeVal");
+var widthInput = document.getElementById("widthInput");
+var heigthInput = document.getElementById("heigthInput");
+var topInput = document.getElementById("topInput");
+var leftInput = document.getElementById("leftInput");
+
+// set font align
+var textAlignLeft = document.getElementById("textAlignLeft");
+var textAlignCenter = document.getElementById("textAlignCenter");
+var textAlignRight = document.getElementById("textAlignRight");
+
 OnNewElementClick();
 LoadPreview();
 
@@ -51,14 +72,12 @@ var selectedElement;
 
 function PreviewOverlay(){    
     document.getElementById("preview").addEventListener("click",function(event){
-        console.log(event.target);
         SelectElement(event.target);
         SetElementSettings();
     });
 }
 
 function SelectElement(element){
-    console.log("selected element", element);
     if(selectedElement !== element){
         selectedElement = element;
     }
@@ -67,43 +86,31 @@ function SelectElement(element){
 function SetElementSettings(){
     switch(selectedElement.tagName){
         case'P':
-        console.log("det er et P element");
+
+        if(selectedElement.style.display != "absolute"){
+            selectedElement.style.position = "absolute";
+        }
+
         // set font size
         fontSize.innerHTML = window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
         
+        heigthInput.value = selectedElement.clientHeight;
+        widthInput.value = selectedElement.clientWidth;
+        topInput.value = selectedElement.offsetTop;
+        leftInput.value = selectedElement.offsetLeft;
         ShowTextEditor();
+        RGBColorChanges();
         break;
 
         case'IMG':
-        console.log("det er et IMG element");
-        
+        heigthInput.value = selectedElement.clientHeight;
+        widthInput.value = selectedElement.clientWidth;
+        topInput.value = selectedElement.offsetTop;
+        leftInput.value = selectedElement.offsetLeft;
         ShowImageEditor();
-        break;
-
-        case'SPAN':
-        console.log("det er et SPAN element");
         break;
     }
 }
-
-// new element box
-var newElementBox = document.getElementById("element-select");
-
-// element settings box
-var elementSettings = document.getElementById("element-editor");
-
-// editors
-var textEditor = document.getElementById("text-editor");
-
-// editor settings
-var fontSize = document.getElementById("fontSizeVal");
-var widthInput = document.getElementById("widthInput");
-var heigthInput = document.getElementById("heigthInput");
-
-// set font align
-var textAlignLeft = document.getElementById("textAlignLeft");
-var textAlignCenter = document.getElementById("textAlignCenter");
-var textAlignRight = document.getElementById("textAlignRight");
 
 function ShowTextEditor(){
     if (newElementBox.style.display !== "none") {
@@ -169,11 +176,13 @@ function LayerHeigth(addOrSubtract){
     // addOrSubtract = 1 add to layer
     // addOrSubtract = -1 subrtract from layer
     if(addOrSubtract == 1){
-        console.log("add layer");
-        selectedElement.style.zIndex = Number(selectedElement.style.zIndex)+1;
+        if(selectedElement.style.zIndex <= 1000 && selectedElement.style.zIndex > 0){
+            selectedElement.style.zIndex = Number(selectedElement.style.zIndex)+1;
+        }
     }else if(addOrSubtract == -1){
-        console.log("subtract layer");
-        selectedElement.style.zIndex = Number(selectedElement.style.zIndex)-1;
+        if(selectedElement.style.zIndex < 1000 && selectedElement.style.zIndex >= 0){
+            selectedElement.style.zIndex = Number(selectedElement.style.zIndex)-1;
+        }
     }
 }
 
@@ -182,12 +191,16 @@ function ContentWidth(addOrSubtract){
     // addOrSubtract -1 = remove width
     if(addOrSubtract == 1){
         // Take the current width and adds it by one
-        selectedElement.style.width = Number(selectedElement.clientWidth)+1 + "px";
-        
+        if(Number(selectedElement.clientWidth) <= 1920 && Number(selectedElement.clientWidth) > 0){
+            selectedElement.style.width = Number(selectedElement.clientWidth)+1 + "px";
+            widthInput.value = Number(widthInput.value)+1;
+        }
     }else if(addOrSubtract == -1){
         // Take the current width and adds it by one
-        selectedElement.style.width = Number(selectedElement.clientWidth)-1 + "px";
-
+        if(Number(selectedElement.clientWidth) < 1920 && Number(selectedElement.clientWidth) >= 0){
+            selectedElement.style.width = Number(selectedElement.clientWidth)-1 + "px";
+            widthInput.value = Number(widthInput.value)-1;
+        }
     }
 }
 
@@ -196,30 +209,269 @@ function ContentHeight(addOrSubtract){
     // addOrSubtract -1 = remove Height
     if(addOrSubtract == 1){
         // Take the current Height and adds it by one
-        selectedElement.style.height = Number(selectedElement.clientHeight)+1 + "px";
-        console.log(Number(selectedElement.clientHeight)+1 + "px");
+        if(Number(selectedElement.clientHeight) <= 1080 && Number(selectedElement.clientHeight) > 0){
+            selectedElement.style.height = Number(selectedElement.clientHeight)+1 + "px";
+            heigthInput.value = Number(heigthInput.value)+1;
+        }
         
     }else if(addOrSubtract == -1){
         // Take the current Height and adds it by one
-        selectedElement.style.height = Number(selectedElement.clientHeight)-1 + "px";
-
+        if(Number(selectedElement.clientHeight) < 1080 && Number(selectedElement.clientHeight) >= 0){
+            selectedElement.style.height = Number(selectedElement.clientHeight)-1 + "px";
+            heigthInput.value = Number(heigthInput.value)-1;
+        }
     }
 }
 
 function PosisitionTop(addOrSubtract){
     
-    
+    if(selectedElement.style.display != "absolute"){
+        selectedElement.style.position = "absolute";
+    }
+
     if(addOrSubtract == 1){
-        if(selectedElement.style.display == "absolute"){
-            
-            var boundingBox = selectedElement.getBoundingClientRect();
-
-            selectedElement.style.position = "absolute";
-
-            
-
+        // take the element curent posision
+        if(selectedElement.offsetTop < 1080 && selectedElement.offsetTop >= 0){
+            selectedElement.style.top = selectedElement.offsetTop+1 + "px";
+            topInput.value = Number(topInput.value) + 1;
+        }else{
+            console.log("Nope");
         }
     }else if(addOrSubtract == -1){
-
+        // take the element curent posision
+        if(selectedElement.offsetTop <= 1920 && selectedElement.offsetTop > 0){
+            selectedElement.style.top = selectedElement.offsetTop-1 + "px";
+            topInput.value = Number(topInput.value) -1;
+        }else{
+            console.log("Nope");
+        }
     }
 }
+
+function PosisitionLeft(addOrSubtract){
+    if(selectedElement.style.display != "absolute"){
+        selectedElement.style.position = "absolute";
+    }
+
+    if(addOrSubtract == 1){
+        // take the element curent posision
+        if(selectedElement.offsetLeft < 1920 && selectedElement.offsetLeft >= 0){
+            selectedElement.style.left = selectedElement.offsetLeft+1 + "px";
+            leftInput.value = Number(leftInput.value) +1;
+        }else{
+            console.log("over 1920 eller under 0");
+        }
+
+    }else if(addOrSubtract == -1){
+        // take the element curent posision
+        if(selectedElement.offsetLeft <= 1920 && selectedElement.offsetLeft > 0){
+            selectedElement.style.left = selectedElement.offsetLeft-1 + "px";
+            leftInput.value = Number(leftInput.value) -1;
+            
+        }else{
+            console.log("over 1920 eller under 0");
+        }
+    }
+}
+
+function InputValueChanges(element){
+    if(element.id == "widthInput"){
+        if(element.value <= 1920 && element.value >= 0){
+            selectedElement.style.width = element.value + "px";
+        }
+    } else if(element.id == "heigthInput"){
+        if(element.value <= 1080 && element.value >= 0){
+            selectedElement.style.height = element.value + "px";
+        }
+    } else if(element.id == "topInput"){
+        if(element.value <= 1080 && element.value >= 0){
+            selectedElement.style.top = element.value + "px";
+        }
+    } else if(element.id == "leftInput"){
+        if(element.value <= 1920 && element.value >= 0){
+            selectedElement.style.left = element.value + "px";
+        }
+    }
+}
+
+// Color Inputs
+var redInput = document.getElementById("redColor");
+var greenInput = document.getElementById("greenColor");
+var blueInput = document.getElementById("blueColor");
+
+function RGBColorChanges() 
+{
+    if(selectedElement.style.color == ""){
+        selectedElement.style.color = "rgb(0,0,0)";
+
+        // set the color to black
+        redInput.value=0;
+        greenInput.value=0;
+        blueInput.value=0;
+    }
+
+    selectedElement.style.color = "rgb("+ redInput.value +","+ greenInput.value +","+ blueInput.value +")";
+
+    SetSVGColor([redInput.value,greenInput.value,blueInput.value]);
+}
+
+// function that set the color of the svg
+function SetSVGColor(rgbColor){
+
+    document.getElementById("MainColor").style.fill="rgb("+ rgbColor[0] +","+ rgbColor[1] +","+ rgbColor[2] +")";
+    
+    if(rgbColor[0] >= rgbColor[1] && rgbColor[0] >=  rgbColor[2])
+    {
+        SetSvgColorWheel("red",rgbColor);
+    }
+    else if(rgbColor[1] >= rgbColor[0] && rgbColor[1] >= rgbColor[2]){
+        SetSvgColorWheel("green",rgbColor);
+    }
+    else if(rgbColor[2] >= rgbColor[0] && rgbColor[2] >= rgbColor[1]){
+        SetSvgColorWheel("blue",rgbColor);
+    }
+}
+
+// function to set the 7 small color wheel 
+function SetSvgColorWheel(color,currentColor){
+    switch(color){
+        case "red":
+        if(currentColor[0] <= 225 && currentColor[0] >= 30){
+            // The Lighter Colors
+            document.getElementById("LightOne").style.fill = "rgb("+ (Number(currentColor[0]) + 10) +","+ currentColor[1] +","+ currentColor[2] +")";
+            document.getElementById("LightTwo").style.fill = "rgb("+ (parseInt(currentColor[0]) + 20) +","+ currentColor[1] +","+ currentColor[2] +")";
+            document.getElementById("LightThree").style.fill = "rgb("+ (parseInt(currentColor[0]) + 30) +","+ currentColor[1] +","+ currentColor[2] +")";
+
+            // The normal color
+            document.getElementById("Normal").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ currentColor[2] +")";
+
+            // The darker colors
+            document.getElementById("DarkOne").style.fill = "rgb("+ (Number(currentColor[0]) - 10) +","+ currentColor[1] +","+ currentColor[2] +")";
+            document.getElementById("DarkTwo").style.fill = "rgb("+ (Number(currentColor[0]) - 20) +","+ currentColor[1] +","+ currentColor[2] +")";
+            document.getElementById("DarkThree").style.fill = "rgb("+ (Number(currentColor[0]) - 30) +","+ currentColor[1] +","+ currentColor[2] +")";
+
+        }else if(currentColor[0] <= 225){
+            // hvis den er mindre end 225
+            document.getElementById("LightOne").style.fill = "rgb("+ (Number(currentColor[0]) + 10) +","+ currentColor[1] +","+ currentColor[2] +")";
+            document.getElementById("LightTwo").style.fill = "rgb("+ (parseInt(currentColor[0]) + 20) +","+ currentColor[1] +","+ currentColor[2] +")";
+            document.getElementById("LightThree").style.fill = "rgb("+ (parseInt(currentColor[0]) + 30) +","+ currentColor[1] +","+ currentColor[2] +")";
+
+            // The normal color
+            document.getElementById("Normal").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ currentColor[2] +")";
+
+            // The darker colors
+            document.getElementById("DarkOne").style.fill = "rgb("+ (Number(currentColor[0]) + 40) +","+ currentColor[1] +","+ currentColor[2] +")";
+            document.getElementById("DarkTwo").style.fill = "rgb("+ (Number(currentColor[0]) + 50) +","+ currentColor[1] +","+ currentColor[2] +")";
+            document.getElementById("DarkThree").style.fill = "rgb("+ (Number(currentColor[0]) + 60) +","+ currentColor[1] +","+ currentColor[2] +")";
+
+        }else if(currentColor[0] >= 30){
+            // hvis den er over 30
+            document.getElementById("LightOne").style.fill = "rgb("+ (Number(currentColor[0]) - 10) +","+ currentColor[1] +","+ currentColor[2] +")";
+            document.getElementById("LightTwo").style.fill = "rgb("+ (parseInt(currentColor[0]) - 20) +","+ currentColor[1] +","+ currentColor[2] +")";
+            document.getElementById("LightThree").style.fill = "rgb("+ (parseInt(currentColor[0]) - 30) +","+ currentColor[1] +","+ currentColor[2] +")";
+
+            // The normal color
+            document.getElementById("Normal").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ currentColor[2] +")";
+
+            // The darker colors
+            document.getElementById("DarkOne").style.fill = "rgb("+ (Number(currentColor[0]) - 40) +","+ currentColor[1] +","+ currentColor[2] +")";
+            document.getElementById("DarkTwo").style.fill = "rgb("+ (Number(currentColor[0]) - 50) +","+ currentColor[1] +","+ currentColor[2] +")";
+            document.getElementById("DarkThree").style.fill = "rgb("+ (Number(currentColor[0]) - 60) +","+ currentColor[1] +","+ currentColor[2] +")";         
+        }
+        break;
+
+        case "green":
+        if(currentColor[1] <= 225 && currentColor[1] >= 30){
+            // The Lighter Colors
+            document.getElementById("LightOne").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])+10) +","+ currentColor[2] +")";
+            document.getElementById("LightTwo").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])+20) +","+ currentColor[2] +")";
+            document.getElementById("LightThree").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])+30) +","+ currentColor[2] +")";
+
+            // The normal color
+            document.getElementById("Normal").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ currentColor[2] +")";
+
+            // The darker colors
+            document.getElementById("DarkOne").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])-10) +","+ currentColor[2] +")";
+            document.getElementById("DarkTwo").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])-20) +","+ currentColor[2] +")";
+            document.getElementById("DarkThree").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])-30) +","+ currentColor[2] +")";
+
+        }else if(currentColor[1] <= 225){
+            // hvis den er mindre end 225
+            document.getElementById("LightOne").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])+10) +","+ currentColor[2] +")";
+            document.getElementById("LightTwo").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])+20) +","+ currentColor[2] +")";
+            document.getElementById("LightThree").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])+30) +","+ currentColor[2] +")";
+
+            // The normal color
+            document.getElementById("Normal").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ currentColor[2] +")";
+
+            // The darker colors
+            document.getElementById("DarkOne").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])+40) +","+ currentColor[2] +")";
+            document.getElementById("DarkTwo").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])+50) +","+ currentColor[2] +")";
+            document.getElementById("DarkThree").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])+60) +","+ currentColor[2] +")";
+
+        }else if(currentColor[1] >= 30){
+            // hvis den er over 30
+            document.getElementById("LightOne").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])-10) +","+ currentColor[2] +")";
+            document.getElementById("LightTwo").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])-20) +","+ currentColor[2] +")";
+            document.getElementById("LightThree").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])-30) +","+ currentColor[2] +")";
+
+            // The normal color
+            document.getElementById("Normal").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ currentColor[2] +")";
+
+            // The darker colors
+            document.getElementById("DarkOne").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])-40) +","+ currentColor[2] +")";
+            document.getElementById("DarkTwo").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])-50) +","+ currentColor[2] +")";
+            document.getElementById("DarkThree").style.fill = "rgb("+ currentColor[0] +","+ (Number(currentColor[1])-60) +","+ currentColor[2] +")";         
+        }
+        break;
+
+        case "blue":
+        if(currentColor[2] <= 225 && currentColor[2] >= 30){
+            // The Lighter Colors
+            document.getElementById("LightOne").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])+10) +")";
+            document.getElementById("LightTwo").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])+20) +")";
+            document.getElementById("LightThree").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])+30) +")";
+
+            // The normal color
+            document.getElementById("Normal").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ currentColor[2] +")";
+
+            // The darker colors
+            document.getElementById("DarkOne").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-10) +")";
+            document.getElementById("DarkTwo").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-20) +")";
+            document.getElementById("DarkThree").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-30) +")";
+
+        }else if(currentColor[2] <= 225){
+            // hvis den er mindre end 225
+            document.getElementById("LightOne").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])+10) +")";
+            document.getElementById("LightTwo").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])+20) +")";
+            document.getElementById("LightThree").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])+30) +")";
+
+            // The normal color
+            document.getElementById("Normal").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ currentColor[2] +")";
+
+            // The darker colors
+            document.getElementById("DarkOne").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])+40) +")";
+            document.getElementById("DarkTwo").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])+50) +")";
+            document.getElementById("DarkThree").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])+60) +")";
+
+        }else if(currentColor[2] >= 30){
+            // hvis den er over 30
+            document.getElementById("LightOne").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-10) +")";
+            document.getElementById("LightTwo").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-20) +")";
+            document.getElementById("LightThree").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-30) +")";
+
+            // The normal color
+            document.getElementById("Normal").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ currentColor[2] +")";
+
+            // The darker colors
+            document.getElementById("DarkOne").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-40) +")";
+            document.getElementById("DarkTwo").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-50) +")";
+            document.getElementById("DarkThree").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-60) +")";         
+        }
+        break;
+
+        default:
+        console.log("Error On SetSvgColorWeel");
+    }
+}
+
