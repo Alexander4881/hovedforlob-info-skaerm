@@ -33,7 +33,7 @@ include_once("management/database.php");
                 </div>
             </div>
 
-            <div id="element-editor" class="hide">
+            <div id="element-editor" class="">
 
                 <div id="text-editor">
 

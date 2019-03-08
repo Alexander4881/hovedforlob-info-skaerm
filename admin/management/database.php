@@ -3,9 +3,9 @@
 $connection;
 
 function db(){    
-    $DBUsername = 'mysql';
-    $DBPassword = 'Pa$$w0rd';
-    $DBHostname = '10.108.148.82';
+    $DBUsername = 'sql';
+    $DBPassword = '4qK&r=jpn[6:Z%#h';
+    $DBHostname = '127.0.0.1';
     $DBCatalogue = 'infoskaerm';
 
 

@@ -80,7 +80,12 @@ function PreviewOverlay(){
 function SelectElement(element){
     if(selectedElement !== element){
         selectedElement = element;
+        selectedElement.addEventListener("dblclick", EditText());
     }
+}
+
+function EditText(){
+    console.log(event.target.innerHTML);
 }
 
 function SetElementSettings(){

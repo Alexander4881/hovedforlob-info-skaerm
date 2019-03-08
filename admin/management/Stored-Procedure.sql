@@ -1,0 +1,4 @@
+CREATE PROCEDURE InsertNewWebSite ( IN Title VARCHAR(40), IN SiteID TINYINT )
+BEGIN
+INSERT INTO WebSite(Title, SiteID) VALUE(Title,SiteID);
+END;
