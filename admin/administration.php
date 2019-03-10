@@ -10,7 +10,7 @@ include_once("management/database.php");
 
 <!-- Modal -->
 <!-- edit text modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="editTextModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -20,11 +20,11 @@ include_once("management/database.php");
         </button>
       </div>
       <div class="modal-body">
-        <input class="form-control w-100" type="text" value="test text">
+        <input id="editText" class="form-control w-100" type="text" value="test text">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="SaveText()" data-dismiss="modal">Save changes</button>
+        <button id="saveButtonText" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
