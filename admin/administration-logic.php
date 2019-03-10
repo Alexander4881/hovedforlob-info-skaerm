@@ -10,5 +10,8 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 }else if(isset($_POST['val']) && $_POST['val'] === "newImage"){
     NewImage();
 
+}else if(isset($_POST['val']) && $_POST['val'] === "getImages"){
+    echo(GetImages(2));
+
 }
 ?>

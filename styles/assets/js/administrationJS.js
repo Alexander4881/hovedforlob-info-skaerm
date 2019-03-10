@@ -80,12 +80,7 @@ function PreviewOverlay(){
 function SelectElement(element){
     if(selectedElement !== element){
         selectedElement = element;
-        selectedElement.addEventListener("dblclick", EditText());
     }
-}
-
-function EditText(){
-    console.log(event.target.innerHTML);
 }
 
 function SetElementSettings(){
@@ -95,14 +90,6 @@ function SetElementSettings(){
         if(selectedElement.style.display != "absolute"){
             selectedElement.style.position = "absolute";
         }
-
-        // set font size
-        fontSize.innerHTML = window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
-        
-        heigthInput.value = selectedElement.clientHeight;
-        widthInput.value = selectedElement.clientWidth;
-        topInput.value = selectedElement.offsetTop;
-        leftInput.value = selectedElement.offsetLeft;
         ShowTextEditor();
         RGBColorChanges();
         break;
@@ -117,7 +104,20 @@ function SetElementSettings(){
     }
 }
 
+function EditText(){
+    console.log(event.target.innerHTML);
+}
+
 function ShowTextEditor(){
+
+    // set font size
+    fontSize.innerHTML = window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
+        
+    heigthInput.value = selectedElement.clientHeight;
+    widthInput.value = selectedElement.clientWidth;
+    topInput.value = selectedElement.offsetTop;
+    leftInput.value = selectedElement.offsetLeft;
+
     if (newElementBox.style.display !== "none") {
       newElementBox.style.display = "none";
     }

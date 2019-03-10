@@ -7,33 +7,57 @@ include_once("management/database.php");
 ?>
 
 <!-- Main Content -->
+
+<!-- Modal -->
+<!-- edit text modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Text</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input class="form-control w-100" type="text" value="test text">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="SaveText()" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container-fluid h-100">
     <div class="row h-100">
-
-        <div id="preview" class="col-9" style="background-color: rgba(0,0,255,.1)">
+        
+        <div id="preview" class="col-10" style="background-color: rgba(0,0,255,.1)">
         </div>
-        <div id="element-select-box" class="col-3 d-inline-block" style="background-color: rgba(0,100,255,.1)">
+
+        <div id="element-select-box" class="col-2 d-inline-block" style="background-color: rgba(0,100,255,.1)">
             <div id="element-select">
 
                 <div class="row">
-                    <button class="element" type="submit" onclick="test()" value="newText"><i
+                    <button class="element" type="submit" onclick="NewElement(1)" value="newText"><i
                             class="fas fa-font"></i></button>
                 </div>
 
                 <div class="row">
-                    <button class="element" type="submit" onclick="test()" value="newTime">
-                        <i class="far fa-clock"></i>
+                    <button class="element" type="submit" onclick="NewElement(2)" value="newTime">
+                        <i class="fas fa-table"></i>
                     </button>
                 </div>
 
                 <div class="row">
-                    <button class="element" type="submit" onclick="test()" value="newImage">
+                    <button class="element" type="submit" onclick="NewElement(3)" value="newImage">
                         <i class="fas fa-image"></i>
                     </button>
                 </div>
             </div>
 
-            <div id="element-editor" class="">
+            <div id="element-editor" class="hide">
 
                 <div id="text-editor">
 
@@ -224,8 +248,7 @@ include_once("management/database.php");
 </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="../styles/assets/js/administrationJS.js"></script>
+<script src="../styles/assets/js/administrationJS_v001.js"></script>
 
 <?php
 //  include_once("../includes/footer.php");

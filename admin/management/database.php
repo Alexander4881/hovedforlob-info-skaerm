@@ -18,62 +18,25 @@ function db(){
     }
 }
 
-function NewText(){
-    if(!isset($connection)){
-        $connection = db();
-    }
+function GetImages(){
+    $connection = db();
 
-    $sql = "INSERT INTO Description (text, website_id) VALUES ('text','1')";
+    $sql = "CALL ShowImages;";
 
-    if (mysqli_query($connection, $sql)) {
-        echo "New record created successfully";
+    $result = $connection->query($sql);
+
+    $images = "";
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+             $images .= $row["path"]. ",";
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($connection);
-    }
-    $connection->close();
-}
-
-function NewTime(){
-    if(!isset($connection)){
-        $connection = db();
+        echo "error in db";
     }
 
-    $sql = "INSERT INTO Time (startTime, endTime, website_id) VALUES ('2019-01-30','2008-02-14','1')";
-
-    if (mysqli_query($connection, $sql)) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($connection);
-    }
-}
-
-function NewImage(){
-    if(!isset($connection)){
-        $connection = db();
-    }
-
-    $sql = "INSERT INTO Image (text, website_id) VALUES ('text','1')";
-    $sql = "INSERT INTO Image (text, website_id) VALUES ('text','1')";
-    $sql = "INSERT INTO Image (text, website_id) VALUES ('text','1')";
-
-    if (mysqli_query(db(), $sql)) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($connection);
-    }
-}
-
-function NewWebsite(){
-    if(!isset($connection)){
-        $connection = db();
-    }
-
-    $sql = "INSERT INTO WebSite (text, website_id) VALUES ('text','1')";
-
-    if (mysqli_query(db(), $sql)) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($connection);
-    }
+    if($images != null)
+        return($images);
 }
 ?>
