@@ -3,8 +3,8 @@
 $connection;
 
 function db(){    
-    $DBUsername = 'sql';
-    $DBPassword = '4qK&r=jpn[6:Z%#h';
+    $DBUsername = 'root';
+    $DBPassword = '';
     $DBHostname = '127.0.0.1';
     $DBCatalogue = 'infoskaerm';
 

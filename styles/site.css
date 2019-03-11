@@ -116,7 +116,7 @@ body {
 
 #colorSvg{
   height: 200px;
-  margin: 0.5 0;
+  margin: 0.5em 0 0.5em 0;
   font-size: 3em;
 }
 
@@ -134,4 +134,13 @@ body {
 
 .hide{
   display: none;
+}
+
+.btn-input{
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.btn-input > input{
+  text-align: center;
 }
