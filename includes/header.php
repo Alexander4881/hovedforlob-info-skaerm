@@ -17,7 +17,7 @@ include_once("admin/management/global.php");
 
 <body>
   <!-- Maintenance -->
-  <div class="alert alert-danger navbar justify-content-between align-items-center w-100" role="alert">
+  <div class="alert alert-danger main-alert navbar justify-content-between align-items-center w-100" role="alert">
     <div class="justify-content-center align-items-center">
       Website is in Alpha, be patient.
     </div>

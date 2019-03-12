@@ -1,5 +1,4 @@
 <?php
-
 $connection;
 
 function db(){    
@@ -30,13 +29,26 @@ function GetImages(){
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-             $images .= '<image src="'. $row["path"]. ' class="d-block w-100">,';
+             $images .= '<image src="C:\\Users\User\\Documents\\GitHub\\hovedforlob-info-skaerm\\images\\uploads\\'. $row["path"]. ' class="d-block rounded img-thumbnail">,';
         }
     } else {
-        echo "error in db";
+        echo "error in db or tabel is empty";
     }
 
     if($images != null)
         return($images);
+}
+
+function NewImage($path){
+
+    $path = str_replace('\\','\\\\',$path);
+
+    $connection = db();
+
+    $sql = "CALL NewImage('". $path ."');";
+
+    $result = $connection->query($sql);
+
+    return($result);
 }
 ?>

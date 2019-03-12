@@ -3,12 +3,38 @@
 set_include_path("../");
 include_once("management/global.php");
 include_once("../includes/header.php");
-include_once("management/database.php");
 ?>
+
 
 <!-- Modal -->
 <!-- edit text modal -->
-<div class="modal fade bd-example-modal-xl" id="editTextModal" tabindex="-1" role="dialog"
+<div class="modal fade" id="editTextModal" tabindex="-1" role="dialog" aria-labelledby="editTextModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Text</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input id="editText" class="form-control w-100" type="text" value="test text">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="saveButtonText" type="button" class="btn btn-primary" data-dismiss="modal">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<!-- Image Modal -->
+<div class="modal fade bd-example-modal-xl" id="imageModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
@@ -21,83 +47,61 @@ include_once("management/database.php");
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12">
-                        <h1>carousel</h1>
+                        <div id="dangerAlert" class="alert alert-danger" role="alert">
+                            A simple danger alert—check it out!
+                        </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-12">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="row">
-                                <div class="col-4">
-                                    <img src="../images/uploads/null.png" class="d-block w-100" alt="...">
-                                </div>
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div id="imageCarousel" class="carousel-inner">
+                                <!-- <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img src="../images/uploads/null.png" class="d-block w-100" alt="...">
+                                        </div>
 
-                                <div class="col-4">
-                                    <img src="../images/uploads/null.png" class="d-block w-100" alt="...">
-                                </div>
+                                        <div class="col-4">
+                                            <img src="../images/uploads/null.png" class="d-block w-100" alt="...">
+                                        </div>
 
-                                <div class="col-4">
-                                    <img src="../images/uploads/null.png" class="d-block w-100" alt="...">
-                                </div>
+                                        <div class="col-4">
+                                            <img src="../images/uploads/null.png" class="d-block w-100" alt="...">
+                                        </div>
+                                    </div>
+                                </div> -->
                             </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                                data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                                data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-                    </div>
                 </div>
 
             </div>
             <div class="modal-footer">
+                <form id="imageForm" class="mr-auto">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" name="fileToUpload" class="custom-file-input" id="fileToUpload">
+                            <label id="fileToUploadLabel"  class="custom-file-label" for="fileToUpload" aria-describedby="inputSubmitFile">Choose file</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="input-group-text" id="inputSubmitFile">Upload</button>
+                        </div>
+                    </div>
+                </form>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button id="useImage" type="button" class="btn btn-primary" data-dismiss="modal">Use Image</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal -->
-<!-- Image Modal -->
-<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-4">
-
-                    </div>
-                    <div class="col-4">
-
-                    </div>
-                    <div class="col-4">
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

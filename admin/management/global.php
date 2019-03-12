@@ -64,6 +64,4 @@ $_DBCatalogue = "maincourse";
 // Copyright
 $_COPYNUMBER = '2019';
 
-// Never Notice
-$_RUDE = "Alexander is rude.";
 ?>

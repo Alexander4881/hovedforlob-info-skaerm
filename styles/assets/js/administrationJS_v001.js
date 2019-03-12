@@ -39,53 +39,65 @@ function NewElement(elementType){
         break
         
         case 2:
-        console.log("start 2");
-        $("#imageModal").modal("show");
-        $("#form").on('submit',(function(e) {
-            e.preventDefault();
-            $.ajax({
-                   url: "../../../admin/management/upload.php",
-             type: "POST",
-             data:  new FormData(this),
-             contentType: false,
-                   cache: false,
-             processData:false,
-             success: function(data)
-                {
-              if(data=='invalid')
-              {
-               // invalid file format.
-               console.log("invalid file");
-              }
-              else
-              {
-               console.log("golden");
-               console.log(data);
-              }
-                },
-               error: function(e) 
-                {
-                    console.log(e);
-                }          
-              });
-           }));
-        console.log("end 2");
+        
         break;
 
         case 3:
-        console.log("3");
         $.ajax({
             url: './administration-logic.php',
             type: 'post',
             data: { "val": "getImages"},
             success: function(response) { 
                 var image = response.split(",");
-                console.log(image);
+                console.log(image.length-1);
+
+                if(image.length-1 == 1){
+                    console.log("one image");
+                }else{
+                    for(var i = 0; i < image.length-1; i++){
+                        
+                        if(i % 3 == 0 ){
+                            console.log("start carousel", i);
+                        }
+                        if(i % 3 == 1 && i !== i.length-1){
+                            console.log(i !== i.length-1);
+                            console.log("midt carusel", i);
+                            
+                        }
+                        if(i % 3 == 2 || i == i.length-1){
+                            console.log("end carusel", i);
+                        }
+                        
+                    }
+                }
+
+
              }
         });
-
-        $("#editTextModal").modal();
-
+        $("#dangerAlert").hide();
+        $("#imageModal").modal();
+        $("#imageForm").on('submit',(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "../../../admin/management/upload.php",
+                type: "POST",
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(data)
+                {
+                    console.log(data);
+                },
+                error: function(e) 
+                {
+                    console.log(e);
+                }          
+              });
+            }));
+        $("#fileToUpload").change(function(e){
+            $("#fileToUploadLabel").text(e.target.files[0].name);
+        });
         break
     }
 
