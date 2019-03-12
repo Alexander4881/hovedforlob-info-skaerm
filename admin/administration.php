@@ -6,73 +6,104 @@ include_once("../includes/header.php");
 include_once("management/database.php");
 ?>
 
-<!-- Main Content -->
-
-<form>
-    Select image to upload:
-    <input id="buttonFileToUpload" type="file" name="fileToUpload" id="fileToUpload">
-    <input id="buttonUpload" type="submit" value="Upload Image" name="submit">
-</form>
-
 <!-- Modal -->
 <!-- edit text modal -->
-<div class="modal fade" id="editTextModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Edit Text</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <input id="editText" class="form-control w-100" type="text" value="test text">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="saveButtonText" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-      </div>
+<div class="modal fade bd-example-modal-xl" id="editTextModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Images</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>carousel</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="../images/uploads/null.png" class="d-block w-100" alt="...">
+                                </div>
+
+                                <div class="col-4">
+                                    <img src="../images/uploads/null.png" class="d-block w-100" alt="...">
+                                </div>
+
+                                <div class="col-4">
+                                    <img src="../images/uploads/null.png" class="d-block w-100" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="useImage" type="button" class="btn btn-primary" data-dismiss="modal">Use Image</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Modal -->
 <!-- Image Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-            <div class="col-4">
-
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="col-4">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4">
 
+                    </div>
+                    <div class="col-4">
+
+                    </div>
+                    <div class="col-4">
+
+                    </div>
+                </div>
             </div>
-            <div class="col-4">
-
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
     </div>
-  </div>
 </div>
 
 <div class="container-fluid h-100">
     <div class="row h-100">
-        
+
         <div id="preview" class="col-10" style="background-color: rgba(0,0,255,.1)">
-        
+
         </div>
 
         <div id="element-select-box" class="col-2 d-inline-block" style="background-color: rgba(0,100,255,.1)">
@@ -209,7 +240,7 @@ include_once("management/database.php");
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-plus"></i>
                         </label>
-                        <label class="btn btn-secondary disabled btn-input" >
+                        <label class="btn btn-secondary disabled btn-input">
                             <input type="number" min="0" max="1920" value="" name="options" id="widthInput"
                                 autocomplete="off" onchange="InputValueChanges(this)">
                         </label>
@@ -271,7 +302,7 @@ include_once("management/database.php");
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-plus"></i>
                         </label>
-                        <label class="btn btn-secondary disabled btn-input scroll-able" >
+                        <label class="btn btn-secondary disabled btn-input scroll-able">
                             <input type="number" min="0" max="1080" value="0" name="options" id="leftInput"
                                 onchange="InputValueChanges(this)">
                         </label>

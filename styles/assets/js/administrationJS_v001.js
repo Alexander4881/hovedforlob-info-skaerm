@@ -78,8 +78,14 @@ function NewElement(elementType){
             url: './administration-logic.php',
             type: 'post',
             data: { "val": "getImages"},
-            success: function(response) { console.log(response); }
+            success: function(response) { 
+                var image = response.split(",");
+                console.log(image);
+             }
         });
+
+        $("#editTextModal").modal();
+
         break
     }
 

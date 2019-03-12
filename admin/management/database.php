@@ -30,7 +30,7 @@ function GetImages(){
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-             $images .= $row["path"]. ",";
+             $images .= '<image src="'. $row["path"]. ' class="d-block w-100">,';
         }
     } else {
         echo "error in db";
