@@ -39,37 +39,37 @@ function NewElement(elementType){
         break
         
         case 2:
-        console.log("2");
-        $("#buttonUpload").click(function(){
-        
-		// disabled the submit button
-        $("#btnSubmit").prop("disabled", true);
-
-        $.ajax({
-            type: "POST",
-            enctype: 'multipart/form-data',
-            url: "../../../admin/management/upload.php",
-            data: $("buttonFileToUpload").data,
-            processData: false,
-            contentType: false,
-            cache: false,
-            timeout: 600000,
-            success: function (data) {
-
-                $("#result").text(data);
-                console.log("SUCCESS : ", data);
-                $("#btnSubmit").prop("disabled", false);
-
-            },
-            error: function (e) {
-
-                $("#result").text(e.responseText);
-                console.log("ERROR : ", e);
-                $("#btnSubmit").prop("disabled", false);
-
-            }
-        });
-        });
+        console.log("start 2");
+        $("#imageModal").modal("show");
+        $("#form").on('submit',(function(e) {
+            e.preventDefault();
+            $.ajax({
+                   url: "../../../admin/management/upload.php",
+             type: "POST",
+             data:  new FormData(this),
+             contentType: false,
+                   cache: false,
+             processData:false,
+             success: function(data)
+                {
+              if(data=='invalid')
+              {
+               // invalid file format.
+               console.log("invalid file");
+              }
+              else
+              {
+               console.log("golden");
+               console.log(data);
+              }
+                },
+               error: function(e) 
+                {
+                    console.log(e);
+                }          
+              });
+           }));
+        console.log("end 2");
         break;
 
         case 3:
