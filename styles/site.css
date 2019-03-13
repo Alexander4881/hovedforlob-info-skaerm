@@ -144,3 +144,8 @@ body {
 .btn-input > input{
   text-align: center;
 }
+
+.img-thumbnail{
+  height: 25rem!important;
+  width: auto!important;
+}

@@ -43,37 +43,7 @@ function NewElement(elementType){
         break;
 
         case 3:
-        $.ajax({
-            url: './administration-logic.php',
-            type: 'post',
-            data: { "val": "getImages"},
-            success: function(response) { 
-                var image = response.split(",");
-                console.log(image.length-1);
-
-                if(image.length-1 == 1){
-                    console.log("one image");
-                }else{
-                    for(var i = 0; i < image.length-1; i++){
-                        
-                        if(i % 3 == 0 ){
-                            console.log("start carousel", i);
-                        }
-                        if(i % 3 == 1 && i !== i.length-1){
-                            console.log(i !== i.length-1);
-                            console.log("midt carusel", i);
-                            
-                        }
-                        if(i % 3 == 2 || i == i.length-1){
-                            console.log("end carusel", i);
-                        }
-                        
-                    }
-                }
-
-
-             }
-        });
+        UpdateImages();
         $("#dangerAlert").hide();
         $("#imageModal").modal();
         $("#imageForm").on('submit',(function(e) {
@@ -88,13 +58,16 @@ function NewElement(elementType){
                 success: function(data)
                 {
                     console.log(data);
+                    UpdateImages();
                 },
                 error: function(e) 
                 {
                     console.log(e);
                 }          
               });
-            }));
+        }));
+
+        // funtion to changes the label to the name of the file that is selected
         $("#fileToUpload").change(function(e){
             $("#fileToUploadLabel").text(e.target.files[0].name);
         });
@@ -102,6 +75,18 @@ function NewElement(elementType){
     }
 
     Editor();
+}
+
+function UpdateImages(){
+    $.ajax({
+        url: './administration-logic.php',
+        type: 'post',
+        data: { "val": "getImages"},
+        success: function(response) { 
+            $("#imageCarousel").append(response);
+            $("#imageCarousel > div:first-child").addClass("active");
+        }
+    });
 }
 
 function Editor(){

@@ -29,7 +29,7 @@ function GetImages(){
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-             $images .= '<image src="C:\\Users\User\\Documents\\GitHub\\hovedforlob-info-skaerm\\images\\uploads\\'. $row["path"]. ' class="d-block rounded img-thumbnail">,';
+             $images .= '<div class="carousel-item"><image src="../images/uploads/'. $row["path"]. '" class="img-thumbnail rounded mx-auto d-block vh-50"></div>';
         }
     } else {
         echo "error in db or tabel is empty";
@@ -40,8 +40,6 @@ function GetImages(){
 }
 
 function NewImage($path){
-
-    $path = str_replace('\\','\\\\',$path);
 
     $connection = db();
 

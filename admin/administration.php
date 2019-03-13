@@ -53,26 +53,10 @@ include_once("../includes/header.php");
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row"><!-- start on the images -->
                     <div class="col-12">
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                            <div id="imageCarousel" class="carousel-inner">
-                                <!-- <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <img src="../images/uploads/null.png" class="d-block w-100" alt="...">
-                                        </div>
-
-                                        <div class="col-4">
-                                            <img src="../images/uploads/null.png" class="d-block w-100" alt="...">
-                                        </div>
-
-                                        <div class="col-4">
-                                            <img src="../images/uploads/null.png" class="d-block w-100" alt="...">
-                                        </div>
-                                    </div>
-                                </div> -->
-                            </div>
+                            <div id="imageCarousel" class="carousel-inner"></div>
                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
                                 data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
