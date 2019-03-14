@@ -27,6 +27,8 @@ var redInput = document.getElementById("redColor");
 var greenInput = document.getElementById("greenColor");
 var blueInput = document.getElementById("blueColor");
 
+// selected image
+var selectedImage = null;
 
 function NewElement(elementType){
 // 1 = text element
@@ -66,6 +68,18 @@ function NewElement(elementType){
                 }          
               });
         }));
+        $("#useImage").click(function () {
+            if(selectedImage != null){
+                $("#imageModal").modal("hide");
+                $("#preview").append('<image src="'+ selectedImage + '">');
+                $(".carousel-item").remove();
+                selectedImage = null;
+                Editor();
+            }else{
+                $("#dangerAlert").html("please select a image");
+                $("#dangerAlert").show();
+            }
+          });
 
         // funtion to changes the label to the name of the file that is selected
         $("#fileToUpload").change(function(e){
@@ -78,6 +92,7 @@ function NewElement(elementType){
 }
 
 function UpdateImages(){
+    $(".carousel-item").remove();
     $.ajax({
         url: './administration-logic.php',
         type: 'post',
@@ -85,11 +100,17 @@ function UpdateImages(){
         success: function(response) { 
             $("#imageCarousel").append(response);
             $("#imageCarousel > div:first-child").addClass("active");
+            $("#imageCarousel > div > img").click(function(){
+                event.target.classList.add("selected");
+                selectedImage = event.target.src;
+            });
         }
     });
 }
 
 function Editor(){
+    
+    
     $("#preview > p").dblclick(function(){
         var textElement = event.target;
         $("#editText").attr("value",textElement.textContent);
@@ -99,18 +120,40 @@ function Editor(){
             console.log(textElement);
         });
     });
-    $("#preview > p").click(function(){
+    
+    $("#preview").click(function(){
         selectedElement = event.target;
+        console.log(selectedElement);
+        SetElementSettings();
+    });
+}
+
+function SetElementSettings(){
+    switch(selectedElement.tagName){
+        case'P':
         if(selectedElement.style.display != "absolute"){
             selectedElement.style.position = "absolute";
         }
         ShowTextEditor();
         RGBColorChanges();
-    });
+        break;
+
+        case'IMG':
+        heigthInput.value = selectedElement.clientHeight;
+        widthInput.value = selectedElement.clientWidth;
+        topInput.value = selectedElement.offsetTop;
+        leftInput.value = selectedElement.offsetLeft;
+        ShowImageEditor();
+        break;
+
+        case'DIV':
+        $("#element-select").show();
+        $("#element-editor").hide();
+        break;
+    }
 }
 
 function ShowTextEditor(){
-
     $("#element-editor").removeClass("hide")
     // set font size
     fontSize.innerHTML = window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
@@ -120,12 +163,16 @@ function ShowTextEditor(){
     topInput.value = selectedElement.offsetTop;
     leftInput.value = selectedElement.offsetLeft;
 
+    $("#element-select").hide();
+    $("#element-editor").show();
+}
+
+function ShowImageEditor(){
     if (newElementBox.style.display !== "none") {
-      newElementBox.style.display = "none";
+        newElementBox.style.display = "none";
     }
-    if(textEditor.style.display === "none"){
-        textEditor.style.display = "inline";
-    }
+    textEditor.style.display = "none";
+    $("#element-editor").show();
 }
 
 function RGBColorChanges() 

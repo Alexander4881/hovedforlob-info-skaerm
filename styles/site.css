@@ -149,3 +149,8 @@ body {
   height: 25rem!important;
   width: auto!important;
 }
+
+.selected{
+  border: 0.25em solid lightblue;
+  padding: 0%;
+}

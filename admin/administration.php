@@ -85,7 +85,7 @@ include_once("../includes/header.php");
                     </div>
                 </form>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="useImage" type="button" class="btn btn-primary" data-dismiss="modal">Use Image</button>
+                <button id="useImage" type="button" class="btn btn-primary">Use Image</button>
             </div>
         </div>
     </div>

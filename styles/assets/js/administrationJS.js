@@ -70,7 +70,7 @@ function LoadPreview(){
 //Globale Variables
 var selectedElement;
 
-function PreviewOverlay(){    
+function PreviewOverlay(){
     document.getElementById("preview").addEventListener("click",function(event){
         SelectElement(event.target);
         SetElementSettings();
