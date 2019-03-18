@@ -2,8 +2,8 @@
 $connection;
 
 function db(){    
-    $DBUsername = 'root';
-    $DBPassword = '';
+    $DBUsername = 'sql';
+    $DBPassword = 'WtrXaPM3RHLhR1Kl';
     $DBHostname = '127.0.0.1';
     $DBCatalogue = 'infoskaerm';
 
@@ -48,5 +48,18 @@ function NewImage($path){
     $result = $connection->query($sql);
 
     return($result);
+}
+
+function NewWebSite($title, $location)
+{
+    $connection = db();
+
+    //$sql = "CALL InsertNewWebSite(\"" . $title . "\",\"" . $location . "\");";
+    $sql = "CALL InsertNewWebSite('" . $title . "','" . $location . "');";
+    
+
+    $result = $connection->query($sql);
+
+    echo($result);
 }
 ?>

@@ -13,5 +13,17 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 }else if(isset($_POST['val']) && $_POST['val'] === "getImages"){
     echo(GetImages());
 
+}else if(isset($_POST['val']) && $_POST['val'] === "newWebSite"){
+
+    if (isset($_POST['title']) && isset($_POST['location'])){
+        NewWebSite($_POST['title'], $_POST['location']);
+
+    }else if (!isset($_POST['title'])){
+        echo(1 . "administration-logic");
+
+    }else if(!isset($_POST['location'])){
+        echo(2 . "administration-logic");
+
+    }
 }
 ?>

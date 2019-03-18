@@ -30,6 +30,11 @@ var blueInput = document.getElementById("blueColor");
 // selected image
 var selectedImage = null;
 
+
+function SaveContent(){
+    console.log($("#preview").children());
+}
+
 function NewElement(elementType){
 // 1 = text element
 // 2 = table element
@@ -41,7 +46,7 @@ function NewElement(elementType){
         break
         
         case 2:
-        
+        SaveContent();
         break;
 
         case 3:
