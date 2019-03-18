@@ -25,5 +25,9 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         echo(2 . "administration-logic");
 
     }
+}else if(isset($_POST['val']) && $_POST['val'] === "newTable"){
+    if(isset($_POST['website_id'])){
+        NewTable($_POST['website_id']);
+    }
 }
 ?>

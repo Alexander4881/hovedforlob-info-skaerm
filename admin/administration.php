@@ -13,7 +13,7 @@ include_once("../includes/header.php");
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Edit Text</h5>
+                <h5 class="modal-title" id="tableSelectLongTitle">Edit Text</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -30,16 +30,18 @@ include_once("../includes/header.php");
     </div>
 </div>
 
-
+<div id="Save" onclick="SaveContent()" >
+    <i class="fas fa-save"></i>
+</div>
 
 <!-- Modal -->
 <!-- Image Modal -->
 <div class="modal fade bd-example-modal-xl" id="imageModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    aria-labelledby="tableSelectCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Images</h5>
+                <h5 class="modal-title" id="tableSelectLongTitle">Images</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -89,6 +91,81 @@ include_once("../includes/header.php");
             </div>
         </div>
     </div>
+</div>
+
+<!-- Modal -->
+<!-- Table Select -->
+<div class="modal fade" id="tableSelect" tabindex="-1" role="dialog" aria-labelledby="tableSelectLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tableSelectLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div id="ts-select">
+          <!-- row 1 -->
+          <div class="ts-row">
+            <span class="1-1"></span><span class="1-2"></span><span class="1-3"></span><span class="1-4"></span><span class="1-5"></span><span class="1-6"></span><span class="1-7"></span><span class="1-8"></span><span class="1-9"></span><span class="1-10"></span>
+          </div>
+
+          <!-- row 2 -->
+          <div class="ts-row">
+            <span class="2-1"></span><span class="2-2"></span><span class="2-3"></span><span class="2-4"></span><span class="2-5"></span><span class="2-6"></span><span class="2-7"></span><span class="2-8"></span><span class="2-9"></span><span class="2-10"></span>
+          </div>
+
+          <!-- row 3 -->
+          <div class="ts-row">
+            <span class="3-1"></span><span class="3-2"></span><span class="3-3"></span><span class="3-4"></span><span class="3-5"></span><span class="3-6"></span><span class="3-7"></span><span class="3-8"></span><span class="3-9"></span><span class="3-10"></span>
+          </div>
+
+          <!-- row 4 -->
+          <div class="ts-row">
+            <span class="4-1"></span><span class="4-2"></span><span class="4-3"></span><span class="4-4"></span><span class="4-5"></span><span class="4-6"></span><span class="4-7"></span><span class="4-8"></span><span class="4-9"></span><span class="4-10"></span>
+          </div>
+
+          <!-- row 5 -->
+          <div class="ts-row">
+            <span class="5-1"></span><span class="5-2"></span><span class="5-3"></span><span class="5-4"></span><span class="5-5"></span><span class="5-6"></span><span class="5-7"></span><span class="5-8"></span><span class="5-9"></span><span class="5-10"></span>
+          </div>
+
+          <!-- row 6 -->
+          <div class="ts-row">
+            <span class="6-1"></span><span class="6-2"></span><span class="6-3"></span><span class="6-4"></span><span class="6-5"></span><span class="6-6"></span><span class="6-7"></span><span class="6-8"></span><span class="6-9"></span><span class="6-10"></span>
+          </div>
+
+          <!-- row 7 -->
+          <div class="ts-row">
+            <span class="7-1"></span><span class="7-2"></span><span class="7-3"></span><span class="7-4"></span><span class="7-5"></span><span class="7-6"></span><span class="7-7"></span><span class="7-8"></span><span class="7-9"></span><span class="7-10"></span>
+          </div>
+
+          <!-- row 8 -->
+          <div class="ts-row">
+            <span class="8-1"></span><span class="8-2"></span><span class="8-3"></span><span class="8-4"></span><span class="8-5"></span><span class="8-6"></span><span class="8-7"></span><span class="8-8"></span><span class="8-9"></span><span class="8-10"></span>
+          </div>
+
+          <!-- row 9 -->
+          <div class="ts-row">
+            <span class="9-1"></span><span class="9-2"></span><span class="9-3"></span><span class="9-4"></span><span class="9-5"></span><span class="9-6"></span><span class="9-7"></span><span class="9-8"></span><span class="9-9"></span><span class="9-10"></span>
+          </div>
+
+          <!-- row 10 -->
+          <div class="ts-row">
+            <span class="10-1"></span><span class="10-2"></span><span class="10-3"></span><span class="10-4"></span><span class="10-5"></span><span class="10-6"></span><span class="10-7"></span><span class="10-8"></span><span class="10-9"></span><span class="10-10"></span>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row">

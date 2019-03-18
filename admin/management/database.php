@@ -35,6 +35,8 @@ function GetImages(){
         echo "error in db or tabel is empty";
     }
 
+    mysqli_close($connection);
+
     if($images != null)
         return($images);
 }
@@ -47,11 +49,13 @@ function NewImage($path){
 
     $result = $connection->query($sql);
 
+    mysqli_close($connection);
+
     return($result);
 }
 
-function NewWebSite($title, $location)
-{
+function NewWebSite($title, $location){
+
     $connection = db();
 
     //$sql = "CALL InsertNewWebSite(\"" . $title . "\",\"" . $location . "\");";
@@ -59,6 +63,22 @@ function NewWebSite($title, $location)
     
 
     $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    echo($result);
+}
+
+function NewTable($WebSite_ID){
+
+    $connection = db();
+
+    $sql = "CALL InsertTable('" . $WebSite_ID ."',@LID);";
+    
+
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
 
     echo($result);
 }

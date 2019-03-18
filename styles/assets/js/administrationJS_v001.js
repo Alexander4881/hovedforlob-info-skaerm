@@ -32,21 +32,108 @@ var selectedImage = null;
 
 
 function SaveContent(){
-    console.log($("#preview").children());
+    var elements = $("#preview").children();
+
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        const elementID = $(elements[i]).attr('id');
+        
+        switch(element.tagName.toLowerCase()){
+            case'p':
+            console.log("p");
+            break;
+
+            case'table':
+            console.log("table");
+
+            // Check if it has an id
+            console.log(elementID);
+            if (typeof elementID === typeof undefined || elementID === false) {
+                // it does not have an id
+                console.log("needs to be inserted");
+
+                
+                $.ajax({
+                    url: './administration-logic.php',
+                    type: 'post',
+                    data: 
+                    { 
+                        "val" : "newTable",
+                        "website_id" : "1"
+                    },
+                    success: function(response) { 
+                        alert(response);
+                    }
+                });
+
+
+            }else{
+                // it has an id
+                console.log("needs to be updated");
+
+            }
+
+            break;
+
+            case'img':
+            console.log("img");
+            break;
+
+        }
+
+    }
 }
 
 function NewElement(elementType){
-// 1 = text element
-// 2 = table element
-// 3 = image element
-
+    // 1 = text element
+    // 2 = table element
+    // 3 = image element
     switch(elementType){
         case 1:
         $("#preview").append('<p style="position: absolute;" data-toggle="tooltip">New Text</p>');
         break
         
         case 2:
-        SaveContent();
+        $("#tableSelect").modal();
+        $("#ts-select > div > span").mouseenter(function () {
+
+            // clear the old background color
+            $("#ts-select > div > span").removeClass("st-hover");
+          
+              var classList = event.target.classList[0].split('-');
+          
+              var loopI = classList[0];
+              var loopJ = classList[1];
+          
+          
+              for (var i = 1; i <= loopI; i++) {
+                for (var j = 1; j <= loopJ; j++) {
+                  console.log("search");
+                  $("."+i+"-"+j).addClass("st-hover");
+                }
+              }
+              $("."+loopI+"-"+loopJ).click(function () {
+                LockTabelSelect();
+              });
+          });
+          
+          function LockTabelSelect(){
+            $("#ts-select > div > span").unbind("mouseenter");
+            var tableSize = event.target.classList[0].split('-');
+            var table = `<table class="table table-bordered table-dark"><tbody>`;
+            console.log(tableSize);
+            for (let iIndex = 0; iIndex < tableSize[0]; iIndex++) {
+                table += `<tr>`;
+                for (let jIndex = 0; jIndex < tableSize[1]; jIndex++) {
+                    table += `<td> <span>Column ` + Number(jIndex + 1) + ` </span> </td>`;                    
+                }
+                table += `</tr>`;
+            }
+            table += `</tbody></table>`;
+            $("#preview").append(table);
+            Editor();
+
+          }
         break;
 
         case 3:
@@ -114,15 +201,23 @@ function UpdateImages(){
 }
 
 function Editor(){
-    
-    
     $("#preview > p").dblclick(function(){
         var textElement = event.target;
         $("#editText").attr("value",textElement.textContent);
         $("#editTextModal").modal();
         $("#saveButtonText").click(function(){
             textElement.textContent = $("#editText").val();
-            console.log(textElement);
+            $("#saveButtonText").unbind();
+        });
+    });
+
+    $("#preview > table > tbody > tr > td > span").dblclick(function(){
+        var textElement = event.target;
+        $("#editText").attr("value",textElement.textContent);
+        $("#editTextModal").modal();
+        $("#saveButtonText").click(function(){
+            textElement.textContent = $("#editText").val();
+            $("#saveButtonText").unbind();
         });
     });
     

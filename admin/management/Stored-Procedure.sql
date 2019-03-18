@@ -58,10 +58,7 @@ SELECT * FROM `Text` WHERE `WebSite_ID` = WebSiteID;
 
 CALL ShowText(2);
 
-CREATE PROCEDURE `InsertTable`(IN WebSiteID INT)
-INSERT INTO `Table` (`WebSite_ID`) VALUES(WebSiteID);
 
-CALL InsertTable(1);
 
 CREATE PROCEDURE `InsertRow`(IN Table_ID INT, IN Row_ID INT)
 INSERT INTO `Row` (`Table_ID`, `Column_ID`) VALUES(Table_ID, Row_ID);
@@ -88,3 +85,17 @@ INNER JOIN `Column` ON `Column`.`Row_ID`=  `Row`.`ID`
 WHERE `Table`.`WebSite_ID` = WebSiteID;
 
 CALL ShowTable(1);
+
+
+
+CREATE PROCEDURE `InsertTable`(IN WebSiteID INT, OUT LID INT)
+INSERT INTO `Table` (`WebSite_ID`) VALUES(WebSiteID);
+SET LID = LAST_INSERT_ID();
+
+CALL InsertTable(1,@LID);
+
+
+
+
+
+

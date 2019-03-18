@@ -154,3 +154,29 @@ body {
   border: 0.25em solid lightblue;
   padding: 0%;
 }
+
+
+#ts-select>div{
+  text-align: center;
+}
+
+#ts-select>div>span{
+  display: inline-flex;
+  background-color: #ef6b6b;
+  width: 2rem;
+  height: 2rem;
+  margin: 0.25rem
+}
+
+.st-hover{
+  background-color: #abf961!important;
+}
+
+
+#Save{
+  position: absolute;
+  top: 90%;
+  left: 90%;
+  font-size: 2em;
+  z-index: 100;
+}
