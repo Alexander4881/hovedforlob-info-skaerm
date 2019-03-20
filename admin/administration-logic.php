@@ -26,8 +26,19 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
     }
 }else if(isset($_POST['val']) && $_POST['val'] === "newTable"){
-    if(isset($_POST['website_id'])){
-        NewTable($_POST['website_id']);
+    if(isset($_POST['table'])){
+        // check var table #endregion
+        // unWrap html 
+        
+        // get table
+        // insert table
+
+        // get row
+        // insert row
+
+        // get columns
+        // insert columns
+
     }
 }
 ?>

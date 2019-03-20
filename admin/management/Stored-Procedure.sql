@@ -60,42 +60,57 @@ CALL ShowText(2);
 
 
 
-CREATE PROCEDURE `InsertRow`(IN Table_ID INT, IN Row_ID INT)
-INSERT INTO `Row` (`Table_ID`, `Column_ID`) VALUES(Table_ID, Row_ID);
-
-CALL InsertRow(2,3);
-
-CREATE PROCEDURE `InsertColumn`(IN Text VARCHAR(255))
-INSERT INTO `column` (`text`) VALUES(Text);
-
-CALL InsertColumn("test test");
-
-CREATE PROCEDURE `ShowTable`(IN WebSte_ID INT)
-SELECT `Table`.`ID`,`Row`.`ID`,`Column`.`ID`,`Column`.`Text` FROM `Table`
-INNER JOIN `Row` ON `Row`.`ID` = `Table`.`ID`
-INNER JOIN `Column` ON `Column`.`ID` = `Row`.`Column_ID`
-WHERE `Table`.`WebSite_ID` = WebSite_ID;
-
-CALL ShowTable(1);
-
-CREATE PROCEDURE `ShowTable`(IN WebSiteID INT)
-SELECT * FROM `Table`
-INNER JOIN `Row` ON `Row`.`Table_ID` = `Table`.`ID`
-INNER JOIN `Column` ON `Column`.`Row_ID`=  `Row`.`ID` 
-WHERE `Table`.`WebSite_ID` = WebSiteID;
-
-CALL ShowTable(1);
-
-
-
-CREATE PROCEDURE `InsertTable`(IN WebSiteID INT, OUT LID INT)
-INSERT INTO `Table` (`WebSite_ID`) VALUES(WebSiteID);
-SET LID = LAST_INSERT_ID();
-
-CALL InsertTable(1,@LID);
 
 
 
 
 
 
+
+
+
+
+
+/* Inset New Table */
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewTable`
+(
+    IN `@websiteID` INT
+)
+BEGIN
+	INSERT INTO `table`(`WebSite_ID`) VALUES(`@websiteID`);
+	SELECT LAST_INSERT_ID() AS `ID`;
+END $$
+DELIMITER ;
+
+CALL `InsertNewTable`(1);
+
+
+/* Inset New Row */
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewRow`
+(
+    IN `@tableID` INT
+)
+BEGIN
+	INSERT INTO `Row`(`Table_ID`) VALUES(`@tableID`);
+	SELECT LAST_INSERT_ID() AS `ID`;
+END $$
+DELIMITER ;
+
+CALL `InsertNewRow`(1);
+
+
+/* Inset New Row */
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewColumn`
+(
+    IN `@rowID` INT
+)
+BEGIN
+	INSERT INTO `Column`(`Row_ID`) VALUES(`@rowID`);
+	SELECT LAST_INSERT_ID() AS `ID`;
+END $$
+DELIMITER ;
+
+CALL `InsertNewColumn`(1);

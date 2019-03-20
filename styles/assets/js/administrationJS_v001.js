@@ -51,15 +51,15 @@ function SaveContent(){
             if (typeof elementID === typeof undefined || elementID === false) {
                 // it does not have an id
                 console.log("needs to be inserted");
-
                 
+                console.log(element);
                 $.ajax({
                     url: './administration-logic.php',
-                    type: 'post',
+                    type: 'post', 
                     data: 
                     { 
                         "val" : "newTable",
-                        "website_id" : "1"
+                        "table" : element
                     },
                     success: function(response) { 
                         alert(response);
