@@ -44,7 +44,7 @@ function SaveContent(){
             break;
 
             case'table':
-            console.log("table");
+            console.log(element.outerHTML);
 
             // Check if it has an id
             console.log(elementID);
@@ -59,10 +59,11 @@ function SaveContent(){
                     data: 
                     { 
                         "val" : "newTable",
-                        "table" : element
+                        "table" : element.outerHTML
                     },
                     success: function(response) { 
-                        alert(response);
+
+                        $("#preview").append(response);
                     }
                 });
 
@@ -114,6 +115,7 @@ function NewElement(elementType){
               }
               $("."+loopI+"-"+loopJ).click(function () {
                 LockTabelSelect();
+                $("."+loopI+"-"+loopJ).unbind();
               });
           });
           

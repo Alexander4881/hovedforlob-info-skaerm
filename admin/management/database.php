@@ -82,4 +82,32 @@ function NewTable($WebSite_ID){
 
     echo($result);
 }
+
+function NewRow($Table_ID){
+
+    $connection = db();
+
+    $sql = "CALL InsertTable('" . $WebSite_ID ."',@LID);";
+    
+
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    echo($result);
+}
+
+function NewColumn($Row_ID){
+
+    $connection = db();
+
+    $sql = "CALL InsertTable('" . $WebSite_ID ."',@LID);";
+    
+
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    echo($result);
+}
 ?>

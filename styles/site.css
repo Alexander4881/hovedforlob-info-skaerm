@@ -172,11 +172,3 @@ body {
   background-color: #abf961!important;
 }
 
-
-#Save{
-  position: absolute;
-  top: 90%;
-  left: 90%;
-  font-size: 2em;
-  z-index: 100;
-}
