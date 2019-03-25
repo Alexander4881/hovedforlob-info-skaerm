@@ -42,7 +42,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         
         /*** the table by its tag name ***/ 
         $tables = $dom->getElementsByTagName('table'); 
-        
+        $tableID = NewTable(1); 
         /*** get all rows from the table ***/ 
         $rows = $tables->item(0)->getElementsByTagName('tr'); 
         
@@ -50,13 +50,13 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         foreach ($rows as $row) {
             /*** get each column by tag name ***/ 
             $cols = $row->getElementsByTagName('td'); 
-        
             /*** insert the row to the database ***/
-            
+            $rowID = NewRow($tableID);
+
             /*** loop over all the colums ***/
             foreach($cols as $col){
                 /*** inserts the colum to the database ***/
-                echo($col->nodeValue);
+                NewColumn($rowID, $col->nodeValue);
             }
         }
     }

@@ -105,10 +105,11 @@ CALL `InsertNewRow`(1);
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewColumn`
 (
-    IN `@rowID` INT
+    IN `@rowID` INT,
+		IN `@ColumnText` VARCHAR(255) 
 )
 BEGIN
-	INSERT INTO `Column`(`Row_ID`) VALUES(`@rowID`);
+	INSERT INTO `Column`(`Row_ID`,`Column_Text`) VALUES(`@rowID`);
 	SELECT LAST_INSERT_ID() AS `ID`;
 END $$
 DELIMITER ;

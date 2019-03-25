@@ -58,7 +58,6 @@ function NewWebSite($title, $location){
 
     $connection = db();
 
-    //$sql = "CALL InsertNewWebSite(\"" . $title . "\",\"" . $location . "\");";
     $sql = "CALL InsertNewWebSite('" . $title . "','" . $location . "');";
     
 
@@ -69,45 +68,50 @@ function NewWebSite($title, $location){
     echo($result);
 }
 
+
+/*** new table querys ***/
 function NewTable($WebSite_ID){
 
     $connection = db();
 
-    $sql = "CALL InsertTable('" . $WebSite_ID ."',@LID);";
+    $sql = "CALL `InsertNewTable`(" . $WebSite_ID . ");";
     
 
     $result = $connection->query($sql);
 
     mysqli_close($connection);
 
-    echo($result);
+    $resultt = mysqli_fetch_array($result);
+    return($resultt[0]);
 }
 
 function NewRow($Table_ID){
 
     $connection = db();
 
-    $sql = "CALL InsertTable('" . $WebSite_ID ."',@LID);";
+    $sql = "CALL `InsertNewRow`(" . $Table_ID . ");";
     
 
     $result = $connection->query($sql);
-
+    
     mysqli_close($connection);
 
-    echo($result);
+    $resultt = mysqli_fetch_array($result);
+    return($resultt[0]);
 }
 
-function NewColumn($Row_ID){
+function NewColumn($Row_ID, $Text){
 
     $connection = db();
 
-    $sql = "CALL InsertTable('" . $WebSite_ID ."',@LID);";
+    $sql = "CALL InsertNewColumn(" . $Row_ID .", '" . $Text ."');";
     
 
     $result = $connection->query($sql);
 
     mysqli_close($connection);
 
-    echo($result);
+    $resultt = mysqli_fetch_array($result);
+    return($resultt[0]);
 }
 ?>
