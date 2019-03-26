@@ -114,4 +114,19 @@ function NewColumn($Row_ID, $Text){
     $resultt = mysqli_fetch_array($result);
     return($resultt[0]);
 }
+
+function GetTable($WebSite_ID)
+{
+    $connection = db();
+
+    $sql = "CALL `ShowTable`(" . $WebSite_ID . ");";
+    
+
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    $resultt = mysqli_fetch_array($result);
+    echo($resultt);
+}
 ?>

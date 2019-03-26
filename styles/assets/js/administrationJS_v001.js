@@ -30,7 +30,6 @@ var blueInput = document.getElementById("blueColor");
 // selected image
 var selectedImage = null;
 
-
 function SaveContent(){
     var elements = $("#preview").children();
 
