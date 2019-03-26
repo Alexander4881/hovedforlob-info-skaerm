@@ -105,7 +105,6 @@ include_once("../includes/header.php");
         </button>
       </div>
       <div class="modal-body">
-
         <div id="ts-select">
           <!-- row 1 -->
           <div class="ts-row">
@@ -157,8 +156,6 @@ include_once("../includes/header.php");
             <span class="10-1"></span><span class="10-2"></span><span class="10-3"></span><span class="10-4"></span><span class="10-5"></span><span class="10-6"></span><span class="10-7"></span><span class="10-8"></span><span class="10-9"></span><span class="10-10"></span>
           </div>
         </div>
-
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

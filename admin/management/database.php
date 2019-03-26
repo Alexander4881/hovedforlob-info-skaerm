@@ -65,7 +65,7 @@ function NewWebSite($title, $location){
 
     mysqli_close($connection);
 
-    echo($result);
+    return($result);
 }
 
 

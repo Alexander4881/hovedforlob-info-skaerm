@@ -70,7 +70,19 @@ function SaveContent(){
 
             }else{
                 // it has an id
-                console.log("needs to be updated");
+                $.ajax({
+                    url: './administration-logic.php',
+                    type: 'post', 
+                    data: 
+                    { 
+                        "val" : "updateTable",
+                        "table" : element.outerHTML
+                    },
+                    success: function(response) { 
+
+                        $("#preview").append(response);
+                    }
+                });
 
             }
 
