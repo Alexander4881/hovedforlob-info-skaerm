@@ -227,12 +227,16 @@ CALL `DeleteTable`(1);
 
 
 /* Show Procedure */
-/*		Delete Table*/
+/*		Show Table*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `DeleteTable`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `ShowTable`
+(
+	IN `@websiteID` INT
+)
 BEGIN
-	SELECT
+	SELECT `id` FROM `table` WHERE `WebSite_ID` = `@websiteID`;
 END $$
 DELIMITER ;
 
-CALL `DeleteTable`(1);
+CALL `ShowTable`(1);
+CALL `ShowColumn`(2);
