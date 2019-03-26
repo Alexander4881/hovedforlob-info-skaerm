@@ -84,13 +84,13 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         foreach ($rows as $row) {
             /*** get each column by tag name ***/ 
             $cols = $row->getElementsByTagName('td'); 
-            /*** insert the row to the database ***/
-            $rowID = NewRow($tableID);
+            /*** updaets the row to the database ***/
+            UpdateRow($row->getAttribute("id"));
 
             /*** loop over all the colums ***/
             foreach($cols as $col){
-                /*** inserts the colum to the database ***/
-                NewColumn($rowID, $col->nodeValue);
+                /*** updates the colum to the database ***/
+                UpdateColumn($col->getAttribute("id"));
             }
         }
     }

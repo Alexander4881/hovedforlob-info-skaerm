@@ -24,17 +24,17 @@ INSERT INTO `Image`(`Path`) VALUE(ImagePath);
 
 CALL NewImage("C:\\Users\\alihn\\Documents\\GitHub\\hovedforlob-info-skaerm\\images\\uploads\\null.png");
 
-CREATE PROCEDURE NewImageLink(IN WebSite_ID INT, IN Image_ID INT)
+CREATE PROCEDURE IF NOT EXISTS NewImageLink(IN WebSite_ID INT, IN Image_ID INT)
 INSERT INTO `ImageLink`(`WebSite_ID`, `Image_ID`) VALUE(WebSite_ID,Image_ID);
 
-CALL NewImageLink(2,1);
+CALL NewImageLink(1,1);
 
 /* Show Items */
 /* Show Items Websites*/
 CREATE PROCEDURE IF NOT EXISTS ShowWebSites(IN WebSite_ID INT)
 SELECT * FROM `WebSite` WHERE `ID` = WebSite_ID;
 
-CALL ShowWebSites(2);
+CALL ShowWebSites(1);
 
 /* Show Images */
 CREATE PROCEDURE IF NOT EXISTS ShowImages()
@@ -220,6 +220,18 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `DeleteTable`
 )
 BEGIN
 	DELETE FROM `table` WHERE `id` = `@TableID`;
+END $$
+DELIMITER ;
+
+CALL `DeleteTable`(1);
+
+
+/* Show Procedure */
+/*		Delete Table*/
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `DeleteTable`()
+BEGIN
+	SELECT
 END $$
 DELIMITER ;
 
