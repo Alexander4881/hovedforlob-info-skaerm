@@ -239,4 +239,27 @@ END $$
 DELIMITER ;
 
 CALL `ShowTable`(1);
-CALL `ShowColumn`(2);
+
+/*		Show Row*/
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowRow`(
+	IN `@tableID` INT
+)
+BEGIN
+	SELECT `id` FROM `Row` WHERE `Table_ID` = `@tableID`;
+END $$
+DELIMITER ;
+
+CALL `ShowRow`(1);
+
+/*		Show Column*/
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowColumn`(
+	IN `@rowID` INT
+)
+BEGIN
+	SELECT `id`,`text` FROM `column` WHERE `Row_ID` = `@rowID`;
+END $$
+DELIMITER ;
+
+CALL `ShowColumn`(1);
