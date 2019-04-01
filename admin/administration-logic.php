@@ -17,12 +17,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
     if (isset($_POST['title']) && isset($_POST['location'])){
         $result = NewWebSite($_POST['title'], $_POST['location']);
-
-        if($result == 1){
-            echo(1);
-        }else{
-            echo(2);
-        }
+        echo($result[0] . "," . $result[1]);
     }
 }else if(isset($_POST['val']) && $_POST['val'] === "newTable"){
     // inserts the table to the database

@@ -12,8 +12,10 @@ function NewWebSite(location){
                     "title":$("#NewWebSiteTitle").val(),
                     "location":location
                 },
-            success: function(response) { 
+            success: function(response) {
                 console.log(response);
+                var temp = response.split(",");
+                window.location.replace("../../../admin/administration.php?id=" + temp[0] + "&title=" + temp[1]);
             }
         });
         $("#NewWebSite").unbind();

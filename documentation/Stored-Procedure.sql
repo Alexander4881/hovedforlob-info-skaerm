@@ -2,11 +2,22 @@
 USE infoskaerm;
 /* new website*/
 
-CREATE PROCEDURE IF NOT EXISTS InsertNewWebSite ( title VARCHAR(40) , IN siteID TINYINT )
-INSERT INTO `website` (`Title`, `SiteID`) VALUES (title, siteID);
+CREATE PROCEDURE IF NOT EXISTS  (  )
+
+/*		new website*/
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewWebSite`(
+	title VARCHAR(40) , 
+	IN siteID TINYINT
+)
+BEGIN
+	INSERT INTO `website` (`Title`, `SiteID`) VALUES (title, siteID);
+	SELECT `id`,`title` FROM `website` WHERE `ID` = (SELECT LAST_INSERT_ID() FROM `website`);
+END $$
+DELIMITER ;
+
 /* new website call */
 CALL InsertNewWebSite("Titel",1);
-
 
 /* new Time*/
 CREATE PROCEDURE IF NOT EXISTS NewTime ( IN StartTime DATETIME , IN EndTime DATETIME, IN WebSite_ID INT )

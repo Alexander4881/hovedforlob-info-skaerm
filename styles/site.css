@@ -41,12 +41,6 @@ html {
   min-height: 100%;
 }
 
-body {
-  /* Margin bottom by footer height */
-  height: calc(100vh - 164px);
-  /*margin-bottom: 60px;*/
-}
-
 .footer {
   position: absolute;
   bottom: 0;
@@ -60,7 +54,6 @@ body {
   border-left: 0.3em double grey;
   overflow-y: auto;
   position: relative;
-  height: calc(100vh - 104px);
 }
 
 #element-select > .row > .col > i{
@@ -85,7 +78,6 @@ body {
 
 #preview{
   padding: 2em;
-  height: calc(100vh - 104px);
   overflow: scroll;
   overflow-y: auto;
 }
@@ -110,9 +102,9 @@ body {
   outline: none;
 }
 
-#widthInput, #heigthInput, #leftInput, #topInput{
+/* #widthInput, #heigthInput, #leftInput, #topInput{
   width: 40px!important;
-}
+} */
 
 #colorSvg{
   height: 200px;
