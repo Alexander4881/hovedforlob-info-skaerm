@@ -27,6 +27,8 @@ var redInput = document.getElementById("redColor");
 var greenInput = document.getElementById("greenColor");
 var blueInput = document.getElementById("blueColor");
 
+var tableSelectedSize = null;
+
 // selected image
 var selectedImage = null;
 
@@ -51,6 +53,7 @@ function SaveContent(){
                 // it does not have an id
                 console.log("needs to be inserted");
                 
+                // inserts it to the database
                 console.log(element);
                 $.ajax({
                     url: './administration-logic.php',
@@ -66,7 +69,6 @@ function SaveContent(){
                     }
                 });
 
-
             }else{
                 // it has an id
                 $.ajax({
@@ -78,8 +80,7 @@ function SaveContent(){
                         "table" : element.outerHTML
                     },
                     success: function(response) { 
-
-                        $("#preview").append(response);
+                        console.log(response);
                     }
                 });
 
@@ -96,6 +97,26 @@ function SaveContent(){
     }
 }
 
+function InsertTable(){
+    console.log("Insert Table Method");
+    if(tableSelectedSize != null){
+        
+        var table = `<table class="table table-bordered table-dark"><tbody>`;
+        console.log(tableSelectedSize);
+        for (let iIndex = 0; iIndex < tableSelectedSize[0]; iIndex++) {
+            table += `<tr>`;
+            for (let jIndex = 0; jIndex < tableSelectedSize[1]; jIndex++) {
+                table += `<td> <span>Column ` + Number(jIndex + 1) + ` </span> </td>`;                    
+            }
+            table += `</tr>`;
+        }
+        table += `</tbody></table>`;
+
+        $("#preview").append(table);
+        $("#tableSelect").modal("hide");
+    }
+}
+
 function NewElement(elementType){
     // 1 = text element
     // 2 = table element
@@ -107,6 +128,9 @@ function NewElement(elementType){
         
         case 2:
         $("#tableSelect").modal();
+
+        $("")
+
         $("#ts-select > div > span").mouseenter(function () {
 
             // clear the old background color
@@ -125,28 +149,12 @@ function NewElement(elementType){
                 }
               }
               $("."+loopI+"-"+loopJ).click(function () {
-                LockTabelSelect();
                 $("."+loopI+"-"+loopJ).unbind();
+                LockTabelSelect();
               });
           });
           
-          function LockTabelSelect(){
-            $("#ts-select > div > span").unbind("mouseenter");
-            var tableSize = event.target.classList[0].split('-');
-            var table = `<table class="table table-bordered table-dark"><tbody>`;
-            console.log(tableSize);
-            for (let iIndex = 0; iIndex < tableSize[0]; iIndex++) {
-                table += `<tr>`;
-                for (let jIndex = 0; jIndex < tableSize[1]; jIndex++) {
-                    table += `<td> <span>Column ` + Number(jIndex + 1) + ` </span> </td>`;                    
-                }
-                table += `</tr>`;
-            }
-            table += `</tbody></table>`;
-            $("#preview").append(table);
-            Editor();
-
-          }
+          
         break;
 
         case 3:
@@ -194,6 +202,12 @@ function NewElement(elementType){
     }
 
     Editor();
+}
+
+function LockTabelSelect(){
+    console.log("LockTableLock");
+    $("#ts-select > div > span").unbind("mouseenter");
+    tableSelectedSize = event.target.classList[0].split('-');
 }
 
 function UpdateImages(){
@@ -600,7 +614,6 @@ function ContentHeight(addOrSubtract){
 }
 
 function PosisitionTop(addOrSubtract){
-    
     if(selectedElement.style.display != "absolute"){
         selectedElement.style.position = "absolute";
     }

@@ -54,6 +54,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
                 NewColumn($rowID, $col->nodeValue);
             }
         }
+        echo($tableID);
     }
 }else if(isset($_POST['val']) && $_POST['val'] === "updateTable"){
     if(isset($_POST['table']) && $_POST['table'] !== " "){
@@ -90,4 +91,5 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         }
     }
 }else if(isset($_POST['val']) && $_POST['val'] === "getWebSiteContent")
+
 ?>

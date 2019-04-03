@@ -16,7 +16,7 @@ include_once("admin/management/global.php");
 </head>
 
 <body>
-  <!-- Maintenance -->
+  <!-- Maintenance
   <div class="alert alert-danger main-alert navbar justify-content-between align-items-center w-100" role="alert">
     <div class="justify-content-center align-items-center">
       Website is in Alpha, be patient.
@@ -24,7 +24,7 @@ include_once("admin/management/global.php");
     <div class="flex-row justify-content-end flex-nowrap">
       <?php echo 'PHP Version: ' . phpversion(); ?>
     </div>
-  </div>
+  </div> -->
     <!-- Navbar Header -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
         <div class="container">

@@ -61,14 +61,14 @@ html {
   padding: 3em 2em;
   border: 0.1em solid black;
   margin: 0 auto;
-  font-size: 30px;
+  font-size: 15px;
 }
 
 #element-select > .row > .element {
   margin: 1em auto;
   text-align: center;
   padding: 0.5em 2em;
-  font-size: 30px;
+  font-size: 15px;
   border: 0.15em double black;
 }
 
@@ -102,9 +102,9 @@ html {
   outline: none;
 }
 
-/* #widthInput, #heigthInput, #leftInput, #topInput{
+#widthInput, #heigthInput, #leftInput, #topInput{
   width: 40px!important;
-} */
+}
 
 #colorSvg{
   height: 200px;
@@ -163,4 +163,3 @@ html {
 .st-hover{
   background-color: #abf961!important;
 }
-
