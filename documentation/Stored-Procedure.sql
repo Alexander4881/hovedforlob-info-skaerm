@@ -12,12 +12,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewWebSite`(
 )
 BEGIN
 	INSERT INTO `website` (`Title`, `SiteID`) VALUES (title, siteID);
-	SELECT `id`,`title` FROM `website` WHERE `ID` = (SELECT LAST_INSERT_ID() FROM `website`);
+	SELECT `id`,`title` FROM `website` WHERE `ID` = (SELECT LAST_INSERT_ID() FROM `website` limit 1);
 END $$
 DELIMITER ;
 
 /* new website call */
-CALL InsertNewWebSite("Titel",1);
+CALL InsertNewWebSite("Titel Test",1);
 
 /* new Time*/
 CREATE PROCEDURE IF NOT EXISTS NewTime ( IN StartTime DATETIME , IN EndTime DATETIME, IN WebSite_ID INT )

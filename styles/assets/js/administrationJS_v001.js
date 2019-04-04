@@ -59,15 +59,13 @@ function SaveContent(){
                     type: 'post', 
                     data: 
                     { 
-                        "val" : "getTable",
-                        "table" : element.outerHTML
+                        "val" : "newTable",
+                        "table" : element.outerHTML,
+                        "websiteID" : websiteID
                     },
                     success: function(response) { 
 
                         $(element).replaceWith(response);
-                        // console.log("response from ajax");
-                        // console.log(response);
-                        // $("#preview").append(response);
                     }
                 });
             }else{

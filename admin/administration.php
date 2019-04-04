@@ -202,7 +202,7 @@ include_once("../includes/header.php");
 <div class="container-fluid">
     <div class="row">
         <div class="alert alert-dark main-alert  w-100 text-center" role="alert">
-            <span class="">TITLE</span>
+            <span class=""> <?= $_GET["title"] ?> </span>
         </div>
     </div>
 

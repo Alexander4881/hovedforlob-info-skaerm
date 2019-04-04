@@ -16,12 +16,14 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 }else if(isset($_POST['val']) && $_POST['val'] === "newWebSite"){
 
     if (isset($_POST['title']) && isset($_POST['location'])){
+        
         $result = NewWebSite($_POST['title'], $_POST['location']);
+        
         echo($result[0] . "," . $result[1]);
     }
 }else if(isset($_POST['val']) && $_POST['val'] === "newTable"){
     // inserts the table to the database
-    if(isset($_POST['table']) && $_POST['table'] !== " "){
+    if(isset($_POST['table']) && $_POST['table'] !== " " && isset($_POST['websiteID']) && $_POST['websiteID'] !== " "){
         
         /*** get the html for the table */
         $html = $_POST['table'];
@@ -55,7 +57,9 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             }
         }
         //echo($tableID);
-
+        
+        // get the newley inserted table
+        echo(GetTableHTML($tableID));
 
     }
 }else if(isset($_POST['val']) && $_POST['val'] === "updateTable"){
@@ -94,13 +98,15 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
     }
 }else if(isset($_POST['val']) && $_POST['val'] === "getWebSiteContent"){
     // nets to be emplimented
-}else if(isset($_POST['val']) && $_POST['val'] === "getTable"){
+}
+
+function GetTableHTML($tableID){
     // table var 
     // start table
-    $table = "<table id=\"" . 2 . "\" class=\"table table-bordered table-dark\">";
+    $table = "<table id=\"" . $tableID . "\" class=\"table table-bordered table-dark\">";
     $table .= "<tbody>";
     //
-    $rows = GetRow(2);
+    $rows = GetRow($tableID);
     // get rows from database querry
     while($row = mysqli_fetch_array($rows)){
         $table .= "<tr id=\"" . $row["id"] . "\">";
@@ -124,7 +130,6 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
     $table .= "</table>";
 
-    echo($table);
+    return $table;
 }
-
 ?>

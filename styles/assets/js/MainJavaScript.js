@@ -9,8 +9,8 @@ function NewWebSite(location){
             data: 
                 { 
                     "val": "newWebSite",
-                    "title":$("#NewWebSiteTitle").val(),
-                    "location":location
+                    "title": $("#NewWebSiteTitle").val(),
+                    "location": location,
                 },
             success: function(response) {
                 console.log(response);
@@ -20,5 +20,4 @@ function NewWebSite(location){
         });
         $("#NewWebSite").unbind();
     });
-    
 }
