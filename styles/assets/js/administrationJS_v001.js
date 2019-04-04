@@ -45,7 +45,6 @@ function SaveContent(){
             break;
 
             case'table':
-            console.log(element.outerHTML);
 
             // Check if it has an id
             console.log(elementID);
@@ -60,15 +59,17 @@ function SaveContent(){
                     type: 'post', 
                     data: 
                     { 
-                        "val" : "newTable",
+                        "val" : "getTable",
                         "table" : element.outerHTML
                     },
                     success: function(response) { 
 
-                        $("#preview").append(response);
+                        $(element).replaceWith(response);
+                        // console.log("response from ajax");
+                        // console.log(response);
+                        // $("#preview").append(response);
                     }
                 });
-
             }else{
                 // it has an id
                 $.ajax({
@@ -83,7 +84,6 @@ function SaveContent(){
                         console.log(response);
                     }
                 });
-
             }
 
             break;
@@ -93,7 +93,6 @@ function SaveContent(){
             break;
 
         }
-
     }
 }
 

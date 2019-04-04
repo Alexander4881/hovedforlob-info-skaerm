@@ -115,6 +115,7 @@ function NewColumn($Row_ID, $Text){
     return($resultt[0]);
 }
 
+// Get The Table
 function GetTable($WebSite_ID)
 {
     $connection = db();
@@ -126,7 +127,32 @@ function GetTable($WebSite_ID)
 
     mysqli_close($connection);
 
-    $resultt = mysqli_fetch_array($result);
-    echo($resultt);
+    return $result;
+}
+
+// Get Row
+function GetRow($tableID){
+    $connection = db();
+
+    $sql = "CALL `ShowRow`(" . $tableID . ");";
+
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    return $result;
+}
+
+// Get Column
+function GetColumn($rowID){
+    $connection = db();
+
+    $sql = "CALL `ShowColumn`(" . $rowID . ");";
+
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    return $result;
 }
 ?>

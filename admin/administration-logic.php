@@ -54,7 +54,9 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
                 NewColumn($rowID, $col->nodeValue);
             }
         }
-        echo($tableID);
+        //echo($tableID);
+
+
     }
 }else if(isset($_POST['val']) && $_POST['val'] === "updateTable"){
     if(isset($_POST['table']) && $_POST['table'] !== " "){
@@ -90,6 +92,39 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             }
         }
     }
-}else if(isset($_POST['val']) && $_POST['val'] === "getWebSiteContent")
+}else if(isset($_POST['val']) && $_POST['val'] === "getWebSiteContent"){
+    // nets to be emplimented
+}else if(isset($_POST['val']) && $_POST['val'] === "getTable"){
+    // table var 
+    // start table
+    $table = "<table id=\"" . 2 . "\" class=\"table table-bordered table-dark\">";
+    $table .= "<tbody>";
+    //
+    $rows = GetRow(2);
+    // get rows from database querry
+    while($row = mysqli_fetch_array($rows)){
+        $table .= "<tr id=\"" . $row["id"] . "\">";
+        
+
+        $columns = GetColumn($row["id"]);
+
+        if(mysqli_num_rows($columns) > 0){
+            while($column = mysqli_fetch_array($columns)){
+                // adds the column to the table var
+                $table .= "<td id=\"" . $column["id"] . "\">";
+                $table .= " <span>" . $column['text'] . "</span>";
+
+            }
+        }
+        $table .= "</tr>";
+        // mysqli_free_result($rows);
+    }
+
+    $table .= "</tbody>";
+
+    $table .= "</table>";
+
+    echo($table);
+}
 
 ?>
