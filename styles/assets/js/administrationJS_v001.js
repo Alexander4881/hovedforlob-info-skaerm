@@ -64,7 +64,7 @@ function SaveContent(){
                         "websiteID" : websiteID
                     },
                     success: function(response) { 
-
+                        // replaces the old table with the new
                         $(element).replaceWith(response);
                     }
                 });
@@ -78,12 +78,12 @@ function SaveContent(){
                         "val" : "updateTable",
                         "table" : element.outerHTML
                     },
-                    success: function(response) { 
+                    success: function(response) {
+                        // update the save logo  
                         console.log(response);
                     }
                 });
             }
-
             break;
 
             case'img':
