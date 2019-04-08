@@ -4,6 +4,10 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 
+html,body{
+  height: 100%;
+}
+
 .main-content{
   margin-top: 60px;
   margin-bottom: 60px;

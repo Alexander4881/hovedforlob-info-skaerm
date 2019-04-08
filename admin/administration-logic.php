@@ -1,8 +1,35 @@
 <?php
 include_once("management/database.php");
 
+# all post
 if(isset($_POST['val']) && $_POST['val'] === "newText"){
-    NewText();
+    
+    if(isset($_POST['text']) && isset($_POST['websiteID']) && isset($_POST['style']) ){
+        $sqlResult = NewText($_POST['text'], $_POST['websiteID'], $_POST['style']);
+
+        if(mysqli_num_rows($sqlResult) > 0){
+
+            while($textElement = mysqli_fetch_array($sqlResult)){
+                
+                 echo("<p id=\"".$textElement["ID"]."\"" . $textElement["Style"] .">" .  $textElement["Text"] . "</p>");
+
+            }
+        }
+    }
+
+}else if(isset($_POST['val']) && $_POST['val'] === "updateText"){
+
+    if(isset($_POST['text']) && isset($_POST['textID']) && isset($_POST['style']) ){
+        $sqlResult = UpdateText($_POST['text'], $_POST['textID'], $_POST['style']);
+
+        if(mysqli_num_rows($sqlResult) > 0){
+
+            while($textElement = mysqli_fetch_array($sqlResult)){
+
+                echo("<p id=\"".$textElement["ID"]. "\"" . $textElement["Style"] .">" .  $textElement["Text"] . "</p>");
+            }
+        }
+    }
 
 }else if(isset($_POST['val']) && $_POST['val'] === "newTime"){
     NewTime();
@@ -98,7 +125,34 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
     }
 }else if(isset($_POST['val']) && $_POST['val'] === "getWebSiteContent"){
     // nets to be emplimented
+}else if(isset($_POST['val']) && $_POST['val'] == "newImageLink"){
+    
+    $sqlResult = NewImageLink($_POST['websideID'], $_POST['imageID'], $_POST['style']);
+
+    if(mysqli_num_rows($sqlResult) > 0){
+
+        while($imageProp = mysqli_fetch_array($sqlResult)){
+            
+             echo("<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../images/uploads/". $imageProp["Path"] ."\"></img>");
+
+        }
+    }
+}else if(isset($_POST['val']) && $_POST['val'] == "updateImage"){
+    
+    $sqlResult = UpdateImageLink( $_POST['imageLinkID'], $_POST['style']);
+
+    if(mysqli_num_rows($sqlResult) > 0){
+
+        while($imageProp = mysqli_fetch_array($sqlResult)){
+            
+             echo("<img id=\"".$imageProp["id"]."\" " . $imageProp["Image_Style"] . " src=\"../images/uploads/". $imageProp["Path"] ."\"></img>");
+
+        }
+    }
 }
+
+
+
 
 function GetTableHTML($tableID){
     // table var 

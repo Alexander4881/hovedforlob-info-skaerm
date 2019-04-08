@@ -1,12 +1,11 @@
+
 /* New Items */
 USE infoskaerm;
 /* new website*/
 
-CREATE PROCEDURE IF NOT EXISTS  (  )
-
 /*		new website*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewWebSite`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `InsertNewWebSite`(
 	title VARCHAR(40) , 
 	IN siteID TINYINT
 )
@@ -19,26 +18,37 @@ DELIMITER ;
 /* new website call */
 CALL InsertNewWebSite("Titel Test",1);
 
-/* new Time*/
-CREATE PROCEDURE IF NOT EXISTS NewTime ( IN StartTime DATETIME , IN EndTime DATETIME, IN WebSite_ID INT )
-INSERT INTO `time`(`StartTime`, `EndTime`, `WebSite_ID`) VALUE(StartTime, EndTime, WebSite_ID);
-/* new Time call */
-CALL NewTime("2019-03-07 13:02:10", "2019-03-08 10:20:30", 1);
 
-CREATE PROCEDURE IF NOT EXISTS NewText ( Text VARCHAR(255) , IN Website_ID INT )
-INSERT INTO `text` (`Text`, `WebSite_ID`) VALUES (Text,Website_ID);
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NewText`(
+	IN `@text` VARCHAR(255),
+	IN `@website_ID` INT,
+	IN `@style` VARCHAR(255)
+)
+BEGIN
+	INSERT INTO `text` (`Text`, `WebSite_ID`, `Style`) VALUES (`@text`, `@website_ID`, `@style`);
+	SELECT * FROM `text` WHERE `id` = LAST_INSERT_ID();
+END $$
+DELIMITER ;
 
-CALL NewText("Titel",1);
 
-CREATE PROCEDURE IF NOT EXISTS NewImage(IN ImagePath VARCHAR(255))
+CALL NewText("Titel",1,"style=''");
+
+CREATE PROCEDURE IF NOT EXISTS InsertNewImage(IN ImagePath VARCHAR(255))
 INSERT INTO `Image`(`Path`) VALUE(ImagePath);
 
-CALL NewImage("C:\\Users\\alihn\\Documents\\GitHub\\hovedforlob-info-skaerm\\images\\uploads\\null.png");
+CALL InsertNewImage("null.png");
 
-CREATE PROCEDURE IF NOT EXISTS NewImageLink(IN WebSite_ID INT, IN Image_ID INT)
-INSERT INTO `ImageLink`(`WebSite_ID`, `Image_ID`) VALUE(WebSite_ID,Image_ID);
+DELIMITER $$
+CREATE PROCEDURE IF NOT EXISTS `InsertNewImageLink`(IN `@WebSite_ID` INT, IN `@Image_ID` INT, IN `@ImageStyle` VARCHAR(255))
+BEGIN
+INSERT INTO `ImageLink`(`WebSite_ID`, `Image_ID`, `Image_Style`) VALUE(`@WebSite_ID`,`@Image_ID`, `@ImageStyle`);
+SELECT `imagelink`.`ID`, `imagelink`.`Image_Style`, `image`.`Path` FROM `imagelink` 
+	INNER JOIN `image` ON `imagelink`.`Image_ID` = `image`.`ID` WHERE `imagelink`.`ID` = (LAST_INSERT_ID());
+END $$
+DELIMITER ;
 
-CALL NewImageLink(1,1);
+CALL InsertNewImageLink(1,3,"");
 
 /* Show Items */
 /* Show Items Websites*/
@@ -49,7 +59,7 @@ CALL ShowWebSites(1);
 
 /* Show Images */
 CREATE PROCEDURE IF NOT EXISTS ShowImages()
-SELECT `image`.`path` FROM `Image`;
+SELECT `image`.`ID`,`image`.`path` FROM `Image`;
 
 CALL ShowImages;
 
@@ -59,11 +69,6 @@ SELECT * FROM `ImageLink` WHERE `WebSite_ID` = WebSiteID;
 
 CALL ShowImagesForWebSite(2);
 
-/* Show Time */
-CREATE PROCEDURE IF NOT EXISTS ShowTime(IN WebSiteID INT)
-SELECT * FROM `Time` WHERE `WebSite_ID` = WebSiteID;
-
-CALL ShowTime(2);
 
 /* Show Text */
 CREATE PROCEDURE IF NOT EXISTS ShowText(IN WebSiteID INT)
@@ -136,33 +141,34 @@ CALL `UpdateColumn`(9,'text new test');
 
 /*		Update Image*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `UpdateImageLink`
-(
-    IN `@NewWebSite_ID` INT,
-		IN `@NewImage_ID` INT,
-		IN `@WebSite_ID` INT,
-		IN `@Image_ID` INT
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateImageLink`(
+		IN `@ImageLink_ID` INT,
+		IN `@Style` VARCHAR(255)
 )
 BEGIN
-	UPDATE `imagelink` SET `WebSite_ID` = `@NewWebSite_ID`, `Image_ID` = `@NewImage_ID` WHERE `Image_ID` = `@Image_ID` AND `WebSite_ID` = `@WebSite_ID`;
+	UPDATE `imagelink` SET `Image_Style` = `@Style` WHERE `ID` = `@ImageLink_ID`;
+	SELECT `imagelink`.`id`, `imagelink`.`Image_Style`, `image`.`Path` FROM `imagelink` 
+	INNER JOIN `image` ON `imagelink`.`Image_ID` = `image`.`ID` WHERE `imagelink`.`id` = `@ImageLink_ID`;
 END $$
 DELIMITER ;
 
-CALL `UpdateImageLink`(1,1,2,1);
+CALL `UpdateImageLink`(8,"test");
 
 /*		Update Text*/
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `UpdateText`
 (
     IN `@Text` VARCHAR(255),
-		IN `@Text_ID` INT
+		IN `@Text_ID` INT,
+		IN `@Style` VARCHAR(255)
 )
 BEGIN
-	UPDATE `text` SET `text` = `@Text` WHERE `ID` = `@Text_ID`;
+	UPDATE `text` SET `text` = `@Text`, `Style` = `@Style` WHERE `ID` = `@Text_ID`;
+	SELECT * FROM `text` WHERE `id` = `@Text_ID`;
 END $$
 DELIMITER ;
 
-CALL `UpdateText`('Test Text Update',1);
+CALL `UpdateText`('Test Text Update',3, "style=''");
 
 
 

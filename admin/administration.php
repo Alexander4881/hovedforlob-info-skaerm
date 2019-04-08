@@ -373,7 +373,6 @@ include_once("../includes/header.php");
                 </div>
             </div>
         </div>
-        <!-- Layer -->
     </div>
 
     <div class="row">

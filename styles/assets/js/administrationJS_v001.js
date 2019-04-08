@@ -32,9 +32,12 @@ var tableSelectedSize = null;
 // selected image
 var selectedImage = null;
 
+// save content in preview
 function SaveContent(){
+    // get all elements in the preview div
     var elements = $("#preview").children();
 
+    // loops all the elements and updatest or inserts them
     for (let i = 0; i < elements.length; i++) {
         const element = elements[i];
         const elementID = $(elements[i]).attr('id');
@@ -42,12 +45,52 @@ function SaveContent(){
         switch(element.tagName.toLowerCase()){
             case'p':
             console.log("p");
+            // Check if it has an id
+            if (typeof elementID === typeof undefined || elementID === false) {
+                // it does not have an id
+                console.log("needs to be inserted");
+                
+                // inserts it to the database
+                console.log(element);
+                $.ajax({
+                    url: './administration-logic.php',
+                    type: 'post', 
+                    data: 
+                    { 
+                        "val" : "newText",
+                        "text" : element.textContent,
+                        "websiteID" : websiteID,
+                        "style" : "style=\"" + element.getAttribute("style") + "\""
+                    },
+                    success: function(response) { 
+                        // replaces the old table with the new
+                        $(element).replaceWith(response);
+                    }
+                });
+            }else{
+                // it has an id
+                $.ajax({
+                    url: './administration-logic.php',
+                    type: 'post', 
+                    data: 
+                    { 
+                        "val" : "updateText",
+                        "text" : element.textContent,
+                        "textID" : elementID,
+                        "style" : "style=\"" + element.getAttribute("style") + "\""
+                    },
+                    success: function(response) {
+                        // update the save logo 
+                        console.log("updated") 
+                        $(element).replaceWith(response);
+                    }
+                });
+            }
+            
             break;
 
             case'table':
-
             // Check if it has an id
-            console.log(elementID);
             if (typeof elementID === typeof undefined || elementID === false) {
                 // it does not have an id
                 console.log("needs to be inserted");
@@ -88,6 +131,45 @@ function SaveContent(){
 
             case'img':
             console.log("img");
+            // Check if it has an id
+            if (typeof elementID === typeof undefined || elementID === false) {
+                // it does not have an id
+                console.log("needs to be inserted");
+                
+                // inserts it to the database
+                console.log(element);
+                $.ajax({
+                    url: './administration-logic.php',
+                    type: 'post', 
+                    data: 
+                    { 
+                        "val" : "newImageLink",
+                        "websideID" : websiteID,
+                        "style" : "style=\"" + element.getAttribute("style") + "\"",
+                        "imageID" : element.dataset.imageId
+                    },
+                    success: function(response) { 
+                        // replaces the old table with the new
+                        $(element).replaceWith(response);
+                    }
+                });
+            }else{
+                // it has an id
+                $.ajax({
+                    url: './administration-logic.php',
+                    type: 'post', 
+                    data: 
+                    { 
+                        "val" : "updateImage",
+                        "imageLinkID" : element.id,
+                        "style" : "style=\"" + element.getAttribute("style") + "\""
+                    },
+                    success: function(response) {
+                        // update the save logo  
+                        $(element).replaceWith(response);
+                    }
+                });
+            }
             break;
 
         }
@@ -111,6 +193,9 @@ function InsertTable(){
 
         $("#preview").append(table);
         $("#tableSelect").modal("hide");
+
+        // updates the lisners on the #preview div
+        Editor();
     }
 }
 
@@ -181,7 +266,8 @@ function NewElement(elementType){
         $("#useImage").click(function () {
             if(selectedImage != null){
                 $("#imageModal").modal("hide");
-                $("#preview").append('<image src="'+ selectedImage + '">');
+                console.log(selectedImage);
+                $("#preview").append('<image data-image-id="' + selectedImage.id + '" src="'+ selectedImage.src + '">');
                 $(".carousel-item").remove();
                 selectedImage = null;
                 Editor();
@@ -202,7 +288,6 @@ function NewElement(elementType){
 }
 
 function LockTabelSelect(){
-    console.log("LockTableLock");
     $("#ts-select > div > span").unbind("mouseenter");
     tableSelectedSize = event.target.classList[0].split('-');
 }
@@ -218,36 +303,60 @@ function UpdateImages(){
             $("#imageCarousel > div:first-child").addClass("active");
             $("#imageCarousel > div > img").click(function(){
                 event.target.classList.add("selected");
-                selectedImage = event.target.src;
+                selectedImage = event.target;
+                console.log(selectedImage);
             });
         }
     });
 }
 
 function Editor(){
+    
+    // remove the old listeners
+    $("#preview > p").unbind("dblclick");
+
+    // add the new listeners to the new elements
     $("#preview > p").dblclick(function(){
         var textElement = event.target;
-        $("#editText").attr("value",textElement.textContent);
-        $("#editTextModal").modal();
-        $("#saveButtonText").click(function(){
-            textElement.textContent = $("#editText").val();
-            $("#saveButtonText").unbind();
-        });
-    });
 
-    $("#preview > table > tbody > tr > td > span").dblclick(function(){
-        var textElement = event.target;
+        // set the text field on the modal
         $("#editText").attr("value",textElement.textContent);
+
+        // show the modal
         $("#editTextModal").modal();
+
+        // Set OnClick on the save button
         $("#saveButtonText").click(function(){
+            // Set the value og the field to the old field
             textElement.textContent = $("#editText").val();
             $("#saveButtonText").unbind();
         });
     });
     
+    // remove the old listenes
+    $("#preview > table > tbody > tr > td > span").unbind("dblclick");
+
+    // add new listeners to the new object
+    $("#preview > table > tbody > tr > td > span").dblclick(function(){
+        var textElement = event.target;
+
+        // set the text field on the modal
+        $("#editText").attr("value",textElement.textContent);
+
+        // show the modal
+        $("#editTextModal").modal();
+
+        // Set OnClick on the save button
+        $("#saveButtonText").click(function(){
+            // Set the value og the field to the old field
+            textElement.textContent = $("#editText").val();
+            $("#saveButtonText").unbind();
+        });
+    });
+
+    // click on element
     $("#preview").click(function(){
         selectedElement = event.target;
-        console.log(selectedElement);
         SetElementSettings();
     });
 }

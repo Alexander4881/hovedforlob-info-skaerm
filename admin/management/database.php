@@ -29,7 +29,7 @@ function GetImages(){
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-             $images .= '<div class="carousel-item"><image src="../images/uploads/'. $row["path"]. '" class="img-thumbnail rounded mx-auto d-block vh-50"></div>';
+             $images .= '<div class="carousel-item"><image id="' . $row["ID"] . '" src="../images/uploads/'. $row["path"]. '" class="img-thumbnail rounded mx-auto d-block vh-50"></div>';
         }
     } else {
         echo "error in db or tabel is empty";
@@ -46,6 +46,34 @@ function NewImage($path){
     $connection = db();
 
     $sql = "CALL NewImage('". $path ."');";
+
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    return($result);
+}
+
+function NewImageLink($webSite_ID, $imageID, $imageStyle)
+{
+    
+    $connection = db();
+
+    $sql = "CALL InsertNewImageLink('" . $webSite_ID . "','" . $imageID . "','" . $imageStyle . "');";
+    
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    return($result);
+}
+
+function UpdateImageLink( $imageLinkID, $imageStyle)
+{
+    
+    $connection = db();
+
+    $sql = "CALL UpdateImageLink('" . $imageLinkID . "','" . $imageStyle . "');";
 
     $result = $connection->query($sql);
 
@@ -155,4 +183,30 @@ function GetColumn($rowID){
 
     return $result;
 }
+
+// new text 
+function NewText($text, $webSiteID, $style){
+    $connection = db();
+
+    $sql = "CALL NewText('" . $text . "'," . $webSiteID . ",'" . $style . "');";
+
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    return $result;
+}
+
+function UpdateText($text, $textID,$style){
+    $connection = db();
+
+    $sql = "CALL `UpdateText`('" . $text . "'," . $textID . ",'" . $style . "');";
+    
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    return $result;
+}
+
 ?>
