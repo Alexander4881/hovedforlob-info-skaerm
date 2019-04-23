@@ -1,5 +1,5 @@
     <!-- Footer -->
-    <footer class="border-top footer text-light bg-dark">
+    <footer class="border-top footer text-light bg-dark zIndex100">
         <div class="container">
             <?php
             function auto_copyright ($year = 'auto')

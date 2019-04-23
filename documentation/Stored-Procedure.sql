@@ -15,8 +15,8 @@ BEGIN
 END $$
 DELIMITER ;
 
-/* new website call */
-CALL InsertNewWebSite("Titel Test",16);
+/* new website call 
+CALL InsertNewWebSite("Titel Test",16);*/
 
 
 DELIMITER $$
@@ -31,13 +31,14 @@ BEGIN
 END $$
 DELIMITER ;
 
-
-CALL NewText("Titel",1,"style=''");
+/* new text call
+CALL NewText("Titel",1,"style=''");*/
 
 CREATE PROCEDURE IF NOT EXISTS InsertNewImage(IN ImagePath VARCHAR(255))
 INSERT INTO `Image`(`Path`) VALUE(ImagePath);
 
-CALL InsertNewImage("null.png");
+/*
+CALL InsertNewImage("null.png");*/
 
 DELIMITER $$
 CREATE PROCEDURE IF NOT EXISTS `InsertNewImageLink`(IN `@WebSite_ID` INT, IN `@Image_ID` INT, IN `@ImageStyle` VARCHAR(255))
@@ -48,7 +49,7 @@ SELECT `imagelink`.`ID`, `imagelink`.`Image_Style`, `image`.`Path` FROM `imageli
 END $$
 DELIMITER ;
 
-CALL InsertNewImageLink(1,3,"");
+CALL InsertNewImageLink(1,1,"");
 
 /* Show Items */
 /* Show Items Websites*/
@@ -291,11 +292,23 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowWebsitesOnSiteID`(
 	IN `@siteID` INT
 )
 BEGIN
-	SELECT `ID`,`Title` FROM `website` WHERE `SiteID` = `@siteID`;
+	SELECT `ID`,`Title`,`ActiveWebside` FROM `website` WHERE `SiteID` = `@siteID`;
 END $$
 DELIMITER ;
 
-CALL `ShowWebsitesOnSiteID`(1);
+CALL `ShowWebsitesOnSiteID`(16);
 
 
+CREATE TRIGGER ``
 
+/*		Update Active Webside */
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateActiveWebsite`(
+	IN `@websideID` INT
+)
+BEGIN
+	UPDATE `website` SET `ActiveWebsite` = true  WHERE `ID` = `@websideID`;
+END $$
+DELIMITER ;
+
+CALL `UpdateActiveWebsite`(1);

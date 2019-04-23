@@ -155,45 +155,126 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         $result = GetWebsite($_POST['location']);
         $html = "";
         $sqlRowCount = mysqli_num_rows($result);
-        $witchElementWeAreAt = 0;
+        $witchElementAreWeAt = 0;
 
         $websiteProp = mysqli_fetch_all($result);
-           
+        
+        $carouselIndicators = "";
+        $carouselIndicatorsIndex = 0;
+
+
+
         while($sqlRowCount != 0)
         {
-            if ($sqlRowCount <= 6) {
-                $html = CreateCardHTML($html, $websiteProp, $witchElementWeAreAt, 6);
+            if ($sqlRowCount >= 6) {
+                // start the row
+                $html .= '<div class="carousel-item"><div class="container-fluid"><div class="row">';
+                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 6);
+                // end the row
+                $html .= '</div></div></div>';
+
+                // add a carousel indicator to the list
+                $carouselIndicators .= '<li data-target="#carouselWithControlsAndIndicators" data-slide-to="' . $carouselIndicatorsIndex . '"></li>';
+                // add to the Carousel Indicators Index
+                $carouselIndicatorsIndex++;
+
                 $sqlRowCount = $sqlRowCount - 6;
-                $witchElementWeAreAt = $witchElementWeAreAt + 6; // DO IT ON THE REST
+                $witchElementAreWeAt = $witchElementAreWeAt + 6;
             }
-            else if ($sqlRowCount <= 5) 
+            else if ($sqlRowCount >= 5) 
             {
-                $html = CreateCardHTML($html, $websiteProp, $witchElementWeAreAt, 5);
+                // start the row
+                $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
+                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 5);
+                // set the one last empty row in
+                $html .= '<div class="col-2"></div>';
+                // end the row
+                $html .= '</div></div></div>';
+
+                // add a carousel indicator to the list
+                $carouselIndicators .= '<li data-target="#carouselWithControlsAndIndicators" data-slide-to="' . $carouselIndicatorsIndex . '"></li>';
+                // add to the Carousel Indicators Index
+                $carouselIndicatorsIndex++;
+
                 $sqlRowCount = $sqlRowCount - 5;
+                $witchElementAreWeAt = $witchElementAreWeAt + 5;
             }
-            else if ($sqlRowCount <= 4) 
+            else if ($sqlRowCount >= 4) 
             {
-                $html = CreateCardHTML($html, $websiteProp, $witchElementWeAreAt, 4);
+                // start the row
+                $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
+                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 4);
+                // set the last empty colums
+                $html .= '<div class="col-2"></div><div class="col-2"></div>';
+                // end the row
+                $html .= '</div></div></div>';
+
+                // add a carousel indicator to the list
+                $carouselIndicators .= '<li data-target="#carouselWithControlsAndIndicators" data-slide-to="' . $carouselIndicatorsIndex . '"></li>';
+                // add to the Carousel Indicators Index
+                $carouselIndicatorsIndex++;
+
                 $sqlRowCount = $sqlRowCount - 4;
+                $witchElementAreWeAt = $witchElementAreWeAt + 4;
             }
-            else if ($sqlRowCount <= 3) 
+            else if ($sqlRowCount >= 3) 
             {
-                $html = CreateCardHTML($html, $websiteProp, $witchElementWeAreAt, 3);
+                // start the row
+                $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
+                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 3);
+                // set the last empty colums
+                $html .= '<div class="col-2"></div><div class="col-2"></div><div class="col-2"></div>';
+                // end the row
+                $html .= '</div></div></div>';
+
+                // add a carousel indicator to the list
+                $carouselIndicators .= '<li data-target="#carouselWithControlsAndIndicators" data-slide-to="' . $carouselIndicatorsIndex . '"></li>';
+                // add to the Carousel Indicators Index
+                $carouselIndicatorsIndex++;
+
                 $sqlRowCount = $sqlRowCount - 3;
+                $witchElementAreWeAt = $witchElementAreWeAt + 3;
             }
-            else if ($sqlRowCount <= 2) 
+            else if ($sqlRowCount >= 2) 
             {
-                $html = CreateCardHTML($html, $websiteProp, $witchElementWeAreAt, 2);
+                // start the row
+                $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
+                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 2);
+                // set the last empty colums
+                $html .= '<div class="col-2"></div><div class="col-2"></div><div class="col-2"></div><div class="col-2"></div>';
+                // end the row
+                $html .= '</div></div></div>';
+
+                // add a carousel indicator to the list
+                $carouselIndicators .= '<li data-target="#carouselWithControlsAndIndicators" data-slide-to="' . $carouselIndicatorsIndex . '"></li>';
+                // add to the Carousel Indicators Index
+                $carouselIndicatorsIndex++;
+
                 $sqlRowCount = $sqlRowCount - 2;
+                $witchElementAreWeAt = $witchElementAreWeAt + 2;
             }
-            else if ($sqlRowCount <= 1) 
+            else if ($sqlRowCount >= 1) 
             {
-                $html = CreateCardHTML($html, $websiteProp, $witchElementWeAreAt, 1);
+                // start the row
+                $html .= '<div class="container-fluid"><div class="row">';
+                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 1);
+                // set the last empty colums
+                $html .= '<div class="col-2"></div><div class="col-2"></div><div class="col-2"></div><div class="col-2"></div><div class="col-2"></div>';
+                // end the row
+                $html .= '</div></div></div>';
+
+                // add a carousel indicator to the list
+                $carouselIndicators .= '<li data-target="#carouselWithControlsAndIndicators" data-slide-to="' . $carouselIndicatorsIndex . '"></li>';
+                // add to the Carousel Indicators Index
+                $carouselIndicatorsIndex++;
+
                 $sqlRowCount = $sqlRowCount - 1;
+                $witchElementAreWeAt = $witchElementAreWeAt + 1;
             }
         }
         
-        echo $html;
+        $array = array($carouselIndicators , $html);
+        echo json_encode($array, JSON_FORCE_OBJECT);
     }
 }
 
@@ -234,18 +315,27 @@ function GetTableHTML($tableID){
 }
 
 function CreateCardHTML($html, $websiteProp, $startElement, $count){
-    $html .= '<div class="container-fluid"><div class="row">';
+    
     for ($i=0; $i < $count; $i++) {
         $html .= '<div class="col-2">';
-        $html .= '    <div class="card" style="width: 16rem;">';
+        $html .= '    <div class="card" style="width: 16rem; height:10rem;">';
         $html .= '        <div class="card-body">';
-        $html .= '            <h5 class="card-title">' . $i . '</h5>';
-        $html .= '            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>';
+        $html .= '            <div class="card-title h-20 w-100">';
+        $html .= '                        <div class="float-left">';
+        $html .= '                            <h5>' . $websiteProp[$startElement][1] . '</h5>';
+        $html .= '                        </div>';
+        if ($websiteProp[$startElement][2] == true ) {
+            $html .= '                        <div class="float-right"> <i class="fas fa-edit"> </i><i class="fas fa-eye"></i></div>';
+        }else{
+            $html .= '                        <div class="float-right"> <i class="fas fa-edit"> </i><i class="fas fa-eye-slash"></i></div>';
+        }
+        $html .= '                    </div>';
+        $html .= '            <p class="card-text">It is gonna be some description text to the webside. <br> It will come in dome tion this week</p>';
         $html .= '        </div>';
         $html .= '    </div>';
         $html .= '</div>';
     }
-    $html .= '</div></div>';
+    
 
     return $html;
 }

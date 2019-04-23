@@ -20,6 +20,26 @@ html,body{
   text-align: center;
 }
 
+#CarouselIndicators{
+  top: 10.5rem;
+}
+
+.zIndex2{
+  z-index: 2;
+}
+
+.zIndex100{
+  z-index: 100;
+}
+
+.h-20{
+  height: 20%!important;
+}
+
+.card-body{
+  padding: 0.5rem;
+}
+
 /* svg hover css */
 svg{
   margin-bottom: 60px;
@@ -138,6 +158,11 @@ html {
   height: 200px;
   margin: 0.5em 0 0.5em 0;
   font-size: 3em;
+}
+
+svg > a > .add:hover{
+  stroke:green;
+  fill: lightgreen;
 }
 
 .red{

@@ -42,74 +42,20 @@
 
   <nav class="nav navbar-nav">
       <div id="SlideMeUp" class="bg-danger footer container-fluid">
-          <div id="carouselExampleControls" class="carousel slide mt-4" data-ride="carousel">
-              <div class="carousel-inner">
-                  <div class="carousel-item active">
-                      <div class="container-fluid">
-                          <div class="row">
-                              <div class="col-2">
-                                  <div class="card" style="width: 16rem;">
-                                      <div class="card-body">
-                                          <h5 class="card-title">Card title</h5>
-                                          <p class="card-text">Some quick example text to build on the card title and
-                                              make up the bulk of the card's content.</p>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-2">
-                                  <div class="card" style="width: 16rem;">
-                                      <div class="card-body">
-                                          <h5 class="card-title">Card title</h5>
-                                          <p class="card-text">Some quick example text to build on the card title and
-                                              make up the bulk of the card's content.</p>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-2">
-                                  <div class="card" style="width: 16rem;">
-                                      <div class="card-body">
-                                          <h5 class="card-title">Card title</h5>
-                                          <p class="card-text">Some quick example text to build on the card title and
-                                              make up the bulk of the card's content.</p>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-2">
-                                  <div class="card" style="width: 16rem;">
-                                      <div class="card-body">
-                                          <h5 class="card-title">Card title</h5>
-                                          <p class="card-text">Some quick example text to build on the card title and
-                                              make up the bulk of the card's content.</p>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-2">
-                                  <div class="card" style="width: 16rem;">
-                                      <div class="card-body">
-                                          <h5 class="card-title">Card title</h5>
-                                          <p class="card-text">Some quick example text to build on the card title and
-                                              make up the bulk of the card's content.</p>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-2">
-                                  <div class="card" style="width: 16rem;">
-                                      <div class="card-body">
-                                          <h5 class="card-title">Card title</h5>
-                                          <p class="card-text">Some quick example text to build on the card title and
-                                              make up the bulk of the card's content.</p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+          <div id="carouselWithControlsAndIndicators" class="carousel slide mt-4" data-ride="carousel">
+              <ol id="CarouselIndicators" class="carousel-indicators zIndex2">
+
+              </ol>
+              <div id="WebsitesCarouselInner" class="carousel-inner">
+
               </div>
-              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <a class="carousel-control-prev zIndex2" href="#carouselWithControlsAndIndicators" role="button"
+                  data-slide="prev">
                   <i class="fas fa-angle-left"></i>
                   <span class="sr-only">Previous</span>
               </a>
-              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <a class="carousel-control-next zIndex2" href="#carouselWithControlsAndIndicators" role="button"
+                  data-slide="next">
                   <i class="fas fa-angle-right"></i>
                   <span class="sr-only">Next</span>
               </a>
