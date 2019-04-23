@@ -6,19 +6,19 @@
     <rect id="svg_2" width="100%" height="100%" x="0" y="0" stroke-width="0" fill="url(#gridpattern)"/>
    </g>
   </g>
-  <a xlink:href="<?= $_LOCATIONB14 ?>">
-    <g fill="#ff7c7c" stroke="#d6d6d6" stroke-width="10" class="active" id="Rum-B.16">
+  <!-- <a xlink:onclick="run()"> -->
+    <g fill="#ff7c7c" stroke="#d6d6d6" stroke-width="10" class="active svg-green" id="Rum-B.16" onclick="SlideMeUp(16)">
       <rect x="6.837376" y="9.263195" width="303" height="244.828488" id="svg_4"/>
       <line stroke-width="5" x1="270.303086" y1="250.878877" x2="212.121278" y2="229.060687" id="svg_15" stroke-linejoin="null" stroke-linecap="null"/>
     </g>
-  </a>
-  <a xlink:href="<?= $_LOCATIONB16 ?>">
-   <g fill="#ff7c7c" stroke="#d6d6d6" stroke-width="10" class="active" id="Rum-B.014">
+  <!-- </a> -->
+  <!-- <a xlink:onclick="run()"> -->
+   <g fill="#ff7c7c" stroke="#d6d6d6" stroke-width="10" class="active svg-green" id="footerSlideButton" onclick="SlideMeUp(14)">
     <rect x="318.907483" y="9.013196" width="303.449394" height="244.828488" id="svg_9"/>
     <line stroke-width="5" x1="584.848509" y1="250.628878" x2="528.484871" y2="228.810688" id="svg_18" stroke-linejoin="null" stroke-linecap="null"/>
     <line stroke-width="5" x1="583.030368" y1="210.628764" x2="639.393927" y2="188.810574" id="svg_19" stroke-linejoin="null" stroke-linecap="null" transform="rotate(-90 611.2122802734376,199.71966552734372) "/>
    </g>
-  </a>
+  <!-- </a> -->
   <g fill="#ff7c7c" stroke-width="10" stroke="#d6d6d6" id="Rum-B.12">
    <rect x="629.253417" y="131.677443" width="94.827929" height="122.34487" id="svg_13"/>
    <line stroke-width="5" x1="686.666721" y1="218.151489" x2="743.03028" y2="196.333299" id="svg_17" stroke-linejoin="null" stroke-linecap="null" transform="rotate(-90 714.8484497070314,207.24246215820312) "/>

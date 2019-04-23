@@ -209,4 +209,15 @@ function UpdateText($text, $textID,$style){
     return $result;
 }
 
+function GetWebsite($location){
+    $connection = db();
+
+    $sql = "CALL `ShowWebsitesOnSiteID`('" . $location . "');";
+    
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    return $result;
+}
 ?>

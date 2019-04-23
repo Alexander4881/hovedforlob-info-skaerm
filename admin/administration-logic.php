@@ -149,6 +149,52 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
         }
     }
+}else if(isset($_POST['val']) && $_POST['val'] == "getWebsites"){
+    
+    if(isset($_POST['location'])){
+        $result = GetWebsite($_POST['location']);
+        $html = "";
+        $sqlRowCount = mysqli_num_rows($result);
+        $witchElementWeAreAt = 0;
+
+        $websiteProp = mysqli_fetch_all($result);
+           
+        while($sqlRowCount != 0)
+        {
+            if ($sqlRowCount <= 6) {
+                $html = CreateCardHTML($html, $websiteProp, $witchElementWeAreAt, 6);
+                $sqlRowCount = $sqlRowCount - 6;
+                $witchElementWeAreAt = $witchElementWeAreAt + 6; // DO IT ON THE REST
+            }
+            else if ($sqlRowCount <= 5) 
+            {
+                $html = CreateCardHTML($html, $websiteProp, $witchElementWeAreAt, 5);
+                $sqlRowCount = $sqlRowCount - 5;
+            }
+            else if ($sqlRowCount <= 4) 
+            {
+                $html = CreateCardHTML($html, $websiteProp, $witchElementWeAreAt, 4);
+                $sqlRowCount = $sqlRowCount - 4;
+            }
+            else if ($sqlRowCount <= 3) 
+            {
+                $html = CreateCardHTML($html, $websiteProp, $witchElementWeAreAt, 3);
+                $sqlRowCount = $sqlRowCount - 3;
+            }
+            else if ($sqlRowCount <= 2) 
+            {
+                $html = CreateCardHTML($html, $websiteProp, $witchElementWeAreAt, 2);
+                $sqlRowCount = $sqlRowCount - 2;
+            }
+            else if ($sqlRowCount <= 1) 
+            {
+                $html = CreateCardHTML($html, $websiteProp, $witchElementWeAreAt, 1);
+                $sqlRowCount = $sqlRowCount - 1;
+            }
+        }
+        
+        echo $html;
+    }
 }
 
 
@@ -185,5 +231,22 @@ function GetTableHTML($tableID){
     $table .= "</table>";
 
     return $table;
+}
+
+function CreateCardHTML($html, $websiteProp, $startElement, $count){
+    $html .= '<div class="container-fluid"><div class="row">';
+    for ($i=0; $i < $count; $i++) {
+        $html .= '<div class="col-2">';
+        $html .= '    <div class="card" style="width: 16rem;">';
+        $html .= '        <div class="card-body">';
+        $html .= '            <h5 class="card-title">' . $i . '</h5>';
+        $html .= '            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>';
+        $html .= '        </div>';
+        $html .= '    </div>';
+        $html .= '</div>';
+    }
+    $html .= '</div></div>';
+
+    return $html;
 }
 ?>

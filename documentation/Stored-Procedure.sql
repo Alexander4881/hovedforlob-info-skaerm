@@ -16,7 +16,7 @@ END $$
 DELIMITER ;
 
 /* new website call */
-CALL InsertNewWebSite("Titel Test",1);
+CALL InsertNewWebSite("Titel Test",16);
 
 
 DELIMITER $$
@@ -243,6 +243,7 @@ DELIMITER ;
 CALL `DeleteTable`(1);
 
 
+
 /* Show Procedure */
 /*		Show Table*/
 DELIMITER $$
@@ -281,3 +282,20 @@ END $$
 DELIMITER ;
 
 CALL `ShowColumn`(1);
+
+
+
+/*		Show Webstes*/
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowWebsitesOnSiteID`(
+	IN `@siteID` INT
+)
+BEGIN
+	SELECT `ID`,`Title` FROM `website` WHERE `SiteID` = `@siteID`;
+END $$
+DELIMITER ;
+
+CALL `ShowWebsitesOnSiteID`(1);
+
+
+
