@@ -299,16 +299,27 @@ DELIMITER ;
 CALL `ShowWebsitesOnSiteID`(16);
 
 
-CREATE TRIGGER ``
-
 /*		Update Active Webside */
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateActiveWebsite`(
-	IN `@websideID` INT
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateActiveWebsiteOnID`(
+	IN `@websiteID` INT,
+	IN `@ActiveWebside` BOOLEAN
 )
 BEGIN
-	UPDATE `website` SET `ActiveWebsite` = true  WHERE `ID` = `@websideID`;
+	UPDATE `infoskaerm`.`website` SET `ActiveWebside` = `@ActiveWebside` WHERE `ID` = `@websiteID`;
 END $$
 DELIMITER ;
 
-CALL `UpdateActiveWebsite`(1);
+CALL `UpdateActiveWebsiteOnID`(3,TRUE);
+
+/*		Show Active Webstes*/
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowWebsitesOnSiteID`()
+BEGIN
+	SELECT `ID`,`Title`,`ActiveWebside` FROM `website` WHERE `SiteID` = `@siteID`;
+END $$
+DELIMITER ;
+
+CALL `ShowWebsitesOnSiteID`(16);
+
+

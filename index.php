@@ -44,10 +44,8 @@
       <div id="SlideMeUp" class="bg-danger footer container-fluid">
           <div id="carouselWithControlsAndIndicators" class="carousel slide mt-4" data-ride="carousel">
               <ol id="CarouselIndicators" class="carousel-indicators zIndex2">
-
               </ol>
               <div id="WebsitesCarouselInner" class="carousel-inner">
-
               </div>
               <a class="carousel-control-prev zIndex2" href="#carouselWithControlsAndIndicators" role="button"
                   data-slide="prev">

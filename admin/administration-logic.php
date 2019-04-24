@@ -256,7 +256,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             else if ($sqlRowCount >= 1) 
             {
                 // start the row
-                $html .= '<div class="container-fluid"><div class="row">';
+                $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
                 $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 1);
                 // set the last empty colums
                 $html .= '<div class="col-2"></div><div class="col-2"></div><div class="col-2"></div><div class="col-2"></div><div class="col-2"></div>';
