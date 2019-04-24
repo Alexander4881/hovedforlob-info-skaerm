@@ -162,9 +162,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         $carouselIndicators = "";
         $carouselIndicatorsIndex = 0;
 
-
-
-        while($sqlRowCount != 0)
+        do
         {
             if ($sqlRowCount >= 6) {
                 // start the row
@@ -271,8 +269,14 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
                 $sqlRowCount = $sqlRowCount - 1;
                 $witchElementAreWeAt = $witchElementAreWeAt + 1;
             }
-        }
-        
+            else if ($sqlRowCount >= 0)
+            {
+                $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
+                $html .= '<p class="text-center w-100 h1 text-capitalize">THE DATABASE IS EMPTY</p>';
+                $html .= '</div></div></div>';
+            }
+        }while($sqlRowCount != 0);
+
         $array = array($carouselIndicators , $html);
         echo json_encode($array, JSON_FORCE_OBJECT);
     }
@@ -322,11 +326,11 @@ function CreateCardHTML($html, $websiteProp, $startElement, $count){
         $html .= '        <div class="card-body">';
         $html .= '            <div class="card-title h-20 w-100">';
         $html .= '                        <div class="float-left">';
-        $html .= '                            <h5>' . $websiteProp[$startElement][1] . '</h5>';
+        $html .= '                            <h5>' . $websiteProp[$startElement + $i][1] . '</h5>';
         $html .= '                        </div>';
-        if ($websiteProp[$startElement][2] == true ) {
+        if ($websiteProp[$startElement + $i][2] == 1 ) {
             $html .= '                        <div class="float-right"> <i class="fas fa-edit"> </i><i class="fas fa-eye"></i></div>';
-        }else{
+        }else if ($websiteProp[$startElement + $i][2] == 0){
             $html .= '                        <div class="float-right"> <i class="fas fa-edit"> </i><i class="fas fa-eye-slash"></i></div>';
         }
         $html .= '                    </div>';

@@ -47,8 +47,12 @@ function SlideMeUp(location){
             },
         success: function(response) {
             
+            console.log(response);
+            
             var tempArray = JSON.parse(response);
             
+            
+
             $("#CarouselIndicators").append(tempArray[0]);
             $("#WebsitesCarouselInner").append(tempArray[1]);
             

@@ -310,7 +310,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `UpdateActiveWebsiteOnID`(3,TRUE);
+CALL `UpdateActiveWebsiteOnID`(1,TRUE);
 
 /*		Show Active Webstes*/
 DELIMITER $$
