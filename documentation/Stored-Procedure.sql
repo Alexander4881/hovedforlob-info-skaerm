@@ -287,43 +287,45 @@ DELIMITER ;
 
 CALL `ShowColumn`(1);
 
-
-
 /*		Show Webstes*/
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowWebsitesOnSiteID`(
 	IN `@siteID` INT
 )
 BEGIN
-	SELECT `ID`,`Title`,`ActiveWebside` FROM `website` WHERE `SiteID` = `@siteID`;
+	SELECT `ID`,`Title`,`ActiveWebsite` FROM `website` WHERE `SiteID` = `@siteID`;
 END $$
 DELIMITER ;
 
 CALL `ShowWebsitesOnSiteID`(16);
 
 
-/*		Update Active Webside */
+/*		Update Active website */
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateActiveWebsiteOnID`(
 	IN `@websiteID` INT,
-	IN `@ActiveWebside` BOOLEAN
+	IN `@Activewebsite` BOOLEAN
 )
 BEGIN
-	UPDATE `infoskaerm`.`website` SET `ActiveWebside` = `@ActiveWebside` WHERE `ID` = `@websiteID`;
+	UPDATE `infoskaerm`.`website` SET `Activewebsite` = `@Activewebsite` WHERE `ID` = `@websiteID`;
 END $$
 DELIMITER ;
 
 CALL `UpdateActiveWebsiteOnID`(1,TRUE);
 
-/*		Show Active Webstes*/
+/*		Update Active website */
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowWebsitesOnSiteID`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ChangeActiveWebsiteOnSiteIDAndWebsiteID`(
+	IN `@siteID` INT,
+    IN `@websiteID` INT
+)
 BEGIN
-	SELECT `ID`,`Title`,`ActiveWebside` FROM `website` WHERE `SiteID` = `@siteID`;
+	CALL `UpdateActiveWebsiteOnID`((SELECT `ID` FROM `website` WHERE `SiteID` = `@siteID` AND `ActiveWebsite` = 1 LIMIT 1),FALSE);
+    CALL `UpdateActiveWebsiteOnID`(`@websiteID`,TRUE);
 END $$
 DELIMITER ;
 
-CALL `ShowWebsitesOnSiteID`(16);
+CALL `ChangeActiveWebsiteOnSiteIDAndWebsiteID`(16,11);
 
 
 /*		Show Active Webstes*/

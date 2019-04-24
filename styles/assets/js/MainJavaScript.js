@@ -75,3 +75,22 @@ function SlideMeUp(location){
     console.log("not possible");
   }
 }
+
+function ChangeActiveWebsite(websiteID,location) {
+
+    $.ajax({
+        url: '../../../admin/administration-logic.php',
+        type: 'post',
+        data: 
+            { 
+                "val": "changeActiveWebsite",
+                "website": websiteID,
+                "location": location
+            },
+        success: function(response) {
+            console.log(response);
+
+            // if response = 1 then changes icon else console log error
+        }
+    });
+}

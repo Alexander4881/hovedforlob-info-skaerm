@@ -245,4 +245,17 @@ function GetWebsiteTexts($webSiteID)
 
     return $result;
 }
+
+function ChangeActiveWebsite($location,$webSiteID)
+{
+    $connection = db();
+    // remove the old active website
+    $sql = "CALL `ChangeActiveWebsiteOnSiteIDAndWebsiteID`('" . $location . "'," . $webSiteID . ");";
+    
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    return $result;
+}
 ?>

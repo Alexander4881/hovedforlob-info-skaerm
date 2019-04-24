@@ -168,7 +168,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             {
                 // start the row
                 $html .= '<div class="carousel-item"><div class="container-fluid"><div class="row">';
-                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 6);
+                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 6, $_POST['location']);
                 // end the row
                 $html .= '</div></div></div>';
 
@@ -184,7 +184,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             {
                 // start the row
                 $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
-                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 5);
+                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 5, $_POST['location']);
                 // set the one last empty row in
                 $html .= '<div class="col-2"></div>';
                 // end the row
@@ -202,7 +202,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             {
                 // start the row
                 $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
-                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 4);
+                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 4, $_POST['location']);
                 // set the last empty colums
                 $html .= '<div class="col-2"></div><div class="col-2"></div>';
                 // end the row
@@ -220,7 +220,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             {
                 // start the row
                 $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
-                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 3);
+                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 3, $_POST['location']);
                 // set the last empty colums
                 $html .= '<div class="col-2"></div><div class="col-2"></div><div class="col-2"></div>';
                 // end the row
@@ -238,7 +238,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             {
                 // start the row
                 $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
-                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 2);
+                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 2, $_POST['location']);
                 // set the last empty colums
                 $html .= '<div class="col-2"></div><div class="col-2"></div><div class="col-2"></div><div class="col-2"></div>';
                 // end the row
@@ -256,7 +256,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             {
                 // start the row
                 $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
-                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 1);
+                $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 1, $_POST['location']);
                 // set the last empty colums
                 $html .= '<div class="col-2"></div><div class="col-2"></div><div class="col-2"></div><div class="col-2"></div><div class="col-2"></div>';
                 // end the row
@@ -289,7 +289,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         // get images
         $result = GetWebsiteImages($_POST['websiteID']);
         while($imageProp = mysqli_fetch_array($result)){
-            $html .= "<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../images/uploads/". $imageProp["Path"] ."\"></img>"
+            $html .= "<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../images/uploads/". $imageProp["Path"] ."\"></img>";
         }
 
         // get text
@@ -303,6 +303,12 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         while($table = mysqli_fetch_array($result)){
             $html .= GetTableHTML($tables["id"]);
         }
+    }
+}else if(isset($_POST['val']) && $_POST['val'] == "changeActiveWebsite"){
+    if (isset($_POST['website']) && isset($_POST['location'])) {
+        $result = ChangeActiveWebsite($_POST['location'], $_POST['website']);
+        
+        echo($result);
     }
 }
 
@@ -342,7 +348,7 @@ function GetTableHTML($tableID){
     return $table;
 }
 
-function CreateCardHTML($html, $websiteProp, $startElement, $count){
+function CreateCardHTML($html, $websiteProp, $startElement, $count, $location){
     
     for ($i=0; $i < $count; $i++) {
         $html .= '<div class="col-2">';
@@ -353,9 +359,9 @@ function CreateCardHTML($html, $websiteProp, $startElement, $count){
         $html .= '                            <h5>' . $websiteProp[$startElement + $i][1] . '</h5>';
         $html .= '                        </div>';
         if ($websiteProp[$startElement + $i][2] == 1 ) {
-            $html .= '                        <div class="float-right"> <i class="fas fa-edit"> </i><i class="fas fa-eye"></i></div>';
+            $html .= '                        <div class="float-right" onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"> <i class="fas fa-edit"> </i><i class="fas fa-eye"></i></div>';
         }else if ($websiteProp[$startElement + $i][2] == 0){
-            $html .= '                        <div class="float-right"> <i class="fas fa-edit"> </i><i class="fas fa-eye-slash"></i></div>';
+            $html .= '                        <div class="float-right" onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"> <i class="fas fa-edit"> </i><i class="fas fa-eye-slash"></i></div>';
         }
         $html .= '                    </div>';
         $html .= '            <p class="card-text">It is gonna be some description text to the webside. <br> It will come in done this week</p>';
