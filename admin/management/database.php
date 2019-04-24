@@ -45,7 +45,7 @@ function NewImage($path){
 
     $connection = db();
 
-    $sql = "CALL NewImage('". $path ."');";
+    $sql = "CALL InsertNewImage('". $path ."');";
 
     $result = $connection->query($sql);
 
@@ -213,6 +213,31 @@ function GetWebsite($location){
     $connection = db();
 
     $sql = "CALL `ShowWebsitesOnSiteID`('" . $location . "');";
+    
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    return $result;
+}
+
+function GetWebsiteImages($webSiteID){
+    $connection = db();
+
+    $sql = "CALL `ShowImagesForWebSite`('" . $webSiteID . "');";
+    
+    $result = $connection->query($sql);
+
+    mysqli_close($connection);
+
+    return $result;
+}
+
+function GetWebsiteTexts($webSiteID)
+{
+    $connection = db();
+
+    $sql = "CALL `ShowWebsiteTextsOnID`(" . $webSiteID . ");";
     
     $result = $connection->query($sql);
 

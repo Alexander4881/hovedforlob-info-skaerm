@@ -65,10 +65,13 @@ SELECT `image`.`ID`,`image`.`path` FROM `Image`;
 CALL ShowImages;
 
 /* Show Image Link */
-CREATE PROCEDURE IF NOT EXISTS ShowImagesForWebSite(IN WebSiteID INT)
-SELECT * FROM `ImageLink` WHERE `WebSite_ID` = WebSiteID;
+CREATE PROCEDURE IF NOT EXISTS ShowImagesForWebSite(IN `@WebSiteID` INT)
+	SELECT `imagelink`.`ID`, `imagelink`.`WebSite_ID`, `imagelink`.`Image_ID`, `imagelink`.`Image_Style`, `image`.`Path` 
+	FROM `ImageLink` 
+	INNER JOIN `image` ON `image`.`ID` = `imagelink`.`Image_ID`
+	WHERE `WebSite_ID` = `@WebSiteID`;
 
-CALL ShowImagesForWebSite(2);
+CALL ShowImagesForWebSite(19);
 
 
 /* Show Text */
@@ -321,5 +324,27 @@ END $$
 DELIMITER ;
 
 CALL `ShowWebsitesOnSiteID`(16);
+
+
+/*		Show Active Webstes*/
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowWebsiteTextsOnID`(
+IN `@websiteID` INT
+)
+BEGIN
+	SELECT `Text`,`Style` FROM `text` WHERE `WebSite_ID` = `@websiteID`;
+END $$
+DELIMITER ;
+
+CALL `ShowWebsiteTextsOnID`(19);
+
+
+
+
+
+
+
+
+
 
 

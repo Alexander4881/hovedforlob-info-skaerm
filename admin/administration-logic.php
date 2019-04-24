@@ -164,7 +164,8 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
         do
         {
-            if ($sqlRowCount >= 6) {
+            if ($sqlRowCount >= 6) 
+            {
                 // start the row
                 $html .= '<div class="carousel-item"><div class="container-fluid"><div class="row">';
                 $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 6);
@@ -280,6 +281,29 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         $array = array($carouselIndicators , $html);
         echo json_encode($array, JSON_FORCE_OBJECT);
     }
+}else if(isset($_POST['val']) && $_POST['val'] == "getWebsiteElements") {
+    if (isset($_POST['websiteID']) && isset($_POST['siteID'])) 
+    {
+        $html;
+
+        // get images
+        $result = GetWebsiteImages($_POST['websiteID']);
+        while($imageProp = mysqli_fetch_array($result)){
+            $html .= "<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../images/uploads/". $imageProp["Path"] ."\"></img>"
+        }
+
+        // get text
+        $result = GetWebsiteTexts($_POST['websiteID']);
+        while($texts = mysqli_fetch_array($result)){
+            $html .= GetTableHTML($texts["id"]);
+        }
+
+        // get tabels
+        $result = GetTable($_POST['websiteID']);
+        while($table = mysqli_fetch_array($result)){
+            $html .= GetTableHTML($tables["id"]);
+        }
+    }
 }
 
 
@@ -334,7 +358,7 @@ function CreateCardHTML($html, $websiteProp, $startElement, $count){
             $html .= '                        <div class="float-right"> <i class="fas fa-edit"> </i><i class="fas fa-eye-slash"></i></div>';
         }
         $html .= '                    </div>';
-        $html .= '            <p class="card-text">It is gonna be some description text to the webside. <br> It will come in dome tion this week</p>';
+        $html .= '            <p class="card-text">It is gonna be some description text to the webside. <br> It will come in done this week</p>';
         $html .= '        </div>';
         $html .= '    </div>';
         $html .= '</div>';
