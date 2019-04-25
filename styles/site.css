@@ -1,24 +1,6 @@
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
-}
-
 html,body{
   height:100%;
   width: 100%;
-}
-
-.main-content{
-  margin-top: 60px;
-  margin-bottom: 60px;
-}
-
-.main-alert{
-  margin-bottom: 0px;
-  border: none;
-  border-radius: 0;
-  text-align: center;
 }
 
 #CarouselIndicators{
@@ -60,7 +42,6 @@ svg > g:hover{
   fill: lightgreen;
 }
 
-
 #WebsitesScrollUp{
   display: none;
 }
@@ -80,11 +61,12 @@ svg > g:hover{
 
 /* Administration*/
 #element-select-box{
-  overflow-y: auto;
+  z-index: 1;
+  overflow-y: none;
   position: relative;
 }
 
-#element-select > .row > .col > i{
+#element-select > .col > i{
   text-align: center;
   padding: 3em 2em;
   border: 0.1em solid black;
@@ -158,7 +140,8 @@ svg > a > .add:hover{
 }
 
 .hide{
-  display: none;
+  background: transparent;
+  display: relative;
 }
 
 .btn-input{
