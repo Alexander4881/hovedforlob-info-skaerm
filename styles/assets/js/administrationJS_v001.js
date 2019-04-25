@@ -194,6 +194,8 @@ function SaveContent(){
 
         }
     }
+
+    Editor();
 }
 
 function InsertTable(){
