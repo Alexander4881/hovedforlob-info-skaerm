@@ -71,7 +71,7 @@ function NewImageLink($webSite_ID, $imageID, $imageStyle){
 // New Image Style
 function UpdateImageLink($imageLinkID, $imageStyle){
     // Query stored procedure with image build ID and new styling for image.
-    SqlQuery("CALL UpdateImageLink('" . $imageLinkID . "','" . $imageStyle . "');");
+    return SqlQuery("CALL UpdateImageLink('" . $imageLinkID . "','" . $imageStyle . "');");
 }
 
 // Generate a new Website - takes 2 arguments

@@ -46,6 +46,7 @@ $(document).ready(function() {
             console.log(response);
             // replaces the old table with the new
             $("#preview").html(response);
+            Editor();
         }
     });
 });
@@ -509,6 +510,165 @@ function textStyle(buttonClicked) {
     }
  }
 
+
+function TextAlign(textAlign){
+    // Left = 1
+    // Center = 2
+    // Right = 3
+    if(textAlign == 1){
+        console.log("left");
+        if(!textAlignLeft.classList.contains("disabled")){
+            textAlignLeft.classList += " disabled";   
+        }
+        selectedElement.style.textAlign='left';
+        
+        textAlignCenter.classList.remove('disabled');
+        textAlignRight.classList.remove('disabled');
+        
+    }else if(textAlign == 2){
+        console.log("center");
+        if(!textAlignCenter.classList.contains("disabled")){
+            textAlignCenter.classList += " disabled";
+        }
+        selectedElement.style.textAlign='center';
+        
+        textAlignLeft.classList.remove('disabled');
+        textAlignRight.classList.remove('disabled');
+        
+    }else if(textAlign === 3){
+        console.log("right");
+        if(!textAlignRight.classList.contains("disabled")){
+            textAlignRight.classList += " disabled";
+        }
+        selectedElement.style.textAlign='right';
+        
+        textAlignCenter.classList.remove('disabled');
+        textAlignLeft.classList.remove('disabled');
+    }
+}
+
+function LayerHeigth(addOrSubtract){
+    // addOrSubtract = 1 add to layer
+    // addOrSubtract = -1 subrtract from layer
+    if(addOrSubtract == 1){
+        if(selectedElement.style.zIndex <= 1000 && selectedElement.style.zIndex > 0){
+            selectedElement.style.zIndex = Number(selectedElement.style.zIndex)+1;
+        }
+    }else if(addOrSubtract == -1){
+        if(selectedElement.style.zIndex < 1000 && selectedElement.style.zIndex >= 0){
+            selectedElement.style.zIndex = Number(selectedElement.style.zIndex)-1;
+        }
+    }
+}
+
+function ContentWidth(addOrSubtract){
+    // addOrSubtract 1 = add width
+    // addOrSubtract -1 = remove width
+    if(addOrSubtract == 1){
+        // Take the current width and adds it by one
+        if(Number(selectedElement.clientWidth) <= 1920 && Number(selectedElement.clientWidth) > 0){
+            selectedElement.style.width = Number(selectedElement.clientWidth)+1 + "px";
+            widthInput.value = Number(widthInput.value)+1;
+        }
+    }else if(addOrSubtract == -1){
+        // Take the current width and adds it by one
+        if(Number(selectedElement.clientWidth) < 1920 && Number(selectedElement.clientWidth) >= 0){
+            selectedElement.style.width = Number(selectedElement.clientWidth)-1 + "px";
+            widthInput.value = Number(widthInput.value)-1;
+        }
+    }
+}
+
+function ContentHeight(addOrSubtract){
+    // addOrSubtract 1 = add Height
+    // addOrSubtract -1 = remove Height
+    if(addOrSubtract == 1){
+        // Take the current Height and adds it by one
+        if(Number(selectedElement.clientHeight) <= 1080 && Number(selectedElement.clientHeight) > 0){
+            selectedElement.style.height = Number(selectedElement.clientHeight)+1 + "px";
+            heigthInput.value = Number(heigthInput.value)+1;
+        }
+        
+    }else if(addOrSubtract == -1){
+        // Take the current Height and adds it by one
+        if(Number(selectedElement.clientHeight) < 1080 && Number(selectedElement.clientHeight) >= 0){
+            selectedElement.style.height = Number(selectedElement.clientHeight)-1 + "px";
+            heigthInput.value = Number(heigthInput.value)-1;
+        }
+    }
+}
+
+function PosisitionTop(addOrSubtract){
+    if(selectedElement.style.display != "absolute"){
+        selectedElement.style.position = "absolute";
+    }
+    
+    if(addOrSubtract == 1){
+        // take the element curent posision
+        if(selectedElement.offsetTop < 1080 && selectedElement.offsetTop >= 0){
+            selectedElement.style.top = selectedElement.offsetTop+1 + "px";
+            topInput.value = Number(topInput.value) + 1;
+        }else{
+            console.log("Nope");
+        }
+    }else if(addOrSubtract == -1){
+        // take the element curent posision
+        if(selectedElement.offsetTop <= 1920 && selectedElement.offsetTop > 0){
+            selectedElement.style.top = selectedElement.offsetTop-1 + "px";
+            topInput.value = Number(topInput.value) -1;
+        }else{
+            console.log("Nope");
+        }
+    }
+}
+
+function PosisitionLeft(addOrSubtract){
+    if(selectedElement.style.display != "absolute"){
+        selectedElement.style.position = "absolute";
+    }
+    
+    if(addOrSubtract == 1){
+        // take the element curent posision
+        if(selectedElement.offsetLeft < 1920 && selectedElement.offsetLeft >= 0){
+            selectedElement.style.left = selectedElement.offsetLeft+1 + "px";
+            leftInput.value = Number(leftInput.value) +1;
+        }else{
+            console.log("over 1920 eller under 0");
+        }
+        
+    }else if(addOrSubtract == -1){
+        // take the element curent posision
+        if(selectedElement.offsetLeft <= 1920 && selectedElement.offsetLeft > 0){
+            selectedElement.style.left = selectedElement.offsetLeft-1 + "px";
+            leftInput.value = Number(leftInput.value) -1;
+            
+        }else{
+            console.log("over 1920 eller under 0");
+        }
+    }
+}
+
+function InputValueChanges(element){
+    if(element.id == "widthInput"){
+        if(element.value <= 1920 && element.value >= 0){
+            selectedElement.style.width = element.value + "px";
+        }
+    } else if(element.id == "heigthInput"){
+        if(element.value <= 1080 && element.value >= 0){
+            selectedElement.style.height = element.value + "px";
+        }
+    } else if(element.id == "topInput"){
+        if(element.value <= 1080 && element.value >= 0){
+            selectedElement.style.top = element.value + "px";
+        }
+    } else if(element.id == "leftInput"){
+        if(element.value <= 1920 && element.value >= 0){
+            selectedElement.style.left = element.value + "px";
+        }
+    }
+}
+
+
 // function to set the 7 small color wheel 
 function SetSvgColorWheel(color,currentColor){
     switch(color){
@@ -636,10 +796,10 @@ function SetSvgColorWheel(color,currentColor){
             document.getElementById("LightOne").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-10) +")";
             document.getElementById("LightTwo").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-20) +")";
             document.getElementById("LightThree").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-30) +")";
-
+            
             // The normal color
             document.getElementById("Normal").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ currentColor[2] +")";
-
+            
             // The darker colors
             document.getElementById("DarkOne").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-40) +")";
             document.getElementById("DarkTwo").style.fill = "rgb("+ currentColor[0] +","+ currentColor[1] +","+ (Number(currentColor[2])-50) +")";
@@ -648,162 +808,5 @@ function SetSvgColorWheel(color,currentColor){
         break;
         default:
         console.log("Error On SetSvgColorWeel");
-    }
-}
-
-function TextAlign(textAlign){
-    // Left = 1
-    // Center = 2
-    // Right = 3
-    if(textAlign == 1){
-        console.log("left");
-        if(!textAlignLeft.classList.contains("disabled")){
-            textAlignLeft.classList += " disabled";   
-        }
-        selectedElement.style.textAlign='left';
-
-        textAlignCenter.classList.remove('disabled');
-        textAlignRight.classList.remove('disabled');
-
-    }else if(textAlign == 2){
-        console.log("center");
-        if(!textAlignCenter.classList.contains("disabled")){
-            textAlignCenter.classList += " disabled";
-        }
-        selectedElement.style.textAlign='center';
-
-        textAlignLeft.classList.remove('disabled');
-        textAlignRight.classList.remove('disabled');
-
-    }else if(textAlign === 3){
-        console.log("right");
-        if(!textAlignRight.classList.contains("disabled")){
-            textAlignRight.classList += " disabled";
-        }
-        selectedElement.style.textAlign='right';
-
-        textAlignCenter.classList.remove('disabled');
-        textAlignLeft.classList.remove('disabled');
-    }
-}
-
-function LayerHeigth(addOrSubtract){
-    // addOrSubtract = 1 add to layer
-    // addOrSubtract = -1 subrtract from layer
-    if(addOrSubtract == 1){
-        if(selectedElement.style.zIndex <= 1000 && selectedElement.style.zIndex > 0){
-            selectedElement.style.zIndex = Number(selectedElement.style.zIndex)+1;
-        }
-    }else if(addOrSubtract == -1){
-        if(selectedElement.style.zIndex < 1000 && selectedElement.style.zIndex >= 0){
-            selectedElement.style.zIndex = Number(selectedElement.style.zIndex)-1;
-        }
-    }
-}
-
-function ContentWidth(addOrSubtract){
-    // addOrSubtract 1 = add width
-    // addOrSubtract -1 = remove width
-    if(addOrSubtract == 1){
-        // Take the current width and adds it by one
-        if(Number(selectedElement.clientWidth) <= 1920 && Number(selectedElement.clientWidth) > 0){
-            selectedElement.style.width = Number(selectedElement.clientWidth)+1 + "px";
-            widthInput.value = Number(widthInput.value)+1;
-        }
-    }else if(addOrSubtract == -1){
-        // Take the current width and adds it by one
-        if(Number(selectedElement.clientWidth) < 1920 && Number(selectedElement.clientWidth) >= 0){
-            selectedElement.style.width = Number(selectedElement.clientWidth)-1 + "px";
-            widthInput.value = Number(widthInput.value)-1;
-        }
-    }
-}
-
-function ContentHeight(addOrSubtract){
-    // addOrSubtract 1 = add Height
-    // addOrSubtract -1 = remove Height
-    if(addOrSubtract == 1){
-        // Take the current Height and adds it by one
-        if(Number(selectedElement.clientHeight) <= 1080 && Number(selectedElement.clientHeight) > 0){
-            selectedElement.style.height = Number(selectedElement.clientHeight)+1 + "px";
-            heigthInput.value = Number(heigthInput.value)+1;
-        }
-        
-    }else if(addOrSubtract == -1){
-        // Take the current Height and adds it by one
-        if(Number(selectedElement.clientHeight) < 1080 && Number(selectedElement.clientHeight) >= 0){
-            selectedElement.style.height = Number(selectedElement.clientHeight)-1 + "px";
-            heigthInput.value = Number(heigthInput.value)-1;
-        }
-    }
-}
-
-function PosisitionTop(addOrSubtract){
-    if(selectedElement.style.display != "absolute"){
-        selectedElement.style.position = "absolute";
-    }
-
-    if(addOrSubtract == 1){
-        // take the element curent posision
-        if(selectedElement.offsetTop < 1080 && selectedElement.offsetTop >= 0){
-            selectedElement.style.top = selectedElement.offsetTop+1 + "px";
-            topInput.value = Number(topInput.value) + 1;
-        }else{
-            console.log("Nope");
-        }
-    }else if(addOrSubtract == -1){
-        // take the element curent posision
-        if(selectedElement.offsetTop <= 1920 && selectedElement.offsetTop > 0){
-            selectedElement.style.top = selectedElement.offsetTop-1 + "px";
-            topInput.value = Number(topInput.value) -1;
-        }else{
-            console.log("Nope");
-        }
-    }
-}
-
-function PosisitionLeft(addOrSubtract){
-    if(selectedElement.style.display != "absolute"){
-        selectedElement.style.position = "absolute";
-    }
-
-    if(addOrSubtract == 1){
-        // take the element curent posision
-        if(selectedElement.offsetLeft < 1920 && selectedElement.offsetLeft >= 0){
-            selectedElement.style.left = selectedElement.offsetLeft+1 + "px";
-            leftInput.value = Number(leftInput.value) +1;
-        }else{
-            console.log("over 1920 eller under 0");
-        }
-
-    }else if(addOrSubtract == -1){
-        // take the element curent posision
-        if(selectedElement.offsetLeft <= 1920 && selectedElement.offsetLeft > 0){
-            selectedElement.style.left = selectedElement.offsetLeft-1 + "px";
-            leftInput.value = Number(leftInput.value) -1;
-            
-        }else{
-            console.log("over 1920 eller under 0");
-        }
-    }
-}
-
-function InputValueChanges(element){
-    if(element.id == "widthInput"){
-        if(element.value <= 1920 && element.value >= 0){
-            selectedElement.style.width = element.value + "px";
-        }
-    } else if(element.id == "heigthInput"){
-        if(element.value <= 1080 && element.value >= 0){
-            selectedElement.style.height = element.value + "px";
-        }
-    } else if(element.id == "topInput"){
-        if(element.value <= 1080 && element.value >= 0){
-            selectedElement.style.top = element.value + "px";
-        }
-    } else if(element.id == "leftInput"){
-        if(element.value <= 1920 && element.value >= 0){
-            selectedElement.style.left = element.value + "px";
-        }
     }
 }
