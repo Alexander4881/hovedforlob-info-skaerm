@@ -194,7 +194,7 @@ include_once("../includes/header.php");
 </div>
 
 <!-- Controlls | Preview -->
-<div class="container-fluid">
+<div class="container-fluid sticky-top">
     <div class="row mb-1">
         <div class="col-sm-6 pr-1">
             <div class="row">
