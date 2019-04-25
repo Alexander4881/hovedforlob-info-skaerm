@@ -198,7 +198,24 @@ include_once("../includes/header.php");
     <div class="row mb-1">
         <div class="col-sm-6 pr-1">
             <div class="row">
-                <div class="col-sm-3 pr-1 pl-1">
+                <div class="col-sm-2 pr-1 pl-1">
+                    <span class="badge badge-pill badge-primary text-center d-block mb-1">New Element</span>
+                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
+                        <label class="btn btn-secondary" onclick="TextAlign(1)" id="textAlignLeft">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-align-left"></i>
+                        </label>
+                        <label class="btn btn-secondary" onclick="TextAlign(2)" id="textAlignCenter">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-align-center"></i>
+                        </label>
+                        <label class="btn btn-secondary" onclick="TextAlign(3)" id="textAlignRight">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-align-right"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-2 pr-1 pl-1">
                     <span class="badge badge-pill badge-primary text-center d-block mb-1">Text</span>
                     <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
                         <label onclick="FontSizeEdit(-1)" class="btn btn-secondary">
@@ -215,7 +232,7 @@ include_once("../includes/header.php");
                         </label>
                     </div>
                 </div>
-                <div class="col-sm-3 pr-1 pl-1">
+                <div class="col-sm-2 pr-1 pl-1">
                     <span class="badge badge-pill badge-primary d-block text-center mb-1">Text Align</span>
                     <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
                         <label class="btn btn-secondary" onclick="TextAlign(1)" id="textAlignLeft">
@@ -232,7 +249,7 @@ include_once("../includes/header.php");
                         </label>
                     </div>
                 </div>
-                <div class="col-sm-3 pr-1 pl-1">
+                <div class="col-sm-2 pr-1 pl-1">
                     <span class="badge badge-pill badge-primary d-block text-center mb-1">Layer Height</span>
                     <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
                         <label class="btn btn-secondary" onclick="LayerHeigth(1)">
@@ -268,6 +285,17 @@ include_once("../includes/header.php");
                             <input type="radio" name="options" id="option2" autocomplete="off">
                             <i class="fas fa-strikethrough"></i>
                         </label>
+                    </div>
+                </div>
+                <div class="col-sm-1 pr-1 pl-1">
+                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Color</span>
+                    <div class="btn-group-sm w-100" role="group" aria-label="Third group">
+                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-secondary w-100"><i class="fas fa-swatchbook"></i></button>
+                        <div class="dropdown-menu">
+                            <?php
+                            include("../styles/images/colorPicker.php");
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>

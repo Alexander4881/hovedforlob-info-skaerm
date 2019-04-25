@@ -362,7 +362,6 @@ function CreateCardHTML($html, $websiteProp, $startElement, $count, $location){
             $html .= '                        <div class="float-right"> <a onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye"></i></a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"> </i></a></div>';
         }else if ($websiteProp[$startElement + $i][2] == 0){
             $html .= '                        <div class="float-right"> <a onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye-slash"></i></a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"> </i></a></div>';
-            //$html .= '                        <div class="float-right" onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"> <i class="fas fa-edit"> </i><i class="fas fa-eye-slash"></i></div>';
         }
         $html .= '                    </div>';
         $html .= '            <p class="card-text">It is gonna be some description text to the webside. <br> It will come in done this week</p>';
