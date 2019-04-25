@@ -26,7 +26,7 @@ include_once("admin/management/global.php");
     </div>
   </div> -->
     <!-- Navbar Header -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top shadow mb-4">
         <div class="container">
             <a class="navbar-brand" href="<?= $_INDEX; ?>">
                 <img src="#" class="d-inline-block align-top" alt="" />

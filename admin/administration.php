@@ -5,7 +5,6 @@ include_once("management/global.php");
 include_once("../includes/header.php");
 ?>
 
-
 <!-- Modal -->
 <!-- edit text modal -->
 <div class="modal fade" id="editTextModal" tabindex="-1" role="dialog" aria-labelledby="editTextModal"
@@ -28,10 +27,6 @@ include_once("../includes/header.php");
             </div>
         </div>
     </div>
-</div>
-
-<div id="Save" onclick="SaveContent()">
-    <i class="fas fa-save"></i>
 </div>
 
 <!-- Modal -->
@@ -197,15 +192,7 @@ include_once("../includes/header.php");
         </div>
     </div>
 </div>
-
-
 <div class="container-fluid">
-    <div class="row">
-        <div class="alert alert-dark main-alert  w-100 text-center" role="alert">
-            <span class=""> <?= $_GET["title"] ?> </span>
-        </div>
-    </div>
-
     <div class="row mb-1">
         <div class="col-sm-6">
             <div class="row">
@@ -374,16 +361,23 @@ include_once("../includes/header.php");
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="alert alert-dark main-alert  w-100 text-center" role="alert">
+            <h2 class=""> <?= $_GET["title"] ?> </h2>
+        </div>
+    </div>
 
     <div class="row">
-        <div class="container-fluid h-100">
-            <div class="row h-100">
+        <div class="container-fluid h-100 clearfix">
+            <div class="row">
 
-                <div id="preview" class="col-10" style="background-color: rgba(0,0,255,.1)">
+                <!-- Left Side -->
+                <div id="preview" class="col-10 bg-light float-left">
 
                 </div>
 
-                <div id="element-select-box" class="col-2 d-inline-block" style="background-color: rgba(0,100,255,.1)">
+                <!-- Right Side -->
+                <div id="element-select-box" class="col h-100 bg-light float-right border-left">
                     <div id="element-select">
 
                         <div class="row">
@@ -404,7 +398,7 @@ include_once("../includes/header.php");
                         </div>
                     </div>
 
-                    <div id="element-editor" class="hide">
+                    <div id="element-editor" class="hide bg-light">
 
                         <div id="text-editor">
 
@@ -592,6 +586,22 @@ include_once("../includes/header.php");
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="container fixed-bottom">
+    <div class="alert alert-dark clearfix shadow p-3 mb-4" role="alert">
+        <h4>Extra Stuff!</h4>
+        <hr>
+        <div class="float-left">
+            <!-- Stuff Here -->
+        </div>
+        <div class="float-right">
+            <button class="btn btn-dark" id="Save" onclick="SaveContent()">
+                <i class="fas fa-save"></i>
+                <p class="d-inline">Gem</p>
+            </button>
         </div>
     </div>
 </div>
