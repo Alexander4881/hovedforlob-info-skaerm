@@ -32,6 +32,25 @@ var tableSelectedSize = null;
 // selected image
 var selectedImage = null;
 
+// get the current elements
+$(document).ready(function() {
+    $.ajax({
+        url: './administration-logic.php',
+        type: 'post', 
+        data: 
+        { 
+            "val" : "getWebsiteElements",
+            "websiteID" : websiteID
+        },
+        success: function(response) { 
+            console.log(response);
+            // replaces the old table with the new
+            $("#preview").html(response);
+        }
+    });
+});
+
+
 // save content in preview
 function SaveContent(){
     // get all elements in the preview div

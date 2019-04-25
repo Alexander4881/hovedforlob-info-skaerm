@@ -16,7 +16,7 @@ END $$
 DELIMITER ;
 
 /* new website /*CALL 
-/*CALL InsertNewWebSite("Titel Test",16);*/
+/*CALL InsertNewWebSite("Titel Test",14);*/
 
 
 DELIMITER $$
@@ -320,8 +320,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ChangeActiveWebsiteOnSiteIDAndWebsi
     IN `@websiteID` INT
 )
 BEGIN
-	/*CALL `UpdateActiveWebsiteOnID`((SELECT `ID` FROM `website` WHERE `SiteID` = `@siteID` AND `ActiveWebsite` = 1 LIMIT 1),FALSE);
-    /*CALL `UpdateActiveWebsiteOnID`(`@websiteID`,TRUE);
+	CALL `UpdateActiveWebsiteOnID`((SELECT `ID` FROM `website` WHERE `SiteID` = `@siteID` AND `ActiveWebsite` = 1 LIMIT 1),FALSE);
+  CALL `UpdateActiveWebsiteOnID`(`@websiteID`,TRUE);
 END $$
 DELIMITER ;
 
@@ -334,7 +334,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowWebsiteTextsOnID`(
 IN `@websiteID` INT
 )
 BEGIN
-	SELECT `Text`,`Style` FROM `text` WHERE `WebSite_ID` = `@websiteID`;
+	SELECT `id`, `Text`,`Style` FROM `text` WHERE `WebSite_ID` = `@websiteID`;
 END $$
 DELIMITER ;
 
