@@ -66,7 +66,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         
         /*** the table by its tag name ***/ 
         $tables = $dom->getElementsByTagName('table'); 
-        $tableID = NewTable(1); 
+        $tableID = NewTable($_POST['websiteID']); 
         /*** get all rows from the table ***/ 
         $rows = $tables->item(0)->getElementsByTagName('tr'); 
         
@@ -300,7 +300,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
         // get tabels
         $result = GetTable($_POST['websiteID']);
-        while($table = mysqli_fetch_array($result)){
+        while($tables = mysqli_fetch_array($result)){
             $html .= GetTableHTML($tables["id"]);
         }
 

@@ -5,7 +5,6 @@ setInterval(() => {
         data: 
             { 
                 "val": "getWebsites",
-                "websiteID": id,
                 "siteID": location
             },
         success: function(response) {
