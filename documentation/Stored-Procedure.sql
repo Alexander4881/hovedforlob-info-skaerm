@@ -15,8 +15,8 @@ BEGIN
 END $$
 DELIMITER ;
 
-/* new website call 
-CALL InsertNewWebSite("Titel Test",16);*/
+/* new website /*CALL 
+/*CALL InsertNewWebSite("Titel Test",16);*/
 
 
 DELIMITER $$
@@ -31,14 +31,14 @@ BEGIN
 END $$
 DELIMITER ;
 
-/* new text call
-CALL NewText("Titel",1,"style=''");*/
+/* new text /*CALL
+/*CALL NewText("Titel",1,"style=''");*/
 
 CREATE PROCEDURE IF NOT EXISTS InsertNewImage(IN ImagePath VARCHAR(255))
 INSERT INTO `Image`(`Path`) VALUE(ImagePath);
 
 /*
-CALL InsertNewImage("null.png");*/
+/*CALL InsertNewImage("null.png");*/
 
 DELIMITER $$
 CREATE PROCEDURE IF NOT EXISTS `InsertNewImageLink`(IN `@WebSite_ID` INT, IN `@Image_ID` INT, IN `@ImageStyle` VARCHAR(255))
@@ -49,20 +49,20 @@ SELECT `imagelink`.`ID`, `imagelink`.`Image_Style`, `image`.`Path` FROM `imageli
 END $$
 DELIMITER ;
 
-CALL InsertNewImageLink(1,1,"");
+/*/*CALL InsertNewImageLink(1,1,"");*/
 
 /* Show Items */
 /* Show Items Websites*/
 CREATE PROCEDURE IF NOT EXISTS ShowWebSites(IN WebSite_ID INT)
 SELECT * FROM `WebSite` WHERE `ID` = WebSite_ID;
 
-CALL ShowWebSites(1);
+/*CALL ShowWebSites(1);
 
 /* Show Images */
 CREATE PROCEDURE IF NOT EXISTS ShowImages()
 SELECT `image`.`ID`,`image`.`path` FROM `Image`;
 
-CALL ShowImages;
+/*CALL ShowImages;*/
 
 /* Show Image Link */
 CREATE PROCEDURE IF NOT EXISTS ShowImagesForWebSite(IN `@WebSiteID` INT)
@@ -71,14 +71,14 @@ CREATE PROCEDURE IF NOT EXISTS ShowImagesForWebSite(IN `@WebSiteID` INT)
 	INNER JOIN `image` ON `image`.`ID` = `imagelink`.`Image_ID`
 	WHERE `WebSite_ID` = `@WebSiteID`;
 
-CALL ShowImagesForWebSite(19);
+/*CALL ShowImagesForWebSite(19);*/
 
 
 /* Show Text */
 CREATE PROCEDURE IF NOT EXISTS ShowText(IN WebSiteID INT)
 SELECT * FROM `Text` WHERE `WebSite_ID` = WebSiteID;
 
-CALL ShowText(2);
+/*CALL ShowText(2);
 
 /* Inset New Table */
 DELIMITER $$
@@ -92,7 +92,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `InsertNewTable`(1);
+/*CALL `InsertNewTable`(1);*/
 
 
 /* Inset New Row */
@@ -107,7 +107,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `InsertNewRow`(1);
+/*CALL `InsertNewRow`(1);*/
 
 
 /* Inset New Row */
@@ -123,7 +123,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `InsertNewColumn`(1,'New Column Text');
+/*CALL `InsertNewColumn`(1,'New Column Text');*/
 
 
 
@@ -141,7 +141,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `UpdateColumn`(9,'text new test');
+/*CALL `UpdateColumn`(9,'text new test');*/
 
 /*		Update Image*/
 DELIMITER $$
@@ -156,7 +156,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `UpdateImageLink`(8,"test");
+/*CALL `UpdateImageLink`(8,"test");*/
 
 /*		Update Text*/
 DELIMITER $$
@@ -172,7 +172,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `UpdateText`('Test Text Update',3, "style=''");
+/*CALL `UpdateText`('Test Text Update',3, "style=''");*/
 
 
 
@@ -190,7 +190,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `DeleteWebsite`(2);
+/*CALL `DeleteWebsite`(2);*/
 
 /*		Delete ImageLink*/
 DELIMITER $$
@@ -204,7 +204,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `DeleteImageLink`(1,1);
+/*CALL `DeleteImageLink`(1,1);*/
 
 /*		Delete Image*/
 DELIMITER $$
@@ -217,7 +217,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `DeleteImage`(1);
+/*CALL `DeleteImage`(1);*/
 
 /*		Delete Text*/
 DELIMITER $$
@@ -230,7 +230,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `DeleteText`(1);
+/*CALL `DeleteText`(1);*/
 
 
 /*		Delete Table*/
@@ -244,7 +244,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `DeleteTable`(1);
+/*CALL `DeleteTable`(1);*/
 
 
 
@@ -260,7 +260,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `ShowTable`(1);
+/*CALL `ShowTable`(1);*/
 
 
 /*		Show Row*/
@@ -273,7 +273,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `ShowRow`(1);
+/*CALL `ShowRow`(1);*/
 
 /*		Show Column*/
 DELIMITER $$
@@ -285,7 +285,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `ShowColumn`(1);
+/*CALL `ShowColumn`(1);*/
 
 /*		Show Webstes*/
 DELIMITER $$
@@ -297,7 +297,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `ShowWebsitesOnSiteID`(16);
+/*CALL `ShowWebsitesOnSiteID`(16);*/
 
 
 /*		Update Active website */
@@ -311,7 +311,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `UpdateActiveWebsiteOnID`(1,TRUE);
+/*CALL `UpdateActiveWebsiteOnID`(1,TRUE);*/
 
 /*		Update Active website */
 DELIMITER $$
@@ -320,12 +320,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ChangeActiveWebsiteOnSiteIDAndWebsi
     IN `@websiteID` INT
 )
 BEGIN
-	CALL `UpdateActiveWebsiteOnID`((SELECT `ID` FROM `website` WHERE `SiteID` = `@siteID` AND `ActiveWebsite` = 1 LIMIT 1),FALSE);
-    CALL `UpdateActiveWebsiteOnID`(`@websiteID`,TRUE);
+	/*CALL `UpdateActiveWebsiteOnID`((SELECT `ID` FROM `website` WHERE `SiteID` = `@siteID` AND `ActiveWebsite` = 1 LIMIT 1),FALSE);
+    /*CALL `UpdateActiveWebsiteOnID`(`@websiteID`,TRUE);
 END $$
 DELIMITER ;
 
-CALL `ChangeActiveWebsiteOnSiteIDAndWebsiteID`(16,11);
+/*CALL `ChangeActiveWebsiteOnSiteIDAndWebsiteID`(16,11);*/
 
 
 /*		Show Active Webstes*/
@@ -338,7 +338,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL `ShowWebsiteTextsOnID`(19);
+/*CALL `ShowWebsiteTextsOnID`(19);*/
 
 
 

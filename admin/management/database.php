@@ -248,10 +248,13 @@ function GetWebsiteTexts($webSiteID)
 
 function ChangeActiveWebsite($location,$webSiteID)
 {
+    SqlQuerry("CALL `ChangeActiveWebsiteOnSiteIDAndWebsiteID`('" . $location . "'," . $webSiteID . ");");
+}
+
+function SqlQuerry($sql)
+{
     $connection = db();
-    // remove the old active website
-    $sql = "CALL `ChangeActiveWebsiteOnSiteIDAndWebsiteID`('" . $location . "'," . $webSiteID . ");";
-    
+
     $result = $connection->query($sql);
 
     mysqli_close($connection);

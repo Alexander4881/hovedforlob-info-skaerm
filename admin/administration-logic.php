@@ -308,7 +308,11 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
     if (isset($_POST['website']) && isset($_POST['location'])) {
         $result = ChangeActiveWebsite($_POST['location'], $_POST['website']);
         
-        echo($result);
+        if($result){
+            echo("set");
+        }else{
+            echo("not set");
+        }
     }
 }
 
