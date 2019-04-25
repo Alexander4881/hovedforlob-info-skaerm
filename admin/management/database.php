@@ -9,13 +9,11 @@ function db(){
     $DBPassword = 'WtrXaPM3RHLhR1Kl';
     // Database Host
     $DBHostname = '127.0.0.1';
-    // Database Port
-    $DBPort = '3306';
     // Datbase Catalogue
     $DBCatalogue = 'infoskaerm';
 
     // ConnectionString
-    $conn = mysqli_connect($DBHostname,$DBPort,$DBUsername,$DBPassword,$DBCatalogue);
+    $conn = mysqli_connect($DBHostname,$DBUsername,$DBPassword,$DBCatalogue);
 
     // Check on connection...
     if(!$conn)
