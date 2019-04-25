@@ -22,19 +22,9 @@ function NewWebSite(location){
     });
 }
 
-function run(){
-    console.log("testtesttest");
-
-    $("#WebsitesScrollUp").slideToggle(1000);
-}
-
-
 var isHidden = true;
 function SlideMeUp(location){
-    // 14 for location 14
-    // 16 for location 16
-
-
+    
   if (isHidden === true) 
   {
     $.ajax({
@@ -78,19 +68,33 @@ function SlideMeUp(location){
 
 function ChangeActiveWebsite(websiteID,location) {
 
-    $.ajax({
-        url: '../../../admin/administration-logic.php',
-        type: 'post',
-        data: 
-            { 
-                "val": "changeActiveWebsite",
-                "website": websiteID,
-                "location": location
-            },
-        success: function(response) {
-            console.log(response);
+    var iconToBeReplacedOnSuccess = event.target;
+    console.log(iconToBeReplacedOnSuccess);
 
-            // if response = 1 then changes icon else console log error
-        }
-    });
+    if (iconToBeReplacedOnSuccess.classList.contains("fa-eye-slash")) {
+        $.ajax({
+            url: '../../../admin/administration-logic.php',
+            type: 'post',
+            data: 
+                { 
+                    "val": "changeActiveWebsite",
+                    "website": websiteID,
+                    "location": location
+                },
+            success: function(response) {
+    
+                // if response = 1 then changes icon else console log error
+                if (response == 1) {
+    
+                    // get the old icons and replaces the with eye-slash
+                    $(".fa-eye").replaceWith('<i class="fas fa-eye-slash"></i>');
+    
+                    // replaces the old icon with the new
+                    $(iconToBeReplacedOnSuccess).replaceWith('<i class="fas fa-eye"></i>');
+                }
+    
+                console.log(response);
+            }
+        });
+    }
 }

@@ -282,9 +282,9 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         echo json_encode($array, JSON_FORCE_OBJECT);
     }
 }else if(isset($_POST['val']) && $_POST['val'] == "getWebsiteElements") {
-    if (isset($_POST['websiteID']) && isset($_POST['siteID'])) 
+    if (isset($_POST['websiteID'])) 
     {
-        $html;
+        $html = "";
 
         // get images
         $result = GetWebsiteImages($_POST['websiteID']);
@@ -295,7 +295,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         // get text
         $result = GetWebsiteTexts($_POST['websiteID']);
         while($texts = mysqli_fetch_array($result)){
-            $html .= GetTableHTML($texts["id"]);
+            $html .= "<p id=\"".$texts["id"]."\"" . $texts["Style"] .">" .  $texts["Text"] . "</p>";
         }
 
         // get tabels
@@ -303,20 +303,16 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         while($table = mysqli_fetch_array($result)){
             $html .= GetTableHTML($tables["id"]);
         }
+
+        echo($html);
     }
 }else if(isset($_POST['val']) && $_POST['val'] == "changeActiveWebsite"){
     if (isset($_POST['website']) && isset($_POST['location'])) {
         $result = ChangeActiveWebsite($_POST['location'], $_POST['website']);
-        
-        if($result){
-            echo("set");
-        }else{
-            echo("not set");
-        }
+
+        echo($result);
     }
 }
-
-
 
 
 function GetTableHTML($tableID){
@@ -326,7 +322,7 @@ function GetTableHTML($tableID){
     $table .= "<tbody>";
     //
     $rows = GetRow($tableID);
-    // get rows from database querry
+    // get rows from database query
     while($row = mysqli_fetch_array($rows)){
         $table .= "<tr id=\"" . $row["id"] . "\">";
         
@@ -363,9 +359,10 @@ function CreateCardHTML($html, $websiteProp, $startElement, $count, $location){
         $html .= '                            <h5>' . $websiteProp[$startElement + $i][1] . '</h5>';
         $html .= '                        </div>';
         if ($websiteProp[$startElement + $i][2] == 1 ) {
-            $html .= '                        <div class="float-right" onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"> <i class="fas fa-edit"> </i><i class="fas fa-eye"></i></div>';
+            $html .= '                        <div class="float-right"> <div onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye"></i></div> <div><i class="fas fa-edit"> </i></div></div>';
         }else if ($websiteProp[$startElement + $i][2] == 0){
-            $html .= '                        <div class="float-right" onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"> <i class="fas fa-edit"> </i><i class="fas fa-eye-slash"></i></div>';
+            $html .= '                        <div class="float-right"> <div onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye-slash"></i></div> <div><i class="fas fa-edit"> </i></div></div>';
+            //$html .= '                        <div class="float-right" onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"> <i class="fas fa-edit"> </i><i class="fas fa-eye-slash"></i></div>';
         }
         $html .= '                    </div>';
         $html .= '            <p class="card-text">It is gonna be some description text to the webside. <br> It will come in done this week</p>';

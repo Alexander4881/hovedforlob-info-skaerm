@@ -8,7 +8,7 @@ function db(){
     // Database Password
     $DBPassword = 'WtrXaPM3RHLhR1Kl';
     // Database Host
-    $DBHostname = '127.0.0.1';
+    $DBHostname = '127.0.0.1:3306';
     // Datbase Catalogue
     $DBCatalogue = 'infoskaerm';
 
@@ -47,7 +47,7 @@ function SqlQuery($sql)
 // Website ID
 function ChangeActiveWebsite($location,$webSiteID){
     // Query stored procedure
-    return SqlQuerry("CALL `ChangeActiveWebsiteOnSiteIDAndWebsiteID`('" . $location . "'," . $webSiteID . ");");
+    return SqlQuery("CALL `ChangeActiveWebsiteOnSiteIDAndWebsiteID`('" . $location . "'," . $webSiteID . ");");
 }
 
 // Generate a new image - takes 1 argument
@@ -98,7 +98,7 @@ function NewTable($WebSite_ID){
 // Table ID
 function NewRow($Table_ID){
     // Query stored procedure, get table id, and insert new row into table.
-    $roWID = mysqli_fetch_array(SqlQuery("CALL `InsertNewRow`(" . $Table_ID . ");"));
+    $rowID = mysqli_fetch_array(SqlQuery("CALL `InsertNewRow`(" . $Table_ID . ");"));
     // Return row ID.
     return($rowID[0]);
 }
@@ -196,6 +196,6 @@ function GetWebsiteImages($webSiteID){
 // Website ID
 function GetWebsiteTexts($webSiteID){
     // Query stored procedure, get texts paragraphs with styling by selected website ID
-    $sql = "CALL `ShowWebsiteTextsOnID`(" . $webSiteID . ");";
+    return SqlQuery("CALL `ShowWebsiteTextsOnID`(" . $webSiteID . ");");
 }
 ?>
