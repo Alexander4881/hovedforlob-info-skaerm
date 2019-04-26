@@ -4,7 +4,241 @@ set_include_path("../");
 include_once("management/global.php");
 include_once("../includes/header.php");
 ?>
+<!-- Controlls | Preview -->
+<div class="container-fluid sticky-top">
+    <div class="row mb-1">
+        <div class="col-sm-6 pr-1">
+            <div class="row">
+                <!-- New Element -->
+                <div class="col-sm-2 pr-1 pl-1">
+                    <span class="badge badge-pill badge-primary text-center d-block mb-1">New Element</span>
+                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
+                        <label class="btn btn-secondary" onclick="NewElement(1)" value="newText" id="textAlignLeft">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-font"></i>
+                        </label>
+                        <label class="btn btn-secondary" onclick="NewElement(2)" value="newTime" id="textAlignCenter">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-table"></i>
+                        </label>
+                        <label class="btn btn-secondary" onclick="NewElement(3)" value="newImage" id="textAlignRight">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-image"></i>
+                        </label>
+                    </div>
+                </div>
+                <!-- Text Size -->
+                <div class="col-sm-2 pr-1 pl-1">
+                    <span class="badge badge-pill badge-primary text-center d-block mb-1">Text</span>
+                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
+                        <label onclick="FontSizeEdit(-1)" class="btn btn-secondary">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-angle-down"></i>
+                        </label>
+                        <label class="btn btn-secondary disabled">
+                            <input type="radio" name="options" autocomplete="off">
+                            <span id="fontSizeVal">12</span>px
+                        </label>
+                        <label onclick="FontSizeEdit(1)" class="btn btn-secondary">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-angle-up"></i>
+                        </label>
+                    </div>
+                </div>
+                <!-- Text Align -->
+                <div class="col-sm-2 pr-1 pl-1">
+                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Text Align</span>
+                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
+                        <label class="btn btn-secondary" onclick="TextAlign(1)" id="textAlignLeft">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-align-left"></i>
+                        </label>
+                        <label class="btn btn-secondary" onclick="TextAlign(2)" id="textAlignCenter">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-align-center"></i>
+                        </label>
+                        <label class="btn btn-secondary" onclick="TextAlign(3)" id="textAlignRight">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-align-right"></i>
+                        </label>
+                    </div>
+                </div>
+                <!-- Layer Height -->
+                <div class="col-sm-2 pr-1 pl-1">
+                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Layer Height</span>
+                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
+                        <label class="btn btn-secondary" onclick="LayerHeigth(1)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-plus"></i>
+                        </label>
+                        <label class="btn btn-secondary disabled">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-layer-group"></i>
+                        </label>
+                        <label class="btn btn-secondary" onclick="LayerHeigth(-1)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-minus"></i>
+                        </label>
+                    </div>
+                </div>
+                <!-- Text Style -->
+                <div class="col-sm-3 pr-1 pl-1">
+                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Text Style</span>
+                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
+                        <label class="btn btn-secondary" onclick="textStyle(1)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-underline"></i>
+                        </label>
+                        <label class="btn btn-secondary" onclick="textStyle(2)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-italic"></i>
+                        </label>
+                        <label class="btn btn-secondary" onclick="textStyle(3)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-bold"></i>
+                        </label>
+                        <label class="btn btn-secondary" onclick="textStyle(4)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-strikethrough"></i>
+                        </label>
+                    </div>
+                </div>
+                <!-- Color -->
+                <div class="col-sm-1 pr-1 pl-1">
+                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Color</span>
+                    <div class="btn-group-sm w-100" role="group" aria-label="Third group">
+                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            class="btn btn-secondary w-100"><i class="fas fa-swatchbook"></i></button>
+                        <div class="dropdown-menu">
+                            <?php
+                            include("../styles/images/colorPicker.php");
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Properties -->
+        <div class="col-sm-3 pr-1">
+            <span class="badge badge-pill badge-primary d-block text-center mb-1">Box Properties: Height - Width</span>
+            <div class="row">
+                <div class="col-sm-6 pr-1">
+                    <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
+                        <label class="btn btn-secondary" onclick="ContentWidth(1)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-plus"></i>
+                        </label>
+                        <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
+                            <input type="number" min="0" max="1920" value="" name="options" id="widthInput"
+                                autocomplete="off" onchange="InputValueChanges(this)">
+                        </label>
+                        <label class="btn btn-secondary" onclick="ContentWidth(-1)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-minus"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-6 pl-1">
+                    <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
+                        <label class="btn btn-secondary" onclick="ContentHeight(1)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-plus"></i>
+                        </label>
+                        <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
+                            <input type="number" min="0" max="1080" value="" name="options" id="heigthInput"
+                                autocomplete="off" onchange="InputValueChanges(this)">
+                        </label>
+                        <label class="btn btn-secondary" onclick="ContentHeight(-1)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-minus"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Posisition -->
+        <div class="col-sm-3 pl-1">
+            <span class="badge badge-pill badge-primary d-block text-center mb-1">Posisition: Height - Width</span>
+            <div class="row">
+                <div class="col-sm-6 pr-1">
+                    <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
+                        <label class="btn btn-secondary" onclick="PosisitionTop(1)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-plus"></i>
+                        </label>
+                        <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
+                            <input type="number" min="0" max="1080" value="" name="options" id="topInput"
+                                autocomplete="off" onchange="InputValueChanges(this)">
+                        </label>
+                        <label class="btn btn-secondary" onclick="PosisitionTop(-1)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-minus"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-6 pl-1">
+                    <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
+                        <label class="btn btn-secondary" onclick="PosisitionLeft(1)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-plus"></i>
+                        </label>
+                        <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
+                            <input type="number" min="0" max="1080" value="0" name="options" id="leftInput"
+                                onchange="InputValueChanges(this)">
+                        </label>
+                        <label class="btn btn-secondary" onclick="PosisitionLeft(-1)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            <i class="fas fa-minus"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Title -->
+    <div class="row">
+        <div class="container alert alert-dark text-center w-100">
+            <h2 class=""> <?= $_GET["title"] ?> </h2>
+        </div>
+    </div>
+</div>
+
+<div class="row h-100 justify-content-center align-items-center">
+    <div id="preview" class="container-fluid" style="width: 1920px; height: 1080px;">
+    </div>
+</div>
+
+<!-- Extra Stuff -->
+<div class="container fixed-bottom">
+    <div class="alert alert-dark clearfix shadow p-3 mb-4" role="alert">
+        <div class="float-left">
+
+            <!-- Small button groups (default and split) -->
+            <div class="btn-group">
+                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    ZOOM
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" onclick="ChangesPreviewSize(0.25)">25 %</a>
+                    <a class="dropdown-item" onclick="ChangesPreviewSize(0.50)">50 %</a>
+                    <a class="dropdown-item" onclick="ChangesPreviewSize(0.75)">75 %</a>
+                    <a class="dropdown-item" onclick="ChangesPreviewSize(1.00)">100 %</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="float-right">
+            <button class="btn btn-dark" id="Save" onclick="SaveContent()">
+                <i class="fas fa-save"></i>
+                <p class="d-inline">Gem</p>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
 <!-- Modal -->
 <!-- edit text modal -->
 <div class="modal fade" id="editTextModal" tabindex="-1" role="dialog" aria-labelledby="editTextModal"
@@ -191,234 +425,6 @@ include_once("../includes/header.php");
             </div>
         </div>
     </div>
-</div>
-
-<!-- Controlls | Preview -->
-<div class="container-fluid sticky-top">
-    <div class="row mb-1">
-        <div class="col-sm-6 pr-1">
-            <div class="row">
-                <div class="col-sm-2 pr-1 pl-1">
-                    <span class="badge badge-pill badge-primary text-center d-block mb-1">New Element</span>
-                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="NewElement(1)" value="newText" id="textAlignLeft">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-font"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="NewElement(2)" value="newTime" id="textAlignCenter">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-table"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="NewElement(3)" value="newImage" id="textAlignRight">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-image"></i>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2 pr-1 pl-1">
-                    <span class="badge badge-pill badge-primary text-center d-block mb-1">Text</span>
-                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
-                        <label onclick="FontSizeEdit(-1)" class="btn btn-secondary">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-angle-down"></i>
-                        </label>
-                        <label class="btn btn-secondary disabled">
-                            <input type="radio" name="options" autocomplete="off">
-                            <span id="fontSizeVal">12</span>px
-                        </label>
-                        <label onclick="FontSizeEdit(1)" class="btn btn-secondary">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-angle-up"></i>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2 pr-1 pl-1">
-                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Text Align</span>
-                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="TextAlign(1)" id="textAlignLeft">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-align-left"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="TextAlign(2)" id="textAlignCenter">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-align-center"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="TextAlign(3)" id="textAlignRight">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-align-right"></i>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2 pr-1 pl-1">
-                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Layer Height</span>
-                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="LayerHeigth(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-plus"></i>
-                        </label>
-                        <label class="btn btn-secondary disabled">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-layer-group"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="LayerHeigth(-1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-minus"></i>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3 pr-1 pl-1">
-                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Text Style</span>
-                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="textStyle(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-underline"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="textStyle(2)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-italic"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="textStyle(3)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-bold"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="textStyle(4)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-strikethrough"></i>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-1 pr-1 pl-1">
-                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Color</span>
-                    <div class="btn-group-sm w-100" role="group" aria-label="Third group">
-                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-secondary w-100"><i class="fas fa-swatchbook"></i></button>
-                        <div class="dropdown-menu">
-                            <?php
-                            include("../styles/images/colorPicker.php");
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Properties -->
-        <div class="col-sm-3 pr-1">
-            <span class="badge badge-pill badge-primary d-block text-center mb-1">Box Properties:</span>
-            <div class="row">
-                <div class="col-sm-6 pr-1">
-                    <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="ContentWidth(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-plus"></i>
-                        </label>
-                        <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
-                            <input type="number" min="0" max="1920" value="" name="options" id="widthInput"
-                                autocomplete="off" onchange="InputValueChanges(this)">
-                        </label>
-                        <label class="btn btn-secondary" onclick="ContentWidth(-1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-minus"></i>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-6 pl-1">
-                    <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="ContentHeight(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-plus"></i>
-                        </label>
-                        <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
-                            <input type="number" min="0" max="1080" value="" name="options" id="heigthInput"
-                                autocomplete="off" onchange="InputValueChanges(this)">
-                        </label>
-                        <label class="btn btn-secondary" onclick="ContentHeight(-1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-minus"></i>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Posisition -->
-        <div class="col-sm-3 pl-1">
-            <span class="badge badge-pill badge-primary d-block text-center mb-1">Posisition</span>
-            <div class="row">
-                <div class="col-sm-6 pr-1">
-                    <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="PosisitionTop(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-plus"></i>
-                        </label>
-                        <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
-                            <input type="number" min="0" max="1080" value="" name="options" id="topInput"
-                                autocomplete="off" onchange="InputValueChanges(this)">
-                        </label>
-                        <label class="btn btn-secondary" onclick="PosisitionTop(-1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-minus"></i>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-6 pl-1">
-                    <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="PosisitionLeft(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-plus"></i>
-                        </label>
-                        <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
-                            <input type="number" min="0" max="1080" value="0" name="options" id="leftInput"
-                                onchange="InputValueChanges(this)">
-                        </label>
-                        <label class="btn btn-secondary" onclick="PosisitionLeft(-1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-minus"></i>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Title -->
-    <div class="row">
-        <div class="container alert alert-dark text-center w-100">
-            <h2 class=""> <?= $_GET["title"] ?> </h2>
-        </div>
-    </div>
-
-    <div class="container-fluid ">
-        <div class="row">
-            <div class="col-12 bg-transparent">
-                <!-- Left Side -->
-                <div id="preview">
-
-                </div>
-            <!-- Col-10 End -->
-            </div>
-            <!-- Col-2 End -->
-            </div>
-        <!-- Row End -->
-        </div>
-    <!-- Container Fluid End -->
-    </div>
-</div>
-
-<!-- Extra Stuff -->
-<div class="container fixed-bottom">
-    <div class="alert alert-dark clearfix shadow p-3 mb-4" role="alert">
-        <h4>Extra Stuff!</h4>
-        <hr>
-        <div class="float-left">
-            <!-- Stuff Here -->
-        </div>
-        <div class="float-right">
-            <button class="btn btn-dark" id="Save" onclick="SaveContent()">
-                <i class="fas fa-save"></i>
-                <p class="d-inline">Gem</p>
-            </button>
-        </div>
-    </div>
-</div>
-
 </div>
 
 <script>

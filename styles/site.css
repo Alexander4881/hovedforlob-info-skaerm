@@ -87,13 +87,7 @@ svg > g:hover{
 }
 
 #preview{
-  padding: 2em;
-  overflow: scroll;
-  overflow-y: auto;
-}
-
-#preview::-webkit-scrollbar { 
-  display: none; 
+  background-color: aqua;
 }
 
 .frame{

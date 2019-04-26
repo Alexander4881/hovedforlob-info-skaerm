@@ -32,6 +32,26 @@ var tableSelectedSize = null;
 // selected image
 var selectedImage = null;
 
+// zoom variable
+var zoomLevel;
+
+
+// zoom function
+function ChangesPreviewSize(size){
+
+    console.log(size);
+
+    console.log(Math.floor($("#preview").width() * size) + "px!important");
+    console.log( Math.floor($("#preview").height() * size) + "px!important");
+
+    zoomLevel = size;
+    $("#preview").width(Math.floor(1920 * size));
+    $("#preview").height(Math.floor(1080 * size));
+
+    console.log($("#preview").width() * size) + "px!important";
+    console.log($("#preview").height() * size) + "px!important";
+}
+
 // get the current elements
 $(document).ready(function() {
     $.ajax({

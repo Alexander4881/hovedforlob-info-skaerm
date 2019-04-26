@@ -21,9 +21,9 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `NewText`(
-	IN `@text` VARCHAR(255),
+	IN `@text` MEDIUMTEXT,
 	IN `@website_ID` INT,
-	IN `@style` VARCHAR(255)
+	IN `@style` MEDIUMTEXT
 )
 BEGIN
 	INSERT INTO `text` (`Text`, `WebSite_ID`, `Style`) VALUES (`@text`, `@website_ID`, `@style`);
@@ -116,7 +116,7 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `InsertNewColumn`
 (
     IN `@rowID` INT,
-		IN `@ColumnText` VARCHAR(255),
+		IN `@ColumnText` MEDIUMTEXT,
 		IN `@ColumnStyle` MEDIUMTEXT
 )
 BEGIN
@@ -136,7 +136,7 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `UpdateColumn`
 (
     IN `@id` INT,
-		IN `@ColumnText` VARCHAR(255),
+		IN `@ColumnText` MEDIUMTEXT,
 		IN `@ColumnStyle` MEDIUMTEXT 
 )
 BEGIN
@@ -179,7 +179,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `UpdateText`
 (
-    IN `@Text` VARCHAR(255),
+    IN `@Text` MEDIUMTEXT,
 		IN `@Text_ID` INT,
 		IN `@Style` MEDIUMTEXT
 )
