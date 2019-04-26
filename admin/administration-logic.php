@@ -75,12 +75,12 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             /*** get each column by tag name ***/ 
             $cols = $row->getElementsByTagName('td'); 
             /*** insert the row to the database ***/
-            $rowID = NewRow($tableID);
+            $rowID = NewRow($tableID,"style=\"" . $row->getAttribute('style') . "\"");
 
             /*** loop over all the colums ***/
             foreach($cols as $col){
                 /*** inserts the colum to the database ***/
-                NewColumn($rowID, $col->nodeValue);
+                NewColumn($rowID, $col->nodeValue,$col->getAttribute('style'));
             }
         }
         //echo($tableID);
@@ -105,7 +105,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         
         /*** the table by its tag name ***/ 
         $tables = $dom->getElementsByTagName('table'); 
-        UpdateTable($table->getAttribute("id"));
+
         /*** get all rows from the table ***/ 
         $rows = $tables->item(0)->getElementsByTagName('tr'); 
         
@@ -114,12 +114,12 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             /*** get each column by tag name ***/ 
             $cols = $row->getElementsByTagName('td'); 
             /*** updaets the row to the database ***/
-            UpdateRow($row->getAttribute("id"));
+            UpdateRow($row->getAttribute("id"),"style=\"" . $row->getAttribute('style') . "\"");
 
             /*** loop over all the colums ***/
             foreach($cols as $col){
                 /*** updates the colum to the database ***/
-                UpdateColumn($col->getAttribute("id"));
+                UpdateColumn($col->getAttribute("id"), $col->nodeValue ,"style=\"" . $row->getAttribute('style') . "\"");
             }
         }
     }

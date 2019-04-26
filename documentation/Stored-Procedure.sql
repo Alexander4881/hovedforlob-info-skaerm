@@ -41,7 +41,7 @@ INSERT INTO `Image`(`Path`) VALUE(ImagePath);
 /*CALL InsertNewImage("null.png");*/
 
 DELIMITER $$
-CREATE PROCEDURE IF NOT EXISTS `InsertNewImageLink`(IN `@WebSite_ID` INT, IN `@Image_ID` INT, IN `@ImageStyle` VARCHAR(255))
+CREATE PROCEDURE IF NOT EXISTS `InsertNewImageLink`(IN `@WebSite_ID` INT, IN `@Image_ID` INT, IN `@ImageStyle` MEDIUMTEXT)
 BEGIN
 INSERT INTO `ImageLink`(`WebSite_ID`, `Image_ID`, `Image_Style`) VALUE(`@WebSite_ID`,`@Image_ID`, `@ImageStyle`);
 SELECT `imagelink`.`ID`, `imagelink`.`Image_Style`, `image`.`Path` FROM `imagelink` 
@@ -99,15 +99,16 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `InsertNewRow`
 (
-    IN `@tableID` INT
+    IN `@tableID` INT,
+		IN `@style` MEDIUMTEXT
 )
 BEGIN
-	INSERT INTO `Row`(`Table_ID`) VALUES(`@tableID`);
+	INSERT INTO `Row`(`Table_ID`,`style`) VALUES(`@tableID`,`@style`);
 	SELECT LAST_INSERT_ID() AS `ID`;
 END $$
 DELIMITER ;
 
-/*CALL `InsertNewRow`(1);*/
+/*CALL `InsertNewRow`(1,'style');*/
 
 
 /* Inset New Row */
@@ -115,10 +116,11 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `InsertNewColumn`
 (
     IN `@rowID` INT,
-		IN `@ColumnText` VARCHAR(255) 
+		IN `@ColumnText` VARCHAR(255),
+		IN `@ColumnStyle` MEDIUMTEXT
 )
 BEGIN
-	INSERT INTO `Column`(`Row_ID`,`Text`) VALUES(`@rowID`,`@ColumnText`);
+	INSERT INTO `Column`(`Row_ID`,`Text`,`style`) VALUES(`@rowID`,`@ColumnText`,`@ColumnStyle`);
 	SELECT LAST_INSERT_ID() AS `ID`;
 END $$
 DELIMITER ;
@@ -134,20 +136,35 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `UpdateColumn`
 (
     IN `@id` INT,
-		IN `@ColumnText` VARCHAR(255) 
+		IN `@ColumnText` VARCHAR(255),
+		IN `@ColumnStyle` MEDIUMTEXT 
 )
 BEGIN
-	UPDATE `column` SET `Text` = `@ColumnText` WHERE `id` = `@id`;
+	UPDATE `column` SET `Text` = `@ColumnText`, `style` = `@ColumnStyle` WHERE `id` = `@id`;
 END $$
 DELIMITER ;
 
 /*CALL `UpdateColumn`(9,'text new test');*/
 
+/*		Update Column */
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `UpdateRow`
+(
+    IN `@id` INT,
+		IN `@RowStyle` MEDIUMTEXT 
+)
+BEGIN
+	UPDATE `row` SET `style` = `@RowStyle` WHERE `id` = `@id`;
+END $$
+DELIMITER ;
+
+/*CALL `UpdateRow`(9,'text new test');*/
+
 /*		Update Image*/
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateImageLink`(
 		IN `@ImageLink_ID` INT,
-		IN `@Style` VARCHAR(255)
+		IN `@Style` MEDIUMTEXT
 )
 BEGIN
 	UPDATE `imagelink` SET `Image_Style` = `@Style` WHERE `ID` = `@ImageLink_ID`;
@@ -164,7 +181,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `UpdateText`
 (
     IN `@Text` VARCHAR(255),
 		IN `@Text_ID` INT,
-		IN `@Style` VARCHAR(255)
+		IN `@Style` MEDIUMTEXT
 )
 BEGIN
 	UPDATE `text` SET `text` = `@Text`, `Style` = `@Style` WHERE `ID` = `@Text_ID`;

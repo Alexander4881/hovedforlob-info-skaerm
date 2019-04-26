@@ -94,11 +94,12 @@ function NewTable($WebSite_ID){
     return($tableID[0]);
 }
 
-// Generate New row into currently added table - takes 1 argument
+// Generate New row into currently added table - takes 2 argument
 // Table ID
-function NewRow($Table_ID){
+// Row Style
+function NewRow($Table_ID, $style){
     // Query stored procedure, get table id, and insert new row into table.
-    $rowID = mysqli_fetch_array(SqlQuery("CALL `InsertNewRow`(" . $Table_ID . ");"));
+    $rowID = mysqli_fetch_array(SqlQuery("CALL `InsertNewRow`(" . $Table_ID . ",'" . $style . "');"));
     // Return row ID.
     return($rowID[0]);
 }
@@ -106,9 +107,9 @@ function NewRow($Table_ID){
 // Generate New column into currently added row - takes 2 arguments
 // Row ID
 // Add Text into Row
-function NewColumn($Row_ID, $Text){
+function NewColumn($Row_ID, $Text, $style){
     // Query stored procedure, get currently row id, and add text into the column
-    $columnID = mysqli_fetch_array(SqlQuery("CALL InsertNewColumn(" . $Row_ID .", '" . $Text ."');"));
+    $columnID = mysqli_fetch_array(SqlQuery("CALL InsertNewColumn(" . $Row_ID .", '" . $Text ."', '" . $style ."');"));
     // return column ID
     return($columnID[0]);
 }
@@ -152,6 +153,22 @@ function NewText($text, $webSiteID, $style){
 function UpdateText($text, $textID, $style){
     // Query stored procedure, update styling for text paragraph on currently selected text id.
     return SqlQuery("CALL `UpdateText`('" . $text . "'," . $textID . ",'" . $style . "');");
+}
+
+// Update styling on Row - takes 2 arguments
+// Changed text
+// Text ID
+function UpdateRow($id, $style){
+    // Query stored procedure, update styling for text paragraph on currently selected text id.
+    return SqlQuery("CALL `UpdateRow`(" . $id . ",'" . $style . "');");
+}
+
+// Updates a Column - takes 2 arguments
+// Title for website
+// Location ID for the room 
+function UpdateColumn($id, $columnText, $style){
+    // Query stored procedure, return as array after.
+    return(SqlQuery("CALL UpdateColumn('" . $id . "','" . $columnText . "','" . $style . "');"));
 }
 
 // Get currently active websites - takes 1 argument
