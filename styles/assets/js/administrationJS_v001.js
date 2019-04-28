@@ -1,7 +1,5 @@
 // the current element
 var selectedElement;
-// new element box
-var newElementBox = document.getElementById("element-select");
 
 // element settings box
 var elementSettings = document.getElementById("element-editor");
@@ -33,23 +31,116 @@ var tableSelectedSize = null;
 var selectedImage = null;
 
 // zoom variable
-var zoomLevel;
-
+var newZoomLevel = 1;
+var oldZoomLevel;
 
 // zoom function
 function ChangesPreviewSize(size){
 
-    console.log(size);
-
-    console.log(Math.floor($("#preview").width() * size) + "px!important");
-    console.log( Math.floor($("#preview").height() * size) + "px!important");
-
-    zoomLevel = size;
+    
+    
+    oldZoomLevel = newZoomLevel;
+    newZoomLevel = size;
+    
+    // Updates Elements size
+    UpdateElementsSizeOnZoom();
+    
     $("#preview").width(Math.floor(1920 * size));
     $("#preview").height(Math.floor(1080 * size));
+}
 
-    console.log($("#preview").width() * size) + "px!important";
-    console.log($("#preview").height() * size) + "px!important";
+// function for update sizes on zoom
+function UpdateElementsSizeOnZoom(){
+    var elements = $("#preview").children();
+    
+    const previewOffset = $("#preview").offset();
+
+    console.log("#preview top = " + previewOffset.top + ", #preview left=" + previewOffset.left);
+
+    // loops all the elements and updatest or inserts them
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        const elementPosition = $(element).position();
+
+        // change width 
+        $(element).width(CalulateZoomNumber($(element).width()));
+        // change height
+        $(element).height(CalulateZoomNumber($(element).height()));
+    
+        // change top
+        $('selector').css({'top' : (previewOffset.top + elementPosition.top) + 'px'});
+        // change left
+        $('selector').css({'left' : (previewOffset.left + elementPosition.left) + 'px'});
+
+
+        switch(element.tagName.toLowerCase()){
+            case'p':
+
+            // edit font size
+            console.log("text size = " + ($(element).css('font-size').replace('px','') ));
+            //element.style.fontSize = 
+            $(element).css('font-size',CalulateZoomNumber($(element).css('font-size').replace('px','')) + "px")
+            break;
+
+            case'table':            
+            break;
+
+            case'img':
+            break;
+        }
+    }
+}
+
+// caluculate the zoome number 
+//needs a number 
+//returnes a number
+function CalulateZoomNumber(numberToBeCalc){
+
+    if(oldZoomLevel == 0.25){
+        // to get the orignal value times with 4
+        var temp = (numberToBeCalc * 4);
+        // we times with 0.25
+        return  temp * newZoomLevel;
+
+    }else if (oldZoomLevel == 0.50){
+        // to get the orignal value times with 2
+        var temp = (numberToBeCalc * 2);
+        // we times with 0.50            
+        return temp * newZoomLevel;
+
+    }else if (oldZoomLevel == 0.75){
+        // to get the orignal value times with 2
+        var temp = (numberToBeCalc / 75 * 100);
+        // we times with 0.75        
+        return temp * newZoomLevel;
+
+    }else if (oldZoomLevel == 1){
+        // return the orginal size            
+        return numberToBeCalc * newZoomLevel;
+
+    }
+}
+
+// function to get the orignal number
+function OriginalZoomNumber(numberToBeCalc){
+    
+    if(newZoomLevel == 0.25){
+        // to get the orignal value times with 4
+        return  (numberToBeCalc * 4);
+
+    }else if (newZoomLevel == 0.50){
+        // to get the orignal value times with 2      
+        return (numberToBeCalc * 2);
+
+    }else if (newZoomLevel == 0.75){
+        // to get the orignal value times with 2
+        return (numberToBeCalc / 75 * 100);
+
+    }else if (newZoomLevel == 1){
+        // return the orginal size            
+        return numberToBeCalc;
+
+    }
 }
 
 // get the current elements
@@ -431,7 +522,7 @@ function SetElementSettings(){
 function ShowTextEditor(){
     $("#element-editor").removeClass("hide")
     // set font size
-    fontSize.innerHTML = window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
+    fontSize.innerHTML =  window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
         
     heigthInput.value = selectedElement.clientHeight;
     widthInput.value = selectedElement.clientWidth;

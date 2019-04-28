@@ -1,2 +1,6 @@
-Table with Time
-sql pro
+table edit
+zoom text size 
+image size
+ajax response to image caosel
+set the size of images on insert  
+save with zoom

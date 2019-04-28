@@ -158,7 +158,7 @@ include_once("../includes/header.php");
         </div>
         <!-- Posisition -->
         <div class="col-sm-3 pl-1">
-            <span class="badge badge-pill badge-primary d-block text-center mb-1">Posisition: Height - Width</span>
+            <span class="badge badge-pill badge-primary d-block text-center mb-1">Posisition: Top - Left</span>
             <div class="row">
                 <div class="col-sm-6 pr-1">
                     <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
