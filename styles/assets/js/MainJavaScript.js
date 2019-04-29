@@ -38,13 +38,16 @@ function SlideMeUp(location){
         success: function(response) {
             
             console.log(response);
-            
+
             var tempArray = JSON.parse(response);
             
             
+            console.log("test " + tempArray);
 
-            $("#CarouselIndicators").append(tempArray[0]);
-            $("#WebsitesCarouselInner").append(tempArray[1]);
+            if (tempArray != "") {
+                $("#CarouselIndicators").append(tempArray[0]);
+                $("#WebsitesCarouselInner").append(tempArray[1]);
+            }
             
             $('#SlideMeUp').show();
             $('#SlideMeUp').animate({ height: '279px' }, 1000);

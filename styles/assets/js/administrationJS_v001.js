@@ -32,7 +32,7 @@ var selectedImage = null;
 
 // zoom variable
 var newZoomLevel = 1;
-var oldZoomLevel;
+var oldZoomLevel = 1;
 
 // zoom function
 function ChangesPreviewSize(size){
@@ -124,19 +124,19 @@ function CalulateZoomNumber(numberToBeCalc){
 // function to get the orignal number
 function OriginalZoomNumber(numberToBeCalc){
     
-    if(newZoomLevel == 0.25){
+    if(oldZoomLevel == 0.25){
         // to get the orignal value times with 4
         return  (numberToBeCalc * 4);
 
-    }else if (newZoomLevel == 0.50){
+    }else if (oldZoomLevel == 0.50){
         // to get the orignal value times with 2      
         return (numberToBeCalc * 2);
 
-    }else if (newZoomLevel == 0.75){
+    }else if (oldZoomLevel == 0.75){
         // to get the orignal value times with 2
         return (numberToBeCalc / 75 * 100);
 
-    }else if (newZoomLevel == 1){
+    }else if (oldZoomLevel == 1){
         // return the orginal size            
         return numberToBeCalc;
 
@@ -523,6 +523,8 @@ function ShowTextEditor(){
     $("#element-editor").removeClass("hide")
     // set font size
     fontSize.innerHTML =  window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','');
+    console.log(OriginalZoomNumber(window.getComputedStyle(selectedElement, null).getPropertyValue("font-size").replace('px','')));
+    
         
     heigthInput.value = selectedElement.clientHeight;
     widthInput.value = selectedElement.clientWidth;
