@@ -38,20 +38,31 @@ function SlideMeUp(location){
         success: function(response) {
             
             console.log(response);
-
-            var tempArray = JSON.parse(response);
             
+            if (response.includes("Connection Failed:")) {
             
-            console.log("test " + tempArray);
+                $("#CarouselIndicators").append('<div class="carousel-item active"><div class="container-fluid"><div class="row"><p class="text-center w-100 h1 text-capitalize">THE DATABASE IS EMPTY</p></div></div></div>');
+                
+                
+                $('#SlideMeUp').show();
+                $('#SlideMeUp').animate({ height: '279px' }, 1000);
+                isHidden = false;
+                
+            }else{
+                
+                var tempArray = JSON.parse(response);
+            
+                console.log("test " + tempArray);
 
-            if (tempArray != "") {
+                
                 $("#CarouselIndicators").append(tempArray[0]);
                 $("#WebsitesCarouselInner").append(tempArray[1]);
+                
+                
+                $('#SlideMeUp').show();
+                $('#SlideMeUp').animate({ height: '279px' }, 1000);
+                isHidden = false;
             }
-            
-            $('#SlideMeUp').show();
-            $('#SlideMeUp').animate({ height: '279px' }, 1000);
-            isHidden = false;
         }
     });
 
