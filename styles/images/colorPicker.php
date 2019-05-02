@@ -4,8 +4,8 @@
 <svg id="colorSvg"
     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:krita="http://krita.org/namespaces/svg/krita"
-    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" width="595.44pt" height="664.56pt"
-    viewBox="0 0 595.44 664.56">
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" width="auto"
+    viewBox="0 0 650 675">
     <defs />
     <circle id="shape07" transform="matrix(1.78891565488645 0 0 1.78891566697782 233.560830314062 532.468448335564)"
         r="36" cx="36" cy="36" fill="none" stroke="#44ff00" stroke-width="3.6" stroke-linecap="square"

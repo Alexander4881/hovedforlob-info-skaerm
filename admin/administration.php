@@ -1,229 +1,328 @@
+<!DOCTYPE html>
+<html>
 <!-- Header -->
 <?php
 set_include_path("../");
 include_once("management/global.php");
-include_once("../includes/header.php");
+// include_once("../includes/header.php");
 ?>
-<!-- Controlls | Preview -->
-<div class="container-fluid sticky-top">
-    <div class="row mb-1">
-        <div class="col-sm-6 pr-1">
-            <div class="row">
-                <!-- New Element -->
-                <div class="col-sm-2 pr-1 pl-1">
-                    <span class="badge badge-pill badge-primary text-center d-block mb-1">New Element</span>
-                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="NewElement(1)" value="newText" id="textAlignLeft">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-font"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="NewElement(2)" value="newTime" id="textAlignCenter">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-table"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="NewElement(3)" value="newImage" id="textAlignRight">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-image"></i>
-                        </label>
-                    </div>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Include Scripts & Stylesheets -->
+    <?php include_once("includes/resources.php"); ?>
+</head>
+
+<body>
+
+<!-- Page Wrapping -->
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
+    <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+            <div class="sidebar-brand">
+                <a href="#">TOOLS MENU</a>
+                <div id="close-sidebar">
+                    <i class="fas fa-times"></i>
                 </div>
-                <!-- Text Size -->
-                <div class="col-sm-2 pr-1 pl-1">
-                    <span class="badge badge-pill badge-primary text-center d-block mb-1">Text</span>
-                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
-                        <label onclick="FontSizeEdit(-1)" class="btn btn-secondary">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-angle-down"></i>
-                        </label>
-                        <label class="btn btn-secondary disabled">
-                            <input type="radio" name="options" autocomplete="off">
-                            <span id="fontSizeVal">12</span>px
-                        </label>
-                        <label onclick="FontSizeEdit(1)" class="btn btn-secondary">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-angle-up"></i>
-                        </label>
-                    </div>
-                </div>
-                <!-- Text Align -->
-                <div class="col-sm-2 pr-1 pl-1">
-                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Text Align</span>
-                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="TextAlign(1)" id="textAlignLeft">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-align-left"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="TextAlign(2)" id="textAlignCenter">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-align-center"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="TextAlign(3)" id="textAlignRight">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-align-right"></i>
-                        </label>
-                    </div>
-                </div>
-                <!-- Layer Height -->
-                <div class="col-sm-2 pr-1 pl-1">
-                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Layer Height</span>
-                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="LayerHeigth(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-plus"></i>
-                        </label>
-                        <label class="btn btn-secondary disabled">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
+            </div>
+            <!-- sidebar-header  -->
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="header-menu">
+                        <span>General</span>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fas fa-paragraph"></i>
+                            <span>Elements</span>
+                            <!-- <span class="badge badge-pill badge-warning">New</span> -->
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                    <a href="#NewParagraph" onclick="NewElement(1)">New Paragraph
+                                        <i class="fas fa-font"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#NewTable" onclick="NewElement(2)">New Table
+                                        <i class="fas fa-table"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#NewImage" onclick="NewElement(3)">New Image
+                                        <i class="fas fa-image"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fas fa-text-height"></i>
+                            <span>Font Sizing</span>
+                            <!-- <span class="badge badge-pill badge-danger">New</span> -->
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                    <a href="#RaiseFontSize" onclick="FontSizeEdit(1)">
+                                        <i class="fas fa-angle-up"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#FontSize">
+                                        <span id="fontSizeVal">12</span>px
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#DecreseFontSize" onclick="FontSizeEdit(-1)">
+                                        <i class="fas fa-angle-down"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fas fa-hat-wizard"></i>
+                            <span>Font Styling</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                    <a href="#" onclick="textStyle(1)">Underline
+                                        <i class="fas fa-underline"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="textStyle(2)">Italic
+                                        <i class="fas fa-italic"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="textStyle(3)">Bold
+                                        <i class="fas fa-bold"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="textStyle(4)">Strikethrough
+                                        <i class="fas fa-strikethrough"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fas fa-box-open"></i>                            
+                            <span>Box Properties</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li class="removeBullets">
+                                    <a href="#">
+                                        <div class="clearfix">
+                                            <span class="header-menu">Width: </span>
+                                            <div class="btn-group btn-group-toggle btn-group-sm text-center float-right" data-toggle="buttons">
+                                                <label class="btn btn-secondary" onclick="ContentWidth(1)">
+                                                        <input type="radio" name="options" id="option2" autocomplete="off">
+                                                    <i class="fas fa-plus"></i>
+                                                </label>
+                                                <label class="btn btn-secondary disabled btn-input">
+                                                    <input type="number" min="0" max="1920" value="" name="options" id="widthInput" autocomplete="off" onchange="InputValueChanges(this)">
+                                                </label>
+                                                <label class="btn btn-secondary" onclick="ContentWidth(-1)">
+                                                    <input type="radio" name="options" id="option2" autocomplete="off">
+                                                    <i class="fas fa-minus"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="removeBullets">
+                                    <a href="#">
+                                        <div class="clearfix">
+                                            <span class="header-menu">Height: </span>
+                                            <div class="btn-group btn-group-toggle btn-group-sm text-center float-right" data-toggle="buttons">
+                                                <label class="btn btn-secondary" onclick="ContentHeight(1)">
+                                                        <input type="radio" name="options" id="option2" autocomplete="off">
+                                                    <i class="fas fa-plus"></i>
+                                                </label>
+                                                <label class="btn btn-secondary disabled btn-input">
+                                                    <input type="number" min="0" max="1080" value="" name="options" id="heigthInput"
+                                                    autocomplete="off" onchange="InputValueChanges(this)">
+                                                </label>
+                                                <label class="btn btn-secondary" onclick="ContentHeight(-1)">
+                                                    <input type="radio" name="options" id="option2" autocomplete="off">
+                                                    <i class="fas fa-minus"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fas fa-arrows-alt"></i>                         
+                            <span>Position Properties</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li class="removeBullets">
+                                    <a href="#">
+                                        <div class="clearfix">
+                                            <span class="header-menu">Top: </span>
+                                            <div class="btn-group btn-group-toggle btn-group-sm text-center float-right" data-toggle="buttons">
+                                                <label class="btn btn-secondary" onclick="PosisitionTop(1)">
+                                                <input type="radio" name="options" id="option2" autocomplete="off">
+                                                    <i class="fas fa-plus"></i>
+                                                </label>
+                                                <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
+                                                    <input type="number" min="0" max="1080" value="" name="options" id="topInput"
+                                                        autocomplete="off" onchange="InputValueChanges(this)">
+                                                </label>
+                                                <label class="btn btn-secondary" onclick="PosisitionTop(-1)">
+                                                    <input type="radio" name="options" id="option2" autocomplete="off">
+                                                    <i class="fas fa-minus"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="removeBullets">
+                                    <a href="#">
+                                        <div class="clearfix">
+                                            <span class="header-menu">Left: </span>
+                                            <div class="btn-group btn-group-toggle btn-group-sm text-center float-right" data-toggle="buttons">
+                                                <label class="btn btn-secondary" onclick="PosisitionLeft(1)">
+                                                <input type="radio" name="options" id="option2" autocomplete="off">
+                                                    <i class="fas fa-plus"></i>
+                                                </label>
+                                                <label class="btn btn-secondary disabled btn-input">
+                                                    <input type="number" min="0" max="1080" value="0" name="options" id="leftInput"
+                                                        onchange="InputValueChanges(this)">
+                                                </label>
+                                                <label class="btn btn-secondary" onclick="PosisitionLeft(-1)">
+                                                    <input type="radio" name="options" id="option2" autocomplete="off">
+                                                    <i class="fas fa-minus"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#Alignment">
+                            <i class="fas fa-align-justify"></i>
+                            <span>Alignment</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                    <a href="#ATL" onclick="TextAlign(1)">Algin Text Left
+                                        <i class="fas fa-align-left"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#ATC" onclick="TextAlign(2)">Align Text Center
+                                        <i class="fas fa-align-center"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#ATR" onclick="TextAlign(3)">Align Text Right
+                                        <i class="fas fa-align-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#Layers">
                             <i class="fas fa-layer-group"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="LayerHeigth(-1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-minus"></i>
-                        </label>
-                    </div>
-                </div>
-                <!-- Text Style -->
-                <div class="col-sm-3 pr-1 pl-1">
-                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Text Style</span>
-                    <div class="btn-group btn-group-toggle btn-group-sm w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="textStyle(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-underline"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="textStyle(2)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-italic"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="textStyle(3)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-bold"></i>
-                        </label>
-                        <label class="btn btn-secondary" onclick="textStyle(4)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-strikethrough"></i>
-                        </label>
-                    </div>
-                </div>
-                <!-- Color -->
-                <div class="col-sm-1 pr-1 pl-1">
-                    <span class="badge badge-pill badge-primary d-block text-center mb-1">Color</span>
-                    <div class="btn-group-sm w-100" role="group" aria-label="Third group">
-                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                            class="btn btn-secondary w-100"><i class="fas fa-swatchbook"></i></button>
-                        <div class="dropdown-menu">
+                            <span>Layers</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                    <a href="#" onclick="LayerHeigth(1)">Forward Layer
+                                        <i class="fas fa-plus"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="LayerHeigth(-1)">Backward Layer
+                                        <i class="fas fa-minus"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fas fa-swatchbook"></i>
+                            <span>Color</span>
+                        </a>
+                        <div class="sidebar-submenu">
                             <?php
-                            include("../styles/images/colorPicker.php");
+                                include("../styles/images/colorPicker.php");
                             ?>
                         </div>
-                    </div>
-                </div>
+                    </li>
+                    <!-- <li class="header-menu">
+                        <span>Extra</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-book"></i>
+                            <span>Documentation</span>
+                            <span class="badge badge-pill badge-primary">Beta</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-calendar"></i>
+                            <span>Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-folder"></i>
+                            <span>Examples</span>
+                        </a>
+                    </li> -->
+                </ul>
             </div>
+            <!-- sidebar-menu  -->
         </div>
-        <!-- Properties -->
-        <div class="col-sm-3 pr-1">
-            <span class="badge badge-pill badge-primary d-block text-center mb-1">Box Properties: Height - Width</span>
-            <div class="row">
-                <div class="col-sm-6 pr-1">
-                    <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="ContentWidth(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-plus"></i>
-                        </label>
-                        <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
-                            <input type="number" min="0" max="1920" value="" name="options" id="widthInput"
-                                autocomplete="off" onchange="InputValueChanges(this)">
-                        </label>
-                        <label class="btn btn-secondary" onclick="ContentWidth(-1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-minus"></i>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-6 pl-1">
-                    <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="ContentHeight(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-plus"></i>
-                        </label>
-                        <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
-                            <input type="number" min="0" max="1080" value="" name="options" id="heigthInput"
-                                autocomplete="off" onchange="InputValueChanges(this)">
-                        </label>
-                        <label class="btn btn-secondary" onclick="ContentHeight(-1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-minus"></i>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Posisition -->
-        <div class="col-sm-3 pl-1">
-            <span class="badge badge-pill badge-primary d-block text-center mb-1">Posisition: Top - Left</span>
-            <div class="row">
-                <div class="col-sm-6 pr-1">
-                    <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="PosisitionTop(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-plus"></i>
-                        </label>
-                        <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
-                            <input type="number" min="0" max="1080" value="" name="options" id="topInput"
-                                autocomplete="off" onchange="InputValueChanges(this)">
-                        </label>
-                        <label class="btn btn-secondary" onclick="PosisitionTop(-1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-minus"></i>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-6 pl-1">
-                    <div class="btn-group btn-group-toggle btn-group-sm text-center w-100" data-toggle="buttons">
-                        <label class="btn btn-secondary" onclick="PosisitionLeft(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-plus"></i>
-                        </label>
-                        <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
-                            <input type="number" min="0" max="1080" value="0" name="options" id="leftInput"
-                                onchange="InputValueChanges(this)">
-                        </label>
-                        <label class="btn btn-secondary" onclick="PosisitionLeft(-1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">
-                            <i class="fas fa-minus"></i>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Title -->
-    <div class="row">
-        <div class="container alert alert-dark text-center w-100">
-            <h2 class=""> <?= $_GET["title"] ?> </h2>
-        </div>
-    </div>
-</div>
-
-<div id="toolbox"></div>
-
-<div class="row h-100 justify-content-center align-items-center">
-    <div id="preview" class="container-fluid" style="width: 1920px; height: 1080px;">
-    </div>
-</div>
-
-<!-- Extra Stuff -->
-<div class="container fixed-bottom">
-    <div class="alert alert-dark clearfix shadow" role="alert">
-        <div class="float-left">
-
-        </div>
-        <div class="float-right">
-            <button class="btn btn-dark" id="Save" onclick="SaveContent()">
+        <!-- sidebar-content  -->
+        <div class="sidebar-footer clearfix">
+            <a href="#SavedContent" onclick="SaveContent()">
                 <i class="fas fa-save"></i>
-                <p class="d-inline">Gem</p>
-            </button>
+                <span class="badge badge-pill badge-info notification">2</span>
+            </a>
+            <a href="#SavedContent" onclick="DeleteItem()">
+                <i class="fas fa-trash-alt"></i>
+            </a>
         </div>
-    </div>
+    </nav>
+    <!-- sidebar-wrapper  -->
+    <main class="page-content">
+        <div class="container-fluid">
+            <div id="preview"></div>
+        </div>
+
+    </main>
+    <!-- page-content" -->
 </div>
 
 <!-- Modals -->
@@ -421,6 +520,47 @@ const websiteID = <?= $_GET['id'] ?>;
 
 <script src="../styles/assets/js/administrationJS_v001.js"></script>
 
+<!-- SideMenu Script -->
+<script>
+jQuery(function($) {
+
+    $(".sidebar-dropdown > a").click(function() {
+        $(".sidebar-submenu").slideUp(200);
+        if (
+            $(this)
+            .parent()
+            .hasClass("active")
+        ) {
+            $(".sidebar-dropdown").removeClass("active");
+            $(this)
+                .parent()
+                .removeClass("active");
+        } else {
+            $(".sidebar-dropdown").removeClass("active");
+            $(this)
+                .next(".sidebar-submenu")
+                .slideDown(200);
+            $(this)
+                .parent()
+                .addClass("active");
+        }
+    });
+
+    $("#close-sidebar").click(function() {
+        $(".page-wrapper").removeClass("toggled");
+    });
+    $("#show-sidebar").click(function() {
+        $(".page-wrapper").addClass("toggled");
+    });
+
+
+
+
+});
+</script>
+
 <?php
 //  include_once("../includes/footer.php");
 ?>
+</body>
+</html>
