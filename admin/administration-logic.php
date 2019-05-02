@@ -66,27 +66,29 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         
         /*** the table by its tag name ***/ 
         $tables = $dom->getElementsByTagName('table'); 
-        $tableID = NewTable($_POST['websiteID']); 
-        /*** get all rows from the table ***/ 
-        $rows = $tables->item(0)->getElementsByTagName('tr'); 
-        
-        /*** loop over the table rows ***/ 
-        foreach ($rows as $row) {
-            /*** get each column by tag name ***/ 
-            $cols = $row->getElementsByTagName('td'); 
-            /*** insert the row to the database ***/
-            $rowID = NewRow($tableID,"style=\"" . $row->getAttribute('style') . "\"");
+        foreach($tables as $table){
+            $tableID = NewTable($_POST['websiteID'],"style=\"" . $table->getAttribute('style') . "\""); 
+            /*** get all rows from the table ***/ 
+            $rows = $tables->item(0)->getElementsByTagName('tr'); 
+            
+            /*** loop over the table rows ***/ 
+            foreach ($rows as $row) {
+                /*** get each column by tag name ***/ 
+                $cols = $row->getElementsByTagName('td'); 
+                /*** insert the row to the database ***/
+                $rowID = NewRow($tableID,"style=\"" . $row->getAttribute('style') . "\"");
 
-            /*** loop over all the colums ***/
-            foreach($cols as $col){
-                /*** inserts the colum to the database ***/
-                NewColumn($rowID, $col->nodeValue,$col->getAttribute('style'));
+                /*** loop over all the colums ***/
+                foreach($cols as $col){
+                    /*** inserts the colum to the database ***/
+                    NewColumn($rowID, $col->nodeValue,$col->getAttribute('style'));
+                }
             }
+            // get the newley inserted table
+            echo(GetTableHTML($tableID,$table->getAttribute('style')));
         }
-        //echo($tableID);
         
-        // get the newley inserted table
-        echo(GetTableHTML($tableID));
+        
 
     }
 }else if(isset($_POST['val']) && $_POST['val'] === "updateTable"){
@@ -106,20 +108,23 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         /*** the table by its tag name ***/ 
         $tables = $dom->getElementsByTagName('table'); 
 
-        /*** get all rows from the table ***/ 
-        $rows = $tables->item(0)->getElementsByTagName('tr'); 
-        
-        /*** loop over the table rows ***/ 
-        foreach ($rows as $row) {
-            /*** get each column by tag name ***/ 
-            $cols = $row->getElementsByTagName('td'); 
-            /*** updaets the row to the database ***/
-            UpdateRow($row->getAttribute("id"),"style=\"" . $row->getAttribute('style') . "\"");
+        foreach ($tables as $table) {
+            UpdateTable($table->getAttribute("id"),"style=\"" . $table->getAttribute('style') . "\"");
+            /*** get all rows from the table ***/ 
+            $rows = $tables->item(0)->getElementsByTagName('tr'); 
+            
+            /*** loop over the table rows ***/ 
+            foreach ($rows as $row) {
+                /*** get each column by tag name ***/ 
+                $cols = $row->getElementsByTagName('td'); 
+                /*** updaets the row to the database ***/
+                UpdateRow($row->getAttribute("id"),"style=\"" . $row->getAttribute('style') . "\"");
 
-            /*** loop over all the colums ***/
-            foreach($cols as $col){
-                /*** updates the colum to the database ***/
-                UpdateColumn($col->getAttribute("id"), $col->nodeValue ,"style=\"" . $row->getAttribute('style') . "\"");
+                /*** loop over all the colums ***/
+                foreach($cols as $col){
+                    /*** updates the colum to the database ***/
+                    UpdateColumn($col->getAttribute("id"), $col->nodeValue ,"style=\"" . $row->getAttribute('style') . "\"");
+                }
             }
         }
     }
@@ -299,10 +304,10 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 }
 
 
-function GetTableHTML($tableID){
+function GetTableHTML($tableID,$Style){
     // table var 
     // start table
-    $table = "<table id=\"" . $tableID . "\" class=\"table table-bordered table-dark\">";
+    $table = "<table id=\"" . $tableID . "\" class=\"table table-bordered table-dark\" " . $Style . ">";
     $table .= "<tbody>";
     //
     $rows = GetRow($tableID);
@@ -377,7 +382,7 @@ function GetwebsiteElements($websiteID){
     // get tabels
     $result = GetTable($websiteID);
     while($tables = mysqli_fetch_array($result)){
-        $html .= GetTableHTML($tables["id"]);
+        $html .= GetTableHTML($tables["id"],$tables["Style"]);
     }
 
     return $html;

@@ -87,9 +87,9 @@ function NewWebSite($title, $location){
 
 // Generate New table for website - takes 1 argument
 // Website ID
-function NewTable($WebSite_ID){
+function NewTable($WebSite_ID, $Style){
     // Query stored procedure, get result of returned data.
-    $tableID = mysqli_fetch_array(SqlQuery("CALL `InsertNewTable`(" . $WebSite_ID . ");"));
+    $tableID = mysqli_fetch_array(SqlQuery("CALL `InsertNewTable`(" . $WebSite_ID . ", '" . $Style . "');"));
     // Only return ID of table.
     return($tableID[0]);
 }
@@ -154,6 +154,15 @@ function UpdateText($text, $textID, $style){
     // Query stored procedure, update styling for text paragraph on currently selected text id.
     return SqlQuery("CALL `UpdateText`('" . $text . "'," . $textID . ",'" . $style . "');");
 }
+
+// Update styling on Row - takes 2 arguments
+// Changed text
+// Text ID
+function UpdateTable($id, $style){
+    // Query stored procedure, update styling for text paragraph on currently selected text id.
+    return SqlQuery("CALL `UpdateTable`(" . $id . ",'" . $style . "');");
+}
+
 
 // Update styling on Row - takes 2 arguments
 // Changed text

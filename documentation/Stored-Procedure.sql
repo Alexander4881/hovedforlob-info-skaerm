@@ -19,6 +19,7 @@ DELIMITER ;
 /*CALL InsertNewWebSite("Titel Test",14);*/
 
 
+
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `NewText`(
 	IN `@text` MEDIUMTEXT,
@@ -84,10 +85,11 @@ SELECT * FROM `Text` WHERE `WebSite_ID` = WebSiteID;
 DELIMITER $$
 CREATE  DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `InsertNewTable`
 (
-    IN `@websiteID` INT
+    IN `@websiteID` INT,
+		IN `@style` MEDIUMTEXT
 )
 BEGIN
-	INSERT INTO `table`(`WebSite_ID`) VALUES(`@websiteID`);
+	INSERT INTO `table`(`WebSite_ID`,`Style`) VALUES(`@websiteID`,`@style`);
 	SELECT LAST_INSERT_ID() AS `ID`;
 END $$
 DELIMITER ;
@@ -145,6 +147,21 @@ END $$
 DELIMITER ;
 
 /*CALL `UpdateColumn`(9,'text new test');*/
+
+
+/*		Update Column */
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `UpdateTable`
+(
+    IN `@id` INT,
+		IN `@TableStyle` MEDIUMTEXT 
+)
+BEGIN
+	UPDATE `table` SET `style` = `@TableStyle` WHERE `id` = `@id`;
+END $$
+DELIMITER ;
+
+/*CALL `UpdateTable`(1,'text new test');*/
 
 /*		Update Column */
 DELIMITER $$
@@ -273,7 +290,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `ShowTable`
 	IN `@websiteID` INT
 )
 BEGIN
-	SELECT `id` FROM `table` WHERE `WebSite_ID` = `@websiteID`;
+	SELECT `id`,`Style` FROM `table` WHERE `WebSite_ID` = `@websiteID`;
 END $$
 DELIMITER ;
 
