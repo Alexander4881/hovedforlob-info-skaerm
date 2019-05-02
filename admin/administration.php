@@ -137,7 +137,7 @@ include_once("management/global.php");
                                                             autocomplete="off">
                                                         <i class="fas fa-plus"></i>
                                                     </label>
-                                                    <label class="btn btn-secondary disabled btn-input">
+                                                    <label class="btn btn-secondary disabled btn-input" onclick="ContentWidth(3)">
                                                         <input type="number" min="0" max="1920" value="" name="options"
                                                             id="widthInput" autocomplete="off"
                                                             onchange="InputValueChanges(this)">
@@ -322,11 +322,11 @@ include_once("management/global.php");
             </div>
             <!-- sidebar-content  -->
             <div class="sidebar-footer clearfix">
-                <a href="#SavedContent" onclick="SaveContent()">
+                <a onclick="SaveContent()">
                     <i class="fas fa-save"></i>
                     <span class="badge badge-pill badge-info notification">2</span>
                 </a>
-                <a href="#SavedContent" onclick="DeleteItem()">
+                <a onclick="DeleteItem()">
                     <i class="fas fa-trash-alt"></i>
                 </a>
             </div>
@@ -334,12 +334,12 @@ include_once("management/global.php");
         <!-- sidebar-wrapper  -->
         <main class="page-content">
             <div class="container-fluid">
-                <div class="container-fluid sticky-top">
+                <div id="alert" class="container-fluid sticky-top">
                     <div class="alert alert-danger" role="alert">
                         <p class="text-center mb-0"><span id="alert-text"></span></p>
                     </div>
                 </div>
-                <div id="preview"></div>
+                <div id="preview" style="position:absolute;top:0px;left: 0px;width: 100%;height: 100%;"></div>
             </div>
 
 
@@ -385,6 +385,13 @@ include_once("management/global.php");
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="image-alert" class="alert alert-danger" role="alert">
+                                <p class="text-center mb-0"><span id="image-alert-text"></span></p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-12">
                             <div id="dangerAlert" class="alert alert-danger" role="alert">
@@ -582,7 +589,6 @@ include_once("management/global.php");
     </script>
 
     <?php
-//  include_once("../includes/footer.php");
 ?>
 </body>
 

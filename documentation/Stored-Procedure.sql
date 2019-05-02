@@ -230,11 +230,10 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `DeleteImageLink`
 (
-		IN `@websiteID` INT,
-		IN `@imageID` INT
+		IN `@imagelinkID` INT
 )
 BEGIN
-	DELETE FROM `imagelink` WHERE `WebSite_ID` = `@websiteID` AND `Image_ID` = `@imageID`;
+	DELETE FROM `imagelink` WHERE  `ID` = `@imagelinkID`;
 END $$
 DELIMITER ;
 

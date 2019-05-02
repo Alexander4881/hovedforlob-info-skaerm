@@ -4,9 +4,9 @@ $connection;
 // Database Instance
 function db(){    
     // Database Username
-    $DBUsername = 'infoskaerm';
+    $DBUsername = 'root';
     // Database Password
-    $DBPassword = '1zbE:iqTMV2CT{hoBz)^SAtiGuvTJXBw';
+    $DBPassword = '';
     // Database Host
     $DBHostname = '127.0.0.1:3306';
     // Datbase Catalogue
@@ -231,5 +231,31 @@ function GetWebsiteImages($webSiteID){
 function GetWebsiteTexts($webSiteID){
     // Query stored procedure, get texts paragraphs with styling by selected website ID
     return SqlQuery("CALL `ShowWebsiteTextsOnID`(" . $webSiteID . ");");
+}
+
+/* Functions for DeleteTable - DeleteText - DeleteImageLink - Delete,  nested together.
+-------------------------------------------------------------------------------------------*/
+// delete table on table id - takes 1 paramater
+// $tableID
+function DeleteTable($tableID)
+{
+    
+    return SqlQuery("CALL `DeleteTable`(" . $tableID . ");");
+}
+
+// delete table on table id - takes 1 paramater
+// $textID
+function DeleteText($textID)
+{
+    
+    return SqlQuery("CALL `DeleteText`(" . $textID . ");");
+}
+
+// delete table on table id - takes 1 paramater
+// $textID
+function DeleteImageLink($imageLinkID)
+{
+    
+    return SqlQuery("CALL `DeleteImageLink`(" . $imageLinkID . ");");
 }
 ?>

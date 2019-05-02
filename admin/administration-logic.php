@@ -301,6 +301,31 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
     $siteID = GetActiveWebsiteOnSiteID($_POST['siteID']);
 
     echo(GetwebsiteElements($siteID));
+}else if(isset($_POST['val']) && $_POST['val'] == "deleteImage"){
+    //delete image
+    if (isset($_POST["imageID"])){
+        $result = DeleteImageLink($_POST["imageID"]);
+        echo($result);
+        // if ($result == true || $result == 1) {
+        //     echo(1);
+        // }else{
+        //     echo("error");
+        // }
+    }
+
+}else if(isset($_POST['val']) && $_POST['val'] == "deleteText"){
+    //delete text
+    if (isset($_POST["textID"])){
+        $result = DeleteText($_POST["textID"]);
+        echo($result);
+    }
+
+}else if(isset($_POST['val']) && $_POST['val'] == "deleteTable"){
+    //delete table
+    if (isset($_POST["tableID"])){
+        $result = DeleteTable($_POST["tableID"]);
+        echo($result);
+    }
 }
 
 

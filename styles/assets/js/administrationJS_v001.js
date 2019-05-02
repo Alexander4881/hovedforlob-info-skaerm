@@ -34,6 +34,8 @@ var selectedImage = null;
 
 // get the current elements
 $(document).ready(function() {
+    $("#alert").hide();
+    $("#image-alert").hide();
     $.ajax({
         url: './administration-logic.php',
         type: 'post', 
@@ -226,7 +228,7 @@ function NewElement(elementType){
     // 3 = image element
     switch(elementType){
         case 1:
-        $("#preview").append('<p style="position: absolute;" data-toggle="tooltip">New Text</p>');
+        $("#preview").append('<p style="text-align:left; position: absolute;">New Text</p>');
         break
         
         case 2:
@@ -275,6 +277,8 @@ function NewElement(elementType){
                 processData:false,
                 success: function(data)
                 {
+                    $("#image-alert-text").text(data);
+                    $("#image-alert").fadeIn();
                     console.log(data);
                     UpdateImages();
                 },
@@ -420,7 +424,8 @@ function SetElementSettings(){
         break;
     }
 
-    $("#alert-text").text(selectedElement.tagName);
+    ShowAlertTextBox("SELECTED " + selectedElement.tagName,250,1000);
+    // $("#alert-text").text(selectedElement.tagName);
 }
 
 function ShowTextEditor(){
@@ -532,33 +537,21 @@ function TextAlign(textAlign){
     // Right = 3
     if(textAlign == 1){
         console.log("left");
-        if(!textAlignLeft.classList.contains("disabled")){
-            textAlignLeft.classList += " disabled";   
-        }
+        
         selectedElement.style.textAlign='left';
         
-        textAlignCenter.classList.remove('disabled');
-        textAlignRight.classList.remove('disabled');
         
     }else if(textAlign == 2){
         console.log("center");
-        if(!textAlignCenter.classList.contains("disabled")){
-            textAlignCenter.classList += " disabled";
-        }
+        
         selectedElement.style.textAlign='center';
         
-        textAlignLeft.classList.remove('disabled');
-        textAlignRight.classList.remove('disabled');
         
     }else if(textAlign === 3){
         console.log("right");
-        if(!textAlignRight.classList.contains("disabled")){
-            textAlignRight.classList += " disabled";
-        }
+        
         selectedElement.style.textAlign='right';
         
-        textAlignCenter.classList.remove('disabled');
-        textAlignLeft.classList.remove('disabled');
     }
 }
 
@@ -591,6 +584,12 @@ function ContentWidth(addOrSubtract){
             selectedElement.style.width = Number(selectedElement.clientWidth)-1 + "px";
             widthInput.value = Number(widthInput.value)-1;
         }
+    }else if(addOrSubtract == 3){
+        // Take the current width and adds it by one
+        if(Number(selectedElement.clientWidth) < 1920 && Number(selectedElement.clientWidth) >= 0){
+            selectedElement.style.width = 1920 + "px";
+            widthInput.value = 1920;
+        }
     }
 }
 
@@ -609,6 +608,12 @@ function ContentHeight(addOrSubtract){
         if(Number(selectedElement.clientHeight) < 1080 && Number(selectedElement.clientHeight) >= 0){
             selectedElement.style.height = Number(selectedElement.clientHeight)-1 + "px";
             heigthInput.value = Number(heigthInput.value)-1;
+        }
+    }else if(addOrSubtract == -1){
+        // Take the current Height and adds it by one
+        if(addOrSubtract == 3){
+            selectedElement.style.height = 1080 + "px";
+            heigthInput.value = 1080;
         }
     }
 }
@@ -684,44 +689,104 @@ function InputValueChanges(element){
 }
 
 function DeleteItem(){
-    console.log("ran");
-    switch(selectedElement.tagName.toLowerCase){
+    console.log("ran " + selectedElement.tagName.toLowerCase());
+    var elementID = $(selectedElement).attr('id');
+    switch(selectedElement.tagName.toLowerCase()){
         case'p':
         console.log("p");
         // Check if it has an id
         if (typeof elementID === typeof undefined || elementID === false) {
             // it does not have an id
+            console.log("hasent an id");
             selectedElement.remove();
+            ShowAlertTextBox("REMOVED PARAGRAPH",500,2000);
 
         }else{
             // it has an id
-           
+            console.log("has id " + elementID);
+
+            $.ajax({
+                url: './administration-logic.php',
+                type: 'post', 
+                data: 
+                { 
+                    "val" : "deleteText",
+                    "textID" : elementID
+                },
+                success: function(response) { 
+                    
+                    if(response == 1){
+                        selectedElement.remove();
+                        ShowAlertTextBox("REMOVED PARAGRAPH",500,2000);
+                        // $("#alert-text").text("REMOVED PARAGRAPH");  
+                    }
+                }
+            });
+
         }
         
         break;
 
         case'table':
+        console.log("table");
         // Check if it has an id
         if (typeof elementID === typeof undefined || elementID === false) {
             // it does not have an id
             selectedElement.remove();
+            ShowAlertTextBox("REMOVED TABLE",500,2000);
 
         }else{
             // it has an id
-            
+            $.ajax({
+                url: './administration-logic.php',
+                type: 'post', 
+                data: 
+                { 
+                    "val" : "deleteTable",
+                    "tableID" : elementID
+                },
+                success: function(response) { 
+                    
+                    if(response == 1){
+                        selectedElement.remove();
+                        ShowAlertTextBox("REMOVED TABLE",500,2000);
+                        // $("#alert-text").text("REMOVED TABLE");  
+                    }
+                    
+                }
+            });
+
         }
         break;
 
         case'img':
-        console.log("img");
+        console.log("image");
         // Check if it has an id
         if (typeof elementID === typeof undefined || elementID === false) {
             // it does not have an id
             selectedElement.remove();
+            ShowAlertTextBox("REMOVED IMAGE",500,2000);
             
         }else{
             // it has an id
-            
+            $.ajax({
+                url: './administration-logic.php',
+                type: 'post', 
+                data: 
+                { 
+                    "val" : "deleteImage",
+                    "imageID" : elementID
+                },
+                success: function(response) { 
+                    
+                    if(response == 1){
+                        selectedElement.remove();
+                        ShowAlertTextBox("REMOVED IMAGE",500,2000);
+                        // $("#alert-text").text("REMOVED IMAGE");
+                    }
+                }
+            });
+
         }
         break;
 
@@ -869,4 +934,13 @@ function SetSvgColorWheel(color,currentColor){
         default:
         console.log("Error On SetSvgColorWeel");
     }
+}
+
+// function to show text alert textbox
+function ShowAlertTextBox(text, easeInTimeInMilliSeconds,timeOpenInMilliSeconds){
+    $("#alert-text").text(text);
+    $("#alert").fadeIn(easeInTimeInMilliSeconds,"swing");
+    setTimeout(function(){
+        $("#alert").fadeOut(easeInTimeInMilliSeconds,"swing");
+    },timeOpenInMilliSeconds);
 }

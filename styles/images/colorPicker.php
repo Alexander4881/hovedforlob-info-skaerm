@@ -4,7 +4,7 @@
 <svg id="colorSvg"
     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:krita="http://krita.org/namespaces/svg/krita"
-    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" width="auto"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" width="260px"
     viewBox="0 0 650 675">
     <defs />
     <circle id="shape07" transform="matrix(1.78891565488645 0 0 1.78891566697782 233.560830314062 532.468448335564)"
@@ -20,15 +20,15 @@
         stroke-dasharray="14.4,7.2" />
         
     <foreignObject x="20" y="560" width="95" height="80">
-    <input id="redColor" class="colorInput red" type="number" value="255" step="5" min="0" max="255" onchange="RGBColorChanges(0)">
+    <input id="redColor" class="colorInput red" type="number" value="0" step="5" min="0" max="255" onchange="RGBColorChanges(0)">
     </foreignObject>
     
     <foreignObject x="250" y="560" width="95" height="80">
-    <input id="greenColor" class="colorInput green" type="number" value="255" step="5" min="0" max="255" onchange="RGBColorChanges(1)">
+    <input id="greenColor" class="colorInput green" type="number" value="0" step="5" min="0" max="255" onchange="RGBColorChanges(1)">
     </foreignObject>
 
     <foreignObject x="480" y="560" width="95" height="80">
-    <input id="blueColor" class="colorInput blue" type="number" value="255" step="5" min="0" max="255" onchange="RGBColorChanges(2)">
+    <input id="blueColor" class="colorInput blue" type="number" value="0" step="5" min="0" max="255" onchange="RGBColorChanges(2)">
     </foreignObject>
 
     <circle id="LightOne" transform="matrix(1.78891568368016 0 0 1.78891568596614 0 262.199068143255)" r="20.64"

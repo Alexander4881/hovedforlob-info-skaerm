@@ -1,6 +1,2 @@
-table edit
-zoom text size 
-image size
-ajax response to image caosel
-set the size of images on insert  
-save with zoom
+Tobias fix preview div left 260px when toolbar is extended
+Alexander fix background color for main div ? ? 
