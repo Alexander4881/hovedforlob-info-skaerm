@@ -204,6 +204,8 @@ include_once("../includes/header.php");
     </div>
 </div>
 
+<div id="toolbox"></div>
+
 <div class="row h-100 justify-content-center align-items-center">
     <div id="preview" class="container-fluid" style="width: 1920px; height: 1080px;">
     </div>
