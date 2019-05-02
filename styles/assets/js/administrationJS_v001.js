@@ -1,5 +1,6 @@
 // the current element
 var selectedElement;
+var oldSelectedElement;
 
 // element settings box
 var elementSettings = document.getElementById("element-editor");
@@ -30,126 +31,6 @@ var tableSelectedSize = null;
 // selected image
 var selectedImage = null;
 
-// // zoom variable
-// var newZoomLevel = 1;
-// var oldZoomLevel = 1;
-// var previewOffset;
-
-// // zoom function
-// function ChangesPreviewSize(size){
-    
-//     oldZoomLevel = newZoomLevel;
-//     newZoomLevel = size;
-    
-    
-    
-//     // Updates Elements size
-//     UpdateElementsSizeOnZoom();
-    
-        
-
-// }
-
-// // function for update sizes on zoom
-// function UpdateElementsSizeOnZoom(){
-//     const elements = $("#preview").children();
-//     previewOffset = $("#preview").offset();
-    
-    
-//     // loops all the elements and updatest or inserts them
-//     for (let i = 0; i < elements.length; i++) {
-
-        
-//         const element = elements[i];
-//         const elementPosition = $(element).position();
-
-//         // change width 
-//         $(element).width(CalulateZoomNumber($(element).width()));
-//         // change height
-//         $(element).height(CalulateZoomNumber($(element).height()));
-    
-
-//         console.log("offset top " + previewOffset.top + " pos top " + CalulateZoomNumber(elementPosition.top));
-//         console.log("offset left " + previewOffset.left + "pos left" + CalulateZoomNumber(elementPosition.left));
-
-//         // change top
-//         $(element).css({'top' : (previewOffset.top + CalulateZoomNumber(elementPosition.top)) + 'px'});
-//         // change left
-//         $(element).css({'left' : (previewOffset.left + CalulateZoomNumber(elementPosition.left)) + 'px'});
-
-
-//         switch(element.tagName.toLowerCase()){
-//             case'p':
-
-//             // edit font size
-//             console.log("text size = " + ($(element).css('font-size').replace('px','') ));
-//             //element.style.fontSize = 
-//             $(element).css('font-size',CalulateZoomNumber($(element).css('font-size').replace('px','')) + "px");
-//             break;
-
-//             case'table':            
-//             break;
-
-//             case'img':
-//             break;
-//         }
-//     }
-
-//     $("#preview").width(Math.floor(1920 * newZoomLevel));
-//     $("#preview").height(Math.floor(1080 * newZoomLevel));
-// }
-
-// // caluculate the zoome number 
-// //needs a number 
-// //returnes a number
-// function CalulateZoomNumber(numberToBeCalc){
-
-//     if(oldZoomLevel == 0.25){
-//         // to get the orignal value times with 4
-//         var temp = (numberToBeCalc * 4);
-//         // we times with 0.25
-//         return  temp * newZoomLevel;
-
-//     }else if (oldZoomLevel == 0.50){
-//         // to get the orignal value times with 2
-//         var temp = (numberToBeCalc * 2);
-//         // we times with 0.50            
-//         return temp * newZoomLevel;
-
-//     }else if (oldZoomLevel == 0.75){
-//         // to get the orignal value times with 2
-//         var temp = (numberToBeCalc / 75 * 100);
-//         // we times with 0.75        
-//         return temp * newZoomLevel;
-
-//     }else if (oldZoomLevel == 1){
-//         // return the orginal size            
-//         return numberToBeCalc * newZoomLevel;
-
-//     }
-// }
-
-// // function to get the orignal number
-// function OriginalZoomNumber(numberToBeCalc){
-    
-//     if(oldZoomLevel == 0.25){
-//         // to get the orignal value times with 4
-//         return  (numberToBeCalc * 4);
-
-//     }else if (oldZoomLevel == 0.50){
-//         // to get the orignal value times with 2      
-//         return (numberToBeCalc * 2);
-
-//     }else if (oldZoomLevel == 0.75){
-//         // to get the orignal value times with 2
-//         return (numberToBeCalc / 75 * 100);
-
-//     }else if (oldZoomLevel == 1){
-//         // return the orginal size            
-//         return numberToBeCalc;
-
-//     }
-// }
 
 // get the current elements
 $(document).ready(function() {
@@ -313,7 +194,6 @@ function SaveContent(){
 
         }
     }
-
     Editor();
 }
 
@@ -497,6 +377,7 @@ function Editor(){
 
     // click on element
     $("#preview").click(function(){
+        oldSelectedElement = selectedElement;
         selectedElement = event.target;
         SetElementSettings();
     });
@@ -521,7 +402,6 @@ function SetElementSettings(){
 
         $(selectedElement).width(selectedElement.clientWidth);
         $(selectedElement).height(selectedElement.clientHeight);
-        ShowImageEditor();
         break;
 
         case'DIV':
@@ -530,14 +410,17 @@ function SetElementSettings(){
         break;
 
         case'TD':
-        console.log("test");
         heigthInput.value = selectedElement.clientHeight;
         widthInput.value = selectedElement.clientWidth;
-        topInput.value = selectedElement.offsetTop;
-        leftInput.value = selectedElement.offsetLeft;
 
+        if(selectedElement === oldSelectedElement){
+            console.log($(selectedElement).parents('table')[0].tagName);
+            selectedElement = $(selectedElement).parents('table')[0];
+        }
         break;
     }
+
+    $("#alert-text").text(selectedElement.tagName);
 }
 
 function ShowTextEditor(){
@@ -640,7 +523,7 @@ function textStyle(buttonClicked) {
         }
         break;
     }
- }
+}
 
 
 function TextAlign(textAlign){
@@ -797,6 +680,51 @@ function InputValueChanges(element){
         if(element.value <= 1920 && element.value >= 0){
             selectedElement.style.left = element.value + "px";
         }
+    }
+}
+
+function DeleteItem(){
+    console.log("ran");
+    switch(selectedElement.tagName.toLowerCase){
+        case'p':
+        console.log("p");
+        // Check if it has an id
+        if (typeof elementID === typeof undefined || elementID === false) {
+            // it does not have an id
+            selectedElement.remove();
+
+        }else{
+            // it has an id
+           
+        }
+        
+        break;
+
+        case'table':
+        // Check if it has an id
+        if (typeof elementID === typeof undefined || elementID === false) {
+            // it does not have an id
+            selectedElement.remove();
+
+        }else{
+            // it has an id
+            
+        }
+        break;
+
+        case'img':
+        console.log("img");
+        // Check if it has an id
+        if (typeof elementID === typeof undefined || elementID === false) {
+            // it does not have an id
+            selectedElement.remove();
+            
+        }else{
+            // it has an id
+            
+        }
+        break;
+
     }
 }
 

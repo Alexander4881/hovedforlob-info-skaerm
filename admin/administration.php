@@ -204,6 +204,12 @@ include_once("../includes/header.php");
     </div>
 </div>
 
+<div class="container-fluid sticky-top">
+    <div class="alert alert-danger" role="alert">
+        <p class="text-center mb-0"><span id="alert-text">alert text</span></p> 
+    </div>
+</div>
+
 <div id="toolbox"></div>
 
 <div class="row h-100 justify-content-center align-items-center">
@@ -218,9 +224,14 @@ include_once("../includes/header.php");
 
         </div>
         <div class="float-right">
+            <button class="btn btn-dark" id="Delete" onclick="DeleteItem()">
+                <i class="fas fa-trash-alt"></i>
+                <p class="d-inline">SLET</p>
+            </button>
+
             <button class="btn btn-dark" id="Save" onclick="SaveContent()">
                 <i class="fas fa-save"></i>
-                <p class="d-inline">Gem</p>
+                <p class="d-inline">GEM</p>
             </button>
         </div>
     </div>

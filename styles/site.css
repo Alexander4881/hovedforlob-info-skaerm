@@ -107,8 +107,12 @@ svg > g:hover{
 }
 
 #toolbox{
+  position: absolute;
+  top: 0%;
+  right: 0%;
   width: 388px;
-  height: 1080;
+  height: 1080px;
+  background-image: url(./images/BackgroundImage.png);
 }
 
 #widthInput, #heigthInput, #leftInput, #topInput{
