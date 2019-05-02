@@ -178,6 +178,14 @@ function GetWebsite($location){
     return SqlQuery("CALL `ShowWebsitesOnSiteID`('" . $location . "');");
 }
 
+// Get currently active website - takes 1 argument
+// Location
+function GetActiveWebsiteOnSiteID($location)
+{
+    $WebsiteSiteID = mysqli_fetch_array(SqlQuery("CALL `ShowActiveWebsiteOnSiteID`(" . $location . ");"));
+    return $WebsiteSiteID[0];
+}
+
 // Get all images available
 function GetImages(){
     // Set Result as the returned values from stored procedure.

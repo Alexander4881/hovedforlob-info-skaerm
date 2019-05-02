@@ -211,22 +211,8 @@ include_once("../includes/header.php");
 
 <!-- Extra Stuff -->
 <div class="container fixed-bottom">
-    <div class="alert alert-dark clearfix shadow p-3 mb-4" role="alert">
+    <div class="alert alert-dark clearfix shadow" role="alert">
         <div class="float-left">
-
-            <!-- Small button groups (default and split) -->
-            <div class="btn-group">
-                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    ZOOM
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" onclick="ChangesPreviewSize(0.25)">25 %</a>
-                    <a class="dropdown-item" onclick="ChangesPreviewSize(0.50)">50 %</a>
-                    <a class="dropdown-item" onclick="ChangesPreviewSize(0.75)">75 %</a>
-                    <a class="dropdown-item" onclick="ChangesPreviewSize(1.00)">100 %</a>
-                </div>
-            </div>
 
         </div>
         <div class="float-right">

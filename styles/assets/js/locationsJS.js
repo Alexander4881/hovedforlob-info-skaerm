@@ -1,16 +1,24 @@
-setInterval(() => {
-    $.ajax({
-        url: '../../../admin/administration-logic.php',
-        type: 'post',
-        data: 
-            { 
-                "val": "getWebsites",
-                "siteID": location
-            },
-        success: function(response) {
-            
-            console.log(response);
-            
-        }
-    });
-}, 100000);
+alert("test");
+
+$(document).ready(function () {
+
+    console.log("ready");
+
+    setInterval(() => {
+        console.log("ran");
+        $.ajax({
+            url: '../../../admin/administration-logic.php',
+            type: 'post',
+            data: 
+                { 
+                    "val": "getWebsiteElementsOnSiteID",
+                    "siteID": location
+                },
+            success: function(response) {
+                
+                
+                
+            }
+        });
+    }, 1000);    
+});

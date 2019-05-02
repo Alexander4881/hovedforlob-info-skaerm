@@ -298,7 +298,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowColumn`(
 	IN `@rowID` INT
 )
 BEGIN
-	SELECT `id`,`text` FROM `column` WHERE `Row_ID` = `@rowID`;
+	SELECT `id`,`text`,`style` FROM `column` WHERE `Row_ID` = `@rowID`;
 END $$
 DELIMITER ;
 
@@ -356,6 +356,25 @@ END $$
 DELIMITER ;
 
 /*CALL `ShowWebsiteTextsOnID`(19);*/
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowActiveWebsiteOnSiteID`(
+	IN `@siteID` INT
+)
+BEGIN
+	SELECT `ID` FROM `website` WHERE `SiteID` = `@siteID` AND `ActiveWebsite` = 1;
+END
+
+/*CALL `ShowActiveWebsiteOnSiteID`(16);*/
+
+
+
+
+
+
+
+
+
+
 
 
 

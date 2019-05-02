@@ -284,27 +284,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 }else if(isset($_POST['val']) && $_POST['val'] == "getWebsiteElements") {
     if (isset($_POST['websiteID'])) 
     {
-        $html = "";
-
-        // get images
-        $result = GetWebsiteImages($_POST['websiteID']);
-        while($imageProp = mysqli_fetch_array($result)){
-            $html .= "<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../images/uploads/". $imageProp["Path"] ."\"></img>";
-        }
-
-        // get text
-        $result = GetWebsiteTexts($_POST['websiteID']);
-        while($texts = mysqli_fetch_array($result)){
-            $html .= "<p id=\"".$texts["id"]."\"" . $texts["Style"] .">" .  $texts["Text"] . "</p>";
-        }
-
-        // get tabels
-        $result = GetTable($_POST['websiteID']);
-        while($tables = mysqli_fetch_array($result)){
-            $html .= GetTableHTML($tables["id"]);
-        }
-
-        echo($html);
+        echo(GetwebsiteElements($_POST['websiteID']));
     }
 }else if(isset($_POST['val']) && $_POST['val'] == "changeActiveWebsite"){
     if (isset($_POST['website']) && isset($_POST['location'])) {
@@ -312,6 +292,10 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
         echo($result);
     }
+}else if(isset($_POST['val']) && $_POST['val'] == "getWebsiteElementsOnSiteID"){
+    $siteID = GetActiveWebsiteOnSiteID($_POST['siteID']);
+
+    echo(GetwebsiteElements($siteID));
 }
 
 
@@ -332,7 +316,7 @@ function GetTableHTML($tableID){
         if(mysqli_num_rows($columns) > 0){
             while($column = mysqli_fetch_array($columns)){
                 // adds the column to the table var
-                $table .= "<td id=\"" . $column["id"] . "\">";
+                $table .= "<td id=\"" . $column["id"] . "\" style=\"" . $column["style"] . "\">";
                 $table .= " <span>" . $column['text'] . "</span>";
 
             }
@@ -372,5 +356,31 @@ function CreateCardHTML($html, $websiteProp, $startElement, $count, $location){
     
 
     return $html;
+}
+
+function GetwebsiteElements($websiteID){
+    
+    $html = "";
+
+    // get images
+    $result = GetWebsiteImages($websiteID);
+    while($imageProp = mysqli_fetch_array($result)){
+        $html .= "<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../images/uploads/". $imageProp["Path"] ."\"></img>";
+    }
+
+    // get text
+    $result = GetWebsiteTexts($websiteID);
+    while($texts = mysqli_fetch_array($result)){
+        $html .= "<p id=\"".$texts["id"]."\"" . $texts["Style"] .">" .  $texts["Text"] . "</p>";
+    }
+
+    // get tabels
+    $result = GetTable($websiteID);
+    while($tables = mysqli_fetch_array($result)){
+        $html .= GetTableHTML($tables["id"]);
+    }
+
+    return $html;
+    
 }
 ?>
