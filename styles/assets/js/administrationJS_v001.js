@@ -199,6 +199,19 @@ function SaveContent(){
     Editor();
 }
 
+function SetSaveIconNumber() {
+    var notSaved;
+
+    $("#preview").children().forEach(element => {
+        const elementID = $(element).attr('id');
+        if (typeof elementID === typeof undefined || elementID === false) {
+            notSaved++;
+        }
+    });
+
+    $("#saveIconNumber").text(notSaved);
+}
+
 function InsertTable(){
     console.log("Insert Table Method");
     if(tableSelectedSize != null){
@@ -308,7 +321,7 @@ function NewElement(elementType){
         });
         break
     }
-
+    SetSaveIconNumber();
     Editor();
 }
 
