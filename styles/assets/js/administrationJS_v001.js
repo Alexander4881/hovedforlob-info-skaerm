@@ -45,7 +45,6 @@ $(document).ready(function() {
             "websiteID" : websiteID
         },
         success: function(response) { 
-            console.log(response);
             // replaces the old table with the new
             $("#preview").html(response);
             Editor();
@@ -200,16 +199,17 @@ function SaveContent(){
 }
 
 function SetSaveIconNumber() {
-    var notSaved;
+    
 
-    $("#preview").children().forEach(element => {
-        const elementID = $(element).attr('id');
-        if (typeof elementID === typeof undefined || elementID === false) {
-            notSaved++;
-        }
-    });
+    // var elements = $("#preview").children();
 
-    $("#saveIconNumber").text(notSaved);
+    // for (let i = 0; i < elements.length; i++) {
+    //     if (typeof elements[i] === typeof undefined || elements[i] === false) {
+    //         notSaved++;
+    //     }
+    // }
+
+    // $("#saveIconNumber").text(notSaved);
 }
 
 function InsertTable(){
@@ -336,7 +336,9 @@ function UpdateImages(){
         url: './administration-logic.php',
         type: 'post',
         data: { "val": "getImages"},
-        success: function(response) { 
+        success: function(response) {
+            $("#imageCarousel").empty();
+            console.log(response);
             $("#imageCarousel").append(response);
             $("#imageCarousel > div:first-child").addClass("active");
             $("#imageCarousel > div > img").click(function(){
@@ -397,6 +399,7 @@ function Editor(){
         oldSelectedElement = selectedElement;
         selectedElement = event.target;
         SetElementSettings();
+        testSnappingDrag();
     });
 }
 
@@ -956,4 +959,39 @@ function ShowAlertTextBox(text, easeInTimeInMilliSeconds,timeOpenInMilliSeconds)
     setTimeout(function(){
         $("#alert").fadeOut(easeInTimeInMilliSeconds,"swing");
     },timeOpenInMilliSeconds);
+}
+
+function testSnappingDrag(){
+    console.log("Test");
+    if(selectedElement.tagName != 'DIV' && selectedElement.tagName != 'TD' && selectedElement.tagName != 'SPAN' ){
+        var element = selectedElement,
+    x = 0, y = 0;
+
+    interact(element)
+    .draggable({
+        modifiers: [
+        interact.modifiers.snap({
+            targets: [
+            interact.createSnapGrid({ x: 30, y: 30 })
+            ],
+            range: Infinity,
+            relativePoints: [ { x: 0, y: 0 } ]
+        }),
+        interact.modifiers.restrict({
+            restriction: element.parentNode,
+            elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+            endOnly: true
+        })
+        ],
+        inertia: true,
+    })
+    .on('dragmove', function (event) {
+        x += event.dx;
+        y += event.dy;
+
+        event.target.style.webkitTransform =
+        event.target.style.transform =
+            'translate(' + x + 'px, ' + y + 'px)';
+    });
+    }
 }

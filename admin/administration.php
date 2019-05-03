@@ -324,7 +324,7 @@ include_once("management/global.php");
             <div class="sidebar-footer clearfix">
                 <a onclick="SaveContent()">
                     <i class="fas fa-save"></i>
-                    <span id="saveIconNumber" class="badge badge-pill badge-info notification">2</span>
+                    <span id="saveIconNumber" class="badge badge-pill badge-info notification">0</span>
                 </a>
                 <a onclick="DeleteItem()">
                     <i class="fas fa-trash-alt"></i>
@@ -551,7 +551,7 @@ include_once("management/global.php");
     <script>
     const websiteID = <?= $_GET['id'] ?>;
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
     <script src="../styles/assets/js/administrationJS_v001.js"></script>
 
     <!-- SideMenu Script -->

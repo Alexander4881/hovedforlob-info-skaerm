@@ -128,8 +128,6 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             }
         }
     }
-}else if(isset($_POST['val']) && $_POST['val'] === "getWebSiteContent"){
-    // nets to be emplimented
 }else if(isset($_POST['val']) && $_POST['val'] == "newImageLink"){
     
     $sqlResult = NewImageLink($_POST['websideID'], $_POST['imageID'], $_POST['style']);
@@ -150,7 +148,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
         while($imageProp = mysqli_fetch_array($sqlResult)){
             
-             echo("<img id=\"".$imageProp["id"]."\" " . $imageProp["Image_Style"] . " src=\"../images/uploads/". $imageProp["Path"] ."\"></img>");
+             echo("<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../images/uploads/". $imageProp["Path"] ."\"></img>");
 
         }
     }
@@ -338,21 +336,20 @@ function GetTableHTML($tableID,$Style){
     $rows = GetRow($tableID);
     // get rows from database query
     while($row = mysqli_fetch_array($rows)){
-        $table .= "<tr id=\"" . $row["id"] . "\">";
+        $table .= "<tr id=\"" . $row["ID"] . "\">";
         
 
-        $columns = GetColumn($row["id"]);
+        $columns = GetColumn($row["ID"]);
 
         if(mysqli_num_rows($columns) > 0){
             while($column = mysqli_fetch_array($columns)){
                 // adds the column to the table var
-                $table .= "<td id=\"" . $column["id"] . "\" style=\"" . $column["style"] . "\">";
-                $table .= " <span>" . $column['text'] . "</span>";
+                $table .= "<td id=\"" . $column["ID"] . "\" style=\"" . $column["style"] . "\">";
+                $table .= " <span>" . $column['Text'] . "</span>";
 
             }
         }
         $table .= "</tr>";
-        // mysqli_free_result($rows);
     }
 
     $table .= "</tbody>";
@@ -401,13 +398,13 @@ function GetwebsiteElements($websiteID){
     // get text
     $result = GetWebsiteTexts($websiteID);
     while($texts = mysqli_fetch_array($result)){
-        $html .= "<p id=\"".$texts["id"]."\"" . $texts["Style"] .">" .  $texts["Text"] . "</p>";
+        $html .= "<p id=\"".$texts["ID"]."\"" . $texts["Style"] .">" .  $texts["Text"] . "</p>";
     }
 
     // get tabels
     $result = GetTable($websiteID);
     while($tables = mysqli_fetch_array($result)){
-        $html .= GetTableHTML($tables["id"],$tables["Style"]);
+        $html .= GetTableHTML($tables["ID"],$tables["Style"]);
     }
 
     return $html;
