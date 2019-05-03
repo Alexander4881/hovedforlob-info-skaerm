@@ -4,9 +4,11 @@ $connection;
 // Database Instance
 function db(){    
     // Database Username
+
     $DBUsername = 'mysql';
     // Database Password
     $DBPassword = '08000800';
+
     // Database Host
     $DBHostname = '192.168.6.146:3306';
     // Datbase Catalogue
