@@ -340,6 +340,8 @@ include_once("management/global.php");
                     </div>
                 </div>
                 <div id="preview"></div>
+                <div id="vertical-line"></div>
+                <div id="horisontal-line"></div>
             </div>
 
 

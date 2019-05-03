@@ -196,20 +196,22 @@ function SaveContent(){
         }
     }
     Editor();
+    SetSaveIconNumber();
 }
 
 function SetSaveIconNumber() {
-    
+    console.log("SetSaveIconNumber");
+    notSaved = 0;
+    var elements = $("#preview").children();
 
-    // var elements = $("#preview").children();
+    for (let i = 0; i < elements.length; i++) {
+        const elementID = $(elements[i]).attr('id');
+        if (typeof elementID === typeof undefined || elementID === false) {
+            notSaved = notSaved + 1;
+        }
+    }
 
-    // for (let i = 0; i < elements.length; i++) {
-    //     if (typeof elements[i] === typeof undefined || elements[i] === false) {
-    //         notSaved++;
-    //     }
-    // }
-
-    // $("#saveIconNumber").text(notSaved);
+    $("#saveIconNumber").text(notSaved);
 }
 
 function InsertTable(){
@@ -359,8 +361,10 @@ function Editor(){
     $("#preview > p").dblclick(function(){
         var textElement = event.target;
 
+        console.log($(textElement).text());
+
         // set the text field on the modal
-        $("#editText").attr("value",textElement.textContent);
+        $("#editText").val($(textElement).text());
 
         // show the modal
         $("#editTextModal").modal();
@@ -381,7 +385,7 @@ function Editor(){
         var textElement = event.target;
 
         // set the text field on the modal
-        $("#editText").attr("value",textElement.textContent);
+        $("#editText").attr("value",$(textElement).text());
 
         // show the modal
         $("#editTextModal").modal();
@@ -962,7 +966,7 @@ function ShowAlertTextBox(text, easeInTimeInMilliSeconds,timeOpenInMilliSeconds)
 }
 
 function testSnappingDrag(){
-    console.log("Test");
+    console.log("testSnappingDrag");
     if(selectedElement.tagName != 'DIV' && selectedElement.tagName != 'TD' && selectedElement.tagName != 'SPAN' ){
         var element = selectedElement,
     x = 0, y = 0;

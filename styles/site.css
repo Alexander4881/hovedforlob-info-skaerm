@@ -30,6 +30,23 @@ html,body{
   width: 1920px;
   height: 1020px;
 }
+
+#horisontal-line{
+  position: absolute;
+  top: 510px;
+  left: 0;
+  width: 1920px;
+  border: #980303 solid 0.5px;
+}
+
+#vertical-line{
+  border: #980303 solid 0.5px;
+  height: 1020px;
+  position: absolute;
+  left: 960px;
+  top: 0px;
+}
+
 /* svg hover css */
 svg{
   margin-bottom: 60px;
