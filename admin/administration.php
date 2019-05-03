@@ -324,7 +324,7 @@ include_once("management/global.php");
             <div class="sidebar-footer clearfix">
                 <a onclick="SaveContent()">
                     <i class="fas fa-save"></i>
-                    <span class="badge badge-pill badge-info notification">2</span>
+                    <span id="saveIconNumber" class="badge badge-pill badge-info notification">2</span>
                 </a>
                 <a onclick="DeleteItem()">
                     <i class="fas fa-trash-alt"></i>
