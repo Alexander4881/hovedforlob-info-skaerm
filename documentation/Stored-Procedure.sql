@@ -5,20 +5,18 @@ USE infoskaerm;
 
 /*		new website*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `InsertNewWebSite`(
-	title VARCHAR(40) , 
+CREATE DEFINER=`root`@`localhost`  `InsertNewWebSite`(
+	IN title VARCHAR(40) , 
 	IN siteID TINYINT
 )
 BEGIN
-	INSERT INTO `website` (`Title`, `SiteID`) VALUES (title, siteID);
-	SELECT `id`,`title` FROM `website` WHERE `ID` = (SELECT LAST_INSERT_ID() FROM `website` limit 1);
+	INSERT INTO `WebSite` (`Title`, `SiteID`) VALUES (title, siteID);
+	SELECT `id`,`title` FROM `WebSite` WHERE `ID` = (SELECT LAST_INSERT_ID() FROM `WebSite` limit 1);
 END $$
 DELIMITER ;
 
 /* new website /*CALL 
 /*CALL InsertNewWebSite("Titel Test",14);*/
-
-
 
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `NewText`(
@@ -27,26 +25,26 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `NewText`(
 	IN `@style` MEDIUMTEXT
 )
 BEGIN
-	INSERT INTO `text` (`Text`, `WebSite_ID`, `Style`) VALUES (`@text`, `@website_ID`, `@style`);
-	SELECT * FROM `text` WHERE `id` = LAST_INSERT_ID();
+	INSERT INTO `Text` (`Text`, `WebSite_ID`, `Style`) VALUES (`@text`, `@website_ID`, `@style`);
+	SELECT * FROM `Text` WHERE `id` = LAST_INSERT_ID();
 END $$
 DELIMITER ;
 
 /* new text /*CALL
 /*CALL NewText("Titel",1,"style=''");*/
 
-CREATE PROCEDURE IF NOT EXISTS InsertNewImage(IN ImagePath VARCHAR(255))
+CREATE  InsertNewImage(IN ImagePath VARCHAR(255))
 INSERT INTO `Image`(`Path`) VALUE(ImagePath);
 
 /*
 /*CALL InsertNewImage("null.png");*/
 
 DELIMITER $$
-CREATE PROCEDURE IF NOT EXISTS `InsertNewImageLink`(IN `@WebSite_ID` INT, IN `@Image_ID` INT, IN `@ImageStyle` MEDIUMTEXT)
+CREATE  `InsertNewImageLink`(IN `@WebSite_ID` INT, IN `@Image_ID` INT, IN `@ImageStyle` MEDIUMTEXT)
 BEGIN
 INSERT INTO `ImageLink`(`WebSite_ID`, `Image_ID`, `Image_Style`) VALUE(`@WebSite_ID`,`@Image_ID`, `@ImageStyle`);
-SELECT `imagelink`.`ID`, `imagelink`.`Image_Style`, `image`.`Path` FROM `imagelink` 
-	INNER JOIN `image` ON `imagelink`.`Image_ID` = `image`.`ID` WHERE `imagelink`.`ID` = (LAST_INSERT_ID());
+SELECT `ImageLink`.`ID`, `ImageLink`.`Image_Style`, `Image`.`Path` FROM `ImageLink` 
+	INNER JOIN `Image` ON `ImageLink`.`Image_ID` = `Image`.`ID` WHERE `ImageLink`.`ID` = (LAST_INSERT_ID());
 END $$
 DELIMITER ;
 
@@ -54,52 +52,50 @@ DELIMITER ;
 
 /* Show Items */
 /* Show Items Websites*/
-CREATE PROCEDURE IF NOT EXISTS ShowWebSites(IN WebSite_ID INT)
+CREATE  ShowWebSites(IN WebSite_ID INT)
 SELECT * FROM `WebSite` WHERE `ID` = WebSite_ID;
 
 /*CALL ShowWebSites(1);
 
 /* Show Images */
-CREATE PROCEDURE IF NOT EXISTS ShowImages()
-SELECT `image`.`ID`,`image`.`path` FROM `Image`;
+CREATE  ShowImages()
+SELECT `Image`.`ID`,`Image`.`Path` FROM `Image`;
 
 /*CALL ShowImages;*/
 
 /* Show Image Link */
-CREATE PROCEDURE IF NOT EXISTS ShowImagesForWebSite(IN `@WebSiteID` INT)
-	SELECT `imagelink`.`ID`, `imagelink`.`WebSite_ID`, `imagelink`.`Image_ID`, `imagelink`.`Image_Style`, `image`.`Path` 
+CREATE  ShowImagesForWebSite(IN `@WebSiteID` INT)
+	SELECT `ImageLink`.`ID`, `ImageLink`.`WebSite_ID`, `ImageLink`.`Image_ID`, `ImageLink`.`Image_Style`, `Image`.`Path` 
 	FROM `ImageLink` 
-	INNER JOIN `image` ON `image`.`ID` = `imagelink`.`Image_ID`
+	INNER JOIN `Image` ON `Image`.`ID` = `ImageLink`.`Image_ID`
 	WHERE `WebSite_ID` = `@WebSiteID`;
 
 /*CALL ShowImagesForWebSite(19);*/
 
-
 /* Show Text */
-CREATE PROCEDURE IF NOT EXISTS ShowText(IN WebSiteID INT)
+CREATE  ShowText(IN WebSiteID INT)
 SELECT * FROM `Text` WHERE `WebSite_ID` = WebSiteID;
 
 /*CALL ShowText(2);
 
 /* Inset New Table */
 DELIMITER $$
-CREATE  DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `InsertNewTable`
+CREATE  DEFINER=`root`@`localhost`  `InsertNewTable`
 (
     IN `@websiteID` INT,
 		IN `@style` MEDIUMTEXT
 )
 BEGIN
-	INSERT INTO `table`(`WebSite_ID`,`Style`) VALUES(`@websiteID`,`@style`);
+	INSERT INTO `Table`(`WebSite_ID`,`Style`) VALUES(`@websiteID`,`@style`);
 	SELECT LAST_INSERT_ID() AS `ID`;
 END $$
 DELIMITER ;
 
 /*CALL `InsertNewTable`(1);*/
 
-
 /* Inset New Row */
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `InsertNewRow`
+CREATE DEFINER=`root`@`localhost`  `InsertNewRow`
 (
     IN `@tableID` INT,
 		IN `@style` MEDIUMTEXT
@@ -112,10 +108,9 @@ DELIMITER ;
 
 /*CALL `InsertNewRow`(1,'style');*/
 
-
 /* Inset New Row */
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `InsertNewColumn`
+CREATE DEFINER=`root`@`localhost`  `InsertNewColumn`
 (
     IN `@rowID` INT,
 		IN `@ColumnText` MEDIUMTEXT,
@@ -129,35 +124,32 @@ DELIMITER ;
 
 /*CALL `InsertNewColumn`(1,'New Column Text');*/
 
-
-
 /* Update Procedure */
 
 /*		Update Column */
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `UpdateColumn`
+CREATE DEFINER=`root`@`localhost`  `UpdateColumn`
 (
     IN `@id` INT,
 		IN `@ColumnText` MEDIUMTEXT,
 		IN `@ColumnStyle` MEDIUMTEXT 
 )
 BEGIN
-	UPDATE `column` SET `Text` = `@ColumnText`, `style` = `@ColumnStyle` WHERE `id` = `@id`;
+	UPDATE `Column` SET `Text` = `@ColumnText`, `style` = `@ColumnStyle` WHERE `ID` = `@id`;
 END $$
 DELIMITER ;
 
 /*CALL `UpdateColumn`(9,'text new test');*/
 
-
 /*		Update Column */
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `UpdateTable`
+CREATE DEFINER=`root`@`localhost`  `UpdateTable`
 (
     IN `@id` INT,
 		IN `@TableStyle` MEDIUMTEXT 
 )
 BEGIN
-	UPDATE `table` SET `style` = `@TableStyle` WHERE `id` = `@id`;
+	UPDATE `Table` SET `Style` = `@TableStyle` WHERE `ID` = `@id`;
 END $$
 DELIMITER ;
 
@@ -165,13 +157,13 @@ DELIMITER ;
 
 /*		Update Column */
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `UpdateRow`
+CREATE DEFINER=`root`@`localhost`  `UpdateRow`
 (
     IN `@id` INT,
 		IN `@RowStyle` MEDIUMTEXT 
 )
 BEGIN
-	UPDATE `row` SET `style` = `@RowStyle` WHERE `id` = `@id`;
+	UPDATE `Row` SET `style` = `@RowStyle` WHERE `ID` = `@id`;
 END $$
 DELIMITER ;
 
@@ -184,9 +176,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateImageLink`(
 		IN `@Style` MEDIUMTEXT
 )
 BEGIN
-	UPDATE `imagelink` SET `Image_Style` = `@Style` WHERE `ID` = `@ImageLink_ID`;
-	SELECT `imagelink`.`id`, `imagelink`.`Image_Style`, `image`.`Path` FROM `imagelink` 
-	INNER JOIN `image` ON `imagelink`.`Image_ID` = `image`.`ID` WHERE `imagelink`.`id` = `@ImageLink_ID`;
+	UPDATE `ImageLink` SET `Image_Style` = `@Style` WHERE `ID` = `@ImageLink_ID`;
+	SELECT `ImageLink`.`ID`, `ImageLink`.`Image_Style`, `Image`.`Path` FROM `ImageLink` 
+	INNER JOIN `Image` ON `ImageLink`.`Image_ID` = `Image`.`ID` WHERE `ImageLink`.`ID` = `@ImageLink_ID`;
 END $$
 DELIMITER ;
 
@@ -194,33 +186,29 @@ DELIMITER ;
 
 /*		Update Text*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `UpdateText`
+CREATE DEFINER=`root`@`localhost`  `UpdateText`
 (
     IN `@Text` MEDIUMTEXT,
 		IN `@Text_ID` INT,
 		IN `@Style` MEDIUMTEXT
 )
 BEGIN
-	UPDATE `text` SET `text` = `@Text`, `Style` = `@Style` WHERE `ID` = `@Text_ID`;
-	SELECT * FROM `text` WHERE `id` = `@Text_ID`;
+	UPDATE `Text` SET `Text` = `@Text`, `Style` = `@Style` WHERE `ID` = `@Text_ID`;
+	SELECT * FROM `Text` WHERE `ID` = `@Text_ID`;
 END $$
 DELIMITER ;
 
 /*CALL `UpdateText`('Test Text Update',3, "style=''");*/
 
-
-
-
-
 /* Delete Procedure */
 /*		Delete WebSite*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `DeleteWebsite`
+CREATE DEFINER=`root`@`localhost`  `DeleteWebsite`
 (
 		IN `@websiteID` INT
 )
 BEGIN
-	DELETE FROM `website` WHERE ID = `@websiteID`;
+	DELETE FROM `WebSite` WHERE ID = `@websiteID`;
 END $$
 DELIMITER ;
 
@@ -228,12 +216,12 @@ DELIMITER ;
 
 /*		Delete ImageLink*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `DeleteImageLink`
+CREATE DEFINER=`root`@`localhost`  `DeleteImageLink`
 (
 		IN `@imagelinkID` INT
 )
 BEGIN
-	DELETE FROM `imagelink` WHERE  `ID` = `@imagelinkID`;
+	DELETE FROM `ImageLink` WHERE `ID` = `@imagelinkID`;
 END $$
 DELIMITER ;
 
@@ -241,12 +229,12 @@ DELIMITER ;
 
 /*		Delete Image*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `DeleteImage`
+CREATE DEFINER=`root`@`localhost`  `DeleteImage`
 (
 		IN `@imageID` INT
 )
 BEGIN
-	DELETE FROM `image` WHERE `id` = `@imageID`;
+	DELETE FROM `Image` WHERE `ID` = `@imageID`;
 END $$
 DELIMITER ;
 
@@ -254,47 +242,43 @@ DELIMITER ;
 
 /*		Delete Text*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `DeleteText`
+CREATE DEFINER=`root`@`localhost`  `DeleteText`
 (
 		IN `@TextID` INT
 )
 BEGIN
-	DELETE FROM `text` WHERE `id` = `@TextID`;
+	DELETE FROM `Text` WHERE `ID` = `@TextID`;
 END $$
 DELIMITER ;
 
 /*CALL `DeleteText`(1);*/
 
-
 /*		Delete Table*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `DeleteTable`
+CREATE DEFINER=`root`@`localhost`  `DeleteTable`
 (
 		IN `@TableID` INT
 )
 BEGIN
-	DELETE FROM `table` WHERE `id` = `@TableID`;
+	DELETE FROM `Table` WHERE `ID` = `@TableID`;
 END $$
 DELIMITER ;
 
 /*CALL `DeleteTable`(1);*/
 
-
-
 /* Show Procedure */
 /*		Show Table*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE IF NOT EXISTS `ShowTable`
+CREATE DEFINER=`root`@`localhost`  `ShowTable`
 (
 	IN `@websiteID` INT
 )
 BEGIN
-	SELECT `id`,`Style` FROM `table` WHERE `WebSite_ID` = `@websiteID`;
+	SELECT `ID`,`Style` FROM `Table` WHERE `WebSite_ID` = `@websiteID`;
 END $$
 DELIMITER ;
 
 /*CALL `ShowTable`(1);*/
-
 
 /*		Show Row*/
 DELIMITER $$
@@ -302,7 +286,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowRow`(
 	IN `@tableID` INT
 )
 BEGIN
-	SELECT `id` FROM `Row` WHERE `Table_ID` = `@tableID`;
+	SELECT `ID` FROM `Row` WHERE `Table_ID` = `@tableID`;
 END $$
 DELIMITER ;
 
@@ -314,7 +298,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowColumn`(
 	IN `@rowID` INT
 )
 BEGIN
-	SELECT `id`,`text`,`style` FROM `column` WHERE `Row_ID` = `@rowID`;
+	SELECT `ID`,`Text`,`style` FROM `Column` WHERE `Row_ID` = `@rowID`;
 END $$
 DELIMITER ;
 
@@ -326,12 +310,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowWebsitesOnSiteID`(
 	IN `@siteID` INT
 )
 BEGIN
-	SELECT `ID`,`Title`,`ActiveWebsite` FROM `website` WHERE `SiteID` = `@siteID`;
+	SELECT `ID`,`Title`,`ActiveWebsite` FROM `WebSite` WHERE `SiteID` = `@siteID`;
 END $$
 DELIMITER ;
 
 /*CALL `ShowWebsitesOnSiteID`(16);*/
-
 
 /*		Update Active website */
 DELIMITER $$
@@ -340,7 +323,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateActiveWebsiteOnID`(
 	IN `@Activewebsite` BOOLEAN
 )
 BEGIN
-	UPDATE `infoskaerm`.`website` SET `Activewebsite` = `@Activewebsite` WHERE `ID` = `@websiteID`;
+	UPDATE `infoskaerm`.`WebSite` SET `ActiveWebsite` = `@Activewebsite` WHERE `ID` = `@websiteID`;
 END $$
 DELIMITER ;
 
@@ -353,13 +336,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ChangeActiveWebsiteOnSiteIDAndWebsi
     IN `@websiteID` INT
 )
 BEGIN
-	CALL `UpdateActiveWebsiteOnID`((SELECT `ID` FROM `website` WHERE `SiteID` = `@siteID` AND `ActiveWebsite` = 1 LIMIT 1),FALSE);
+	CALL `UpdateActiveWebsiteOnID`((SELECT `ID` FROM `WebSite` WHERE `SiteID` = `@siteID` AND `ActiveWebsite` = 1 LIMIT 1),FALSE);
   CALL `UpdateActiveWebsiteOnID`(`@websiteID`,TRUE);
 END $$
 DELIMITER ;
 
 /*CALL `ChangeActiveWebsiteOnSiteIDAndWebsiteID`(16,11);*/
-
 
 /*		Show Active Webstes*/
 DELIMITER $$
@@ -367,7 +349,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowWebsiteTextsOnID`(
 IN `@websiteID` INT
 )
 BEGIN
-	SELECT `id`, `Text`,`Style` FROM `text` WHERE `WebSite_ID` = `@websiteID`;
+	SELECT `ID`, `Text`,`Style` FROM `Text` WHERE `WebSite_ID` = `@websiteID`;
 END $$
 DELIMITER ;
 
@@ -377,28 +359,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowActiveWebsiteOnSiteID`(
 	IN `@siteID` INT
 )
 BEGIN
-	SELECT `ID` FROM `website` WHERE `SiteID` = `@siteID` AND `ActiveWebsite` = 1;
+	SELECT `ID` FROM `WebSite` WHERE `SiteID` = `@siteID` AND `ActiveWebsite` = 1;
 END
 
 /*CALL `ShowActiveWebsiteOnSiteID`(16);*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
