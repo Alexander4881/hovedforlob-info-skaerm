@@ -19,7 +19,7 @@ include_once("management/global.php");
 <body>
 
     <!-- Page Wrapping -->
-    <div class="page-wrapper chiller-theme toggled">
+    <div class="page-wrapper chiller-theme">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
         </a>
@@ -339,7 +339,7 @@ include_once("management/global.php");
                         <p class="text-center mb-0"><span id="alert-text"></span></p>
                     </div>
                 </div>
-                <div id="preview" style="position:absolute;top:0px;left: 0px;width: 100%;height: 100%;"></div>
+                <div id="preview"></div>
             </div>
 
 
@@ -543,6 +543,11 @@ include_once("management/global.php");
         </div>
     </div>
 
+
+    <div >
+        <span class="badge badge-pill badge-warning">New</span>
+    </div>
+
     <script>
     const websiteID = <?= $_GET['id'] ?>;
     </script>
@@ -581,10 +586,6 @@ include_once("management/global.php");
         $("#show-sidebar").click(function() {
             $(".page-wrapper").addClass("toggled");
         });
-
-
-
-
     });
     </script>
 

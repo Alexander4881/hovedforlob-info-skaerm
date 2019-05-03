@@ -23,6 +23,13 @@ html,body{
   padding: 0.5rem;
 }
 
+#preview{  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1020px;
+}
 /* svg hover css */
 svg{
   margin-bottom: 60px;
@@ -272,11 +279,9 @@ body {
   .page-wrapper.toggled .page-content {
     padding-left: 300px;
   }
-
-  .page-wrapper.toggled .page-content .container-fluid #preview {
+  .page-wrapper.toggled .page-content #preview {
     left: 260px;
   }
-
 }
 
 /*----------------show sidebar button----------------*/

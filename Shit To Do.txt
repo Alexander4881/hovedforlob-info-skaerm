@@ -1,2 +1,3 @@
 Tobias fix preview div left 260px when toolbar is extended
 Alexander fix background color for main div ? ? 
+Alexander fix save counter
