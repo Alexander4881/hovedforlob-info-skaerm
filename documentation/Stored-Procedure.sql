@@ -1,11 +1,10 @@
-
 /* New Items */
 USE infoskaerm;
 /* new website*/
 
 /*		new website*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `InsertNewWebSite`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewWebSite`(
 	IN title VARCHAR(40) , 
 	IN siteID TINYINT
 )
@@ -33,14 +32,14 @@ DELIMITER ;
 /* new text /*CALL
 /*CALL NewText("Titel",1,"style=''");*/
 
-CREATE  InsertNewImage(IN ImagePath VARCHAR(255))
+CREATE PROCEDURE InsertNewImage(IN ImagePath VARCHAR(255))
 INSERT INTO `Image`(`Path`) VALUE(ImagePath);
 
 /*
 /*CALL InsertNewImage("null.png");*/
 
 DELIMITER $$
-CREATE  `InsertNewImageLink`(IN `@WebSite_ID` INT, IN `@Image_ID` INT, IN `@ImageStyle` MEDIUMTEXT)
+CREATE PROCEDURE `InsertNewImageLink`(IN `@WebSite_ID` INT, IN `@Image_ID` INT, IN `@ImageStyle` MEDIUMTEXT)
 BEGIN
 INSERT INTO `ImageLink`(`WebSite_ID`, `Image_ID`, `Image_Style`) VALUE(`@WebSite_ID`,`@Image_ID`, `@ImageStyle`);
 SELECT `ImageLink`.`ID`, `ImageLink`.`Image_Style`, `Image`.`Path` FROM `ImageLink` 
@@ -52,19 +51,19 @@ DELIMITER ;
 
 /* Show Items */
 /* Show Items Websites*/
-CREATE  ShowWebSites(IN WebSite_ID INT)
+CREATE PROCEDURE ShowWebSites(IN WebSite_ID INT)
 SELECT * FROM `WebSite` WHERE `ID` = WebSite_ID;
 
 /*CALL ShowWebSites(1);
 
 /* Show Images */
-CREATE  ShowImages()
+CREATE PROCEDURE ShowImages()
 SELECT `Image`.`ID`,`Image`.`Path` FROM `Image`;
 
 /*CALL ShowImages;*/
 
 /* Show Image Link */
-CREATE  ShowImagesForWebSite(IN `@WebSiteID` INT)
+CREATE PROCEDURE ShowImagesForWebSite(IN `@WebSiteID` INT)
 	SELECT `ImageLink`.`ID`, `ImageLink`.`WebSite_ID`, `ImageLink`.`Image_ID`, `ImageLink`.`Image_Style`, `Image`.`Path` 
 	FROM `ImageLink` 
 	INNER JOIN `Image` ON `Image`.`ID` = `ImageLink`.`Image_ID`
@@ -73,14 +72,14 @@ CREATE  ShowImagesForWebSite(IN `@WebSiteID` INT)
 /*CALL ShowImagesForWebSite(19);*/
 
 /* Show Text */
-CREATE  ShowText(IN WebSiteID INT)
+CREATE PROCEDURE ShowText(IN WebSiteID INT)
 SELECT * FROM `Text` WHERE `WebSite_ID` = WebSiteID;
 
 /*CALL ShowText(2);
 
 /* Inset New Table */
 DELIMITER $$
-CREATE  DEFINER=`root`@`localhost`  `InsertNewTable`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewTable`
 (
     IN `@websiteID` INT,
 		IN `@style` MEDIUMTEXT
@@ -95,7 +94,7 @@ DELIMITER ;
 
 /* Inset New Row */
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `InsertNewRow`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewRow`
 (
     IN `@tableID` INT,
 		IN `@style` MEDIUMTEXT
@@ -110,7 +109,7 @@ DELIMITER ;
 
 /* Inset New Row */
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `InsertNewColumn`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewColumn`
 (
     IN `@rowID` INT,
 		IN `@ColumnText` MEDIUMTEXT,
@@ -128,7 +127,7 @@ DELIMITER ;
 
 /*		Update Column */
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `UpdateColumn`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateColumn`
 (
     IN `@id` INT,
 		IN `@ColumnText` MEDIUMTEXT,
@@ -143,7 +142,7 @@ DELIMITER ;
 
 /*		Update Column */
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `UpdateTable`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateTable`
 (
     IN `@id` INT,
 		IN `@TableStyle` MEDIUMTEXT 
@@ -157,7 +156,7 @@ DELIMITER ;
 
 /*		Update Column */
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `UpdateRow`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateRow`
 (
     IN `@id` INT,
 		IN `@RowStyle` MEDIUMTEXT 
@@ -186,7 +185,7 @@ DELIMITER ;
 
 /*		Update Text*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `UpdateText`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateText`
 (
     IN `@Text` MEDIUMTEXT,
 		IN `@Text_ID` INT,
@@ -203,7 +202,7 @@ DELIMITER ;
 /* Delete Procedure */
 /*		Delete WebSite*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `DeleteWebsite`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteWebsite`
 (
 		IN `@websiteID` INT
 )
@@ -216,7 +215,7 @@ DELIMITER ;
 
 /*		Delete ImageLink*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `DeleteImageLink`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteImageLink`
 (
 		IN `@imagelinkID` INT
 )
@@ -229,7 +228,7 @@ DELIMITER ;
 
 /*		Delete Image*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `DeleteImage`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteImage`
 (
 		IN `@imageID` INT
 )
@@ -242,7 +241,7 @@ DELIMITER ;
 
 /*		Delete Text*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `DeleteText`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteText`
 (
 		IN `@TextID` INT
 )
@@ -255,7 +254,7 @@ DELIMITER ;
 
 /*		Delete Table*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `DeleteTable`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteTable`
 (
 		IN `@TableID` INT
 )
@@ -269,7 +268,7 @@ DELIMITER ;
 /* Show Procedure */
 /*		Show Table*/
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost`  `ShowTable`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowTable`
 (
 	IN `@websiteID` INT
 )
