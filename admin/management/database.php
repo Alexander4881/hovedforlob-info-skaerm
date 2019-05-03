@@ -5,12 +5,12 @@ $connection;
 function db(){    
     // Database Username
 
-    $DBUsername = 'mysql';
+    $DBUsername = 'root';
     // Database Password
-    $DBPassword = '08000800';
+    $DBPassword = '';
 
     // Database Host
-    $DBHostname = '192.168.6.146:3306';
+    $DBHostname = '127.0.0.1:3306';
     // Datbase Catalogue
     $DBCatalogue = 'infoskaerm';
 
@@ -81,7 +81,6 @@ function UpdateImageLink($imageLinkID, $imageStyle){
 // Location ID for the room 
 function NewWebSite($title, $location){
     // Query stored procedure, return as array after.
-    echo("CALL InsertNewWebSite('" . $title . "','" . $location . "');");
     return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSite('" . $title . "','" . $location . "');")));
 }
 
