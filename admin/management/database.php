@@ -5,12 +5,12 @@ $connection;
 function db(){    
     // Database Username
 
-    $DBUsername = 'root';
+    $DBUsername = 'mysql';
     // Database Password
-    $DBPassword = '';
+    $DBPassword = '08000800';
 
     // Database Host
-    $DBHostname = '127.0.0.1:3306';
+    $DBHostname = '192.168.6.146:3306';
     // Datbase Catalogue
     $DBCatalogue = 'infoskaerm';
 
