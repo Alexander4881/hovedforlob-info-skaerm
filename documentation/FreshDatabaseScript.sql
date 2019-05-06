@@ -13,6 +13,7 @@ USE `Infoskaerm`;
 
 /* User Section
 ----------------------------------------------- */
+/*
 -- Drop User Account(s) if it exists.
 DROP USER IF EXISTS 'developer'@'%';
 -- Create User Account(s) if it doesn't exists.
@@ -23,7 +24,7 @@ CREATE USER IF NOT EXISTS 'developer'@'%'
 				PASSWORD EXPIRE NEVER;
 -- Grant everything to specified user, on all databases, with optional grant option privilege. 
 GRANT ALL PRIVILEGES ON *.* TO 'developer'@'%'WITH GRANT OPTION;
-
+*/
 /* Table Section
 ----------------------------------------------- */
 --  Drop Tables if any of them exists.

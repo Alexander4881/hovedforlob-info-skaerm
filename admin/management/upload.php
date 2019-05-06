@@ -1,7 +1,7 @@
 <?php
 include_once("./database.php");
 
-$target_dir = "../../images/uploads/";
+$target_dir = "../../styles/images/uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -38,8 +38,9 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        $temp = NewImage(basename( $_FILES["fileToUpload"]["name"]));
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.". " database insert <". $temp;
+        echo($_FILES["fileToUpload"]["name"]);
+        NewImage(basename( $_FILES["fileToUpload"]["name"]));
+        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
     } else {
         echo "Sorry, there was an error uploading your file.";
     }

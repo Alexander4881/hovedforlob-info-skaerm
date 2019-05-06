@@ -318,6 +318,11 @@ include_once("management/global.php");
                     </li> -->
                     </ul>
                 </div>
+                <div id="alert" class="container-fluid">
+                    <div class="alert alert-danger" role="alert">
+                        <p class="text-center mb-0"><span id="alert-text"></span></p>
+                    </div>
+                </div>
                 <!-- sidebar-menu  -->
             </div>
             <!-- sidebar-content  -->
@@ -334,12 +339,8 @@ include_once("management/global.php");
         <!-- sidebar-wrapper  -->
         <main class="page-content">
             <div class="container-fluid">
-                <div id="alert" class="container-fluid sticky-top">
-                    <div class="alert alert-danger" role="alert">
-                        <p class="text-center mb-0"><span id="alert-text"></span></p>
-                    </div>
-                </div>
                 <div id="preview"></div>
+                <!-- lines on preview -->
                 <div id="vertical-line"></div>
                 <div id="horisontal-line"></div>
             </div>
