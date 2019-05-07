@@ -65,14 +65,14 @@ function SaveContent(){
         
         switch(element.tagName.toLowerCase()){
             case'p':
-            console.log("p");
+            // console.log("p");
             // Check if it has an id
             if (typeof elementID === typeof undefined || elementID === false) {
                 // it does not have an id
-                console.log("needs to be inserted");
+                // console.log("needs to be inserted");
                 
                 // inserts it to the database
-                console.log(element);
+                // console.log(element);
                 $.ajax({
                     url: './administration-logic.php',
                     type: 'post', 
@@ -102,7 +102,7 @@ function SaveContent(){
                     },
                     success: function(response) {
                         // update the save logo 
-                        console.log("updated") 
+                        // console.log("updated") 
                         $(element).replaceWith(response);
                     }
                 });
@@ -114,10 +114,10 @@ function SaveContent(){
             // Check if it has an id
             if (typeof elementID === typeof undefined || elementID === false) {
                 // it does not have an id
-                console.log("needs to be inserted");
+                // console.log("needs to be inserted");
                 
                 // inserts it to the database
-                console.log(element);
+                // console.log(element);
                 $.ajax({
                     url: './administration-logic.php',
                     type: 'post', 
@@ -144,21 +144,21 @@ function SaveContent(){
                     },
                     success: function(response) {
                         // update the save logo  
-                        console.log(response);
+                        // console.log(response);
                     }
                 });
             }
             break;
 
             case'img':
-            console.log("img");
+            // console.log("img");
             // Check if it has an id
             if (typeof elementID === typeof undefined || elementID === false) {
                 // it does not have an id
-                console.log("needs to be inserted");
+                // console.log("needs to be inserted");
                 
                 // inserts it to the database
-                console.log(element);
+                // console.log(element);
                 $.ajax({
                     url: './administration-logic.php',
                     type: 'post', 
@@ -200,7 +200,7 @@ function SaveContent(){
 }
 
 function SetSaveIconNumber() {
-    console.log("SetSaveIconNumber");
+    // console.log("SetSaveIconNumber");
     notSaved = 0;
     var elements = $("#preview").children();
 
@@ -215,11 +215,11 @@ function SetSaveIconNumber() {
 }
 
 function InsertTable(){
-    console.log("Insert Table Method");
+    // console.log("Insert Table Method");
     if(tableSelectedSize != null){
         
         var table = `<table class="table table-bordered table-dark"><tbody>`;
-        console.log(tableSelectedSize);
+        // console.log(tableSelectedSize);
         for (let iIndex = 0; iIndex < tableSelectedSize[0]; iIndex++) {
             table += `<tr>`;
             for (let jIndex = 0; jIndex < tableSelectedSize[1]; jIndex++) {
@@ -264,7 +264,7 @@ function NewElement(elementType){
           
               for (var i = 1; i <= loopI; i++) {
                 for (var j = 1; j <= loopJ; j++) {
-                  console.log("search");
+                  // console.log("search");
                   $("."+i+"-"+j).addClass("st-hover");
                 }
               }
@@ -294,19 +294,19 @@ function NewElement(elementType){
                 {
                     $("#image-alert-text").text(data);
                     $("#image-alert").fadeIn();
-                    console.log(data);
+                    // console.log(data);
                     UpdateImages();
                 },
                 error: function(e) 
                 {
-                    console.log(e);
+                    // console.log(e);
                 }          
               });
         }));
         $("#useImage").click(function () {
             if(selectedImage != null){
                 $("#imageModal").modal("hide");
-                console.log(selectedImage);
+                // console.log(selectedImage);
                 $("#preview").append('<image data-image-id="' + selectedImage.id + '" src="'+ selectedImage.src + '">');
                 $(".carousel-item").remove();
                 selectedImage = null;
@@ -340,13 +340,13 @@ function UpdateImages(){
         data: { "val": "getImages"},
         success: function(response) {
             $("#imageCarousel").empty();
-            console.log(response);
+            // console.log(response);
             $("#imageCarousel").append(response);
             $("#imageCarousel > div:first-child").addClass("active");
             $("#imageCarousel > div > img").click(function(){
                 event.target.classList.add("selected");
                 selectedImage = event.target;
-                console.log(selectedImage);
+                // console.log(selectedImage);
             });
         }
     });
@@ -361,7 +361,7 @@ function Editor(){
     $("#preview > p").dblclick(function(){
         var textElement = event.target;
 
-        console.log($(textElement).text());
+        // console.log($(textElement).text());
 
         // set the text field on the modal
         $("#editText").val($(textElement).text());
@@ -400,10 +400,12 @@ function Editor(){
 
     // click on element
     $("#preview").click(function(){
-        oldSelectedElement = selectedElement;
-        selectedElement = event.target;
-        SetElementSettings();
-        testSnappingDrag();
+        if(event.target.tagName != "DIV"){
+            oldSelectedElement = selectedElement;
+            selectedElement = event.target;
+            SetElementSettings();
+            testSnappingDrag();
+        }
     });
 }
 
@@ -438,13 +440,13 @@ function SetElementSettings(){
         widthInput.value = selectedElement.clientWidth;
 
         if(selectedElement === oldSelectedElement){
-            console.log($(selectedElement).parents('table')[0].tagName);
+            // console.log($(selectedElement).parents('table')[0].tagName);
             selectedElement = $(selectedElement).parents('table')[0];
         }
         break;
     }
 
-    ShowAlertTextBox("SELECTED " + selectedElement.tagName,250,1000);
+    ShowAlertTextBox("SELECTED " + selectedElement.tagName,500,1500);
     // $("#alert-text").text(selectedElement.tagName);
 }
 
@@ -556,19 +558,19 @@ function TextAlign(textAlign){
     // Center = 2
     // Right = 3
     if(textAlign == 1){
-        console.log("left");
+        // console.log("left");
         
         selectedElement.style.textAlign='left';
         
         
     }else if(textAlign == 2){
-        console.log("center");
+        // console.log("center");
         
         selectedElement.style.textAlign='center';
         
         
     }else if(textAlign === 3){
-        console.log("right");
+        // console.log("right");
         
         selectedElement.style.textAlign='right';
         
@@ -649,7 +651,7 @@ function PosisitionTop(addOrSubtract){
             selectedElement.style.top = selectedElement.offsetTop+1 + "px";
             topInput.value = Number(topInput.value) + 1;
         }else{
-            console.log("Nope");
+            // console.log("Nope");
         }
     }else if(addOrSubtract == -1){
         // take the element curent posision
@@ -657,7 +659,7 @@ function PosisitionTop(addOrSubtract){
             selectedElement.style.top = selectedElement.offsetTop-1 + "px";
             topInput.value = Number(topInput.value) -1;
         }else{
-            console.log("Nope");
+            // console.log("Nope");
         }
     }
 }
@@ -673,7 +675,7 @@ function PosisitionLeft(addOrSubtract){
             selectedElement.style.left = selectedElement.offsetLeft+1 + "px";
             leftInput.value = Number(leftInput.value) +1;
         }else{
-            console.log("over 1920 eller under 0");
+            // console.log("over 1920 eller under 0");
         }
         
     }else if(addOrSubtract == -1){
@@ -683,7 +685,7 @@ function PosisitionLeft(addOrSubtract){
             leftInput.value = Number(leftInput.value) -1;
             
         }else{
-            console.log("over 1920 eller under 0");
+            // console.log("over 1920 eller under 0");
         }
     }
 }
@@ -709,21 +711,21 @@ function InputValueChanges(element){
 }
 
 function DeleteItem(){
-    console.log("ran " + selectedElement.tagName.toLowerCase());
+    // console.log("ran " + selectedElement.tagName.toLowerCase());
     var elementID = $(selectedElement).attr('id');
     switch(selectedElement.tagName.toLowerCase()){
         case'p':
-        console.log("p");
+        // console.log("p");
         // Check if it has an id
         if (typeof elementID === typeof undefined || elementID === false) {
             // it does not have an id
-            console.log("hasent an id");
+            // console.log("hasent an id");
             selectedElement.remove();
             ShowAlertTextBox("REMOVED PARAGRAPH",500,2000);
 
         }else{
             // it has an id
-            console.log("has id " + elementID);
+            // console.log("has id " + elementID);
 
             $.ajax({
                 url: './administration-logic.php',
@@ -748,7 +750,7 @@ function DeleteItem(){
         break;
 
         case'table':
-        console.log("table");
+        // console.log("table");
         // Check if it has an id
         if (typeof elementID === typeof undefined || elementID === false) {
             // it does not have an id
@@ -780,7 +782,7 @@ function DeleteItem(){
         break;
 
         case'img':
-        console.log("image");
+        // console.log("image");
         // Check if it has an id
         if (typeof elementID === typeof undefined || elementID === false) {
             // it does not have an id
@@ -952,7 +954,7 @@ function SetSvgColorWheel(color,currentColor){
         }
         break;
         default:
-        console.log("Error On SetSvgColorWeel");
+        // console.log("Error On SetSvgColorWeel");
     }
 }
 
@@ -966,8 +968,8 @@ function ShowAlertTextBox(text, easeInTimeInMilliSeconds,timeOpenInMilliSeconds)
 }
 
 function testSnappingDrag(){
-    console.log("testSnappingDrag");
-    if(selectedElement.tagName != 'DIV' && selectedElement.tagName != 'TD' && selectedElement.tagName != 'SPAN' ){
+    // console.log("testSnappingDrag");
+    if(selectedElement.tagName != 'DIV' && selectedElement.tagName != 'TD' && selectedElement.tagName != 'SPAN' && selectedElement.tagName != 'TR' && selectedElement.tagName != 'TBODY'){
         var element = selectedElement,
     x = 0, y = 0;
 

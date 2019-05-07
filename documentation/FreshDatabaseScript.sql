@@ -13,6 +13,7 @@ USE `Infoskaerm`;
 
 /* User Section
 ----------------------------------------------- */
+/*
 -- Drop User Account(s) if it exists.
 DROP USER IF EXISTS 'developer'@'%';
 DROP USER IF EXISTS 'production'@'Infoskaerm';

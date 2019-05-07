@@ -5,13 +5,14 @@ $connection;
 function db(){    
     // Database Username
 
-    $DBUsername = 'root';
+
+    $DBUsername = 'production';
     // Database Password
-    $DBPassword = 'xUbWQw6Oqe$u6dgqXX1F6xe[,FlGAZpj';
+    $DBPassword = 'Pa$$w0rd';
     // Database Host
-    $DBHostname = '127.0.0.1';
+    $DBHostname = '127.0.0.1:3306';
     // Datbase Catalogue
-    $DBCatalogue = 'infoskaerm';
+    $DBCatalogue = 'Infoskaerm';
 
     // ConnectionString
     $conn = mysqli_connect($DBHostname,$DBUsername,$DBPassword,$DBCatalogue);
@@ -144,7 +145,7 @@ function GetColumn($rowID){
 // Text Styling
 function NewText($text, $webSiteID, $style){
     // Query stored procedure, add text to website with styling.
-    return SqlQuery("CALL NewText('" . $text . "'," . $webSiteID . ",'" . $style . "');");
+    return SqlQuery("CALL InsertNewText('" . $text . "'," . $webSiteID . ",'" . $style . "');");
 }
 
 // Update styling on text paragraph - takes 3 arguments
@@ -208,7 +209,7 @@ function GetImages(){
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-             $images .= '<div class="carousel-item"><image id="' . $row["ID"] . '" src="../images/uploads/'. $row["path"]. '" class="img-thumbnail rounded mx-auto d-block vh-50"></div>';
+             $images .= '<div class="carousel-item"><image id="' . $row["ID"] . '" src="../styles/images/uploads/'. $row["Path"]. '" class="img-thumbnail rounded mx-auto d-block vh-50"></div>';
         }
         // error
     } else {
