@@ -59,7 +59,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         $dom = new DOMDocument; 
         
         /*** load the html into the object ***/ 
-        $dom->loadHTML($html); 
+        $dom->loadHTML('<?xml encoding="utf-8" ?>' . $html); 
         
         /*** discard white space ***/ 
         $dom->preserveWhiteSpace = false; 
@@ -100,7 +100,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         $dom = new DOMDocument; 
         
         /*** load the html into the object ***/ 
-        $dom->loadHTML($html); 
+        $dom->loadHTML( '<?xml encoding="utf-8" ?>' . $html); 
         
         /*** discard white space ***/ 
         $dom->preserveWhiteSpace = false; 
@@ -136,7 +136,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
         while($imageProp = mysqli_fetch_array($sqlResult)){
             
-             echo("<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../images/uploads/". $imageProp["Path"] ."\"></img>");
+             echo("<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../styles/images/uploads/". $imageProp["Path"] ."\"></img>");
 
         }
     }
@@ -148,7 +148,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
         while($imageProp = mysqli_fetch_array($sqlResult)){
             
-             echo("<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../images/uploads/". $imageProp["Path"] ."\"></img>");
+             echo("<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../styles/images/uploads/". $imageProp["Path"] ."\"></img>");
 
         }
     }
@@ -392,7 +392,7 @@ function GetwebsiteElements($websiteID){
     // get images
     $result = GetWebsiteImages($websiteID);
     while($imageProp = mysqli_fetch_array($result)){
-        $html .= "<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../images/uploads/". $imageProp["Path"] ."\"></img>";
+        $html .= "<img id=\"".$imageProp["ID"]."\" " . $imageProp["Image_Style"] . " src=\"../styles/images/uploads/". $imageProp["Path"] ."\"></img>";
     }
 
     // get text

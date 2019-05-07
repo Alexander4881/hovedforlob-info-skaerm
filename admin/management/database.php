@@ -5,9 +5,9 @@ $connection;
 function db(){    
     // Database Username
 
-    $DBUsername = 'production';
+    $DBUsername = 'root';
     // Database Password
-    $DBPassword = 'Pa$$w0rd';
+    $DBPassword = '';
 
     // Database Host
     $DBHostname = '127.0.0.1:3306';
@@ -179,6 +179,7 @@ function UpdateRow($id, $style){
 // Location ID for the room 
 function UpdateColumn($id, $columnText, $style){
     // Query stored procedure, return as array after.
+    echo("CALL UpdateColumn('" . $id . "','" . $columnText . "','" . $style . "');");
     return(SqlQuery("CALL UpdateColumn('" . $id . "','" . $columnText . "','" . $style . "');"));
 }
 

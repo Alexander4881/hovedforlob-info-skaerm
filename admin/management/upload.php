@@ -42,7 +42,7 @@ if ($uploadOk == 0) {
         NewImage(basename( $_FILES["fileToUpload"]["name"]));
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
     } else {
-        echo "Sorry, there was an error uploading your file.";
+        echo "Sorry, there was an error uploading your file." . putenv('TMPDIR=/var/www/html/tmpupload');
     }
 }
 ?>

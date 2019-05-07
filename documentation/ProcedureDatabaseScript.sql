@@ -51,7 +51,7 @@ CREATE PROCEDURE `ChangeActiveWebsiteOnSiteIDAndWebsiteID`(
   IN `@websiteID` INT)
 BEGIN
 	CALL `UpdateActiveWebsiteOnID`((SELECT `ID` FROM `WebSite` WHERE `SiteID` = `@siteID` AND `ActiveWebsite` = 1 LIMIT 1),FALSE);
-  CALL `UpdateActiveWebsiteOnID`(`@websiteID`,TRUE);
+    CALL `UpdateActiveWebsiteOnID`(`@websiteID`,TRUE);
 END $$
 DELIMITER ;
 
@@ -439,6 +439,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateActiveWebsiteOnID`(
 	IN `@Activewebsite` BOOLEAN)
 BEGIN
 	-- Update website table, set the active website as true or false, where the id is the value inside the parameter.
-	UPDATE `infoskaerm`.`WebSite` SET `ActiveWebsite` = `@Activewebsite` WHERE `ID` = `@websiteID`;
+	UPDATE `WebSite` SET `ActiveWebsite` = `@Activewebsite` WHERE `ID` = `@websiteID`;
 END $$
 DELIMITER ;

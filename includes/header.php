@@ -38,14 +38,9 @@ include_once("admin/management/global.php");
             </button>
             <div class="navbar-collapse collapse" id="navbarToggler">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="<?= $_DISCORD ?>">
-                            <i class="fab fa-discord mr-1"></i>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/Alexander4881/hovedforlob-info-skaerm/releases" target="_blank">
+                        <i class="fab fa-github"></i> <span> Releases</span>
                         </a>
                     </li>
                 </ul>

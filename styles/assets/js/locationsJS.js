@@ -2,8 +2,6 @@ alert("test");
 
 $(document).ready(function () {
 
-    console.log("ready");
-
     setInterval(() => {
         console.log("ran");
         $.ajax({
@@ -16,7 +14,7 @@ $(document).ready(function () {
                 },
             success: function(response) {
                 
-                
+                console.log("update");
                 
             }
         });

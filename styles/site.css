@@ -29,6 +29,7 @@ html,body{
   left: 0;
   width: 1920px;
   height: 1020px;
+  border: 0.25rem dashed red;
 }
 
 #horisontal-line{
@@ -36,11 +37,11 @@ html,body{
   top: 510px;
   left: 0;
   width: 1920px;
-  border: #980303 solid 0.5px;
+  border: red solid 0.5px;
 }
 
 #vertical-line{
-  border: #980303 solid 0.5px;
+  border: red solid 0.5px;
   height: 1020px;
   position: absolute;
   left: 960px;
@@ -110,9 +111,6 @@ svg > g:hover{
   margin: 1em auto 0 auto;
 }
 
-#preview{
-  background-color: aqua;
-}
 
 .frame{
   border: 1px solid red;
@@ -299,6 +297,15 @@ body {
   .page-wrapper.toggled .page-content #preview {
     left: 260px;
   }
+
+  .page-wrapper.toggled .page-content #horisontal-line{
+    left: 260px;
+  }
+  
+  .page-wrapper.toggled .page-content #vertical-line{
+    left: 1220px;
+  }
+  
 }
 
 /*----------------show sidebar button----------------*/

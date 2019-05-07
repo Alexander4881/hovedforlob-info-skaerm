@@ -2,6 +2,13 @@
 var selectedElement;
 var oldSelectedElement;
 
+// size of the table you selected
+var tableSelectedSize = null;
+
+// selected image
+var selectedImage = null;
+
+
 // element settings box
 var elementSettings = document.getElementById("element-editor");
 
@@ -20,22 +27,19 @@ var textAlignLeft = document.getElementById("textAlignLeft");
 var textAlignCenter = document.getElementById("textAlignCenter");
 var textAlignRight = document.getElementById("textAlignRight");
 
-
 // Color Inputs
 var redInput = document.getElementById("redColor");
 var greenInput = document.getElementById("greenColor");
 var blueInput = document.getElementById("blueColor");
 
-var tableSelectedSize = null;
-
-// selected image
-var selectedImage = null;
 
 
 // get the current elements
 $(document).ready(function() {
     $("#alert").hide();
     $("#image-alert").hide();
+    $("#save-spinner").hide();
+
     $.ajax({
         url: './administration-logic.php',
         type: 'post', 
@@ -55,6 +59,10 @@ $(document).ready(function() {
 
 // save content in preview
 function SaveContent(){
+
+    $("#save-icon").hide();
+    $("#save-spinner").show();
+
     // get all elements in the preview div
     var elements = $("#preview").children();
 
@@ -85,7 +93,7 @@ function SaveContent(){
                     },
                     success: function(response) { 
                         // replaces the old table with the new
-                        $(element).replaceWith(response);
+                        //$(element).replaceWith(response);
                     }
                 });
             }else{
@@ -103,7 +111,7 @@ function SaveContent(){
                     success: function(response) {
                         // update the save logo 
                         // console.log("updated") 
-                        $(element).replaceWith(response);
+                        //$(element).replaceWith(response);
                     }
                 });
             }
@@ -129,7 +137,7 @@ function SaveContent(){
                     },
                     success: function(response) { 
                         // replaces the old table with the new
-                        $(element).replaceWith(response);
+                        //$(element).replaceWith(response);
                     }
                 });
             }else{
@@ -144,7 +152,7 @@ function SaveContent(){
                     },
                     success: function(response) {
                         // update the save logo  
-                        // console.log(response);
+                        //console.log(response + "test");
                     }
                 });
             }
@@ -171,7 +179,7 @@ function SaveContent(){
                     },
                     success: function(response) { 
                         // replaces the old table with the new
-                        $(element).replaceWith(response);
+                        //$(element).replaceWith(response);
                     }
                 });
             }else{
@@ -187,7 +195,7 @@ function SaveContent(){
                     },
                     success: function(response) {
                         // update the save logo  
-                        $(element).replaceWith(response);
+                        //$(element).replaceWith(response);
                     }
                 });
             }
@@ -195,6 +203,28 @@ function SaveContent(){
 
         }
     }
+
+    setTimeout(function () {
+        $.ajax({
+            url: './administration-logic.php',
+            type: 'post', 
+            data: 
+            { 
+                "val" : "getWebsiteElements",
+                "websiteID" : websiteID
+            },
+            success: function(response) { 
+                // replaces the old table with the new
+                $("#preview").html(response);
+                Editor();
+                $("#save-spinner").hide();
+                $("#save-icon").show();
+            }
+        });
+    }, 2000);
+
+    ShowAlertTextBox("Content is Saved",1000,2000);
+
     Editor();
     SetSaveIconNumber();
 }
@@ -815,7 +845,6 @@ function DeleteItem(){
     }
 }
 
-
 // function to set the 7 small color wheel 
 function SetSvgColorWheel(color,currentColor){
     switch(color){
@@ -961,6 +990,7 @@ function SetSvgColorWheel(color,currentColor){
 // function to show text alert textbox
 function ShowAlertTextBox(text, easeInTimeInMilliSeconds,timeOpenInMilliSeconds){
     $("#alert-text").text(text);
+    $("#CurrentSelectedElement").text(text);
     $("#alert").fadeIn(easeInTimeInMilliSeconds,"swing");
     setTimeout(function(){
         $("#alert").fadeOut(easeInTimeInMilliSeconds,"swing");

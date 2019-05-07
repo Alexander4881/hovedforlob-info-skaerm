@@ -34,6 +34,11 @@ include_once("management/global.php");
                 <!-- sidebar-header  -->
                 <div class="sidebar-menu">
                     <ul>
+                        <li class="container text-center">
+                            <div class="alert alert-info" role="alert">
+                                <span id="CurrentSelectedElement">nothing selected...</span>
+                            </div>
+                        </li>
                         <li class="header-menu">
                             <span>General</span>
                         </li>
@@ -137,7 +142,8 @@ include_once("management/global.php");
                                                             autocomplete="off">
                                                         <i class="fas fa-plus"></i>
                                                     </label>
-                                                    <label class="btn btn-secondary disabled btn-input" onclick="ContentWidth(3)">
+                                                    <label class="btn btn-secondary disabled btn-input"
+                                                        onclick="ContentWidth(3)">
                                                         <input type="number" min="0" max="1920" value="" name="options"
                                                             id="widthInput" autocomplete="off"
                                                             onchange="InputValueChanges(this)">
@@ -328,11 +334,16 @@ include_once("management/global.php");
             <!-- sidebar-content  -->
             <div class="sidebar-footer clearfix">
                 <a onclick="SaveContent()">
-                    <i class="fas fa-save"></i>
+                    <i id="save-icon" class="fas fa-save"></i>
+                    <div id="save-spinner" class="spinner-border spinner-border-sm text-info" role="status"><span
+                            class="sr-only">Saving...</span></div>
                     <span id="saveIconNumber" class="badge badge-pill badge-info notification">0</span>
                 </a>
                 <a onclick="DeleteItem()">
                     <i class="fas fa-trash-alt"></i>
+                </a>
+                <a href="../">
+                    <i class="fas fa-igloo"></i>
                 </a>
             </div>
         </nav>
@@ -544,11 +555,6 @@ include_once("management/global.php");
                 </div>
             </div>
         </div>
-    </div>
-
-
-    <div >
-        <span class="badge badge-pill badge-warning">New</span>
     </div>
 
     <script>
