@@ -16,6 +16,8 @@ USE `Infoskaerm`;
 /*
 -- Drop User Account(s) if it exists.
 DROP USER IF EXISTS 'developer'@'%';
+DROP USER IF EXISTS 'production'@'Infoskaerm';
+
 -- Create User Account(s) if it doesn't exists.
 CREATE USER IF NOT EXISTS 'developer'@'%' 
 				-- Select [auth_plugin], [auth_string]
@@ -24,7 +26,15 @@ CREATE USER IF NOT EXISTS 'developer'@'%'
 				PASSWORD EXPIRE NEVER;
 -- Grant everything to specified user, on all databases, with optional grant option privilege. 
 GRANT ALL PRIVILEGES ON *.* TO 'developer'@'%'WITH GRANT OPTION;
-*/
+
+CREATE USER IF NOT EXISTS 'production'@'Infoskaerm'
+				-- Select [auth_plugin], [auth_string]
+				IDENTIFIED WITH mysql_native_password BY 'DxVUMZAcgj:2wPN2qfWDYb\/rw8b2mvI'
+				-- Select [password_option]
+				PASSWORD EXPIRE NEVER;
+-- Grant options to specified user.
+GRANT SELECT, INSERT, UPDATE, DELETE ON infoskaerm.* TO 'production'@'Infoskaerm';
+
 /* Table Section
 ----------------------------------------------- */
 --  Drop Tables if any of them exists.
