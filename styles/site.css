@@ -3,6 +3,10 @@ html,body{
   width: 100%;
 }
 
+.activeWebsite{
+  color: #007bff;
+}
+
 #CarouselIndicators{
   top: 10.5rem;
 }
@@ -17,10 +21,6 @@ html,body{
 
 .h-20{
   height: 20%!important;
-}
-
-.card-body{
-  padding: 0.5rem;
 }
 
 #preview{  
@@ -110,7 +110,6 @@ svg > g:hover{
 #element-select > .row > .btn-group-toggle{
   margin: 1em auto 0 auto;
 }
-
 
 .frame{
   border: 1px solid red;

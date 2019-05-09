@@ -360,28 +360,32 @@ function GetTableHTML($tableID,$Style){
 }
 
 function CreateCardHTML($html, $websiteProp, $startElement, $count, $location){
-    
     for ($i=0; $i < $count; $i++) {
+                // Specify the width of each col.
         $html .= '<div class="col-2">';
-        $html .= '    <div class="card" style="width: 16rem; height:10rem;">';
-        $html .= '        <div class="card-body">';
-        $html .= '            <div class="card-title h-20 w-100">';
-        $html .= '                        <div class="float-left">';
-        $html .= '                            <h5>' . $websiteProp[$startElement + $i][1] . '</h5>';
-        $html .= '                        </div>';
-        if ($websiteProp[$startElement + $i][2] == 1 ) {
-            $html .= '                        <div class="float-right"> <a onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye"></i></a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"> </i></a></div>';
-        }else if ($websiteProp[$startElement + $i][2] == 0){
-            $html .= '                        <div class="float-right"> <a onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye-slash"></i></a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"> </i></a></div>';
-        }
-        $html .= '                    </div>';
-        $html .= '            <p class="card-text">It is gonna be some description text to the webside. <br> It will come in done this week</p>';
-        $html .= '        </div>';
-        $html .= '    </div>';
+                    // Add Card View
+        $html .=    '<div class="card border-secondary mb-3" style="max-width: 18rem;">';
+                        // Field for Card-Heading 
+                            // [Website Location]
+        $html .=        '<div class="card-header">';
+        $html .=            '[WebSiteLocationID]';                         
+                            // [Website Edit & Make Active]
+                            if ($websiteProp[$startElement + $i][2] == 1 ) {
+                                $html .= '<div class="float-right "> <a onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye activeWebsite"></i> </a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"></i> </a></div>';
+                            }else if ($websiteProp[$startElement + $i][2] == 0){
+                                $html .= '<div class="float-right"> <a onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye-slash"></i> </a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"></i> </a></div>';
+                            }
+        $html .=        '</div>';
+                        // Field for Card-Body
+        $html .=        '<div class="card-body text-secondary">';
+                            // Add Card-Title [Website Title]
+        $html .=            '<h5 class="card-title">' . $websiteProp[$startElement + $i][1] . '</h5>';
+                            // Apply some description. [Website Description]
+        $html .=            '<p class="card-text">Testing...</p>';                
+        $html .=        '</div>';
+        $html .=    '</div>';
         $html .= '</div>';
     }
-    
-
     return $html;
 }
 

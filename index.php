@@ -41,7 +41,7 @@
   </div>
 
   <nav class="nav navbar-nav">
-      <div id="SlideMeUp" class="bg-danger footer zIndex2 fixed-bottom container-fluid">
+      <div id="SlideMeUp" class="bg-light footer zIndex2 fixed-bottom container-fluid">
           <div id="carouselWithControlsAndIndicators" class="carousel slide mt-4" data-ride="carousel">
               <ol id="CarouselIndicators" class="carousel-indicators zIndex2">
               </ol>

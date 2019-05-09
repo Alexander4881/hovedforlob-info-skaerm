@@ -104,7 +104,7 @@ function ChangeActiveWebsite(websiteID,location) {
                     $(".fa-eye").replaceWith('<i class="fas fa-eye-slash"></i>');
     
                     // replaces the old icon with the new
-                    $(iconToBeReplacedOnSuccess).replaceWith('<i class="fas fa-eye"></i>');
+                    $(iconToBeReplacedOnSuccess).replaceWith('<i class="fas fa-eye activeWebsite"></i>');
                 }
     
                 console.log(response);
