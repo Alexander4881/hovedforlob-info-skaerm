@@ -42,9 +42,9 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
 }else if(isset($_POST['val']) && $_POST['val'] === "newWebSite"){
 
-    if (isset($_POST['title']) && isset($_POST['location'])){
+    if (isset($_POST['title']) && isset($_POST['location']) && isset($_POST['description'])){
         
-        $result = NewWebSite($_POST['title'], $_POST['location']);
+        $result = NewWebSite($_POST['title'], $_POST['location'], $_POST['description']);
         
         echo($result[0] . "," . $result[1]);
     }
@@ -368,7 +368,7 @@ function CreateCardHTML($html, $websiteProp, $startElement, $count, $location){
                         // Field for Card-Heading 
                             // [Website Location]
         $html .=        '<div class="card-header">';
-        $html .=            '[WebSiteLocationID]';                         
+        $html .=            "Lokale B." . $location ;                         
                             // [Website Edit & Make Active]
                             if ($websiteProp[$startElement + $i][2] == 1 ) {
                                 $html .= '<div class="float-right "> <a onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye activeWebsite"></i> </a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"></i> </a></div>';
@@ -381,7 +381,7 @@ function CreateCardHTML($html, $websiteProp, $startElement, $count, $location){
                             // Add Card-Title [Website Title]
         $html .=            '<h5 class="card-title">' . $websiteProp[$startElement + $i][1] . '</h5>';
                             // Apply some description. [Website Description]
-        $html .=            '<p class="card-text">Testing...</p>';                
+        $html .=            '<p class="card-text">' . $websiteProp[$startElement + $i][3] . '</p>';                
         $html .=        '</div>';
         $html .=    '</div>';
         $html .= '</div>';

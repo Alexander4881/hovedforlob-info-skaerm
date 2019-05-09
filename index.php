@@ -24,6 +24,9 @@
                       <div class="input-group mb-3">
                           <input id="NewWebSiteTitle" type="text" class="form-control" value="Title">
                       </div>
+                      <div class="input-group mb-3">
+                          <input id="NewWebSiteDescription" maxlength="255" type="text" class="form-control" value="Description">
+                      </div>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>

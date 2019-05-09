@@ -22,6 +22,11 @@ html,body{
 .h-20{
   height: 20%!important;
 }
+.card-body.text-secondary{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 100px;
+}
 
 #preview{  
   position: absolute;

@@ -59,15 +59,16 @@ DELIMITER ;
 /* Insert New Website Procedure.
 ----------------------------------------------- */
 DELIMITER $$
-CREATE PROCEDURE `InsertNewWebSite`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewWebSite`(
 	-- Create procedure parameters as IN.
 	IN title VARCHAR(40) , 
-	IN siteID TINYINT)
+	IN siteID TINYINT,
+	IN description VARCHAR(255))
 BEGIN
 	-- Insert Values into WebSite table.
-	INSERT INTO `WebSite` (`Title`, `SiteID`) VALUES (title, siteID);
+	INSERT INTO `WebSite` (`Title`, `SiteID`,`Description`) VALUES (title, siteID, description);
 	-- Select id and title from website, get id from last inserted id in website Table.
-	SELECT `id`,`title` FROM `WebSite` WHERE `ID` = (SELECT LAST_INSERT_ID() FROM `WebSite` limit 1);
+	SELECT `id`,`title`,`Description` FROM `WebSite` WHERE `ID` = (SELECT LAST_INSERT_ID() FROM `WebSite` limit 1);
 END $$
 DELIMITER ;
 
@@ -316,12 +317,12 @@ DELIMITER ;
 /* Show Website by Site ID Procedure.
 ----------------------------------------------- */
 DELIMITER $$
-CREATE PROCEDURE `ShowWebsitesOnSiteID`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowWebsitesOnSiteID`(
 	-- Create procedure parameter as IN.
 	IN `@siteID` INT)
 BEGIN
 	-- Get values from WebSite where the siteId is the value from parameter.
-	SELECT `ID`,`Title`,`ActiveWebsite` FROM `WebSite` WHERE `SiteID` = `@siteID`;
+	SELECT `ID`,`Title`,`ActiveWebsite`,`Description` FROM `WebSite` WHERE `SiteID` = `@siteID`;
 END $$
 DELIMITER ;
 

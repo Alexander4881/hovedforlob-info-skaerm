@@ -11,13 +11,17 @@ function NewWebSite(location){
                     "val": "newWebSite",
                     "title": $("#NewWebSiteTitle").val(),
                     "location": location,
+                    "description": $("#NewWebSiteDescription").val()
                 },
             success: function(response) {
-                console.log(response);
+                console.log("Log me please " + response);
                 var temp = response.split(",");
                 window.location.replace("../../../admin/administration.php?id=" + temp[0] + "&title=" + temp[1]);
             }
         });
+
+        
+
         $("#NewWebSite").unbind();
     });
 }
