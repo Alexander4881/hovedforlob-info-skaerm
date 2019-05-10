@@ -1,8 +1,46 @@
+$(document).ready(function(){
+    $("#userInputRegex").hide();
+});
+
+function ShowAlertTextBox(easeInTimeInMilliSeconds,timeOpenInMilliSeconds){
+    $("#userInputRegex").fadeIn(easeInTimeInMilliSeconds,"swing");
+    setTimeout(function(){
+        $("#userInputRegex").fadeOut(easeInTimeInMilliSeconds,"swing");
+    },timeOpenInMilliSeconds);
+}
+
 function NewWebSite(location){
     $("#NewWebsiteTitle").text(location);
     $("#NewWebsite").modal();
     
+    $("#NewWebSite").unbind();
     $("#NewWebSite").click(function(){
+        if ($("#NewWebSiteTitle").val().match(/^[a-zA-Z0-9ÆØÅæøå\s]/) && $("#NewWebSiteDescription").val().match(/^[a-zA-Z0-9ÆØÅæøå\s]/)) {
+            $.ajax({
+                url: '../../../admin/administration-logic.php',
+                type: 'post',
+                data: 
+                    { 
+                        "val": "newWebSite",
+                        "title": $("#NewWebSiteTitle").val(),
+                        "location": location,
+                        "description": $("#NewWebSiteDescription").val()
+                    },
+                success: function(response) {
+                    console.log("Log me please " + response);
+                    var temp = response.split(",");
+                    window.location.replace("../../../admin/administration.php?id=" + temp[0] + "&title=" + temp[1]);
+                }
+            });
+        } else {
+            $("#userInputRegex").show();
+            ShowAlertTextBox(500, 1000);
+        }
+    });
+}
+
+function NewWebsiteModal(){
+    if ($("#NewWebSiteTitle").val().match(/^[a-zA-Z0-9ÆØÅæøå\s]/) && $("#NewWebSiteDescription").val().match(/^[a-zA-Z0-9ÆØÅæøå\s]/)) {
         $.ajax({
             url: '../../../admin/administration-logic.php',
             type: 'post',
@@ -19,11 +57,10 @@ function NewWebSite(location){
                 window.location.replace("../../../admin/administration.php?id=" + temp[0] + "&title=" + temp[1]);
             }
         });
-
-        
-
-        $("#NewWebSite").unbind();
-    });
+    } else {
+        $("#userInputRegex").show();
+        ShowAlertTextBox(500, 1000);
+    }
 }
 
 var isHidden = true;

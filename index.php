@@ -21,16 +21,20 @@
                   </div>
                   <div class="modal-body">
                       <label for="basic-url">Inforskærm lokation <span id="NewWebsiteTitle"></span></label>
+                      <div id="userInputRegex" class="alert alert-danger" role="alert">
+                          <span>Not an acceptable character...</span>
+                      </div>
                       <div class="input-group mb-3">
                           <input id="NewWebSiteTitle" type="text" class="form-control" value="Title">
                       </div>
                       <div class="input-group mb-3">
-                          <input id="NewWebSiteDescription" maxlength="255" type="text" class="form-control" value="Description">
+                          <input id="NewWebSiteDescription" maxlength="255" type="text" class="form-control"
+                              value="Description">
                       </div>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
-                      <button id="NewWebSite" type="submit" class="btn btn-primary" data-dismiss="modal">Opret ny
+                      <button id="NewWebSite" class="btn btn-primary">Opret ny
                           Inforskærm</button>
                   </div>
               </div>
