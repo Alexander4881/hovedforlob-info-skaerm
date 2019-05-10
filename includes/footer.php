@@ -1,6 +1,7 @@
     <!-- Footer -->
     <footer class="text-light bg-dark zIndex100 fixed-bottom p-3">
-        <div class="container">
+        <div class="container clearfix">
+            <div class="float-left">
             <?php
             function auto_copyright ($year = 'auto')
                 { 
@@ -30,6 +31,10 @@
             auto_copyright($_COPYNUMBER);
             $_RUDE;
              ?>
+            </div>
+            <div class="float-right">
+            <i class="fas fa-tag"></i><span class="ml-2">Version: 1.0.3</span>
+            </div>
 
         </div>
     </footer>
