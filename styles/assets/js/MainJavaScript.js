@@ -15,7 +15,12 @@ function NewWebSite(location){
     
     $("#NewWebSite").unbind();
     $("#NewWebSite").click(function(){
-        if ($("#NewWebSiteTitle").val().match(/^[a-zA-Z0-9ÆØÅæøå\s]/) && $("#NewWebSiteDescription").val().match(/^[a-zA-Z0-9ÆØÅæøå\s]/)) {
+
+        var pattern = /^[a-zA-Z0-9æøåÆØÅ]+$/;
+        var userTitle = $("#NewWebSiteTitle").val();
+        var userDesc = $("#NewWebSiteDescription").val();
+
+    if ( pattern.test(userTitle) && pattern.test(userDesc)) {
             $.ajax({
                 url: '../../../admin/administration-logic.php',
                 type: 'post',
@@ -37,30 +42,6 @@ function NewWebSite(location){
             ShowAlertTextBox(500, 1000);
         }
     });
-}
-
-function NewWebsiteModal(){
-    if ($("#NewWebSiteTitle").val().match(/^[a-zA-Z0-9ÆØÅæøå\s]/) && $("#NewWebSiteDescription").val().match(/^[a-zA-Z0-9ÆØÅæøå\s]/)) {
-        $.ajax({
-            url: '../../../admin/administration-logic.php',
-            type: 'post',
-            data: 
-                { 
-                    "val": "newWebSite",
-                    "title": $("#NewWebSiteTitle").val(),
-                    "location": location,
-                    "description": $("#NewWebSiteDescription").val()
-                },
-            success: function(response) {
-                console.log("Log me please " + response);
-                var temp = response.split(",");
-                window.location.replace("../../../admin/administration.php?id=" + temp[0] + "&title=" + temp[1]);
-            }
-        });
-    } else {
-        $("#userInputRegex").show();
-        ShowAlertTextBox(500, 1000);
-    }
 }
 
 var isHidden = true;
@@ -92,13 +73,11 @@ function SlideMeUp(location){
             }else{
                 
                 var tempArray = JSON.parse(response);
-            
-                console.log("test " + tempArray);
-
-                
+                            
                 $("#CarouselIndicators").append(tempArray[0]);
                 $("#WebsitesCarouselInner").append(tempArray[1]);
                 
+                $("#WebsitesCarouselInner .carousel-item").eq(0).addClass("active");
                 
                 $('#SlideMeUp').show();
                 $('#SlideMeUp').animate({ height: '279px' }, 1000);

@@ -186,7 +186,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             else if ($sqlRowCount >= 5) 
             {
                 // start the row
-                $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
+                $html .= '<div class="carousel-item"><div class="container-fluid"><div class="row">';
                 $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 5, $_POST['location']);
                 // set the one last empty row in
                 $html .= '<div class="col-2"></div>';
@@ -204,7 +204,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             else if ($sqlRowCount >= 4) 
             {
                 // start the row
-                $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
+                $html .= '<div class="carousel-item"><div class="container-fluid"><div class="row">';
                 $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 4, $_POST['location']);
                 // set the last empty colums
                 $html .= '<div class="col-2"></div><div class="col-2"></div>';
@@ -222,7 +222,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             else if ($sqlRowCount >= 3) 
             {
                 // start the row
-                $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
+                $html .= '<div class="carousel-item"><div class="container-fluid"><div class="row">';
                 $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 3, $_POST['location']);
                 // set the last empty colums
                 $html .= '<div class="col-2"></div><div class="col-2"></div><div class="col-2"></div>';
@@ -240,7 +240,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             else if ($sqlRowCount >= 2) 
             {
                 // start the row
-                $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
+                $html .= '<div class="carousel-item"><div class="container-fluid"><div class="row">';
                 $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 2, $_POST['location']);
                 // set the last empty colums
                 $html .= '<div class="col-2"></div><div class="col-2"></div><div class="col-2"></div><div class="col-2"></div>';
@@ -258,7 +258,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             else if ($sqlRowCount >= 1) 
             {
                 // start the row
-                $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
+                $html .= '<div class="carousel-item"><div class="container-fluid"><div class="row">';
                 $html = CreateCardHTML($html, $websiteProp, $witchElementAreWeAt, 1, $_POST['location']);
                 // set the last empty colums
                 $html .= '<div class="col-2"></div><div class="col-2"></div><div class="col-2"></div><div class="col-2"></div><div class="col-2"></div>';
@@ -275,7 +275,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             }
             else if ($sqlRowCount >= 0)
             {
-                $html .= '<div class="carousel-item active"><div class="container-fluid"><div class="row">';
+                $html .= '<div class="carousel-item"><div class="container-fluid"><div class="row">';
                 $html .= '<p class="text-center w-100 h1 text-capitalize">THE DATABASE IS EMPTY</p>';
                 $html .= '</div></div></div>';
             }
@@ -410,7 +410,6 @@ function GetwebsiteElements($websiteID){
     while($tables = mysqli_fetch_array($result)){
         $html .= GetTableHTML($tables["ID"],$tables["Style"]);
     }
-
     return $html;
     
 }

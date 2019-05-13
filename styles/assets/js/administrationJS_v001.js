@@ -1028,6 +1028,11 @@ function testSnappingDrag(){
         event.target.style.webkitTransform =
         event.target.style.transform =
             'translate(' + x + 'px, ' + y + 'px)';
+
+        // event.target.style.top = y + 'px)';
+        // event.target.style.left = x + 'px)';
+        
+
     });
     }
 }
