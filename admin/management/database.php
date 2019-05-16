@@ -4,9 +4,9 @@ $connection;
 // Database Instance
 function db(){    
     // Database Username
-    $DBUsername = 'root';
+    $DBUsername = 'production';
     // Database Password
-    $DBPassword = '';
+    $DBPassword = 'Pa$$w0rd';
     // Database Host
     $DBHostname = '127.0.0.1:3306';
     // Datbase Catalogue

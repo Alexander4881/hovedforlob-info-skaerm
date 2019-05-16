@@ -33,7 +33,7 @@
              ?>
             </div>
             <div class="float-right">
-            <i class="fas fa-tag"></i><span class="ml-2">Version: 1.0.3</span>
+            <i class="fas fa-tag"></i><span class="ml-2">Version: 1.0.6</span>
             </div>
 
         </div>
