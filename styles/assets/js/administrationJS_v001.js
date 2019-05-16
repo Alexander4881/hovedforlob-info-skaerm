@@ -152,7 +152,7 @@ function SaveContent(){
                     },
                     success: function(response) {
                         // update the save logo  
-                        //console.log(response + "test");
+                        console.log(response);
                     }
                 });
             }

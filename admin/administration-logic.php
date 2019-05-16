@@ -81,7 +81,9 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
                 /*** loop over all the colums ***/
                 foreach($cols as $col){
                     /*** inserts the colum to the database ***/
-                    NewColumn($rowID, $col->nodeValue,$col->getAttribute('style'));
+                    $span = $col->getElementsByTagName('span');
+                    /*** updates the colum to the database ***/
+                    NewColumn($rowID, $span[0]->nodeValue,"style=\"" . $span[0]->getAttribute('style') . "\"");
                 }
             }
             // get the newley inserted table
@@ -122,8 +124,10 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
                 /*** loop over all the colums ***/
                 foreach($cols as $col){
+                    /*** get the span value */
+                    $span = $col->getElementsByTagName('span');
                     /*** updates the colum to the database ***/
-                    UpdateColumn($col->getAttribute("id"), $col->nodeValue ,"style=\"" . $row->getAttribute('style') . "\"");
+                    UpdateColumn($col->getAttribute("id"), $span[0]->nodeValue ,"style=\"" . $span[0]->getAttribute('style') . "\"");
                 }
             }
         }
@@ -344,8 +348,8 @@ function GetTableHTML($tableID,$Style){
         if(mysqli_num_rows($columns) > 0){
             while($column = mysqli_fetch_array($columns)){
                 // adds the column to the table var
-                $table .= "<td id=\"" . $column["ID"] . "\" style=\"" . $column["style"] . "\">";
-                $table .= " <span>" . $column['Text'] . "</span>";
+                $table .= "<td id=\"" . $column["ID"] . "\">";
+                $table .= " <span " . $column["style"] . ">" . $column['Text'] . "</span>";
 
             }
         }

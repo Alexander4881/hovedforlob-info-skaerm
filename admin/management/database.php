@@ -176,7 +176,6 @@ function UpdateRow($id, $style){
 // Location ID for the room 
 function UpdateColumn($id, $columnText, $style){
     // Query stored procedure, return as array after.
-    echo("CALL UpdateColumn('" . $id . "','" . $columnText . "','" . $style . "');");
     return(SqlQuery("CALL UpdateColumn('" . $id . "','" . $columnText . "','" . $style . "');"));
 }
 
