@@ -63,7 +63,7 @@ function SlideMeUp(location){
             
             if (response.includes("Connection Failed:")) {
             
-                $("#CarouselIndicators").append('<div class="carousel-item active"><div class="container-fluid"><div class="row"><p class="text-center w-100 h1 text-capitalize">THE DATABASE IS EMPTY</p></div></div></div>');
+                $("#WebsitesCarouselInner").append('<div class="carousel-item active"><div class="container-fluid"><div class="row"><p class="text-center w-100 h1 text-capitalize">No Database Connection</p></div></div></div>');
                 
                 
                 $('#SlideMeUp').show();
@@ -103,7 +103,7 @@ function SlideMeUp(location){
 function ChangeActiveWebsite(websiteID,location) {
 
     var iconToBeReplacedOnSuccess = event.target;
-    console.log(iconToBeReplacedOnSuccess);
+    //console.log(iconToBeReplacedOnSuccess);
 
     if (iconToBeReplacedOnSuccess.classList.contains("fa-eye-slash")) {
         $.ajax({

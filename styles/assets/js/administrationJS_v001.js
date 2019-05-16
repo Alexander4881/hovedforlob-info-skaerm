@@ -152,7 +152,7 @@ function SaveContent(){
                     },
                     success: function(response) {
                         // update the save logo  
-                        console.log(response);
+                        //console.log(response);
                     }
                 });
             }
@@ -433,7 +433,12 @@ function Editor(){
         if(event.target.tagName != "DIV"){
             oldSelectedElement = selectedElement;
             selectedElement = event.target;
+            $(".selectedElement").removeClass("selectedElement");
+
             SetElementSettings();
+
+            $(oldSelectedElement).unbind("mousedown");
+
             testSnappingDrag();
         }
     });
@@ -998,41 +1003,51 @@ function ShowAlertTextBox(text, easeInTimeInMilliSeconds,timeOpenInMilliSeconds)
 }
 
 function testSnappingDrag(){
-    // console.log("testSnappingDrag");
-    if(selectedElement.tagName != 'DIV' && selectedElement.tagName != 'TD' && selectedElement.tagName != 'SPAN' && selectedElement.tagName != 'TR' && selectedElement.tagName != 'TBODY'){
-        var element = selectedElement,
-    x = 0, y = 0;
 
-    interact(element)
-    .draggable({
-        modifiers: [
-        interact.modifiers.snap({
-            targets: [
-            interact.createSnapGrid({ x: 30, y: 30 })
-            ],
-            range: Infinity,
-            relativePoints: [ { x: 0, y: 0 } ]
-        }),
-        interact.modifiers.restrict({
-            restriction: element.parentNode,
-            elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-            endOnly: true
-        })
-        ],
-        inertia: true,
-    })
-    .on('dragmove', function (event) {
-        x += event.dx;
-        y += event.dy;
+    if(selectedElement.tagName == 'IMG' || selectedElement.tagName == 'TABLE' || selectedElement.tagName == 'P'){
 
-        event.target.style.webkitTransform =
-        event.target.style.transform =
-            'translate(' + x + 'px, ' + y + 'px)';
+        $(selectedElement).removeClass("selectedElement");
 
-        // event.target.style.top = y + 'px)';
-        // event.target.style.left = x + 'px)';
-        
+        $(selectedElement).mousedown(function(event) {
 
-    });
+            
+            $(selectedElement).addClass("movingElement");
+
+            let shiftX = event.clientX - selectedElement.getBoundingClientRect().left;
+            let shiftY = event.clientY - selectedElement.getBoundingClientRect().top;
+          
+            selectedElement.style.position = 'absolute';
+            selectedElement.style.zIndex = 1;
+            //document.body.append(selectedElement);
+          
+            moveAt(event.pageX, event.pageY);
+          
+            // centers the selectedElement at (pageX, pageY) coordinates
+            function moveAt(pageX, pageY) {
+              selectedElement.style.left = (pageX - 260) - shiftX + 'px';
+              selectedElement.style.top = pageY - shiftY + 'px';
+            }
+          
+            function onMouseMove(event) {
+              moveAt(event.pageX, event.pageY);
+            }
+          
+            // (3) move the selectedElement on mousemove
+            document.addEventListener('mousemove', onMouseMove);
+          
+            // (4) drop the selectedElement, remove unneeded handlers
+            selectedElement.onmouseup = function() {
+                $("#preview").append(selectedElement);
+                document.removeEventListener('mousemove', onMouseMove);
+                selectedElement.onmouseup = null;
+                $(selectedElement).removeClass("movingElement");
+                $(selectedElement).addClass("selectedElement");
+            };
+          
+        });
+          
+        selectedElement.ondragstart = function() {
+            return false;
+        };
     }
 }

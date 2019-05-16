@@ -3,6 +3,29 @@ html,body{
   width: 100%;
 }
 
+/* move element */
+
+.selectedElement {
+  border: #16c7ff solid 0.25rem!important;
+  padding: 0rem!important;
+  cursor: -webkit-grab!important;
+  cursor: grab!important;
+}
+
+.movingElement {
+  border: #ef6b6b solid 0.25rem;
+  padding: 0rem;
+  cursor: -webkit-grabbing; 
+  cursor: grabbing;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 .activeWebsite{
   color: #007bff;
 }
@@ -47,7 +70,7 @@ html,body{
 
 #vertical-line{
   border: red solid 0.5px;
-  height: 1020px;
+  height: 1080px;
   position: absolute;
   left: 960px;
   top: 0px;

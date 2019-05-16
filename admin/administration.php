@@ -560,7 +560,6 @@ include_once("management/global.php");
     <script>
     const websiteID = <?= $_GET['id'] ?>;
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
     <script src="../styles/assets/js/administrationJS_v001.js"></script>
 
     <!-- SideMenu Script -->
