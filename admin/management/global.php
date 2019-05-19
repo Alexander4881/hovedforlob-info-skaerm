@@ -9,6 +9,7 @@ $_SITECSS = '../styles/site.css';
 
 // JS Global
 $_MAINJS = "../styles/assets/js/MainJavaScript.js";
+$_APIJS = "../styles/assets/js/APIGitHub.js";
 
 // Bootstrap 4.2.1
 $_BOOTSTRAP_CSS = '../styles/bootstrap.css';

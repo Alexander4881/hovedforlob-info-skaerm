@@ -16,15 +16,6 @@ include_once("admin/management/global.php");
 </head>
 
 <body>
-  <!-- Maintenance
-  <div class="alert alert-danger main-alert navbar justify-content-between align-items-center w-100" role="alert">
-    <div class="justify-content-center align-items-center">
-      Website is in Alpha, be patient.
-    </div>
-    <div class="flex-row justify-content-end flex-nowrap">
-      <?php echo 'PHP Version: ' . phpversion(); ?>
-    </div>
-  </div> -->
     <!-- Navbar Header -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top shadow mb-4">
         <div class="container">
@@ -40,9 +31,9 @@ include_once("admin/management/global.php");
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/Alexander4881/hovedforlob-info-skaerm/releases" target="_blank">
-                        <i class="fab fa-github"></i> <span> Releases</span>
-                        </a>
-                    </li>
+                          <i class="fab fa-github"></i> <span> Releases</span>
+                        </a>                        
+                    </li>                                        
                 </ul>
             </div>
         </div>

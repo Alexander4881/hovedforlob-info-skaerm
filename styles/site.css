@@ -1,237 +1,12 @@
 html,body{
   height:100%;
   width: 100%;
+  font-size: 0.9rem;
 }
 
-/* move element */
-
-.selectedElement {
-  border: #16c7ff solid 0.25rem!important;
-  padding: 0rem!important;
-  cursor: -webkit-grab!important;
-  cursor: grab!important;
-}
-
-.movingElement {
-  border: #ef6b6b solid 0.25rem;
-  padding: 0rem;
-  cursor: -webkit-grabbing; 
-  cursor: grabbing;
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
-}
-
-.activeWebsite{
-  color: #007bff;
-}
-
-#CarouselIndicators{
-  top: 10.5rem;
-}
-
-.zIndex2{
-  z-index: 2;
-}
-
-.zIndex100{
-  z-index: 100;
-}
-
-.h-20{
-  height: 20%!important;
-}
-.card-body.text-secondary{
-  overflow-y: scroll;
-  overflow-x: hidden;
-  max-height: 100px;
-}
-
-#preview{  
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1920px;
-  height: 1080px;
-  border: 0.25rem dashed red;
-}
-
-#horisontal-line{
-  position: absolute;
-  top: 510px;
-  left: 0;
-  width: 1920px;
-  border: red solid 0.5px;
-}
-
-#vertical-line{
-  border: red solid 0.5px;
-  height: 1080px;
-  position: absolute;
-  left: 960px;
-  top: 0px;
-}
-
-/* svg hover css */
-svg{
-  margin-bottom: 60px;
-}
-svg > g:hover{
-  stroke: grey;
-  fill: darkgrey;
-}
-
-.svg-green:hover{
-  stroke: green;
-  fill: lightgreen;
-}
-
-.svg-green:hover{
-  stroke:green;
-  fill: lightgreen;
-}
-
-#WebsitesScrollUp{
-  display: none;
-}
-
-#SlideMeUp{
-  display: none;
-  overflow: hidden;
-}
-
-.carousel-control-prev, .carousel-control-next{
-  width: 100px;
-}
-
-.carousel-item{
-  padding: 0 50px;
-}
-
-/* Administration*/
-#element-select-box{
-  z-index: 1;
-  overflow-y: none;
-  position: relative;
-}
-
-#element-select > .col > i{
-  text-align: center;
-  padding: 3em 2em;
-  border: 0.1em solid black;
-  margin: 0 auto;
-  font-size: 15px;
-}
-
-#element-select > .row > .element {
-  margin: 1em auto;
-  text-align: center;
-  padding: 0.5em 2em;
-  font-size: 15px;
-  border: 0.15em double black;
-}
-
-#element-select > .row > .btn-group-toggle{
-  margin: 1em auto 0 auto;
-}
-
-.frame{
-  border: 1px solid red;
-}
-
-.colorInput{
-  width: 100px!important;
-  height: 72px!important;
-  border: none;
-  background-color: transparent;
-  text-align: center;
-}
-
-.colorInput:focus{
-  outline: none;
-}
-
-#toolbox{
-  position: absolute;
-  top: 0%;
-  right: 0%;
-  width: 388px;
-  height: 1080px;
-  background-image: url(./images/BackgroundImage.png);
-}
-
-#widthInput, #heigthInput, #leftInput, #topInput{
-  width: 40px!important;
-}
-
-#colorSvg{
-  height: 200px;
-  margin: 0.5em 0 0.5em 0;
-  font-size: 3em;
-}
-
-svg > a > .add:hover{
-  stroke:green;
-  fill: lightgreen;
-}
-
-.red{
-  color: red;
-}
-
-.blue{
-  color: blue;
-}
-
-.green{
-  color:green;
-}
-
-.hide{
-  background: transparent;
-  display: relative;
-}
-
-.btn-input{
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-
-.btn-input > input{
-  text-align: center;
-}
-
-.img-thumbnail{
-  height: 25rem!important;
-  width: auto!important;
-}
-
-.selected{
-  border: 0.25em solid lightblue;
-  padding: 0%;
-}
-
-
-#ts-select>div{
-  text-align: center;
-}
-
-#ts-select>div>span{
-  display: inline-flex;
-  background-color: #ef6b6b;
-  width: 2rem;
-  height: 2rem;
-  margin: 0.25rem
-}
-
-.st-hover{
-  background-color: #abf961!important;
-}
-
+/* Custom Menu for Administration Site
+-----------------------------------------------------*/
+/*#region CustomMenu*/
 @keyframes swing {
   0% {
     transform: rotate(0deg);
@@ -271,9 +46,6 @@ svg > a > .add:hover{
     transform: scale(2);
     opacity: 0;
   }
-}
-body {
-  font-size: 0.9rem;
 }
 .page-wrapper .sidebar-wrapper,
 .sidebar-wrapper .sidebar-brand > a,
@@ -742,4 +514,309 @@ body {
 
 ul li.removeBullets {
   list-style: none !important;
+}
+/*#endregion CustomMenu*/
+
+/* Custom Loader for API
+-----------------------------------------------------*/
+/*#region CustomLoader*/
+.circle-loader {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-left-color: #343a40;
+  animation: loader-spin 1.2s infinite linear;
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+  border-radius: 50%;
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.load-complete {
+  -webkit-animation: none;
+  animation: none;
+  border-color: #343a40;
+  transition: border 500ms ease-out;
+}
+
+.checkmark {
+  display: none;
+}
+.checkmark.draw:after {
+  animation-duration: 800ms;
+  animation-timing-function: ease;
+  animation-name: checkmark;
+  transform: scaleX(-1) rotate(135deg);
+}
+.checkmark:after {
+  opacity: 1;
+  height: 0.65em;
+  width: 0.35em;
+  transform-origin: left top;
+  border-right: 1px solid #343a40;
+  border-top: 1px solid #343a40;
+  content: '';
+  left: 0.15em;
+  top: 0.55em;
+  position: absolute;
+}
+
+@keyframes loader-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes checkmark {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: 0.35em;
+    opacity: 1;
+  }
+  40% {
+    height: 0.65em;
+   width: 0.35em;
+    opacity: 1;
+  }
+  100% {
+    height: 0.65em;
+    width: 0.35em;
+    opacity: 1;
+  }
+}
+/*#endregion CustomLoader*/
+
+/* move element */
+
+.selectedElement {
+  border: #16c7ff solid 0.25rem!important;
+  padding: 0rem!important;
+  cursor: -webkit-grab!important;
+  cursor: grab!important;
+}
+
+.movingElement {
+  border: #ef6b6b solid 0.25rem;
+  padding: 0rem;
+  cursor: -webkit-grabbing; 
+  cursor: grabbing;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.activeWebsite{
+  color: #007bff;
+}
+
+#CarouselIndicators{
+  top: 10.5rem;
+}
+
+.zIndex2{
+  z-index: 2;
+}
+
+.zIndex100{
+  z-index: 100;
+}
+
+.h-20{
+  height: 20%!important;
+}
+.card-body.text-secondary{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 100px;
+}
+
+#preview{  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1080px;
+  border: 0.25rem dashed red;
+}
+
+#horisontal-line{
+  position: absolute;
+  top: 510px;
+  left: 0;
+  width: 1920px;
+  border: red solid 0.5px;
+}
+
+#vertical-line{
+  border: red solid 0.5px;
+  height: 1080px;
+  position: absolute;
+  left: 960px;
+  top: 0px;
+}
+
+/* svg hover css */
+svg{
+  margin-bottom: 60px;
+}
+svg > g:hover{
+  stroke: grey;
+  fill: darkgrey;
+}
+
+.svg-green:hover{
+  stroke: green;
+  fill: lightgreen;
+}
+
+.svg-green:hover{
+  stroke:green;
+  fill: lightgreen;
+}
+
+#WebsitesScrollUp{
+  display: none;
+}
+
+#SlideMeUp{
+  display: none;
+  overflow: hidden;
+}
+
+.carousel-control-prev, .carousel-control-next{
+  width: 100px;
+}
+
+.carousel-item{
+  padding: 0 50px;
+}
+
+/* Administration*/
+#element-select-box{
+  z-index: 1;
+  overflow-y: none;
+  position: relative;
+}
+
+#element-select > .col > i{
+  text-align: center;
+  padding: 3em 2em;
+  border: 0.1em solid black;
+  margin: 0 auto;
+  font-size: 15px;
+}
+
+#element-select > .row > .element {
+  margin: 1em auto;
+  text-align: center;
+  padding: 0.5em 2em;
+  font-size: 15px;
+  border: 0.15em double black;
+}
+
+#element-select > .row > .btn-group-toggle{
+  margin: 1em auto 0 auto;
+}
+
+.frame{
+  border: 1px solid red;
+}
+
+.colorInput{
+  width: 100px!important;
+  height: 72px!important;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+}
+
+.colorInput:focus{
+  outline: none;
+}
+
+#toolbox{
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  width: 388px;
+  height: 1080px;
+  background-image: url(./images/BackgroundImage.png);
+}
+
+#widthInput, #heigthInput, #leftInput, #topInput{
+  width: 40px!important;
+}
+
+#colorSvg{
+  height: 200px;
+  margin: 0.5em 0 0.5em 0;
+  font-size: 3em;
+}
+
+svg > a > .add:hover{
+  stroke:green;
+  fill: lightgreen;
+}
+
+.red{
+  color: red;
+}
+
+.blue{
+  color: blue;
+}
+
+.green{
+  color:green;
+}
+
+.hide{
+  background: transparent;
+  display: relative;
+}
+
+.btn-input{
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.btn-input > input{
+  text-align: center;
+}
+
+.img-thumbnail{
+  height: 25rem!important;
+  width: auto!important;
+}
+
+.selected{
+  border: 0.25em solid lightblue;
+  padding: 0%;
+}
+
+#ts-select>div{
+  text-align: center;
+}
+
+#ts-select>div>span{
+  display: inline-flex;
+  background-color: #ef6b6b;
+  width: 2rem;
+  height: 2rem;
+  margin: 0.25rem
+}
+
+.st-hover{
+  background-color: #abf961!important;
 }
