@@ -10,15 +10,15 @@ function GetReleaseUpdate() {
         url: apiUrl + apiKey,
         contentType: "application/json",
         dataType: 'json',
-        error: function(){
-            var errorUrl = 'https://github.com/Alexander4881/hovedforlob-info-skaerm/releases'
+        error: function() {
+            var errorUrl = 'https://github.com/Alexander4881/hovedforlob-info-skaerm/releases';
             var errorMessage = 'Could not get release.';
 
             $(insertUrl).prop('href', errorUrl);
             $(insertTagName).removeClass("bg-success").addClass("bg-danger");
             $(insertTagName).append(errorMessage);
         },
-        success: function(apiResult){
+        success: function(apiResult) {
             var htmlUrl = apiResult.html_url;
             var tagName = apiResult.tag_name;
             

@@ -43,7 +43,6 @@
                     <span class="rounded-left bg-white text-dark px-sm-2 py-sm-1 mx-auto">Version</span>
                     <div id="APIRelease" class="rounded-right bg-success text-white px-sm-2 py-sm-1 mx-auto">
                         <div class="circle-loader">
-                            <span class="sr-only">Loading release...</span>
                             <div class="checkmark draw"></div>
                         </div>
                     </div>

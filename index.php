@@ -35,7 +35,7 @@
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
                       <button id="NewWebSite" class="btn btn-primary">Opret ny
-                          Inforskærm</button>
+                          Infoskærm</button>
                   </div>
               </div>
           </div>

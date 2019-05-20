@@ -12,10 +12,8 @@ $(document).ready(function () {
                     "val": "getWebsiteElementsOnSiteID",
                     "siteID": location
                 },
-            success: function(response) {
-                
-                console.log("update");
-                
+            success: function(response) {                
+                console.log("update");                
             }
         });
     }, 1000);    
