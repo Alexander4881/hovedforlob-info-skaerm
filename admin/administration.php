@@ -19,7 +19,7 @@ include_once("management/global.php");
 <body>
 
     <!-- Page Wrapping -->
-    <div class="page-wrapper chiller-theme">
+    <div id="sideBar" class="page-wrapper chiller-theme">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
         </a>
@@ -142,9 +142,8 @@ include_once("management/global.php");
                                                             autocomplete="off">
                                                         <i class="fas fa-plus"></i>
                                                     </label>
-                                                    <label class="btn btn-secondary disabled btn-input"
-                                                        onclick="ContentWidth(3)">
-                                                        <input type="number" min="0" max="1920" value="" name="options"
+                                                    <label class="btn btn-secondary disabled btn-input">
+                                                        <input type="number" min="0" max="1920" value="0" name="options"
                                                             id="widthInput" autocomplete="off"
                                                             onchange="InputValueChanges(this)">
                                                     </label>
@@ -169,7 +168,7 @@ include_once("management/global.php");
                                                         <i class="fas fa-plus"></i>
                                                     </label>
                                                     <label class="btn btn-secondary disabled btn-input">
-                                                        <input type="number" min="0" max="1080" value="" name="options"
+                                                        <input type="number" min="0" max="1080" value="0" name="options"
                                                             id="heigthInput" autocomplete="off"
                                                             onchange="InputValueChanges(this)">
                                                     </label>
@@ -204,7 +203,7 @@ include_once("management/global.php");
                                                         <i class="fas fa-plus"></i>
                                                     </label>
                                                     <label class="btn btn-secondary disabled btn-input pb-0 pt-0">
-                                                        <input type="number" min="0" max="1080" value="" name="options"
+                                                        <input type="number" min="0" max="1080" value="0" name="options"
                                                             id="topInput" autocomplete="off"
                                                             onchange="InputValueChanges(this)">
                                                     </label>
@@ -220,7 +219,7 @@ include_once("management/global.php");
                                     <li class="removeBullets">
                                         <a href="#">
                                             <div class="clearfix">
-                                                <span class="header-menu">Left: </span>
+                                                <span class="header-menu">Left:</span>
                                                 <div class="btn-group btn-group-toggle btn-group-sm text-center float-right"
                                                     data-toggle="buttons">
                                                     <label class="btn btn-secondary" onclick="PosisitionLeft(1)">

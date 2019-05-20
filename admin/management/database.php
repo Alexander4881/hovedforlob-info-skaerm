@@ -78,7 +78,13 @@ function UpdateImageLink($imageLinkID, $imageStyle){
 // Location ID for the room 
 function NewWebSite($title, $location, $description, $isTemplate){
     // Query stored procedure, return as array after.
-    return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "','" . $isTemplate . "');")));
+    return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "'," . $isTemplate . ");")));
+}
+
+function NewWebSiteFromTemplate($title, $location, $description){
+    // Query stored procedure, return as array after.
+    echo("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "'," . $isTemplate . ");");
+    return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "'," . $isTemplate . ");")));
 }
 
 /* Functions for NewTable - NewRow - NewColumn, nested together.
@@ -106,9 +112,9 @@ function NewRow($Table_ID, $style){
 // Generate New column into currently added row - takes 2 arguments
 // Row ID
 // Add Text into Row
-function NewColumn($Row_ID, $Text, $style){
+function NewColumn($Row_ID, $Text , $tdStyle, $spanStyle){
     // Query stored procedure, get currently row id, and add text into the column
-    $columnID = mysqli_fetch_array(SqlQuery("CALL InsertNewColumn(" . $Row_ID .", '" . $Text ."', '" . $style ."');"));
+    $columnID = mysqli_fetch_array(SqlQuery("CALL InsertNewColumn(" . $Row_ID .", '" . $Text ."', '" . $tdStyle ."', '" . $spanStyle ."');"));
     // return column ID
     return($columnID[0]);
 }
@@ -174,9 +180,9 @@ function UpdateRow($id, $style){
 // Updates a Column - takes 2 arguments
 // Title for website
 // Location ID for the room 
-function UpdateColumn($id, $columnText, $style){
+function UpdateColumn($id, $columnText, $tdStyle, $spanStyle){
     // Query stored procedure, return as array after.
-    return(SqlQuery("CALL UpdateColumn('" . $id . "','" . $columnText . "','" . $style . "');"));
+    return(SqlQuery("CALL UpdateColumn('" . $id . "','" . $columnText . "', '" . $tdStyle . "','" . $spanStyle . "');"));
 }
 
 // Get currently active websites - takes 1 argument

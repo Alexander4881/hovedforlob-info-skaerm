@@ -1,11 +1,12 @@
 $(document).ready(function() {
     $("#userInputRegex").hide();
+    $("#TemplateModalUserInputRegex").hide();
 });
 
-function ShowAlertTextBox(easeInTimeInMilliSeconds,timeOpenInMilliSeconds) {
-    $("#userInputRegex").fadeIn(easeInTimeInMilliSeconds,"swing");
+function ShowAlertTextBox(easeInTimeInMilliSeconds,timeOpenInMilliSeconds, Field) {
+    Field.fadeIn(easeInTimeInMilliSeconds,"swing");
     setTimeout(function() {
-        $("#userInputRegex").fadeOut(easeInTimeInMilliSeconds,"swing");
+        Field.fadeOut(easeInTimeInMilliSeconds,"swing");
     },timeOpenInMilliSeconds);
 }
 
@@ -14,7 +15,7 @@ function NewWebSite(location) {
     $("#NewWebsite").modal();
     $("#NewWebSite").unbind();
     $("#NewWebSite").click(function() {
-        var pattern = /^[a-zA-Z0-9æøåÆØÅ]+$/;
+        var pattern = /^[a-zA-Z0-9æøåÆØÅ ]+$/;
         var userTitle = $("#NewWebSiteTitle").val();
         var userDesc = $("#NewWebSiteDescription").val();
     if (pattern.test(userTitle) && pattern.test(userDesc)) {
@@ -30,13 +31,14 @@ function NewWebSite(location) {
                         "isTemplate": document.getElementById("IsTemplate").checked
                     },
                 success: function(response) {
+                    console.log(response);
                     var temp = response.split(",");
                     window.location.replace("../../../admin/administration.php?id=" + temp[0] + "&title=" + temp[1]);
                 }
             });
         }else {
             $("#userInputRegex").show();
-            ShowAlertTextBox(500, 1000);
+            ShowAlertTextBox(500, 1000,$("#userInputRegex"));
         }
     });
 }
@@ -84,7 +86,6 @@ function SlideMeUp(location) {
 
 function ChangeActiveWebsite(websiteID,location) {
     var iconToBeReplacedOnSuccess = event.target;
-    //console.log(iconToBeReplacedOnSuccess);
     if (iconToBeReplacedOnSuccess.classList.contains("fa-eye-slash")) {
         $.ajax({
             url: '../../../admin/administration-logic.php',
@@ -107,4 +108,35 @@ function ChangeActiveWebsite(websiteID,location) {
             }
         });
     }
+}
+
+function NewWebSiteFromTemplate(){
+    $("#NewWebsiteFromTemplate").modal(location);
+    $("#TemplateModalNewWebSite").unbind();
+    $("#TemplateModalNewWebSite").click(function() {
+        var pattern = /^[a-zA-Z0-9æøåÆØÅ ]+$/;
+        var userTitle = $("#TemplateModalNewWebSiteTitle").val();
+        var userDesc = $("#TemplateModalNewWebSiteDescription").val();
+    if (pattern.test(userTitle) && pattern.test(userDesc)) {
+            $.ajax({
+                url: '../../../admin/administration-logic.php',
+                type: 'post',
+                data:
+                    {
+                        "val": "newWebSiteFromTemplate",
+                        "title": $("#TemplateModalNewWebSiteTitle").val(),
+                        "location": location,
+                        "description": $("#TemplateModalNewWebSiteDescription").val()
+                    },
+                success: function(response) {
+                    console.log(response);
+                    var temp = response.split(",");
+                    window.location.replace("../../../admin/administration.php?id=" + temp[0] + "&title=" + temp[1]);
+                }
+            });
+        }else {
+            $("#TemplateModalUserInputRegex").show();
+            ShowAlertTextBox(500, 1000, $("#TemplateModalUserInputRegex"));
+        }
+    });
 }

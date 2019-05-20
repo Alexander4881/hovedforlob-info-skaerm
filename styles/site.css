@@ -646,9 +646,9 @@ ul li.removeBullets {
   position: absolute;
   top: 0;
   left: 0;
-  width: 1920px;
-  height: 1080px;
-  border: 0.25rem dashed red;
+  width: 1928px;
+  height: 1088px;
+  border: 4px dashed red;
 }
 
 #horisontal-line{

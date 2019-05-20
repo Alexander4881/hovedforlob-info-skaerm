@@ -119,7 +119,8 @@ CREATE TABLE `Column`(
 `ID` INT NOT NULL AUTO_INCREMENT,
 `Text` MEDIUMTEXT NOT NULL,
 `Row_ID` INT NOT NULL,
-`style` MEDIUMTEXT,
+`td-style` MEDIUMTEXT,
+`span-style` MEDIUMTEXT,
 -- Add Foreign Key between [Column].Row_ID with [Row].ID.
 FOREIGN KEY(`Row_ID`) REFERENCES `Row`(`ID`) ON DELETE CASCADE,
 -- Set Primary Key to [Column].ID.

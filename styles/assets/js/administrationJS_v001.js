@@ -116,6 +116,7 @@ function SaveContent() {
                         "websiteID" : websiteID
                     },
                     success: function(response) { 
+                        console.log(response);
                         // replaces the old table with the new
                         //$(element).replaceWith(response);
                     }
@@ -382,7 +383,6 @@ function Editor() {
         if(event.target.tagName != "DIV") {
             oldSelectedElement = selectedElement;
             selectedElement = event.target;
-            $(".selectedElement").removeClass("selectedElement");
             SetElementSettings();
             $(oldSelectedElement).unbind("mousedown");
             testSnappingDrag();
@@ -391,6 +391,12 @@ function Editor() {
 }
 
 function SetElementSettings() {
+    heigthInput.value = selectedElement.clientHeight;
+    widthInput.value = selectedElement.clientWidth;
+
+    topInput.value = selectedElement.offsetTop;
+    leftInput.value = selectedElement.offsetLeft;
+
     switch(selectedElement.tagName) {
         case'P':
         if (selectedElement.style.display != "absolute") {
@@ -400,9 +406,7 @@ function SetElementSettings() {
         RGBColorChanges();
         break;
 
-        case'IMG':
-        heigthInput.value = selectedElement.clientHeight;
-        widthInput.value = selectedElement.clientWidth;        
+        case'IMG':    
         topInput.value = selectedElement.offsetTop;
         leftInput.value = selectedElement.offsetLeft;
         $(selectedElement).width(selectedElement.clientWidth);
@@ -883,9 +887,7 @@ function ShowAlertTextBox(text, easeInTimeInMilliSeconds,timeOpenInMilliSeconds)
 
 function testSnappingDrag() {
     if (selectedElement.tagName == 'IMG' || selectedElement.tagName == 'TABLE' || selectedElement.tagName == 'P') {
-        $(selectedElement).removeClass("selectedElement");
-        $(selectedElement).mousedown(function(event) {            
-            $(selectedElement).addClass("movingElement");
+        $(selectedElement).mousedown(function(event) {
             let shiftX = event.clientX - selectedElement.getBoundingClientRect().left;
             let shiftY = event.clientY - selectedElement.getBoundingClientRect().top;          
             selectedElement.style.position = 'absolute';
@@ -895,7 +897,12 @@ function testSnappingDrag() {
             // centers the selectedElement at (pageX, pageY) coordinates
 
             function moveAt(pageX, pageY) {
-              selectedElement.style.left = (pageX - 260) - shiftX + 'px';
+                if ($("#sideBar").hasClass( "toggled" )) {
+                    selectedElement.style.left = (pageX - 260) - shiftX + 'px';
+                }else{
+                    selectedElement.style.left = pageX - shiftX + 'px';
+                }
+              
               selectedElement.style.top = pageY - shiftY + 'px';
             }          
 
@@ -906,11 +913,10 @@ function testSnappingDrag() {
             document.addEventListener('mousemove', onMouseMove);          
             // (4) drop the selectedElement, remove unneeded handlers
             selectedElement.onmouseup = function() {
-                $("#preview").append(selectedElement);
+                
                 document.removeEventListener('mousemove', onMouseMove);
                 selectedElement.onmouseup = null;
-                $(selectedElement).removeClass("movingElement");
-                $(selectedElement).addClass("selectedElement");
+                SetElementSettings();
             };
           
         });          

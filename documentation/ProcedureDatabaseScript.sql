@@ -73,6 +73,21 @@ BEGIN
 END $$
 DELIMITER ;
 
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewWebSiteFromTemplate`(
+	-- Create procedure parameters as IN.
+	IN title VARCHAR(40), 
+	IN siteID TINYINT,
+	IN description VARCHAR(255),
+	IN isTemplate BOOLEAN)
+BEGIN
+	-- Insert Values into WebSite table.
+	INSERT INTO `WebSite` (`Title`, `SiteID`,`Description`,`IsTemplate`) VALUES (title, siteID, description, isTemplate);
+	-- Select id and title from website, get id from last inserted id in website Table.
+	SELECT `id`,`title`,`Description` FROM `WebSite` WHERE `ID` = (SELECT LAST_INSERT_ID() FROM `WebSite` limit 1);
+END $$
+DELIMITER ;
+
 /* Insert New Text Procedure
 ----------------------------------------------- */
 DELIMITER $$
@@ -155,10 +170,11 @@ CREATE PROCEDURE `InsertNewColumn`(
 	-- Create procedure parameters as IN.
 	IN `@rowID` INT,
 	IN `@ColumnText` MEDIUMTEXT,
-	IN `@ColumnStyle` MEDIUMTEXT)
+    IN `@ColumnStyle` MEDIUMTEXT,
+	IN `@SpanStyle` MEDIUMTEXT)
 BEGIN
 	-- Insert values into Column Table.
-	INSERT INTO `Column`(`Row_ID`,`Text`,`style`) VALUES(`@rowID`,`@ColumnText`,`@ColumnStyle`);
+	INSERT INTO `Column`(`Row_ID`,`Text`,`td-style`,`span-style`) VALUES(`@rowID`,`@ColumnText`,`@ColumnStyle`,`@SpanStyle`);
 	-- Select last inserted id from Column Table as ID.
 	SELECT LAST_INSERT_ID() AS `ID`;
 END $$
@@ -311,7 +327,7 @@ CREATE PROCEDURE `ShowColumn`(
 	IN `@rowID` INT)
 BEGIN
 	-- Get values from Column table where Row_ ID column is the value from parameter.
-	SELECT `ID`,`Text`,`style` FROM `Column` WHERE `Row_ID` = `@rowID`;
+	SELECT `ID`,`Text`,`td-style`,`span-style` FROM `Column` WHERE `Row_ID` = `@rowID`;
 END $$
 DELIMITER ;
 
@@ -323,7 +339,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowWebsitesOnSiteID`(
 	IN `@siteID` INT)
 BEGIN
 	-- Get values from WebSite where the siteId is the value from parameter.
-	SELECT `ID`,`Title`,`ActiveWebsite`,`Description` FROM `WebSite` WHERE `SiteID` = `@siteID`;
+	SELECT `ID`,`Title`,`ActiveWebsite`,`Description`,`IsTemplate` FROM `WebSite` WHERE `SiteID` = `@siteID` OR `IsTemplate` = 1;
 END $$
 DELIMITER ;
 
@@ -359,10 +375,11 @@ CREATE PROCEDURE `UpdateColumn`(
 	-- Create procedure parameters as IN.
 	IN `@id` INT,
 	IN `@ColumnText` MEDIUMTEXT,
-	IN `@ColumnStyle` MEDIUMTEXT)
+    IN `@ColumnStyle` MEDIUMTEXT,
+	IN `@SpanStyle` MEDIUMTEXT)
 BEGIN
 	-- Update Column Table set the values in table to specified procedure parameters.
-	UPDATE `Column` SET `Text` = `@ColumnText`, `style` = `@ColumnStyle` WHERE `ID` = `@id`;
+	UPDATE `Column` SET `Text` = `@ColumnText`, `td-style` = `@ColumnStyle`, `span-style` = `@SpanStyle` WHERE `ID` = `@id`;
 END $$
 DELIMITER ;
 

@@ -42,7 +42,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
 }else if(isset($_POST['val']) && $_POST['val'] === "newWebSite"){
 
-    if (isset($_POST['title']) && isset($_POST['location']) && isset($_POST['description']) isset($_POST["isTemplate"])){
+    if (isset($_POST['title']) && isset($_POST['location']) && isset($_POST['description']) && isset($_POST["isTemplate"])){
         
         $result = NewWebSite($_POST['title'], $_POST['location'], $_POST['description'],$_POST["isTemplate"]);
         
@@ -83,7 +83,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
                     /*** inserts the colum to the database ***/
                     $span = $col->getElementsByTagName('span');
                     /*** updates the colum to the database ***/
-                    NewColumn($rowID, $span[0]->nodeValue,"style=\"" . $span[0]->getAttribute('style') . "\"");
+                    NewColumn($rowID, $span[0]->nodeValue, "style=\"" . $col->getAttribute('style') . "\"", "style=\"" . $span[0]->getAttribute('style') . "\"");
                 }
             }
             // get the newley inserted table
@@ -127,7 +127,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
                     /*** get the span value */
                     $span = $col->getElementsByTagName('span');
                     /*** updates the colum to the database ***/
-                    UpdateColumn($col->getAttribute("id"), $span[0]->nodeValue ,"style=\"" . $span[0]->getAttribute('style') . "\"");
+                    UpdateColumn($col->getAttribute("id"), $span[0]->nodeValue ,"style=\"" . $col->getAttribute('style') . "\"", "style=\"" . $span[0]->getAttribute('style') . "\"");
                 }
             }
         }
@@ -342,14 +342,13 @@ function GetTableHTML($tableID,$Style){
     while($row = mysqli_fetch_array($rows)){
         $table .= "<tr id=\"" . $row["ID"] . "\">";
         
-
         $columns = GetColumn($row["ID"]);
 
         if(mysqli_num_rows($columns) > 0){
             while($column = mysqli_fetch_array($columns)){
                 // adds the column to the table var
-                $table .= "<td id=\"" . $column["ID"] . "\">";
-                $table .= " <span " . $column["style"] . ">" . $column['Text'] . "</span>";
+                $table .= "<td id=\"" . $column["ID"] . "\" " . $column["td-style"] . ">";
+                $table .= " <span " . $column["span-style"] . ">" . $column['Text'] . "</span>";
 
             }
         }
@@ -373,11 +372,20 @@ function CreateCardHTML($html, $websiteProp, $startElement, $count, $location){
                             // [Website Location]
         $html .=        '<div class="card-header">';
         $html .=            "Lokale B." . $location ;                         
-                            // [Website Edit & Make Active]
-                            if ($websiteProp[$startElement + $i][2] == 1 ) {
-                                $html .= '<div class="float-right "> <a onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye activeWebsite"></i> </a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"></i> </a></div>';
-                            }else if ($websiteProp[$startElement + $i][2] == 0){
-                                $html .= '<div class="float-right"> <a onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye-slash"></i> </a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"></i> </a></div>';
+                            // check if the website is a template
+                            if($websiteProp[$startElement + $i][4] == 0){
+                                // not a template
+
+                                // [Website Edit & Make Active]
+                                // Check if the website is active
+                                if ($websiteProp[$startElement + $i][2] == 1 ) {
+                                    $html .= '<div class="float-right "> <a onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye activeWebsite"></i> </a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"></i> </a></div>';
+                                }else if ($websiteProp[$startElement + $i][2] == 0){
+                                    $html .= '<div class="float-right"> <a onclick="ChangeActiveWebsite(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-eye-slash"></i> </a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"></i> </a></div>';
+                                }
+                            }else{
+                                // it is a tamplate
+                                $html .= '<div class="float-right"> <a onclick="NewWebSiteFromTemplate(' . $location . ')"><i class="fas fa-scroll"></i> </a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"></i> </a></div>';
                             }
         $html .=        '</div>';
                         // Field for Card-Body

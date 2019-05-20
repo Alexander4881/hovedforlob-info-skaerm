@@ -7,7 +7,7 @@
   <div class="container main-content">
 
       <!-- Modal -->
-      <!-- edit text modal -->
+      <!-- New Website modal -->
       <div class="modal fade" id="NewWebsite" tabindex="-1" role="dialog" aria-labelledby="NewWebsite"
           aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -45,6 +45,40 @@
           </div>
       </div>
 
+
+      <!-- Modal -->
+      <!-- New Website modal -->
+      <div class="modal fade" id="NewWebsiteFromTemplate" tabindex="-1" role="dialog" aria-labelledby="NewWebsiteFromTemplate"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Ny Inforskærm fra Template<span
+                              id="TemplateModalTamplateTitle"></span></h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <div id="TemplateModalUserInputRegex" class="alert alert-danger" role="alert">
+                          <span>Not an acceptable character...</span>
+                      </div>
+                      <div class="input-group mb-3">
+                          <input id="TemplateModalNewWebSiteTitle" type="text" class="form-control" value="Title">
+                      </div>
+                      <div class="input-group mb-3">
+                          <input id="TemplateModalNewWebSiteDescription" maxlength="255" type="text" class="form-control"
+                              value="Description">
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+                      <button id="TemplateModalNewWebSite" class="btn btn-primary">Opret ny Infoskærm</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
       <h2 class="display-3"><?php echo $_INDEXTITLE; ?></h2>
       <?php
       include './styles/images/svg.php';
@@ -74,6 +108,6 @@
 
   <script src="./styles/assets/js/MainJavaScript.js"></script>
   <!-- Footer -->
-  <?php 
+  <?php
   include_once("./includes/footer.php"); 
   ?>
