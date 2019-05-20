@@ -50,8 +50,8 @@ CREATE PROCEDURE `ChangeActiveWebsiteOnSiteIDAndWebsiteID`(
 	IN `@siteID` INT,
   IN `@websiteID` INT)
 BEGIN
-	CALL `UpdateActiveWebsiteOnID`((SELECT `ID` FROM `WebSite` WHERE `SiteID` = `@siteID` AND `ActiveWebsite` = 1 LIMIT 1),FALSE);
-    CALL `UpdateActiveWebsiteOnID`(`@websiteID`,TRUE);
+	CALL `UpdateActiveWebsiteOnID`((SELECT `ID` FROM `WebSite` WHERE `SiteID` = `@siteID` AND `IsTemplate` = "true" AND `ActiveWebsite` = 1 LIMIT 1),FALSE);
+  CALL `UpdateActiveWebsiteOnID`(`@websiteID`,TRUE);
 END $$
 DELIMITER ;
 
@@ -61,12 +61,13 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNewWebSite`(
 	-- Create procedure parameters as IN.
-	IN title VARCHAR(40) , 
+	IN title VARCHAR(40), 
 	IN siteID TINYINT,
-	IN description VARCHAR(255))
+	IN description VARCHAR(255),
+	IN isTemplate BOOLEAN)
 BEGIN
 	-- Insert Values into WebSite table.
-	INSERT INTO `WebSite` (`Title`, `SiteID`,`Description`) VALUES (title, siteID, description);
+	INSERT INTO `WebSite` (`Title`, `SiteID`,`Description`,`IsTemplate`) VALUES (title, siteID, description, isTemplate);
 	-- Select id and title from website, get id from last inserted id in website Table.
 	SELECT `id`,`title`,`Description` FROM `WebSite` WHERE `ID` = (SELECT LAST_INSERT_ID() FROM `WebSite` limit 1);
 END $$

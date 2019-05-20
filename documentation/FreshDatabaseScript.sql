@@ -47,6 +47,7 @@ CREATE TABLE `WebSite`(
 `SiteID` TINYINT NOT NULL,
 `Description` VARCHAR(255) NOT NULL,
 `ActiveWebsite` BOOLEAN NOT NULL DEFAULT FALSE,
+`IsTemplate` BOOLEAN NOT NULL DEFAULT FALSE,
 -- Set Primary Key to [WebSite].ID.
 PRIMARY KEY(`ID`)
 );

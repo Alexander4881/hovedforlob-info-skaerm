@@ -6,7 +6,7 @@ function db(){
     // Database Username
     $DBUsername = 'root';
     // Database Password
-    $DBPassword = 'xUbWQw6Oqe$u6dgqXX1F6xe[,FlGAZpj';
+    $DBPassword = '';
     // Database Host
     $DBHostname = '127.0.0.1:3306';
     // Datbase Catalogue
@@ -76,9 +76,9 @@ function UpdateImageLink($imageLinkID, $imageStyle){
 // Generate a new Website - takes 2 arguments
 // Title for website
 // Location ID for the room 
-function NewWebSite($title, $location, $description){
+function NewWebSite($title, $location, $description, $isTemplate){
     // Query stored procedure, return as array after.
-    return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "');")));
+    return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "','" . $isTemplate . "');")));
 }
 
 /* Functions for NewTable - NewRow - NewColumn, nested together.
