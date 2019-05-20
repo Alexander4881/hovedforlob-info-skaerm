@@ -76,9 +76,9 @@ function UpdateImageLink($imageLinkID, $imageStyle){
 // Generate a new Website - takes 2 arguments
 // Title for website
 // Location ID for the room 
-function NewWebSite($title, $location, $description){
+function NewWebSite($title, $location, $description, $isTemplate){
     // Query stored procedure, return as array after.
-    return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "');")));
+    return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "','" . $isTemplate . "');")));
 }
 
 /* Functions for NewTable - NewRow - NewColumn, nested together.

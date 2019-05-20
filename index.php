@@ -31,6 +31,10 @@
                           <input id="NewWebSiteDescription" maxlength="255" type="text" class="form-control"
                               value="Description">
                       </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="IsTemplate" value="option1">
+                            <label class="form-check-label" for="IsTemplate">Template Mode</label>
+                        </div>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>

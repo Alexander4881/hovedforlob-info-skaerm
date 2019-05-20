@@ -42,9 +42,9 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
 
 }else if(isset($_POST['val']) && $_POST['val'] === "newWebSite"){
 
-    if (isset($_POST['title']) && isset($_POST['location']) && isset($_POST['description'])){
+    if (isset($_POST['title']) && isset($_POST['location']) && isset($_POST['description']) isset($_POST["isTemplate"])){
         
-        $result = NewWebSite($_POST['title'], $_POST['location'], $_POST['description']);
+        $result = NewWebSite($_POST['title'], $_POST['location'], $_POST['description'],$_POST["isTemplate"]);
         
         echo($result[0] . "," . $result[1]);
     }
