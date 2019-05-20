@@ -32,7 +32,7 @@
                               value="Description">
                       </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="IsTemplate" value="option1">
+                            <input class="form-check-input" type="checkbox" id="IsTemplate">
                             <label class="form-check-label" for="IsTemplate">Template Mode</label>
                         </div>
                   </div>

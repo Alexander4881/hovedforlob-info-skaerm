@@ -27,7 +27,7 @@ function NewWebSite(location) {
                         "title": $("#NewWebSiteTitle").val(),
                         "location": location,
                         "description": $("#NewWebSiteDescription").val(),
-                        "isTemplate": $("#IsTemplate").checked
+                        "isTemplate": document.getElementById("IsTemplate").checked
                     },
                 success: function(response) {
                     var temp = response.split(",");
