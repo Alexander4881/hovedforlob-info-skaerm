@@ -55,7 +55,8 @@ function SlideMeUp(location) {
         success: function(response) {
             console.log(response);
             if (response.includes("Connection Failed:")) {
-                $("#WebsitesCarouselInner").append('<div class="carousel-item active"><div class="container-fluid"><div class="row"><p class="text-center w-100 h1 text-capitalize">No Database Connection</p></div></div></div>');                
+                var connectionErrorMessage = 'no data found..';
+                $("#WebsitesCarouselInner").append('<div class="carousel-item active"><div class="container-fluid"><div class="row"><p class="text-center w-100 h1 text-capitalize">' + connectionErrorMessage + '</p></div></div></div>');                
                 $('#SlideMeUp').show();
                 $('#SlideMeUp').animate({ height: '279px' }, 1000);
                 isHidden = false;

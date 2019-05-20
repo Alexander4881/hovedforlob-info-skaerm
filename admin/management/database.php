@@ -6,7 +6,7 @@ function db(){
     // Database Username
     $DBUsername = 'root';
     // Database Password
-    $DBPassword = 'xUbWQw6Oqe$u6dgqXX1F6xe[,FlGAZpj';
+    $DBPassword = '';
     // Database Host
     $DBHostname = '127.0.0.1:3306';
     // Datbase Catalogue
