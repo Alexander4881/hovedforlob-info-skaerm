@@ -384,6 +384,7 @@ function Editor() {
             oldSelectedElement = selectedElement;
             selectedElement = event.target;
             SetElementSettings();
+            $(selectedElement).unbind("mousemove");
             testSnappingDrag();
         }
     });
