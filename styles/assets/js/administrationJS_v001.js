@@ -384,7 +384,6 @@ function Editor() {
             oldSelectedElement = selectedElement;
             selectedElement = event.target;
             SetElementSettings();
-            $(oldSelectedElement).unbind("mousedown");
             testSnappingDrag();
         }
     });
@@ -423,13 +422,11 @@ function SetElementSettings() {
         widthInput.value = selectedElement.clientWidth;
 
         if (selectedElement === oldSelectedElement) {
-            // console.log($(selectedElement).parents('table')[0].tagName);
             selectedElement = $(selectedElement).parents('table')[0];
         }
         break;
     }
     ShowAlertTextBox("SELECTED " + selectedElement.tagName,500,1500);
-    // $("#alert-text").text(selectedElement.tagName);
 }
 
 function ShowTextEditor() {
@@ -888,6 +885,7 @@ function ShowAlertTextBox(text, easeInTimeInMilliSeconds,timeOpenInMilliSeconds)
 function testSnappingDrag() {
     if (selectedElement.tagName == 'IMG' || selectedElement.tagName == 'TABLE' || selectedElement.tagName == 'P') {
         $(selectedElement).mousedown(function(event) {
+            console.log("mousedown");
             let shiftX = event.clientX - selectedElement.getBoundingClientRect().left;
             let shiftY = event.clientY - selectedElement.getBoundingClientRect().top;          
             selectedElement.style.position = 'absolute';
@@ -906,16 +904,19 @@ function testSnappingDrag() {
               selectedElement.style.top = pageY - shiftY + 'px';
             }          
 
-            function onMouseMove(event) {
-              moveAt(event.pageX, event.pageY);
-            }          
+                      
             // (3) move the selectedElement on mousemove
-            document.addEventListener('mousemove', onMouseMove);          
+            $(selectedElement).mousemove(
+                function onMouseMove(event) {
+                    moveAt(event.pageX, event.pageY);
+                  }
+            );          
             // (4) drop the selectedElement, remove unneeded handlers
-            $("#preview").onmouseup = function() {
+            $(selectedElement).mouseup = function() {
                 
-                document.removeEventListener('mousemove', onMouseMove);
-                $("#preview").unbind("onmouseup");
+                $(selectedElement).unbind("mousemove");
+                $(selectedElement).unbind("mouseup");
+
                 SetElementSettings();
             };
           

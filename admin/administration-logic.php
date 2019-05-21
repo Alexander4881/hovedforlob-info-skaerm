@@ -280,7 +280,7 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
             else if ($sqlRowCount >= 0)
             {
                 $html .= '<div class="carousel-item"><div class="container-fluid"><div class="row">';
-                $html .= '<p class="text-center w-100 h1 text-capitalize">THE DATABASE IS EMPTY</p>';
+                $html .= '<p class="text-center w-100 h1 text-capitalize">No Websites Created</p>';
                 $html .= '</div></div></div>';
             }
         }while($sqlRowCount != 0);

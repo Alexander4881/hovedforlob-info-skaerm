@@ -4,9 +4,9 @@ $connection;
 // Database Instance
 function db(){    
     // Database Username
-    $DBUsername = 'root';
+    $DBUsername = 'production';
     // Database Password
-    $DBPassword = '';
+    $DBPassword = 'Pa$$w0rd';
     // Database Host
     $DBHostname = '127.0.0.1:3306';
     // Datbase Catalogue
@@ -81,7 +81,7 @@ function NewWebSite($title, $location, $description, $isTemplate){
     return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "'," . $isTemplate . ");")));
 }
 
-function NewWebSiteFromTemplate($templateID,$title, $location, $description){
+function NewWebSiteFromTemplate($templateID, $title, $location, $description){
     // Query stored procedure, return as array after.
     //echo("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "'," . $isTemplate . ");");
     return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSiteFromTemplate('" . $templateID . "','" . $title . "','" . $location . "','" . $description . "');")));
