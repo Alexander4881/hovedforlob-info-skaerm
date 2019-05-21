@@ -328,6 +328,12 @@ if(isset($_POST['val']) && $_POST['val'] === "newText"){
         $result = DeleteTable($_POST["tableID"]);
         echo($result);
     }
+}else if(isset($_POST['val']) && $_POST['val'] == "newWebSiteFromTemplate"){
+    if (isset($_POST['title']) && isset($_POST['location']) && isset($_POST['description']) && isset($_POST["templateID"])) {
+        $result = NewWebSiteFromTemplate($_POST["templateID"], $_POST['title'], $_POST['location'], $_POST['description']);
+        
+        echo($result[0] . "," . $result[1]);
+    }
 }
 
 
@@ -385,7 +391,7 @@ function CreateCardHTML($html, $websiteProp, $startElement, $count, $location){
                                 }
                             }else{
                                 // it is a tamplate
-                                $html .= '<div class="float-right"> <a onclick="NewWebSiteFromTemplate(' . $location . ')"><i class="fas fa-scroll"></i> </a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"></i> </a></div>';
+                                $html .= '<div class="float-right"> <a onclick="NewWebSiteFromTemplate(' . $websiteProp[$startElement + $i][0] . ',' . $location . ')"><i class="fas fa-scroll"></i> </a> <a href="../admin/administration.php?id=' . $websiteProp[$startElement + $i][0] . '&title=' . $websiteProp[$startElement + $i][1] . '"><i class="fas fa-edit"></i> </a></div>';
                             }
         $html .=        '</div>';
                         // Field for Card-Body

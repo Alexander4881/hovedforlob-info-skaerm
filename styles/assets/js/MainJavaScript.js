@@ -104,13 +104,12 @@ function ChangeActiveWebsite(websiteID,location) {
                     // replaces the old icon with the new
                     $(iconToBeReplacedOnSuccess).replaceWith('<i class="fas fa-eye activeWebsite"></i>');
                 }
-                console.log(response);
             }
         });
     }
 }
 
-function NewWebSiteFromTemplate(){
+function NewWebSiteFromTemplate(templateID,location){
     $("#NewWebsiteFromTemplate").modal(location);
     $("#TemplateModalNewWebSite").unbind();
     $("#TemplateModalNewWebSite").click(function() {
@@ -124,12 +123,12 @@ function NewWebSiteFromTemplate(){
                 data:
                     {
                         "val": "newWebSiteFromTemplate",
+                        "templateID":templateID,
                         "title": $("#TemplateModalNewWebSiteTitle").val(),
                         "location": location,
                         "description": $("#TemplateModalNewWebSiteDescription").val()
                     },
                 success: function(response) {
-                    console.log(response);
                     var temp = response.split(",");
                     window.location.replace("../../../admin/administration.php?id=" + temp[0] + "&title=" + temp[1]);
                 }

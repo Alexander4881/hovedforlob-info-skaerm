@@ -26,25 +26,27 @@ BEGIN
 	DECLARE textStyle MEDIUMTEXT;
     
     -- vars for table
+    DECLARE orignalTableID INT;
     DECLARE tableID INT;
     DECLARE tableStyle MEDIUMTEXT;
     
     -- vars for row
+    DECLARE originalRowID INT;
     DECLARE rowID INT;
     DECLARE rowStyle MEDIUMTEXT;
     
     -- vars for column
-    DECLARE columnID INT;
-    DECLARE columnStyle MEDIUMTEXT;
+    DECLARE columnTdStyle MEDIUMTEXT;
+    DECLARE columnText MEDIUMTEXT;
+    DECLARE columnSpanStyle MEDIUMTEXT;
     
     -- cursors
     DECLARE cursorImageLink CURSOR FOR SELECT `Image_ID`, `Image_Style` FROM `ImageLink` WHERE `WebSite_ID` = templateID;
     DECLARE cursorText CURSOR FOR SELECT `Text`,`Style` FROM `Text` WHERE `WebSite_ID` = templateID;
     -- table 
-    DECLARE cursorTable CURSOR FOR SELECT `ID`,`Style` FROM `Table` WHERE `WebSite_ID` = templateID;
-    DECLARE cursorRow CURSOR FOR SELECT `ID`,`Style` FROM `Table` WHERE `Table_ID` = tableID;
-	-- GET MORE INFO FROM COLUMN
-    DECLARE cursorColumn CURSOR FOR SELECT `ID`,`Style` FROM `Table` WHERE `Row_ID` = rowID;    
+    DECLARE cursorTable CURSOR FOR SELECT `ID`, `Style` FROM `Table` WHERE `WebSite_ID` = templateID;
+    DECLARE cursorRow CURSOR FOR SELECT `ID`, `Style` FROM `Row` WHERE `Table_ID` = orignalTableID;
+    DECLARE cursorColumn CURSOR FOR SELECT `Text`,`td-style`,`span-style` FROM `Column` WHERE `Row_ID` = originalRowID;
     
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET finish = 1;
     
@@ -89,42 +91,51 @@ BEGIN
     -- copy template text
     OPEN cursorTable;
 		copyTableLoop: LOOP
-			FETCH cursorTable INTO tableID, tableStyle;
+			FETCH cursorTable INTO orignalTableID,tableStyle;
 	 
 			IF finish = 1 THEN
 				LEAVE copyTableLoop;
 			END IF;
 			
-            -- INSERT TABLE
-			
+            -- INSERT TABLE 
+                        
+            INSERT INTO `Table`(`WebSite_ID`,`Style`) VALUES(newWebsiteID, tableStyle);
+			SET tableID = (SELECT LAST_INSERT_ID() FROM `Table` limit 1);
+            
 			OPEN cursorRow;
 				copyRowLoop: LOOP
-					FETCH cursorRow INTO rowID, rowStyle;
+					FETCH cursorRow INTO originalRowID, rowStyle;
 			 
 					IF finish = 1 THEN
 						LEAVE copyRowLoop;
 					END IF;
                     
-					-- INSERT ROW
+					-- INSERT ROW LAST_INSERT_ID()
+                    INSERT INTO `Row`(`Table_ID`,`style`) VALUES(tableID, rowStyle);
+                    SET rowID = (SELECT LAST_INSERT_ID() FROM `Row` limit 1);
                     
 					OPEN cursorColumn;
-						copyRowLoop: LOOP
-							FETCH cursorColumn INTO columnID, columnStyle;
+						copyColumnLoop: LOOP
+							FETCH cursorColumn INTO columnText, columnTdStyle, columnSpanStyle;
 					 
 							IF finish = 1 THEN
-								LEAVE copyRowLoop;
+								LEAVE copyColumnLoop;
 							END IF;
 							
 							-- INSERT COLUMN
+							INSERT INTO `Column`(`Row_ID`,`Text`,`td-style`,`span-style`) VALUES(rowID, columnText, columnTdStyle, columnSpanStyle);
 							
 							
-							
-						END LOOP copyRowLoop;
+						END LOOP copyColumnLoop;
 					CLOSE cursorColumn;
 					
+                    SET finish = 0;
+                    
 				END LOOP copyRowLoop;
 			CLOSE cursorRow;
 			
+            SET finish = 0;
+            
 		END LOOP copyTableLoop;
     CLOSE cursorTable;
     
@@ -132,4 +143,4 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL InsertNewWebSiteFromTemplate(13,'TemplateTestTitle',16,'Test af Template Copy Procedure');
+-- CALL InsertNewWebSiteFromTemplate(2,'TemplateTestTitle',16,'Test af Template Copy Procedure');

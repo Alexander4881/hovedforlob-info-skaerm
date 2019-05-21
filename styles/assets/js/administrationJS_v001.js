@@ -912,10 +912,10 @@ function testSnappingDrag() {
             // (3) move the selectedElement on mousemove
             document.addEventListener('mousemove', onMouseMove);          
             // (4) drop the selectedElement, remove unneeded handlers
-            selectedElement.onmouseup = function() {
+            $("#preview").onmouseup = function() {
                 
                 document.removeEventListener('mousemove', onMouseMove);
-                selectedElement.onmouseup = null;
+                $("#preview").unbind("onmouseup");
                 SetElementSettings();
             };
           

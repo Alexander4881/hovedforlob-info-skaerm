@@ -81,10 +81,10 @@ function NewWebSite($title, $location, $description, $isTemplate){
     return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "'," . $isTemplate . ");")));
 }
 
-function NewWebSiteFromTemplate($title, $location, $description){
+function NewWebSiteFromTemplate($templateID,$title, $location, $description){
     // Query stored procedure, return as array after.
-    echo("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "'," . $isTemplate . ");");
-    return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "'," . $isTemplate . ");")));
+    //echo("CALL InsertNewWebSite('" . $title . "','" . $location . "','" . $description . "'," . $isTemplate . ");");
+    return(mysqli_fetch_array(SqlQuery("CALL InsertNewWebSiteFromTemplate('" . $templateID . "','" . $title . "','" . $location . "','" . $description . "');")));
 }
 
 /* Functions for NewTable - NewRow - NewColumn, nested together.

@@ -339,7 +339,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ShowWebsitesOnSiteID`(
 	IN `@siteID` INT)
 BEGIN
 	-- Get values from WebSite where the siteId is the value from parameter.
-	SELECT `ID`,`Title`,`ActiveWebsite`,`Description`,`IsTemplate` FROM `WebSite` WHERE `SiteID` = `@siteID` OR `IsTemplate` = 1;
+	SELECT `ID`,`Title`,`ActiveWebsite`,`Description`,`IsTemplate` FROM `WebSite` WHERE `SiteID` = `@siteID` OR `IsTemplate` = 1 ORDER BY IsTemplate DESC;
 END $$
 DELIMITER ;
 
