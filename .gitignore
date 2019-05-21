@@ -2,3 +2,4 @@
 #####################
 admin/management/database.php
 documentation/*.sql
+documentation/Old SQL/*.sql
