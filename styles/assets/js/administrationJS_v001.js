@@ -392,7 +392,6 @@ function Editor() {
             oldSelectedElement = selectedElement;
             selectedElement = event.target;
             SetElementSettings();
-            $(selectedElement).unbind("mousemove");
             testSnappingDrag();
         }
     });
@@ -891,16 +890,17 @@ function ShowAlertTextBox(text, easeInTimeInMilliSeconds,timeOpenInMilliSeconds)
     },timeOpenInMilliSeconds);
 }
 
+const offset = 7;
 function testSnappingDrag() {
-    if (selectedElement.tagName == 'IMG' || selectedElement.tagName == 'TABLE' || selectedElement.tagName == 'P') {
+    if (selectedElement.tagName === 'IMG' || selectedElement.tagName === 'TABLE' || selectedElement.tagName === 'P') {
         $(selectedElement).mousedown(function(event) {
-            console.log("mousedown");
-            let shiftX = event.clientX - selectedElement.getBoundingClientRect().left;
-            let shiftY = event.clientY - selectedElement.getBoundingClientRect().top;          
+
+            let shiftX = (event.clientX - selectedElement.getBoundingClientRect().left) - 7;
+            let shiftY = (event.clientY - selectedElement.getBoundingClientRect().top) - 7;          
             selectedElement.style.position = 'absolute';
             selectedElement.style.zIndex = 1;
-            //document.body.append(selectedElement);          
-            moveAt(event.pageX, event.pageY);          
+            moveAt(event.pageX, event.pageY);
+            console.log(event);
             // centers the selectedElement at (pageX, pageY) coordinates
 
             function moveAt(pageX, pageY) {
@@ -911,25 +911,26 @@ function testSnappingDrag() {
                 }
               
               selectedElement.style.top = pageY - shiftY + 'px';
-            }          
-
+            }
                       
             // (3) move the selectedElement on mousemove
             $(selectedElement).mousemove(
                 function onMouseMove(event) {
                     moveAt(event.pageX, event.pageY);
                   }
-            );          
-            // (4) drop the selectedElement, remove unneeded handlers
-            $(selectedElement).mouseup = function() {
-                
-                $(selectedElement).unbind("mousemove");
-                $(selectedElement).unbind("mouseup");
-
-                SetElementSettings();
-            };
+            );
+            
           
-        });          
+        });
+        
+        $(document).mouseup(function () {
+
+            console.log("trigger");
+            $(selectedElement).unbind("mousemove");
+            //$(selectedElement).unbind("mouseup");
+
+            SetElementSettings();
+        });
         selectedElement.ondragstart = function() {
             return false;
         };

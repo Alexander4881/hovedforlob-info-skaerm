@@ -642,29 +642,29 @@ ul li.removeBullets {
   min-height: 100px;
 }
 
-#preview{  
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  border: 4px dashed red;
+#preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    border: 4px dashed red;
 }
 
-#horisontal-line{
-  position: absolute;
-  top: 50vh;
-  left: 0;
-  width: 100vw;
-  border: red solid 0.5px;
+#horisontal-line {
+    position: absolute;
+    top: 510px;
+    left: 0;
+    width: 1920px;
+    border: red solid 0.5px;
 }
 
-#vertical-line{
-  border: red solid 0.5px;
-  height: 100vh;
-  position: absolute;
-  left: 50vw;
-  top: 0px;
+#vertical-line {
+    border: red solid 0.5px;
+    height: 1080px;
+    position: absolute;
+    left: 960px;
+    top: 0px;
 }
 
 /* svg hover css */
