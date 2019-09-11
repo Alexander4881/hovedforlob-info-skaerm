@@ -60,11 +60,11 @@ include_once("management/global.php");
                                             <i class="fas fa-table"></i>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="#NewImage" onclick="NewElement(3)">New Image
                                             <i class="fas fa-image"></i>
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </li>

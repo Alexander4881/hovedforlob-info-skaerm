@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name=”viewport” content=”width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;” />
+    <meta name=”viewport” content=”width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=false;” />
+    <meta name=”viewport” content=”width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;” />
     <link rel="stylesheet" href="../styles/bootstrap.min.css">
     <title>Document</title>
 </head>
 
-<body>
+<body style="width: 1920px;height: 1080px;">
     <div id="content" style="width: 100%;height: 100%;">
 
     </div>
